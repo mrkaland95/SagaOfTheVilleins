@@ -25,7 +25,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter {
 		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		TextureRegion frame = walkingWarrior.getImageToRender(deltaTime);
-		spriteBatch.draw(frame, 50, 50);
+		spriteBatch.draw(frame, 100, 100);
 		spriteBatch.end();
 	}
 	
