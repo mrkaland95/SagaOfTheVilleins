@@ -11,21 +11,20 @@ public class ProjectRogueLikeMain extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Texture img;
 
-	Animator2D walkingWarrior;
+	Animation2D walkingWarrior;
 	
 	@Override
 	public void create () {
 		spriteBatch = new SpriteBatch();
-		walkingWarrior = new Animator2D("./Sprites/Warrior/WalkingWarrior.png");
+		walkingWarrior = new Animation2D("./Sprites/Warrior/WalkingWarrior.png");
 	}
 
 	@Override
 	public void render () {
 		float deltaTime = Gdx.graphics.getDeltaTime();
-		ScreenUtils.clear(1, 1, 1, 1);
+		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		TextureRegion frame = walkingWarrior.getImageToRender(deltaTime);
-//		batch.draw(img, 0, 50);
 		spriteBatch.draw(frame, 50, 50);
 		spriteBatch.end();
 	}
