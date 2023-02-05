@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Animator2D {
+public class Animation2D {
     // Adjusted class from the official libgdx documentation, to implement 2d animations.
     // https://libgdx.com/wiki/graphics/2d/2d-animation
 
     // Defines the columns of the sprite sheet
-    private static final int FRAME_COLUMNS = 12;
+    private static final int FRAME_COLUMNS = 11;
     private static final int FRAME_ROWS = 1;
     Animation<TextureRegion> walkAnimation;
     Texture animationSheet;
@@ -17,32 +17,30 @@ public class Animator2D {
     // Variable for tracking elapsed time for the animation.
     float elapsedAnimationTime;
 
-    public Animator2D(String spriteSheet) {
-        this.animationSheet = new Texture(Gdx.files.internal(spriteSheet));
-        // Transforms the 2d texture array back into a 1d array
-
+    public Animation2D(String pathToSpriteSheet) {
+        this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
         TextureRegion[][] tempTextures = TextureRegion.split(animationSheet,
                 animationSheet.getWidth() / FRAME_COLUMNS,
-                animationSheet.getHeight() / FRAME_ROWS
-        );
+                animationSheet.getHeight() / FRAME_ROWS);
 
+        TextureRegion[] walkFrames = new TextureRegion[FRAME_COLUMNS * FRAME_ROWS];
 
-        TextureRegion[] walkFrames = new TextureRegion[FRAME_COLUMNS];
+//        // Transforms the 2d texture array back into a 1d array
         int index = 0;
         for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; i < FRAME_COLUMNS; j++) {
-                walkFrames[index++] = tempTextures[i][j];
+            for (int j = 0; j < FRAME_COLUMNS; j++) {
+                walkFrames[index] = tempTextures[i][j];
+                index++;
             }
         }
-        this.walkAnimation = new Animation<TextureRegion>(0.025f, walkFrames);
+        walkAnimation = new Animation<TextureRegion>(0.09f, walkFrames);
         elapsedAnimationTime = 0f;
-
     }
+
 
     public TextureRegion getImageToRender(float deltaTime) {
         elapsedAnimationTime += deltaTime;
-        TextureRegion currentFrame = walkAnimation.getKeyFrame(elapsedAnimationTime, true);
-        return currentFrame;
+        return walkAnimation.getKeyFrame(elapsedAnimationTime, true);
     }
 }
 
