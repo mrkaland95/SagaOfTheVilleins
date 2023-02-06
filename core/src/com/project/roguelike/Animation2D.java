@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Animation2D {
     // Adjusted class from the official libgdx documentation, to implement 2d animations.
     // https://libgdx.com/wiki/graphics/2d/2d-animation
-
-    // Defines the columns of the sprite sheet
+    // Defines the dimensions of the sprite sheet that's taken in.
     private static final int FRAME_COLUMNS = 11;
     private static final int FRAME_ROWS = 1;
     Animation<TextureRegion> walkAnimation;
@@ -19,13 +18,15 @@ public class Animation2D {
 
     public Animation2D(String pathToSpriteSheet) {
         this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
+        // The texture region class' split function only takens in a 2d array, so despite our sheets being 1d,
+        // We need to initialize it as a 2d array.
         TextureRegion[][] tempTextures = TextureRegion.split(animationSheet,
                 animationSheet.getWidth() / FRAME_COLUMNS,
                 animationSheet.getHeight() / FRAME_ROWS);
 
         TextureRegion[] walkFrames = new TextureRegion[FRAME_COLUMNS * FRAME_ROWS];
 
-//        // Transforms the 2d texture array back into a 1d array
+        // Unpacks the 2d texture array back into a 1d array
         int index = 0;
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLUMNS; j++) {
@@ -33,7 +34,9 @@ public class Animation2D {
                 index++;
             }
         }
-        walkAnimation = new Animation<TextureRegion>(0.09f, walkFrames);
+
+        float frameDuration = 1f / FRAME_COLUMNS;
+        walkAnimation = new Animation<TextureRegion>(frameDuration, walkFrames);
         elapsedAnimationTime = 0f;
     }
 
