@@ -36,7 +36,9 @@ public class Animation2D {
         }
 
         float frameDuration = 1f / FRAME_COLUMNS;
-        walkAnimation = new Animation<TextureRegion>(frameDuration, walkFrames);
+        // Defines how fast the animation should play. Higher number slows the animation down, while lower makes it faster.
+        float frameSpeed = frameDuration * 1.33f;
+        walkAnimation = new Animation<TextureRegion>(frameSpeed, walkFrames);
         elapsedAnimationTime = 0f;
     }
 
