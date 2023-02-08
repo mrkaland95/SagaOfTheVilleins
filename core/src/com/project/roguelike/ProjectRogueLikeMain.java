@@ -14,6 +14,9 @@ public class ProjectRogueLikeMain extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Texture img;
 	Animation2D walkingWarrior;
+	float warriorXPosition = 0f;
+	float screenWidth = 560f;
+
 	
 	@Override
 	public void create () {
@@ -23,17 +26,14 @@ public class ProjectRogueLikeMain extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		float deltaTime = Gdx.graphics.getDeltaTime();
 		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
-		System.out.println(Gdx.graphics.getMonitors());
 		spriteBatch.begin();
-		TextureRegion frame = walkingWarrior.getImageToRender(deltaTime);
-		float warriorXPosition = 300;
-//		if (warriorXPosition < 300) {
-//			warriorXPosition++;
-//		} else {
-//			warriorXPosition = 0;
-//		}
+		TextureRegion frame = walkingWarrior.getImageToRender();
+		if (warriorXPosition < screenWidth) {
+			warriorXPosition++;
+		} else {
+			warriorXPosition = 0;
+		}
 		warriorXPosition += 4;
 		spriteBatch.draw(frame, warriorXPosition, 100f);
 		spriteBatch.end();

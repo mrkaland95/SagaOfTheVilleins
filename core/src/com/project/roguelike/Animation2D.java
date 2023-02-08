@@ -41,7 +41,8 @@ public class Animation2D {
     }
 
 
-    public TextureRegion getImageToRender(float deltaTime) {
+    public TextureRegion getImageToRender() {
+        float deltaTime = Gdx.graphics.getDeltaTime();
         elapsedAnimationTime += deltaTime;
         return walkAnimation.getKeyFrame(elapsedAnimationTime, true);
     }
