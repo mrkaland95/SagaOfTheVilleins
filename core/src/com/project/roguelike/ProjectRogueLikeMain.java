@@ -45,6 +45,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 		spriteBatch.begin();
 		renderer.setView(camera);
 		renderer.render();
+		camera.update();
 		TextureRegion frame = walkingWarrior.getImageToRender();
 		if (warriorXPosition < screenWidth) {
 			warriorXPosition++;
@@ -83,6 +84,31 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 
 	@Override
 	public boolean keyTyped(char character) {
+		if(character == 'w'){
+			camera.translate(0, 10, 0);
+			return true;
+		}
+		if(character == 's'){
+			camera.translate(0, -10,0);
+			return true;
+		}
+		if(character == 'a'){
+			camera.translate(-10, 0 ,0);
+			return true;
+		}
+		if(character == 'd'){
+			camera.translate(10, 0 ,0);
+			return true;
+		}
+		if(character == 'z'){
+			camera.zoom += 0.05;
+			return true;
+		}
+		if(character == 'x'){
+			camera.zoom -= 0.05;
+			return true;
+		}
+
 		return false;
 	}
 
