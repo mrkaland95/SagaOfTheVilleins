@@ -17,7 +17,6 @@ import java.awt.*;
 
 public class ProjectRogueLikeMain extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch spriteBatch;
-	Texture img;
 	Animation2D walkingWarrior;
 	float warriorXPosition = 0f;
 	float screenWidth = 560f;
@@ -60,7 +59,6 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 	@Override
 	public void dispose () {
 		spriteBatch.dispose();
-		img.dispose();
 		map.dispose();
 		renderer.dispose();
 	}
