@@ -3,7 +3,7 @@ package com.project.roguelike.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.project.roguelike.TestGameMain;
+import com.project.roguelike.ProjectRogueLikeMain;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -17,6 +17,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new TestGameMain();
+                return new ProjectRogueLikeMain();
         }
 }
