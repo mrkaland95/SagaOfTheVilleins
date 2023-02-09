@@ -1,0 +1,55 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "TiledRougelikeMap.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/Green_Hex.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/grass_hexxa.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/idk.tmx": {
+            "scale": 0.1263032786885246,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3056.136024401324,
+                "y": 1532.0267376208708
+            }
+        },
+        "TiledRougelikeMap.tmx": {
+            "scale": 0.18791463414634146,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2155.233954182621,
+                "y": 1524.6284638847428
+            }
+        }
+    },
+    "last.imagePath": "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets",
+    "map.lastUsedFormat": "tmx",
+    "map.orientation": null,
+    "map.tileHeight": 200,
+    "map.tileWidth": 200,
+    "map.width": 20,
+    "openFiles": [
+        "TiledRougelikeMap.tmx",
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/Green_Hex.tsx"
+    ],
+    "project": "TiledMap.tiled-project",
+    "recentFiles": [
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/Green_Hex.tsx",
+        "TiledRougelikeMap.tmx",
+        "C:/Users/marku/OneDrive - University of Bergen/INF112/Project-rougelike/inf112-project-rougelike/assets/idk.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 200,
+        "width": 200
+    }
+}
