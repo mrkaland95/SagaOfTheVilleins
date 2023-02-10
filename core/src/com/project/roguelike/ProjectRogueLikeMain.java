@@ -41,7 +41,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
+		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
 		renderer.render();
