@@ -12,10 +12,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.project.roguelike.Characters.Animation2D;
+import com.project.roguelike.Characters.Player;
+import com.project.roguelike.InputProcessors.GameProcessor;
 
 import java.awt.*;
 
-public class ProjectRogueLikeMain extends ApplicationAdapter implements InputProcessor {
+public class ProjectRogueLikeMain extends ApplicationAdapter{
 	SpriteBatch spriteBatch;
 	Animation2D walkingWarrior;
 	Animation2D idleWarrior;
@@ -38,7 +41,8 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 		renderer = new HexagonalTiledMapRenderer(map);
 		player = new Player(0f, 0f, walkingWarrior, idleWarrior, spriteBatch);
 		camera = new OrthographicCamera();
-		Gdx.input.setInputProcessor(this);
+		GameProcessor processor = new GameProcessor(camera);
+		Gdx.input.setInputProcessor(processor);
 
 	}
 
@@ -66,70 +70,5 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 		camera.viewportHeight = height;
 		camera.viewportWidth = width;
 		camera.update();
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		if(character == 'w'){
-			camera.translate(0, 10, 0);
-			return true;
-		}
-		if(character == 's'){
-			camera.translate(0, -10,0);
-			return true;
-		}
-		if(character == 'a'){
-			camera.translate(-10, 0 ,0);
-			return true;
-		}
-		if(character == 'd'){
-			camera.translate(10, 0 ,0);
-			return true;
-		}
-		if(character == 'z'){
-			camera.zoom += 0.05;
-			return true;
-		}
-		if(character == 'x'){
-			camera.zoom -= 0.05;
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(float amountX, float amountY) {
-		return false;
 	}
 }
