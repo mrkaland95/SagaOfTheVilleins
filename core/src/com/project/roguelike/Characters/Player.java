@@ -79,4 +79,11 @@ public class Player implements ICharacter {
     }
 
 
+    @Override
+    public CharacterStats getStats() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
 }
