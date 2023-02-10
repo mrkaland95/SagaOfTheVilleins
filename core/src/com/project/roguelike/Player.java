@@ -1,6 +1,6 @@
 package com.project.roguelike;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -12,9 +12,9 @@ public class Player implements ICharacter {
     Animation2D walkingPlayer;
 
     // Temp variables until those animations are made.
-    Animation2D idlePlayer;
+    Animation2D idleAnimation;
 
-    Animation2D attackingPlayer;
+    Animation2D attackingAnimation;
 
     // The current animation that should be rendered, depending on which state the character is in. For example, moving, idle, attacking etc.
     Animation2D currentAnimation;
@@ -23,21 +23,32 @@ public class Player implements ICharacter {
 
     public Player(float startingXPosition, float startingYPosition,
                   Animation2D walkingAnimation,
+                  Animation2D idleAnimation,
                   SpriteBatch spriteBatch) {
 
         this.xPosition = startingXPosition;
         this.yPosition = startingYPosition;
         this.spriteBatch = spriteBatch;
         this.walkingPlayer = walkingAnimation;
-        this.currentAnimation = walkingAnimation;
+        this.idleAnimation = idleAnimation;
+//        this.currentAnimation = walkingAnimation;
+        this.currentAnimation = idleAnimation;
     }
 
+
+    /**
+     * Method that draws the current
+     *
+     *
+     */
     @Override
     public void drawSpriteAnimation() {
+
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
         TextureRegion currentImage = currentAnimation.getImageToRender();
         this.spriteBatch.draw(currentImage, this.xPosition, this.yPosition);
     }
+
 
     @Override
     public Vector2 getPosition() {
@@ -61,4 +72,11 @@ public class Player implements ICharacter {
     public void moveYAxis(float distance) {
         yPosition += distance;
     }
+
+    public void setPosition(float xPosition, float yPosition) {
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
+
+
 }
