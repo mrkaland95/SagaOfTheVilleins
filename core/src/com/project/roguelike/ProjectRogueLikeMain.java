@@ -18,6 +18,7 @@ import java.awt.*;
 public class ProjectRogueLikeMain extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch spriteBatch;
 	Animation2D walkingWarrior;
+	Animation2D idleWarrior;
 	Player player;
 	float warriorXPosition = 0f;
 	float screenWidth = 560f;
@@ -32,9 +33,10 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 	public void create () {
 		spriteBatch = new SpriteBatch();
 		walkingWarrior = new Animation2D("./Sprites/Warrior/WalkingWarrior.png");
+		idleWarrior = new Animation2D("./Sprites/Warrior/IdleWarrior.png");
 		map = new TmxMapLoader().load("./TiledMap/TiledRougelikeMap.tmx");
 		renderer = new HexagonalTiledMapRenderer(map);
-		player = new Player(0f, 0f, walkingWarrior, spriteBatch);
+		player = new Player(0f, 0f, walkingWarrior, idleWarrior, spriteBatch);
 		camera = new OrthographicCamera();
 		Gdx.input.setInputProcessor(this);
 
@@ -47,16 +49,8 @@ public class ProjectRogueLikeMain extends ApplicationAdapter implements InputPro
 		renderer.setView(camera);
 		renderer.render();
 		camera.update();
-		player.moveXAxis(2f);
-		player.moveYAxis(1f);
+		player.setPosition(500f, 500f);
 		player.drawSpriteAnimation();
-//		player.drawSpriteAnimation();
-////		TextureRegion frame = walkingWarrior.getImageToRender();
-//		if (warriorXPosition < screenWidth) {
-//			warriorXPosition += 4;
-//		} else {
-//			warriorXPosition = -30;
-//		}
 		spriteBatch.end();
 	}
 	
