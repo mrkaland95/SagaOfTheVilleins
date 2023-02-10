@@ -36,7 +36,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 	public void create () {
 		spriteBatch = new SpriteBatch();
 		walkingWarrior = new Animation2D("./Sprites/Warrior/WalkingWarrior.png");
-		idleWarrior = new Animation2D("./Sprites/Warrior/IdleWarrior.png");
+		idleWarrior = new Animation2D("./Sprites/Warrior/IdleWarrior.png", 1, 2);
 		map = new TmxMapLoader().load("./TiledMap/TiledRougelikeMap.tmx");
 		renderer = new HexagonalTiledMapRenderer(map);
 		player = new Player(0f, 0f, walkingWarrior, idleWarrior, spriteBatch);
@@ -53,7 +53,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 		renderer.setView(camera);
 		renderer.render();
 		camera.update();
-		player.setPosition(500f, 500f);
+		player.setPosition(580f, 500f);
 		player.drawSpriteAnimation();
 		spriteBatch.end();
 	}
