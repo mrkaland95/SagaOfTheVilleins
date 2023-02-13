@@ -9,7 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.project.roguelike.Characters.Animation2D;
@@ -44,7 +46,9 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 		CameraProcessor processor = new CameraProcessor(camera);
 		Gdx.input.setInputProcessor(processor);
 
+		camera.translate(900, 500, 0);
 	}
+
 
 	@Override
 	public void render () {
