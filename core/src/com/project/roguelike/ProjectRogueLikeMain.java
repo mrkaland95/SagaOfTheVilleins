@@ -14,7 +14,7 @@ import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.project.roguelike.Characters.Animation2D;
 import com.project.roguelike.Characters.Player;
-import com.project.roguelike.InputProcessors.GameProcessor;
+import com.project.roguelike.InputProcessors.CameraProcessor;
 
 import java.awt.*;
 
@@ -41,7 +41,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 		renderer = new HexagonalTiledMapRenderer(map);
 		player = new Player(0f, 0f, walkingWarrior, idleWarrior, spriteBatch);
 		camera = new OrthographicCamera();
-		GameProcessor processor = new GameProcessor(camera);
+		CameraProcessor processor = new CameraProcessor(camera);
 		Gdx.input.setInputProcessor(processor);
 
 	}
