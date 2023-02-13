@@ -16,5 +16,4 @@ public interface ICharacter {
     
     void moveYAxis(float distance);
 
-    CharacterStats getStats();
 }

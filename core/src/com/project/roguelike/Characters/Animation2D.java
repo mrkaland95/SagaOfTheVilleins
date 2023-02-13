@@ -8,8 +8,8 @@ public class Animation2D {
     // Adjusted class from the official libgdx documentation, to implement 2d animations.
     // https://libgdx.com/wiki/graphics/2d/2d-animation
     // Defines the dimensions of the sprite sheet that's taken in.
-    private static int FRAME_COLUMNS = 11;
-    private static int FRAME_ROWS = 1;
+    private int FRAME_COLUMNS = 11;
+    private int FRAME_ROWS = 1;
     Animation<TextureRegion> walkAnimation;
     Texture animationSheet;
 
@@ -43,8 +43,8 @@ public class Animation2D {
         }
 
     public Animation2D(String pathToSpriteSheet, int frameRows, int frameColumns) {
-        this.FRAME_ROWS = frameRows;
-        this.FRAME_COLUMNS = frameColumns;
+        FRAME_ROWS = frameRows;
+        FRAME_COLUMNS = frameColumns;
         this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
         // The texture region class' split function only takens in a 2d array, so despite our sheets being 1d,
         // We need to initialize it as a 2d array.
