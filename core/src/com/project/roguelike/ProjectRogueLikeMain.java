@@ -31,12 +31,12 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 
-	
+	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
 	public void create () {
 		spriteBatch = new SpriteBatch();
 		walkingWarrior = new Animation2D("./Sprites/Warrior/WalkingWarrior.png");
-		idleWarrior = new Animation2D("./Sprites/Warrior/IdleWarrior.png");
+		idleWarrior = new Animation2D("./Sprites/Warrior/IdleWarrior.png", 1, 2);
 		map = new TmxMapLoader().load("./TiledMap/TiledRougelikeMap.tmx");
 		renderer = new HexagonalTiledMapRenderer(map);
 		player = new Player(0f, 0f, walkingWarrior, idleWarrior, spriteBatch);
@@ -48,12 +48,12 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
+		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
 		renderer.render();
 		camera.update();
-		player.setPosition(500f, 500f);
+		player.setPosition(580f, 500f);
 		player.drawSpriteAnimation();
 		spriteBatch.end();
 	}
