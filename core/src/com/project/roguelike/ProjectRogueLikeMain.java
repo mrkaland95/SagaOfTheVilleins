@@ -31,7 +31,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 
-	
+	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
 	public void create () {
 		spriteBatch = new SpriteBatch();
@@ -48,7 +48,7 @@ public class ProjectRogueLikeMain extends ApplicationAdapter{
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0.2f, 0.0f, 0.0f, 0f);
+		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
 		renderer.render();
