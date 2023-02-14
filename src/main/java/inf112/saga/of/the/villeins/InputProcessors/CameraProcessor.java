@@ -1,13 +1,14 @@
-package com.project.roguelike.InputProcessors;
+package inf112.saga.of.the.villeins.InputProcessors;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 
-public class GameProcessor implements InputProcessor{
+public class CameraProcessor implements InputProcessor{
 
     private OrthographicCamera camera;
 
-    public GameProcessor(OrthographicCamera camera){
+    public CameraProcessor(OrthographicCamera camera){
         this.camera = camera;
     }
 
@@ -53,6 +54,8 @@ public class GameProcessor implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
+		System.out.println(worldCoordinate);
 		return false;
 	}
 
