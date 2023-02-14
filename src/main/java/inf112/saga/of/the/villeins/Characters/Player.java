@@ -22,6 +22,10 @@ public class Player implements ICharacter {
 
 
     Vector2 positionToMoveTo;
+    private int maxHealth;
+    private int health;
+    private int strength;
+    private int defense;
 
     // TODO make a new class for loading in all the animations.
 
@@ -29,7 +33,10 @@ public class Player implements ICharacter {
     public Player(float startingXPosition, float startingYPosition,
                   Animation2D walkingAnimation,
                   Animation2D idleAnimation,
-                  SpriteBatch spriteBatch) {
+                  SpriteBatch spriteBatch,
+                  int maxHealth,
+                  int strength,
+                  int defense) {
 
         this.xPosition = startingXPosition;
         this.yPosition = startingYPosition;
@@ -39,6 +46,11 @@ public class Player implements ICharacter {
         this.idleAnimation = idleAnimation;
 //        this.currentAnimation = walkingAnimation;
         this.currentAnimation = idleAnimation;
+
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.strength = strength;
+        this.defense = defense;
     }
 
 
@@ -90,4 +102,33 @@ public class Player implements ICharacter {
     }
 
 
+    @Override
+    public int getHealth(ICharacter character) {
+        return this.health;
+    }
+
+
+    @Override
+    public int getStrength(ICharacter character) {
+        return this.strength;
+    }
+
+
+    @Override
+    public int getDefense(ICharacter character) {
+        return this.defense;
+    }
+
+
+    @Override
+    public int getMaxHealth(ICharacter character) {
+        return this.maxHealth;
+    }
+
+
+    @Override
+    public void setHealth(int damageTaken, ICharacter character) {
+        this.health = character.getHealth(character)-damageTaken;
+        
+    }
 }
