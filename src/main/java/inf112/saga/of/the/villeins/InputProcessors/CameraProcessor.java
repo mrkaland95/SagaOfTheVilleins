@@ -9,7 +9,7 @@ public class CameraProcessor implements InputProcessor {
 
     private OrthographicCamera camera;
 
-	private Vector2 clickCoordinates;
+	private Vector2 clickCoordinates = new Vector2(0f, 0f);
 
     public CameraProcessor(OrthographicCamera camera){
         this.camera = camera;
@@ -89,7 +89,7 @@ public class CameraProcessor implements InputProcessor {
 
 
 	public Vector2 getClickCoordinates() {
-		return clickCoordinates;
+		return this.clickCoordinates;
 	}
     
 }

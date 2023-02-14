@@ -61,14 +61,9 @@ public class Player implements ICharacter {
     }
 
 
-    /**
-     * Method that draws the current
-     *
-     *
-     */
-    @Override
-    public void drawSpriteAnimation() {
 
+    @Override
+    public void update() {
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
         TextureRegion currentImage = currentAnimation.getImageToRender();
         this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
@@ -82,9 +77,6 @@ public class Player implements ICharacter {
 
         // Temp variable until we can make the character go to the center of a tile.
         float positionMarginOfError = 5.0f;
-        float distancefromdest = Math.abs(positionToMoveTo.x - this.xCurrentPosition);
-
-        System.out.println(distancefromdest);
 
         if ((Math.abs(positionToMoveTo.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - positionToMoveTo.y) > positionMarginOfError)) {
 //        if ((positionToMoveTo.x != this.xCurrentPosition) || (positionToMoveTo.y != this.yCurrentPosition)) {
@@ -96,6 +88,10 @@ public class Player implements ICharacter {
             this.xCurrentPosition += directiontoMoveX * this.moveSpeed * deltaTime;
             this.yCurrentPosition += directiontoMoveY * this.moveSpeed * deltaTime;
         } else {
+            // Is the player within the margin of error?
+            // Then snap the player's position to the desired spot.
+            xCurrentPosition = positionToMoveTo.x;
+            yCurrentPosition = positionToMoveTo.y;
         }
     }
 

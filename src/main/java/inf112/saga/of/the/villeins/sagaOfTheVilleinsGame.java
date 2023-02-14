@@ -1,7 +1,6 @@
 package inf112.saga.of.the.villeins;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -23,6 +22,9 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	CameraProcessor processor;
 
+	Vector2 clickPosition;
+
+
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
 	public void create () {
@@ -32,12 +34,17 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		map = new TmxMapLoader().load("./assets/TiledMap/TiledRougelikeMap.tmx");
 		renderer = new HexagonalTiledMapRenderer(map);
 
-		// Inits the player character and sets the position.
-		player = new Player(580f, 500f, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
 
-		// Inits camera and sets it's starting position
+		float playerXStartPosition = 580f;
+		float playerYStartPosition = 500f;
+		clickPosition = new Vector2(playerXStartPosition, playerYStartPosition);
+
+		// Inits the player character and sets the position.
+		player = new Player(playerXStartPosition, playerYStartPosition, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
+
+		// Inits camera and sets it's starting position and zoom.
 		camera = new OrthographicCamera();
-		CameraProcessor processor = new CameraProcessor(camera);
+		processor = new CameraProcessor(camera);
 		Gdx.input.setInputProcessor(processor);
 		camera.translate(800f, 500f, 0f);
 		camera.zoom = 1.5f;
@@ -49,13 +56,19 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
-//		Vector2 movePosition = processor.getClickCoordinates();
+
+
+		Vector2 clickPosition = processor.getClickCoordinates();
+
 
 		renderer.render();
 		camera.update();
-		player.drawSpriteAnimation();
-//		player.moveToPosition(movePosition.x, movePosition.y);
-		player.moveToPosition(300f, 200f);
+
+
+		player.update();
+
+		player.moveToPosition(clickPosition.x, clickPosition.y);
+//		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}
 	

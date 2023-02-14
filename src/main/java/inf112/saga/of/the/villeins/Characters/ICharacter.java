@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public interface ICharacter {
 
-    void drawSpriteAnimation();
+    void update();
     
     Vector2 getPosition();
 
