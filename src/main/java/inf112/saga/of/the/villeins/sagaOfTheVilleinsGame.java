@@ -58,6 +58,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		renderer.setView(camera);
 
 
+
 		Vector2 clickPosition = processor.getClickCoordinates();
 
 

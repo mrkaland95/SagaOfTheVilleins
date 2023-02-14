@@ -1,9 +1,12 @@
 package inf112.saga.of.the.villeins.InputProcessors;
-
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+
+
+// Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class CameraProcessor implements InputProcessor {
 
@@ -59,11 +62,16 @@ public class CameraProcessor implements InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 //		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
 //		System.out.println(worldCoordinate);
-		Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
-		// TODO fjern dette senere
-		// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
-        camera.unproject(cameraCoordinates);
-		clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+
+
+		if (button == Input.Buttons.LEFT) {
+			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+			// TODO fjern dette senere
+			// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
+			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
+			camera.unproject(cameraCoordinates);
+			clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+		}
 		return false;
 	}
 
@@ -84,6 +92,13 @@ public class CameraProcessor implements InputProcessor {
 
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
+		float zoomMultiplier = 0.25f;
+		float zoomMinimumLevel = 0.3f;
+		if (camera.zoom + amountY * zoomMultiplier < zoomMinimumLevel) {
+			camera.zoom = zoomMinimumLevel;
+		} else {
+			camera.zoom += amountY * 0.25f;
+		}
 		return false;
 	}
 
