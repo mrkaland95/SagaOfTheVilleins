@@ -31,7 +31,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		renderer = new HexagonalTiledMapRenderer(map);
 
 		// Inits the player character and sets the position.
-		player = new Player(580f, 500f, walkingWarrior, idleWarrior, spriteBatch);
+		player = new Player(580f, 500f, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
 
 
 		// Inits camera and sets it's starting position

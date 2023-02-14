@@ -18,4 +18,14 @@ public interface ICharacter {
 
     void moveToPosition(float xPosition, float yPosition);
 
+    int getHealth(ICharacter character);
+
+    int getStrength(ICharacter character);
+
+    int getDefense(ICharacter character);
+
+    int getMaxHealth(ICharacter character);
+    
+    void setHealth(int damageTaken, ICharacter character);
+
 }
