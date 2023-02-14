@@ -8,9 +8,9 @@ public interface ICharacter {
     
     Vector2 getPosition();
 
-    float getxPosition();
+    float getxCurrentPosition();
 
-    float getyPosition();
+    float getyCurrentPosition();
 
     void moveXAxis(float distance);
     

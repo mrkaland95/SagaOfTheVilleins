@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.Player;
@@ -20,6 +21,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private TiledMap map;
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
+	CameraProcessor processor;
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
@@ -32,7 +34,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 		// Inits the player character and sets the position.
 		player = new Player(580f, 500f, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
-
 
 		// Inits camera and sets it's starting position
 		camera = new OrthographicCamera();
@@ -48,10 +49,13 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
+//		Vector2 movePosition = processor.getClickCoordinates();
+
 		renderer.render();
 		camera.update();
-//		player.setPosition(580f, 500f);
 		player.drawSpriteAnimation();
+//		player.moveToPosition(movePosition.x, movePosition.y);
+		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}
 	

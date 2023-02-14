@@ -1,25 +1,28 @@
 package inf112.saga.of.the.villeins.Characters;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player implements ICharacter {
-    private float xPosition;
-    private float yPosition;
-    private float moveSpeed = 5.0f;
+    private float xCurrentPosition;
+    private float yCurrentPosition;
+    private float moveSpeed = 25.0f;
     private SpriteBatch spriteBatch;
     Animation2D walkingPlayer;
 
     // Temp variables until those animations are made.
     Animation2D idleAnimation;
 
+    // Currently no attacking animation has been made
+    // TODO make an attacking animation for the player character(s)
     Animation2D attackingAnimation;
 
     // The current animation that should be rendered, depending on which state the character is in. For example, moving, idle, attacking etc.
     Animation2D currentAnimation;
 
+    boolean shouldMove = true;
 
     Vector2 positionToMoveTo;
     private int maxHealth;
@@ -38,9 +41,13 @@ public class Player implements ICharacter {
                   int strength,
                   int defense) {
 
-        this.xPosition = startingXPosition;
-        this.yPosition = startingYPosition;
-        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
+        this.xCurrentPosition = startingXPosition;
+        this.yCurrentPosition = startingYPosition;
+//        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
+
+        this.positionToMoveTo = new Vector2(0f, 0f);
+
+
         this.spriteBatch = spriteBatch;
         this.walkingPlayer = walkingAnimation;
         this.idleAnimation = idleAnimation;
@@ -64,43 +71,60 @@ public class Player implements ICharacter {
 
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
         TextureRegion currentImage = currentAnimation.getImageToRender();
-        this.spriteBatch.draw(currentImage, this.xPosition, this.yPosition);
+        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
     }
 
     @Override
     public void moveToPosition(float xPosition, float yPosition) {
-        boolean shouldMove = false;
-        if (shouldMove) {
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        positionToMoveTo.x = xPosition;
+        positionToMoveTo.y = yPosition;
 
+        // Temp variable until we can make the character go to the center of a tile.
+        float positionMarginOfError = 5.0f;
+        float distancefromdest = Math.abs(positionToMoveTo.x - this.xCurrentPosition);
+
+        System.out.println(distancefromdest);
+
+        if ((Math.abs(positionToMoveTo.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - positionToMoveTo.y) > positionMarginOfError)) {
+//        if ((positionToMoveTo.x != this.xCurrentPosition) || (positionToMoveTo.y != this.yCurrentPosition)) {
+            float pathX = positionToMoveTo.x - xCurrentPosition;
+            float pathY = positionToMoveTo.y - yCurrentPosition;
+            float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
+            float directiontoMoveX = pathX / distanceToMove;
+            float directiontoMoveY = pathY / distanceToMove;
+            this.xCurrentPosition += directiontoMoveX * this.moveSpeed * deltaTime;
+            this.yCurrentPosition += directiontoMoveY * this.moveSpeed * deltaTime;
+        } else {
         }
     }
 
     @Override
     public Vector2 getPosition() {
-        return new Vector2(this.xPosition, this.yPosition);
+        return new Vector2(this.xCurrentPosition, this.yCurrentPosition);
     }
     @Override
-    public float getxPosition() {
-        return xPosition;
+    public float getxCurrentPosition() {
+        return xCurrentPosition;
     }
     @Override
-    public float getyPosition() {
-        return yPosition;
+    public float getyCurrentPosition() {
+        return yCurrentPosition;
     }
 
     @Override
     public void moveXAxis(float distance) {
-        xPosition += distance;
+        xCurrentPosition += distance;
     }
 
     @Override
     public void moveYAxis(float distance) {
-        yPosition += distance;
+        yCurrentPosition += distance;
     }
 
     public void setPosition(float xPosition, float yPosition) {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+        this.xCurrentPosition = xPosition;
+        this.yCurrentPosition = yPosition;
     }
 
 
