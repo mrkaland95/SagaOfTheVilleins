@@ -2,11 +2,14 @@ package inf112.saga.of.the.villeins.InputProcessors;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-public class CameraProcessor implements InputProcessor{
+public class CameraProcessor implements InputProcessor {
 
     private OrthographicCamera camera;
+
+	private Vector2 clickCoordinates;
 
     public CameraProcessor(OrthographicCamera camera){
         this.camera = camera;
@@ -54,8 +57,13 @@ public class CameraProcessor implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
-		System.out.println(worldCoordinate);
+//		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
+//		System.out.println(worldCoordinate);
+		Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+		// TODO fjern dette senere
+		// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
+        camera.unproject(cameraCoordinates);
+		clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		return false;
 	}
 
@@ -77,6 +85,11 @@ public class CameraProcessor implements InputProcessor{
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
 		return false;
+	}
+
+
+	public Vector2 getClickCoordinates() {
+		return clickCoordinates;
 	}
     
 }
