@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player implements ICharacter {
     private float xPosition;
     private float yPosition;
+    private float moveSpeed = 5.0f;
     private SpriteBatch spriteBatch;
     Animation2D walkingPlayer;
 
@@ -19,7 +20,11 @@ public class Player implements ICharacter {
     // The current animation that should be rendered, depending on which state the character is in. For example, moving, idle, attacking etc.
     Animation2D currentAnimation;
 
+
+    Vector2 positionToMoveTo;
+
     // TODO make a new class for loading in all the animations.
+
 
     public Player(float startingXPosition, float startingYPosition,
                   Animation2D walkingAnimation,
@@ -28,6 +33,7 @@ public class Player implements ICharacter {
 
         this.xPosition = startingXPosition;
         this.yPosition = startingYPosition;
+        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
         this.spriteBatch = spriteBatch;
         this.walkingPlayer = walkingAnimation;
         this.idleAnimation = idleAnimation;
@@ -48,7 +54,10 @@ public class Player implements ICharacter {
         TextureRegion currentImage = currentAnimation.getImageToRender();
         this.spriteBatch.draw(currentImage, this.xPosition, this.yPosition);
     }
+    public void moveToPosition(float xPosition, float yPosition) {
 
+
+    }
 
     @Override
     public Vector2 getPosition() {
