@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
@@ -32,7 +33,16 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		walkingWarrior = new Animation2D("./assets/Sprites/Warrior/WalkingWarrior.png");
 		idleWarrior = new Animation2D("./assets/Sprites/Warrior/IdleWarrior.png", 1, 2);
 		map = new TmxMapLoader().load("./assets/TiledMap/TiledRougelikeMap.tmx");
+//		for (tile : map.getTileSets()) {
+//
+//		}
+
+
+
+		System.out.println();
 		renderer = new HexagonalTiledMapRenderer(map);
+		Rectangle bounds = renderer.getViewBounds();
+		System.out.println(bounds);
 
 
 		float playerXStartPosition = 580f;
@@ -51,6 +61,10 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	}
 
 
+	/**
+	 * This is the render loop
+	 *
+	 */
 	@Override
 	public void render () {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
@@ -68,7 +82,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 		player.update();
 
-		player.moveToPosition(clickPosition.x, clickPosition.y);
+//		player.moveToPosition(clickPosition.x, clickPosition.y);
 //		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}

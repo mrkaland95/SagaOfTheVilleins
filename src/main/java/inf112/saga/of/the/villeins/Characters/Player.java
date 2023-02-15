@@ -66,7 +66,9 @@ public class Player implements ICharacter {
     public void update() {
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
         TextureRegion currentImage = currentAnimation.getImageToRender();
+
         this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
+        this.moveToPosition(this.positionToMoveTo.x, positionToMoveTo.y);
     }
 
     @Override
