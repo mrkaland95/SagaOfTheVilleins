@@ -36,22 +36,12 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		map = new TmxMapLoader().load("./assets/TiledMap/TiledRougelikeMap.tmx");
 		camera = new OrthographicCamera();
 		GameController = new GameController(null, camera);
-//		for (tile : map.getTileSets()) {
-//
-//		}
-
 		renderer = new HexagonalTiledMapRenderer(map);
-		Rectangle bounds = renderer.getViewBounds();
-		System.out.println(bounds);
-
-
 		float playerXStartPosition = 580f;
 		float playerYStartPosition = 500f;
 		this.clickPosition = new Vector2(playerXStartPosition, playerYStartPosition);
-
 		// Inits the player character and sets the position.
 		player = new Player(playerXStartPosition, playerYStartPosition, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
-
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(800f, 500f, 0f);
 		camera.zoom = 1.5f;
@@ -67,12 +57,11 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
-
 		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
 		player.update();
-		player.moveToPosition(clickPosition.x, clickPosition.y);
+		player.moveToPosition(clickPosition);
 //		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}

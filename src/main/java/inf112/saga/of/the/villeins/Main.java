@@ -9,8 +9,6 @@ public class Main {
 	public static float defaultMoveSpeed = 50.0f;
 
 
-
-
 	public static void main(String[] args) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(30);
