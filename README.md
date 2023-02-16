@@ -5,15 +5,15 @@ Medlemmer: Leon Dammann, Markus Sylta, Malene Wathne og Steffen Arnesen Kaland
 https://git.app.uib.no/SagaOfTheVilleins/sagaofthevilleins
 
 Om spillet
-En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og forbedre rustningen sin må han bekjempe en rekke fiender. 
+En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og ferdighetene, samt bedre rustningen sin må han bekjempe en rekke fiender med økende vanskelighetsgrad.
 
 Kjøring 
-* Kompileres med  .
-* Kjøres med `java -jar target/kurt-mario-1.0-SNAPSHOT-fat.jar`
+* Kompileres med "mvn package".
+* Kjøres med ukjent per dags dato
 * Krever Java 17 eller senere
 
 Kjente feil
-Hvis 
+Coming..
 
 Credits
-
+Coming...

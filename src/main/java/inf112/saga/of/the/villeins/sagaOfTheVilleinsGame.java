@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.CameraProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
+import inf112.saga.of.the.villeins.Rules.GameController;
 
 public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
@@ -23,6 +25,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	CameraProcessor processor;
 	Vector2 clickPosition;
+	private GameController GameController;
 
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
@@ -32,6 +35,8 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		walkingWarrior = new Animation2D("./assets/Sprites/Warrior/WalkingWarrior.png");
 		idleWarrior = new Animation2D("./assets/Sprites/Warrior/IdleWarrior.png", 1, 2);
 		map = new TmxMapLoader().load("./assets/TiledMap/TiledRougelikeMap.tmx");
+		camera = new OrthographicCamera();
+		GameController = new GameController(null, camera);
 //		for (tile : map.getTileSets()) {
 //
 //		}
@@ -49,9 +54,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		player = new Player(playerXStartPosition, playerYStartPosition, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
 
 		// Inits camera and sets it's starting position and zoom.
-		camera = new OrthographicCamera();
-		processor = new CameraProcessor(camera);
-		Gdx.input.setInputProcessor(processor);
 		camera.translate(800f, 500f, 0f);
 		camera.zoom = 1.5f;
 	}
@@ -67,7 +69,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		spriteBatch.begin();
 		renderer.setView(camera);
 
-		Vector2 clickPosition = processor.getClickCoordinates();
+		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
 		player.update();
