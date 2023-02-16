@@ -4,7 +4,7 @@
 	<!-- FIXME - set group id -->
 	<groupId>no.uib.ii.inf112.sagaofthevilleins</groupId>
 	<!-- FIXME - set artifact name -->
-	<artifactId>gdx-app</artifactId>
+	<artifactId>SagaOfTheVilleins</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<!-- FIXME - set app name -->

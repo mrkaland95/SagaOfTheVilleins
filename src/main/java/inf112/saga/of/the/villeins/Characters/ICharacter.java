@@ -1,22 +1,8 @@
 package inf112.saga.of.the.villeins.Characters;
 
-import com.badlogic.gdx.math.Vector2;
-
-public interface ICharacter {
+public interface ICharacter extends IMoveable {
 
     void update();
-    
-    Vector2 getPosition();
-
-    float getxCurrentPosition();
-
-    float getyCurrentPosition();
-
-    void moveXAxis(float distance);
-    
-    void moveYAxis(float distance);
-
-    void moveToPosition(float xPosition, float yPosition);
 
     int getHealth(ICharacter character);
 
