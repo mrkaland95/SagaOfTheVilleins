@@ -8,9 +8,9 @@ Om spillet
 En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og forbedre rustningen sin må han bekjempe en rekke fiender. 
 
 Kjøring 
-* Kompileres med .
+* Kompileres med  .
 * Kjøres med `java -jar target/kurt-mario-1.0-SNAPSHOT-fat.jar`
-* Krever Java 15 eller senere
+* Krever Java 17 eller senere
 
 Kjente feil
 Hvis 

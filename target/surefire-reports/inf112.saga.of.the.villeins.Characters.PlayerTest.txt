@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+Test set: inf112.saga.of.the.villeins.Characters.PlayerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.014 s <<< FAILURE! - in inf112.saga.of.the.villeins.Characters.PlayerTest
+inf112.saga.of.the.villeins.Characters.PlayerTest.testGetStrength  Time elapsed: 0.001 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [float arg0] in constructor [public inf112.saga.of.the.villeins.Characters.PlayerTest(float,float,inf112.saga.of.the.villeins.Characters.Animation2D,inf112.saga.of.the.villeins.Characters.Animation2D,com.badlogic.gdx.graphics.g2d.SpriteBatch,int,int,int)].
+
+inf112.saga.of.the.villeins.Characters.PlayerTest.testGetMaxHealth  Time elapsed: 0 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [float arg0] in constructor [public inf112.saga.of.the.villeins.Characters.PlayerTest(float,float,inf112.saga.of.the.villeins.Characters.Animation2D,inf112.saga.of.the.villeins.Characters.Animation2D,com.badlogic.gdx.graphics.g2d.SpriteBatch,int,int,int)].
+
+inf112.saga.of.the.villeins.Characters.PlayerTest.testSetHealth  Time elapsed: 0 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [float arg0] in constructor [public inf112.saga.of.the.villeins.Characters.PlayerTest(float,float,inf112.saga.of.the.villeins.Characters.Animation2D,inf112.saga.of.the.villeins.Characters.Animation2D,com.badlogic.gdx.graphics.g2d.SpriteBatch,int,int,int)].
+
+inf112.saga.of.the.villeins.Characters.PlayerTest.testGetHealth  Time elapsed: 0 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [float arg0] in constructor [public inf112.saga.of.the.villeins.Characters.PlayerTest(float,float,inf112.saga.of.the.villeins.Characters.Animation2D,inf112.saga.of.the.villeins.Characters.Animation2D,com.badlogic.gdx.graphics.g2d.SpriteBatch,int,int,int)].
+
+inf112.saga.of.the.villeins.Characters.PlayerTest.testGetDefense  Time elapsed: 0 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [float arg0] in constructor [public inf112.saga.of.the.villeins.Characters.PlayerTest(float,float,inf112.saga.of.the.villeins.Characters.Animation2D,inf112.saga.of.the.villeins.Characters.Animation2D,com.badlogic.gdx.graphics.g2d.SpriteBatch,int,int,int)].
+
