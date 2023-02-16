@@ -78,3 +78,4 @@ Fjerde gruppetime
 Problemer med access fra VS code til git på mac, utestengt fra uib nettet, men løste det sammen med gruppemedlemmer og leder.
 Skrev prosjektdokumenter til A1-A5
 
+
