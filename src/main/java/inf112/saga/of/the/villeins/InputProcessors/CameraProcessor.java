@@ -8,10 +8,13 @@ import com.badlogic.gdx.math.Vector3;
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class CameraProcessor implements IInputProcessor {
+	private final float minimumZoomLevel = 0.5f;
+
+	private final float zoomAmount = 0.10f;
 
     private OrthographicCamera camera;
 
-	private Vector2 clickCoordinates = new Vector2(0f, 0f);
+	private Vector2 clickCoordinates;
 
     public CameraProcessor(OrthographicCamera camera){
         this.camera = camera;
@@ -45,12 +48,16 @@ public class CameraProcessor implements IInputProcessor {
 			camera.translate(10, 0 ,0);
 			return true;
 		}
-		if(character == 'z'){
+		if(character == 'z') {
 			camera.zoom += 0.05;
 			return true;
 		}
-		if(character == 'x'){
-			camera.zoom -= 0.05;
+		if(character == 'x') {
+			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
+				camera.zoom = minimumZoomLevel;
+			} else {
+				camera.zoom -= 0.05;
+			}
 			return true;
 		}
 
@@ -59,17 +66,14 @@ public class CameraProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
-//		System.out.println(worldCoordinate);
-
 
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			// TODO fjern dette senere
 			// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
 			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
-			camera.unproject(cameraCoordinates);
-			clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			this.camera.unproject(cameraCoordinates);
+			this.clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		}
 		return false;
 	}
@@ -92,11 +96,10 @@ public class CameraProcessor implements IInputProcessor {
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
 		float zoomMultiplier = 0.20f;
-		float zoomMinimumLevel = 0.5f;
-		if (camera.zoom + amountY * zoomMultiplier < zoomMinimumLevel) {
-			camera.zoom = zoomMinimumLevel;
+		if (camera.zoom + amountY * zoomMultiplier < this.minimumZoomLevel) {
+			camera.zoom = this.minimumZoomLevel;
 		} else {
-			camera.zoom += amountY * 0.25f;
+			camera.zoom += amountY * zoomMultiplier;
 		}
 		return false;
 	}
