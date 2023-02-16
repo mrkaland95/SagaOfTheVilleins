@@ -1,4 +1,4 @@
-A1 – Roller
+1A1 – Roller
 
 Leon – grafisk designer
 På bakgrunn av fritidsinteresser og erfaring som innebærer grafikk, var grafisk designer et godt valg. 
@@ -8,7 +8,7 @@ På bakgrunn av lite programmeringsferdigheter, men mye prosjektutførelse, samt
 
 Markus - developer
 
-Steffen – teklead (git ansvarlig, integreringsavsnarlig)
+Steffen – techlead (git ansvarlig, integreringsavsnarlig)
 
 
 A2 – røff beskrivelse av hva som inngår i spillet
