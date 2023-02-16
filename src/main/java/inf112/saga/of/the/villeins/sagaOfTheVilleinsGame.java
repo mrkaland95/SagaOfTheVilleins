@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.CameraProcessor;
-import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.Rules.GameController;
 
 public class sagaOfTheVilleinsGame extends ApplicationAdapter {
