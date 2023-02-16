@@ -1,4 +1,5 @@
 package inf112.saga.of.the.villeins.InputProcessors;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +15,10 @@ public class CameraProcessor implements IInputProcessor {
 
     private OrthographicCamera camera;
 
-	private Vector2 clickCoordinates;
+	private Vector2 moveClickCoordinates;
+
+	private Vector2 lastCameraCoordinates = new Vector2();
+
 
     public CameraProcessor(OrthographicCamera camera){
         this.camera = camera;
@@ -73,10 +77,17 @@ public class CameraProcessor implements IInputProcessor {
 			// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
 			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
 			this.camera.unproject(cameraCoordinates);
-			this.clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			return true;
+
+		} else if (button == Input.Buttons.MIDDLE) {
+			// Stores the position if the middle mouse button was clicked.
+			this.lastCameraCoordinates.set(screenX, screenY);
+			return true;
 		}
 		return false;
 	}
+
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -85,7 +96,15 @@ public class CameraProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
+		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
+			Vector2 NewCameraCoordinates = new Vector2(screenX, screenY);
+			Vector2 delta = NewCameraCoordinates.cpy().sub(lastCameraCoordinates);
+			camera.translate(-delta.x, delta.y);
+			lastCameraCoordinates = NewCameraCoordinates;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -105,8 +124,8 @@ public class CameraProcessor implements IInputProcessor {
 	}
 
 
-	public Vector2 getClickCoordinates() {
-		return this.clickCoordinates;
+	public Vector2 getMoveClickCoordinates() {
+		return this.moveClickCoordinates;
 	}
     
 }

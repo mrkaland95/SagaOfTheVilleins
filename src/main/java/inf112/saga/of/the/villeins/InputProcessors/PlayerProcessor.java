@@ -1,4 +1,5 @@
 package inf112.saga.of.the.villeins.InputProcessors;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +12,7 @@ public class PlayerProcessor implements IInputProcessor {
 
     private OrthographicCamera camera;
 
-	private Vector2 clickCoordinates = new Vector2(0f, 0f);
+	private Vector2 clickCoordinates;
 
     public PlayerProcessor(OrthographicCamera camera){
         this.camera = camera;
@@ -70,6 +71,7 @@ public class PlayerProcessor implements IInputProcessor {
 			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
 			camera.unproject(cameraCoordinates);
 			clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			return true;
 		}
 		return false;
 	}
@@ -81,7 +83,10 @@ public class PlayerProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
+		float x = Gdx.input.getDeltaX();
+		float y = Gdx.input.getDeltaY();
+		camera.translate(-x, -y);
+		return true;
 	}
 
 	@Override
@@ -102,7 +107,7 @@ public class PlayerProcessor implements IInputProcessor {
 	}
 
 
-	public Vector2 getClickCoordinates() {
+	public Vector2 getMoveClickCoordinates() {
 		return this.clickCoordinates;
 	}
     
