@@ -5,6 +5,8 @@ public interface IStats {
 
     int getStrength(ICharacter character);
 
+    void setStrength(ICharacter character);
+
     int getDefense(ICharacter character);
 
     int getMaxHealth(ICharacter character);
