@@ -22,7 +22,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 	CameraProcessor processor;
-
 	Vector2 clickPosition;
 
 
@@ -37,9 +36,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 //
 //		}
 
-
-
-		System.out.println();
 		renderer = new HexagonalTiledMapRenderer(map);
 		Rectangle bounds = renderer.getViewBounds();
 		System.out.println(bounds);
@@ -47,7 +43,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 		float playerXStartPosition = 580f;
 		float playerYStartPosition = 500f;
-		clickPosition = new Vector2(playerXStartPosition, playerYStartPosition);
+		this.clickPosition = new Vector2(playerXStartPosition, playerYStartPosition);
 
 		// Inits the player character and sets the position.
 		player = new Player(playerXStartPosition, playerYStartPosition, walkingWarrior, idleWarrior, spriteBatch, 20, 10, 10);
@@ -62,8 +58,8 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 
 	/**
-	 * This is the render loop
-	 *
+	 * This is the render loop of the program.
+	 * Essentially all the objects or methods that need to be updated every frame should go in here.
 	 */
 	@Override
 	public void render () {
@@ -71,18 +67,11 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		spriteBatch.begin();
 		renderer.setView(camera);
 
-
-
 		Vector2 clickPosition = processor.getClickCoordinates();
-
-
 		renderer.render();
 		camera.update();
-
-
 		player.update();
-
-//		player.moveToPosition(clickPosition.x, clickPosition.y);
+		player.moveToPosition(clickPosition.x, clickPosition.y);
 //		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}

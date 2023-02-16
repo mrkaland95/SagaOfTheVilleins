@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Main;
+
 
 public class Player implements ICharacter {
     private float xCurrentPosition;
     private float yCurrentPosition;
-    private float moveSpeed = 25.0f;
+    // Temporary value from global for testing purposes.
+    private float moveSpeed = Main.defaultMoveSpeed;
     private SpriteBatch spriteBatch;
     Animation2D walkingPlayer;
 
@@ -66,22 +69,22 @@ public class Player implements ICharacter {
     public void update() {
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
         TextureRegion currentImage = currentAnimation.getImageToRender();
-
         this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
-        this.moveToPosition(this.positionToMoveTo.x, positionToMoveTo.y);
+//        this.moveToPosition(this.positionToMoveTo.x, positionToMoveTo.y);
     }
 
     @Override
     public void moveToPosition(float xPosition, float yPosition) {
         float deltaTime = Gdx.graphics.getDeltaTime();
+
         positionToMoveTo.x = xPosition;
         positionToMoveTo.y = yPosition;
 
         // Temp variable until we can make the character go to the center of a tile.
+        // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 5.0f;
 
         if ((Math.abs(positionToMoveTo.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - positionToMoveTo.y) > positionMarginOfError)) {
-//        if ((positionToMoveTo.x != this.xCurrentPosition) || (positionToMoveTo.y != this.yCurrentPosition)) {
             float pathX = positionToMoveTo.x - xCurrentPosition;
             float pathY = positionToMoveTo.y - yCurrentPosition;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
