@@ -36,6 +36,15 @@ public interface IMovable2D {
      */
     public void setPosition(float xPosition, float yPosition);
 
+    /**
+     * @param xDestination a float of the x position that the movable object should move to.
+     * @param yDestination a float of the y position that the movable object should move to.
+     */
     void moveToPosition(float xDestination, float yDestination);
+
+    /**
+     * @param Destination A Vector2 of the x and y position that the movable should move to.
+     */
     void moveToPosition(Vector2 Destination);
+
 }

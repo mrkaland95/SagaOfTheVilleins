@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
@@ -57,12 +56,11 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
 		spriteBatch.begin();
 		renderer.setView(camera);
-		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
+		Vector2 clickPosition = GameController.currentProcessor.getMoveClickCoordinates();
 		renderer.render();
 		camera.update();
 		player.update();
 		player.moveToPosition(clickPosition);
-//		player.moveToPosition(300f, 200f);
 		spriteBatch.end();
 	}
 	

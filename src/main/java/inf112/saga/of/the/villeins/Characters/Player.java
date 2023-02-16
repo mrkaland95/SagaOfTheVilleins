@@ -11,7 +11,7 @@ public class Player implements ICharacter {
     private float xCurrentPosition;
     private float yCurrentPosition;
     // Temporary value from global for testing purposes.
-    private float moveSpeed = Main.defaultMoveSpeed;
+    private float moveSpeed = Main.globalDefaultMoveSpeed;
     private SpriteBatch spriteBatch;
     Animation2D walkingPlayer;
 
