@@ -7,20 +7,23 @@ Malene – prosjektleder og testansvarlig
 På bakgrunn av lite programmeringsferdigheter, men mye prosjektutførelse, samt personlig kvalitet; svært strukturert, var dette en rolle som falt naturlig. I tillegg til dette kan det tenkes at testansvarlig kan være aktuelt, da det vil være overkommelig å fokusere på noe avgrenset og lære det godt. 
 
 Markus - developer
+Rollen ble git basert på historikk som viser til at medlemmet skaper god kode hyppig. 
 
 Steffen – techlead (git ansvarlig, integreringsavsnarlig)
-
+Rollen blir gitt på bakgrunn av mest erfaring i git. 
 
 A2 – røff beskrivelse av hva som inngår i spillet
 
 * Spillfigur som kan gå frem, tilbake og diagonalt  
 * Todimensjonal verden  
-	*Plattform bestående av tiles som spillfiguren kan stå og bevege seg på   
+	* Plattform bestående av tiles som spillfiguren kan stå og bevege seg på   
 * Turn-based interaksjon med fiende  
 * Spilleren kan øke i «skill» ved å bekjempe fiender av stadig vanskeligere grad  
-* Spilleren kan, potensielt, øke inventory ved å plukke med seg gjenstander  
+* Spilleren kan, potensielt, øke inventory kapasitet ved å plukke med seg gjenstander  
 * Spilleren følger et map som består av strategiske valg i form av spill med fiende, samt andre quests  
 * Målet med spillet er å bekjempe alle de ulike fiendene, plukke med seg gjenstander, forflytte seg til enden på   in-between-games-map og bedre skill/karma.  
+
+Spill som illustrer konseptet roguelike, civilization 5 og 6 og xcom.
 
 A3 – Velge og tilpasse en prosjektmetodikk for teamet  
 
@@ -31,6 +34,7 @@ Parprogrammering er en metode som fungerer bra for å involvere medlem med svake
 Kanban virker som å være en oversiktlig metodikk hvor vi alle får innsikt i hva som foregår og hva som trengs. Planen er derav å lage en digital kanban som kan modifiseres fortløpende.
 
 Organisering av møter/arbeidsøkter
+
 Ved møter ønsker vi følgende struktur, med modifikasjoner tilpasset agenda;
 * Første punkt for møtet er en kort orientering fra alle medlemmene over hva en har gjort fra forrige gang, tanker en har kommet på underveis og hva en tenker om veien videre. 
 * Neste punkt er dagens agenda. Da vil det variere om vi har satt en agenda på forhånd som skal følges, følges med modifikasjoner eller at en agenda blir diskutert og satt der og da. 
@@ -38,6 +42,7 @@ Ved møter ønsker vi følgende struktur, med modifikasjoner tilpasset agenda;
 * Fjerde punkt vil bestå av en oppsummering i enden av møtet/arbeidsøkten hvor en tar en lett gjennomgang på hva de ulike medlemmene skal jobbe med frem mot neste gang, samt agendaen for neste møte.
 
 Hyppighet
+
 Faste møter og arbeidsøkter:
 * Torsdager 08:15 - 10:00
 * Fredager 10:15 - 14:00
@@ -46,36 +51,50 @@ Kommunikasjon mellom møter
 * All kommunikasjon mellom medlemmer foregår på Discord i relevant text channel
 
 Arbeidsfordeling
-* Da alle medlemmene har ulik bakgrunn, har det frem til nå vært intuitivt å bestemme hvem som skal ha hvilke arbeidsoppgaver. Ser på muligheten for å lage en digital Kanban hvor arbeidsoppgaver blir reservert og forflyttet.
+* Da alle medlemmene har ulik bakgrunn, har det frem til nå vært intuitivt å bestemme hvem som skal ha hvilke arbeidsoppgaver. Ser på muligheten for å lage en digital Kanban hvor arbeidsoppgaver blir reservert, gjennomført og  forflyttet i dokumentet.
 
 Oppfølging av arbeid
 * Oppfølging av arbeid vil foregå i ulike ledd
-	*Oppfølging på møter fast hver uke
-	*Oppfølging i Discord fortløpende mellom møter
-	*Oppfølging ved oppdateringer i git
+	* Oppfølging på møter fast hver uke
+	* Oppfølging i Discord fortløpende mellom møter
+	* Oppfølging ved oppdateringer i git
 
 Deling og oppbevaring av fellles data
 * Har opprettet en onenote notatbok hvor alle har tilgang
 * Har opprettet et google sheet for logføring av timer og oppgaver
+* Koden oppbevares i develop brach i gitlab
 
 A3 - oversikt over forventet produkt 
 
 Spesifikasjon
 * Det overordnede målet for applikasjonen er å bekjempe en rekke fiender for å komme til enden av mapet og bli "fri".
 
-Krav til MVP ved innlevering oblig1 17/02-23
-1. Vise et tile-basert spillbrett
-2. Vise en spillfigur på spillbrettet
-3. Bevege spillfiguren i henhold til spillbrettet
-4. Kunne kontrollere kameravinkel
+Krav til MVP
+* Vise et tile-basert spillbrett
+* Vise en spillfigur på spillbrettet
+* Bevege spillfiguren i henhold til spillbrettet
+* (Kunne kontrollere kameraposisjon)
+* Fiende med simpel ai som kan lese posisjonen til spilleren og interagere basert på det
+* Karakterene skal kunne interagere og påføre skade som fører til død 
+* Visuell fremvisning av antall liv per spillfigur 
+* (Visuell fremvisning av innholdet på hver tile)
+* Bekjempelse av fiende etterlater en gjenstand som kan plukkes opp og føre til økt ferdighet
+* Lydeffekter ved interaksjon mellom spillfigur og fiende
+* Etter bekjempelse genereres det et nytt spill hvor økt ferdighet er beholdt og ny fiende oppstår
+* Spillbrettet inneholder en barriere hvor spilleren ikke kan befinne seg
+* Spillet skal inneholde en forside hvor en kan navigere seg videre til spillet
+* Spillet skal inneholde en hjelpeside med beskrivelse av hvordan spillet fungerer
+* Opprette enheter i spillet vha. objektfabrikker
+* Koden skal inneholde tester med minimum 75% coverage
+* Automatiske tester skal kunne kjøres uten interaksjon
 
 Brukerhistorier
-1. Som spiller trenger en å forstå hvilket type spill det er ved å se på det for å bestemme interesse
+1. Som spiller trenger en å forstå hvilket type spill det er ved å se på det for å kunne bestemme interesse
 2. Som spiller trenger en å intuivit forstå hvilken spillfigur det er mulig å styre for å kunne iteragere i spillet
 3. Som spiller trenger en å forstå hvor det er mulig å forflytte spillfiguren, samt hvor det ikke er det, for å kunne interagere i spillet
 4. Som spiller trenger en å vite hvordan en forflytter spillfiguren for å kunne interagere i spillet
 5. Som spiller trenger en å vite hvordan en styrer kameraet, slik at en kan orientere seg på skjermen
-6. 
+6. Som programmerer trenger 
 
 
 A5 - oppsummering
@@ -86,13 +105,14 @@ Bra
 * Kommunikasjon mellom møter
 * Oppmøte på avtalte tidspunkt
 * Bistand mellom medlemmer ved tekniske problemer
-* 
+* Diskusjonsprosesser i henhold til spillet, samt å ta valg deretter
+* Opparbeidet god mengde kode med ryddig struktur 
 
 Middels
-* 
+* Oversiktlighet over hva alle medlemmene har gjort til nå
+* Dokumentere ideer til et felles sted
 
 Under middels
-* Oversiktlighet over hva alle medlemmene har gjort til nå
 * Logføring av timearbeid per medlem utenom felles møtetider/arbeidsøkter
 * Fordeling av varierte arbeidsoppgaver
 * Foreløpig ujevn arbeidsmengde gjennomført av de ulike medlemmene, av ulike årsaker 
@@ -100,6 +120,9 @@ Under middels
 Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgende;
 * Aktiv bruk av timelister
 * Aktiv bruk av digital Kanban 
+* Følge møteplan strukturert og systematisk
+
+Ting som har fungert har vært basert på gjennomføringsevne og uklarhet i oppstartsfase.
 
 
 
