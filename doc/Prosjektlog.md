@@ -73,9 +73,20 @@ Steffen: Kode for å flytte
 
 Torsdag 16/02-23
 Kl. 08:15 - 10:00
+Malene, Markus og Steffen (Leon syk)
 
 Fjerde gruppetime 
-Problemer med access fra VS code til git på mac, utestengt fra uib nettet, men løste det sammen med gruppemedlemmer og leder.
-Skrev prosjektdokumenter til A1-A5
+* Problemer med access fra VS code til git på mac, utestengt fra uib nettet, men løste det sammen med gruppemedlemmer og leder.
+* Skrev prosjektdokumenter til A1-A5
+
+
+Fredag 17/02-23
+kl. 10:15 - 14:00
+Malene, Markus og Steffen (Leon syk)
+
+Arbeidsøkt på Realfagsbygget
+* Sette opp digital Kanban
+* Skrive dokumentasjon som svarer til oblig1 og sette tag
+
 
 

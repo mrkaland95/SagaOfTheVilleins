@@ -9,11 +9,18 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 
 Kjøring 
 * Kompileres med "mvn package".
-* Kjøres med ukjent per dags dato
+* Kjøres med java -jar target/SagaOfTheVilleins-1.0-SNAPSHOT-fat.jar
 * Krever Java 17 eller senere
 
 Kjente feil
-Coming..
+* Foreløpeling går det ann å flytte kameraet ved å holde inn enn knapp på musen og deretter scrolle.
+Derimot er ikke denne helt 1-til-1 med tanke på posisjon for øyeblikket.
+
+* Spriten blir rendret ned fra venstre hjørnet, heller enn fra midten av "Spriten".
+
 
 Credits
-Coming...
+
+LibGDX
+
+Leon - Laget "Spritene"
