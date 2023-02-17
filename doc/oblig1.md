@@ -1,16 +1,16 @@
 A1 – Roller
 
 Leon – grafisk designer
-På bakgrunn av fritidsinteresser og erfaring som innebærer grafikk, var grafisk designer et godt valg. 
+* På bakgrunn av fritidsinteresser og erfaring som innebærer grafikk, var grafisk designer et godt valg. 
 
 Malene – prosjektleder og testansvarlig
-På bakgrunn av lite programmeringsferdigheter, men mye prosjektutførelse, samt personlig kvalitet; svært strukturert, var dette en rolle som falt naturlig. I tillegg til dette kan det tenkes at testansvarlig kan være aktuelt, da det vil være overkommelig å fokusere på noe avgrenset og lære det godt. 
+* På bakgrunn av lite programmeringsferdigheter, men mye prosjektutførelse, samt personlig kvalitet; svært strukturert, var dette en rolle som falt naturlig. I tillegg til dette kan det tenkes at testansvarlig kan være aktuelt, da det vil være overkommelig å fokusere på noe avgrenset og lære det godt. 
 
 Markus - developer
-Rollen ble git basert på historikk som viser til at medlemmet skaper god kode hyppig. 
+* Rollen ble git basert på historikk som viser til at medlemmet skaper god kode hyppig. 
 
 Steffen – techlead (git ansvarlig, integreringsavsnarlig)
-Rollen blir gitt på bakgrunn av mest erfaring i git. 
+* Rollen blir gitt på bakgrunn av mest erfaring i git. 
 
 A2 – røff beskrivelse av hva som inngår i spillet
 
@@ -23,15 +23,13 @@ A2 – røff beskrivelse av hva som inngår i spillet
 * Spilleren følger et map som består av strategiske valg i form av spill med fiende, samt andre quests  
 * Målet med spillet er å bekjempe alle de ulike fiendene, plukke med seg gjenstander, forflytte seg til enden på   in-between-games-map og bedre skill/karma.  
 
-Spill som illustrer konseptet roguelike, civilization 5 og 6 og xcom.
+Spill som illustrer konseptet: roguelike, civilization 5 og 6 og xcom.
 
 A3 – Velge og tilpasse en prosjektmetodikk for teamet  
 
 Når det kommer til prosjektmetodikk, har teamet blitt enige om følgende;  
-
-Parprogrammering er en metode som fungerer bra for å involvere medlem med svakere programmeringsferdigheter. Dette er derfor en metode vi har valgt å inkludere, men med et begrenset omfang.
-
-Kanban virker som å være en oversiktlig metodikk hvor vi alle får innsikt i hva som foregår og hva som trengs. Planen er derav å lage en digital kanban som kan modifiseres fortløpende.
+* Parprogrammering er en metode som fungerer bra for å involvere medlem med svakere programmeringsferdigheter. Dette er derfor en metode vi har valgt å inkludere, men med et begrenset omfang.
+* Kanban virker som å være en oversiktlig metodikk hvor vi alle får innsikt i hva som foregår og hva som trengs. Planen er derav å lage en digital kanban som kan modifiseres fortløpende.
 
 Organisering av møter/arbeidsøkter
 
@@ -94,7 +92,9 @@ Brukerhistorier
 3. Som spiller trenger en å forstå hvor det er mulig å forflytte spillfiguren, samt hvor det ikke er det, for å kunne interagere i spillet
 4. Som spiller trenger en å vite hvordan en forflytter spillfiguren for å kunne interagere i spillet
 5. Som spiller trenger en å vite hvordan en styrer kameraet, slik at en kan orientere seg på skjermen
-6. Som programmerer trenger 
+6. Som programmerer trenger en å vite plasseringen til spillfiguren slik at en kan avgjøre hvilke handlinger som er gjennomførbare
+7. Som programmerer trenger en vi lett leslig kode 
+8. Som programmerer trenger en å ta i bruk objektorienterte prinsipper for å oppnå god kode og struktur
 
 
 A5 - oppsummering
@@ -107,6 +107,7 @@ Bra
 * Bistand mellom medlemmer ved tekniske problemer
 * Diskusjonsprosesser i henhold til spillet, samt å ta valg deretter
 * Opparbeidet god mengde kode med ryddig struktur 
+* Hyppig pushing til git
 
 Middels
 * Oversiktlighet over hva alle medlemmene har gjort til nå
@@ -122,8 +123,7 @@ Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgen
 * Aktiv bruk av digital Kanban 
 * Følge møteplan strukturert og systematisk
 
-Ting som har fungert har vært basert på gjennomføringsevne og uklarhet i oppstartsfase.
-
+Ting som har fungert under middels har vært basert på typisk oppstartsfase faktorer, samt gjennomføringsevne. 
 
 
 
