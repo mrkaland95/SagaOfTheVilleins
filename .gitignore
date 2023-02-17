@@ -1,3 +1,7 @@
+.vscode
+/target
+## Maven
+
 ## Java
 
 *.class
@@ -112,3 +116,6 @@ Thumbs.db
 /ios/xcode/native/
 /ios/IOSLauncher.app
 /ios/IOSLauncher.app.dSYM
+/.vscode/
+/dependency-reduced-pom.xml
+/SagaOfTheVilleins-1.0-SNAPSHOT-fat.jar

@@ -8,19 +8,13 @@ import com.badlogic.gdx.math.Vector3;
 
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
-public class CameraProcessor implements IInputProcessor {
-	private final float minimumZoomLevel = 0.5f;
-
-	private final float zoomAmount = 0.10f;
+public class PlayerProcessor implements IInputProcessor {
 
     private OrthographicCamera camera;
 
-	private Vector2 moveClickCoordinates;
+	private Vector2 clickCoordinates;
 
-	private Vector2 lastCameraCoordinates = new Vector2();
-
-
-    public CameraProcessor(OrthographicCamera camera){
+    public PlayerProcessor(OrthographicCamera camera){
         this.camera = camera;
     }
 
@@ -52,16 +46,12 @@ public class CameraProcessor implements IInputProcessor {
 			camera.translate(10, 0 ,0);
 			return true;
 		}
-		if(character == 'z') {
+		if(character == 'z'){
 			camera.zoom += 0.05;
 			return true;
 		}
-		if(character == 'x') {
-			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
-				camera.zoom = minimumZoomLevel;
-			} else {
-				camera.zoom -= 0.05;
-			}
+		if(character == 'x'){
+			camera.zoom -= 0.05;
 			return true;
 		}
 
@@ -70,24 +60,21 @@ public class CameraProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+//		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
+//		System.out.println(worldCoordinate);
+
 
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			// TODO fjern dette senere
 			// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
 			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
-			this.camera.unproject(cameraCoordinates);
-			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
-			return true;
-
-		} else if (button == Input.Buttons.MIDDLE) {
-			// Stores the position if the middle mouse button was clicked.
-			this.lastCameraCoordinates.set(screenX, screenY);
+			camera.unproject(cameraCoordinates);
+			clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 			return true;
 		}
 		return false;
 	}
-
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
@@ -96,15 +83,10 @@ public class CameraProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
-			Vector2 NewCameraCoordinates = new Vector2(screenX, screenY);
-			Vector2 delta = NewCameraCoordinates.cpy().sub(lastCameraCoordinates);
-			camera.translate(-delta.x, delta.y);
-			lastCameraCoordinates = NewCameraCoordinates;
-			return true;
-		} else {
-			return false;
-		}
+		float x = Gdx.input.getDeltaX();
+		float y = Gdx.input.getDeltaY();
+		camera.translate(-x, -y);
+		return true;
 	}
 
 	@Override
@@ -115,17 +97,18 @@ public class CameraProcessor implements IInputProcessor {
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
 		float zoomMultiplier = 0.20f;
-		if (camera.zoom + amountY * zoomMultiplier < this.minimumZoomLevel) {
-			camera.zoom = this.minimumZoomLevel;
+		float zoomMinimumLevel = 0.5f;
+		if (camera.zoom + amountY * zoomMultiplier < zoomMinimumLevel) {
+			camera.zoom = zoomMinimumLevel;
 		} else {
-			camera.zoom += amountY * zoomMultiplier;
+			camera.zoom += amountY * 0.25f;
 		}
 		return false;
 	}
 
 
 	public Vector2 getMoveClickCoordinates() {
-		return this.moveClickCoordinates;
+		return this.clickCoordinates;
 	}
     
 }

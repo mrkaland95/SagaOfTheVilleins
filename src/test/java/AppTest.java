@@ -1,6 +1,5 @@
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,6 +12,6 @@ public class AppTest {
 	void damageTest(){
 		ICharacter Dummy = new Player(0, 0, null, null, null, 20, 0, 0);
 		Dummy.setHealth(10, Dummy);
-		assertEquals(10, Dummy.getHealth(Dummy));
+		assertEquals(10, Dummy.getHealth());
 	}
 }
