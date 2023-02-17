@@ -132,6 +132,8 @@ public class Player implements ICharacter {
         }
     }
 
+
+
     @Override
     public Vector2 getPosition() {
         return new Vector2(this.xCurrentPosition, this.yCurrentPosition);
@@ -161,35 +163,34 @@ public class Player implements ICharacter {
     }
 
     @Override
-    public int getHealth(ICharacter character) {
+    public int getHealth() {
         return this.currentHealth;
     }
 
 
     @Override
-    public int getStrength(ICharacter character) {
+    public int getStrength() {
         return this.strength;
     }
 
     @Override
-    public void setStrength(ICharacter character) {
-
+    public void setStrength(int strength) {
     }
 
     @Override
-    public int getDefense(ICharacter character) {
+    public int getDefense() {
         return this.defense;
     }
 
 
     @Override
-    public int getMaxHealth(ICharacter character) {
+    public int getMaxHealth() {
         return this.maxHealth;
     }
 
 
     @Override
     public void setHealth(int damageTaken, ICharacter character) {
-        this.currentHealth = character.getHealth(character) - damageTaken;
+        this.currentHealth = character.getHealth() - damageTaken;
     }
 }
