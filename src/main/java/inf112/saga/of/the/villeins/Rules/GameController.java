@@ -14,13 +14,13 @@ import inf112.saga.of.the.villeins.InputProcessors.PlayerProcessor;
 public class GameController {
 
     private ArrayList<ICharacter> playerlist;
-    private int turnCounter;
+    // private int turnCounter;
     private ArrayList<InputProcessor> processorList;
     public IInputProcessor currentProcessor;
 
     public GameController(ArrayList<ICharacter> playerlist, OrthographicCamera camera){
         this.playerlist = playerlist;
-        this.turnCounter = 0;
+        // this.turnCounter = 0;
         this.processorList = new ArrayList<>();
         this.currentProcessor = null;
 

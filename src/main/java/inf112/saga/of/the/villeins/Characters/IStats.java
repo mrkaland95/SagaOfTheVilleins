@@ -1,15 +1,15 @@
 package inf112.saga.of.the.villeins.Characters;
 
 public interface IStats {
-    int getHealth(ICharacter character);
+    int getHealth();
 
-    int getStrength(ICharacter character);
+    int getStrength();
 
-    void setStrength(ICharacter character);
+    void setStrength(int strength);
 
-    int getDefense(ICharacter character);
+    int getDefense();
 
-    int getMaxHealth(ICharacter character);
+    int getMaxHealth();
 
     void setHealth(int damageTaken, ICharacter character);
 
