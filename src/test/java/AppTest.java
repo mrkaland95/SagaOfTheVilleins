@@ -10,7 +10,7 @@ import inf112.saga.of.the.villeins.Characters.Player;
 public class AppTest {
 	@Test
 	void damageTest(){
-		ICharacter Dummy = new Player(0, 0, null, null, null, 20, 0, 0);
+		ICharacter Dummy = new Player(0, 0,20, 0, 0);
 		Dummy.setHealth(10, Dummy);
 		assertEquals(10, Dummy.getHealth());
 	}
