@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins;
+package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 public class Main {
 
 	// Temp variable that specifies at what speed characters should move at.
-	public static float globalDefaultMoveSpeed = 100.0f;
+	public final static float globalDefaultMoveSpeed = 100.0f;
 
 	public static void main(String[] args) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();

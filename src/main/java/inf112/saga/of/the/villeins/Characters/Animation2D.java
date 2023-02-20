@@ -65,15 +65,15 @@ public class Animation2D {
 
         float frameDuration = 1f / FRAME_COLUMNS;
         // Defines how fast the animation should play. Higher number slows the animation down, while lower makes it faster.
-        float animationSpeed = frameDuration * 1.33f;
+        float animationSpeed = frameDuration * 0.5f;
         walkAnimation = new Animation<TextureRegion>(animationSpeed, walkFrames);
         elapsedAnimationTime = 0f;
         }
 
 
 
-    public TextureRegion getImageToRender() {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public TextureRegion getImageToRender(float deltaTime) {
+//        float deltaTime = Gdx.graphics.getDeltaTime();
         elapsedAnimationTime += deltaTime;
         return walkAnimation.getKeyFrame(elapsedAnimationTime, true);
     }

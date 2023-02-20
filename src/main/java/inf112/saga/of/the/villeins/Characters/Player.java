@@ -1,45 +1,29 @@
 package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Main;
+import inf112.saga.of.the.villeins.Game.Main;
 
 
 public class Player implements ICharacter {
     private float xCurrentPosition;
     private float yCurrentPosition;
-    // Temporary value from global for testing purposes.
-    private float moveSpeed = Main.globalDefaultMoveSpeed;
-    private SpriteBatch spriteBatch;
-    Animation2D walkingPlayer;
-
-    // Temp variables until those animations are made.
-    Animation2D idleAnimation;
-
-    // Currently no attacking animation has been made
-    // TODO make an attacking animation for the player character(s)
-    Animation2D attackingAnimation;
-
-    // The current animation that should be rendered, depending on which state the character is in. For example, moving, idle, attacking etc.
-    Animation2D currentAnimation;
-
-    boolean shouldMove = true;
-
     Vector2 destinationPosition;
+    private String name;
     private int maxHealth;
     private int currentHealth;
     private int strength;
     private int defense;
+    private float moveSpeed = Main.globalDefaultMoveSpeed;
+
+    private int score;
+
+    private boolean moving;
 
     // TODO make a new class for loading in all the animations.
 
     public Player(float startingXPosition,
                   float startingYPosition,
-                  Animation2D walkingAnimation,
-                  Animation2D idleAnimation,
-                  SpriteBatch spriteBatch,
                   int maxHealth,
                   int strength,
                   int defense) {
@@ -49,12 +33,6 @@ public class Player implements ICharacter {
 //        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
 
         this.destinationPosition = new Vector2(startingXPosition, startingYPosition);
-        this.spriteBatch = spriteBatch;
-        this.walkingPlayer = walkingAnimation;
-        this.idleAnimation = idleAnimation;
-//        this.currentAnimation = walkingAnimation;
-        this.currentAnimation = idleAnimation;
-
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.strength = strength;
@@ -65,9 +43,11 @@ public class Player implements ICharacter {
     @Override
     public void update() {
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
-        TextureRegion currentImage = currentAnimation.getImageToRender();
-        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
-//        this.moveToPosition(this.positionToMoveTo.x, positionToMoveTo.y);
+//        TextureRegion currentImage = currentAnimation.getImageToRender();
+//        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
+        if (destinationPosition != null){
+            this.moveToPosition(this.destinationPosition.x, destinationPosition.y);
+        }
     }
 
     @Override
@@ -82,6 +62,7 @@ public class Player implements ICharacter {
         float positionMarginOfError = 5.0f;
 
         if ((Math.abs(destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+            this.moving = true;
             float pathX = destinationPosition.x - xCurrentPosition;
             float pathY = destinationPosition.y - yCurrentPosition;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
@@ -97,6 +78,7 @@ public class Player implements ICharacter {
             // Then snap the player's position to the desired spot.
             xCurrentPosition = destinationPosition.x;
             yCurrentPosition = destinationPosition.y;
+            this.moving = false;
         }
     }
 
@@ -132,8 +114,14 @@ public class Player implements ICharacter {
         }
     }
 
+    @Override
+    public boolean isMoving() {
+        return this.moving;
+    }
 
-
+    public void setDestination(Vector2 destinationPosition){
+        this.destinationPosition = destinationPosition;
+    }
     @Override
     public Vector2 getPosition() {
         return new Vector2(this.xCurrentPosition, this.yCurrentPosition);
