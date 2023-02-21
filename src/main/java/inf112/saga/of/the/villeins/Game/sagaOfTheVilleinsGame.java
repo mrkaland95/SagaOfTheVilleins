@@ -27,8 +27,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		spriteBatch = new SpriteBatch();
-//		walkingWarrior = new Animation2D("./assets/Sprites/Warrior/WalkingWarrior.png");
-//		idleWarrior = new Animation2D("./assets/Sprites/Warrior/IdleWarrior.png", 1, 2);
+
 		String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		map = new TmxMapLoader().load("./assets/TiledMap/TiledRougelikeMap.tmx");

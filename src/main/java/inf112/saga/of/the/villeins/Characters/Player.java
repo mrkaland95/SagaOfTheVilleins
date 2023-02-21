@@ -103,6 +103,7 @@ public class Player implements ICharacter {
             float directiontoMoveY = pathY / distanceToMove;
 
             // TODO implement a "ramping" function so the character accelerates and slows down when moving.
+            // Something similar to this.
             // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
             this.xCurrentPosition += directiontoMoveX * deltaTime * this.moveSpeed;
             this.yCurrentPosition += directiontoMoveY * deltaTime * this.moveSpeed;

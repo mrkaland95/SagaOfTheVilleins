@@ -12,10 +12,17 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
  * Class for handling the animation of characters, separate from the character objects.
  */
 public class CharacterAnimationController {
+    enum Animations {
+        IDLE,
+        MOVING,
+        ATTACKING
+    }
+    enum AnimationDirections {
+
+    }
     private Animation2D idleAnimation;
     private Animation2D walkAnimation;
     private Animation2D attackAnimation;
-
     private Animation2D activeAnimation;
     private final ICharacter character;
     private final SpriteBatch spriteBatch;
@@ -61,7 +68,8 @@ public class CharacterAnimationController {
     private static Vector2 calculateRenderPosition(TextureRegion currentSprite, ICharacter character) {
         Vector2 characterPosition = character.getPosition();
         float spriteX = characterPosition.x - (currentSprite.getRegionWidth() / 2.0f);
-        float spriteY = characterPosition.y - (currentSprite.getRegionHeight() / 2.0f);
+        float spriteY = characterPosition.y - (currentSprite.getRegionHeight() / 3.0f);
+//        float spriteY = characterPosition.y;
         return new Vector2(spriteX, spriteY);
     }
 }
