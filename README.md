@@ -18,9 +18,14 @@ Derimot er ikke denne helt 1-til-1 med tanke på posisjon for øyeblikket.
 
 * Spriten blir rendret ned fra venstre hjørnet, heller enn fra midten av "Spriten".
 
+* For øyeblikket må du sørge for at "assets" mappen ligger i samme rotmappe som den kompilerte pakken,
+  for at programmet skal kunne kjøres
 
-Credits
+
+Credits for "assetene" som er brukt
 
 LibGDX
+
+Markus - Laget tiles og kart
 
 Leon - Laget "Spritene"
