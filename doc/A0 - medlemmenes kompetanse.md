@@ -18,7 +18,7 @@ Markus
 
 Steffen
 6. semester datasikkerhet.
-* Relevante emner: INF100, INF101, INF102, INF140, INF142, INF143
+* Relevante emner: INF100, INF101, INF102, INF140, INF142, INF143A, INF214, INF226
 * Styrke: Engasjert, hjelpsom og tålmodig
 * Svakhet: Prokrastinerer, men jobber aktivt med det. 
 
