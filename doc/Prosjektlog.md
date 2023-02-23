@@ -95,7 +95,10 @@ Agenda frem mot torsdag 23.02-23
 
 Torsdag 23/02-23
 Kl. 08:15 - 10:00
-xxx
+Malene og Steffen
 
 Femte gruppetime
-* 
+* Ferdigstilt tester for playerklassen (parprogramering)
+* Addert metoder for Player
+* Justeringer i constructor for player
+* Ordnet opp i merge conflicts
