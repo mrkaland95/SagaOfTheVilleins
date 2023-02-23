@@ -10,13 +10,28 @@ public class Animation2D {
     // Defines the dimensions of the sprite sheet that's taken in.
     private int FRAME_COLUMNS = 11;
     private int FRAME_ROWS = 1;
-    Animation<TextureRegion> walkAnimation;
     Texture animationSheet;
+    Animation<TextureRegion> animation;
 
     // Variable for tracking elapsed time for the animation.
     float elapsedAnimationTime;
 
-    public Animation2D(String pathToSpriteSheet) {
+    public Animation2D(String pathToSpriteSheet, float playbackMultiplier) {
+        this.animation = loadAnimation(pathToSpriteSheet, playbackMultiplier);
+        }
+
+    public Animation2D(String pathToSpriteSheet, int frameRows, int frameColumns, float playbackMultiplier) {
+        this.FRAME_ROWS = frameRows;
+        this.FRAME_COLUMNS = frameColumns;
+        this.animation = loadAnimation(pathToSpriteSheet, playbackMultiplier);
+    }
+
+
+
+    private Animation<TextureRegion> loadAnimation(String pathToSpriteSheet, float playerbackMultiplier) {
+        int rows = this.FRAME_ROWS;
+        int cols = this.FRAME_COLUMNS;
+
         this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
         // The texture region class' split function only takens in a 2d array, so despite our sheets being 1d,
         // We need to initialize it as a 2d array.
@@ -24,58 +39,26 @@ public class Animation2D {
                 animationSheet.getWidth() / FRAME_COLUMNS,
                 animationSheet.getHeight() / FRAME_ROWS);
 
-        TextureRegion[] walkFrames = new TextureRegion[FRAME_COLUMNS * FRAME_ROWS];
+        TextureRegion[] animationFrames = new TextureRegion[FRAME_COLUMNS * FRAME_ROWS];
 
         // Unpacks the 2d texture array back into a 1d array
         int index = 0;
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLUMNS; j++) {
-                walkFrames[index] = tempTextures[i][j];
+                animationFrames[index] = tempTextures[i][j];
                 index++;
             }
         }
-
         float frameDuration = 1f / FRAME_COLUMNS;
-        // Defines how fast the animation should play. Higher number slows the animation down, while lower makes it faster.
-        float animationSpeed = frameDuration * 0.5f;
-        walkAnimation = new Animation<TextureRegion>(animationSpeed, walkFrames);
-        elapsedAnimationTime = 0f;
-        }
+        float animationPlaybackSpeed = frameDuration * playerbackMultiplier;
+        this.elapsedAnimationTime = 0f;
+        return new Animation<TextureRegion>(animationPlaybackSpeed, animationFrames);
+    }
 
-    public Animation2D(String pathToSpriteSheet, int frameRows, int frameColumns) {
-        FRAME_ROWS = frameRows;
-        FRAME_COLUMNS = frameColumns;
-        this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
-        // The texture region class' split function only takens in a 2d array, so despite our sheets being 1d,
-        // We need to initialize it as a 2d array.
-        TextureRegion[][] tempTextures = TextureRegion.split(animationSheet,
-                animationSheet.getWidth() / FRAME_COLUMNS,
-                animationSheet.getHeight() / FRAME_ROWS);
-
-        TextureRegion[] walkFrames = new TextureRegion[FRAME_COLUMNS * FRAME_ROWS];
-
-        // Unpacks the 2d texture array back into a 1d array
-        int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLUMNS; j++) {
-                walkFrames[index] = tempTextures[i][j];
-                index++;
-            }
-        }
-
-        float frameDuration = 1f / FRAME_COLUMNS;
-        // Defines how fast the animation should play. Higher number slows the animation down, while lower makes it faster.
-        float animationSpeed = frameDuration * 1.33f;
-        walkAnimation = new Animation<TextureRegion>(animationSpeed, walkFrames);
-        elapsedAnimationTime = 0f;
-        }
-
-
-
-    public TextureRegion getImageToRender() {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public TextureRegion getImageToRender(float deltaTime, boolean looping) {
+//        float deltaTime = Gdx.graphics.getDeltaTime();
         elapsedAnimationTime += deltaTime;
-        return walkAnimation.getKeyFrame(elapsedAnimationTime, true);
+        return animation.getKeyFrame(elapsedAnimationTime, looping);
     }
 }
 

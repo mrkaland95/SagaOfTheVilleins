@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.Rules;
+package inf112.saga.of.the.villeins.Controller;
 
 import java.util.ArrayList;
 
