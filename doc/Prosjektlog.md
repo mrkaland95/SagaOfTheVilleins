@@ -99,4 +99,6 @@ Malene og Steffen
 
 Femte gruppetime
 * Ferdigstilt tester for playerklassen (parprogramering)
-* 
+* Addert metoder for Player
+* Justeringer i constructor for player
+* Ordnet opp i merge conflicts
