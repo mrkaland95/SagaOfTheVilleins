@@ -11,6 +11,8 @@ public interface IStats {
 
     int getMaxHealth();
 
-    void setHealth(int damageTaken, ICharacter character);
+    void setHealth(int health);
+
+    void applyDamage( int damage, ICharacter character);
 
 }

@@ -52,31 +52,18 @@ public class TestForPlayer {
         float result = testPlayer123.getyCurrentPosition();
         assertEquals(expectedPosition, result);
     }
-
-/* 
+       
     @Test
     public void testSetPosition(){
         Player testPlayer123 = new Player(0, 0, null, null, null, 0, 0, 0);
         float expectedPositionX = 10f;
         float expectedPositionY = 10f;
+        Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
         testPlayer123.setPosition(expectedPositionX, expectedPositionY);
-        float resultX = testPlayer123.setPositionX(); // hvordan løse dette? set.position ønsker både x og y argument.
-        float resultY = testPlayer123.setPositionY();
-        assertEquals(expectedPositionX, resultX);
-        assertEquals(expectedPositionY, resultY);
+        Vector2 result = testPlayer123.getPosition(); 
+        assertEquals(expectedResult, result);
     }
-    
-   // Bytte til Vector2?
-    
-    @Test
-    public void testSetPosition(){
-        Player testPlayer123 = new Player(0, 0, null, null, null, 0, 0, 0);
-        Vector2 expectedPosition = new Vector2(10f, 10f);
-        testPlayer123.setPosition(expectedPosition);
-        Vector2 result = testPlayer123.setPosition(); 
-        assertEquals(expectedPosition, result);
-    }
-    */
+
 
     @Test
     public void testGetZPosition(){
@@ -103,18 +90,17 @@ public class TestForPlayer {
         int result = testPlayer123.getStrength();
         assertEquals(expectedStrength, result);
     }
-/*
+
     @Test
     public void testSetStrength(){
         int initialStrength = 5;
         int newStrength = 10;
-        Player testPlayer = new Player(0,0,null, null, null, 0, initialStrength, 0);
-        testPlayer.setStrength(newStrength);
-        int result = testPlayer.getStrength();
+        Player testPlayer123 = new Player(0,0,null, null, null, 0, initialStrength, 0);
+        testPlayer123.setStrength(newStrength);
+        int result = testPlayer123.getStrength();
         assertEquals(newStrength, result);
     }
 
-    */
 
     @Test
     public void testGetDefence(){
@@ -132,11 +118,27 @@ public class TestForPlayer {
         assertEquals(expectedMaxHealth, result);
     }
 
-    /*
+
     @Test
     public void testSetHealth(){
-        
+        Player testplayer123 = new Player(0, 0, null, null, null, 10, 0, 0);
+        int expectedHealth = 5;
+        testplayer123.setHealth(expectedHealth);
+        int result = testplayer123.getHealth();
+        assertEquals(expectedHealth, result);
     }
-     */
+
+
+    @Test
+    public void testApplyDamage(){
+        Player testplayer1 = new Player(0, 0, null, null, null, 10, 0, 0);
+        Player testplayer2 = new Player(0, 0, null, null, null, 10, 0, 0);
+        int expectedHealth = 5;
+        int damage = 5;
+        testplayer1.applyDamage(damage, testplayer2);
+        int result = testplayer2.getHealth();
+        assertEquals(expectedHealth, result);
+    }
+    
 
 }
