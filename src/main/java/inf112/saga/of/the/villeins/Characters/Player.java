@@ -156,7 +156,7 @@ public class Player implements ICharacter {
 
     @Override
     public void applyDamage(int damage, ICharacter character) {
-        int currentHealth = character.getHealth() - damage;
+        int currentHealth = character.getCurrentHealth() - damage;
         character.setHealth(currentHealth);
     }
 }

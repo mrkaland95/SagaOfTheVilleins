@@ -92,6 +92,12 @@ public class baseMonster implements ICharacter {
     }
 
     @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
+
+    }
+
+    @Override
     public int getStrength() {
         return this.strength;
     }
@@ -107,11 +113,19 @@ public class baseMonster implements ICharacter {
     }
 
     @Override
-    public void setStrength(int strength) {
+    public void setHealth(int health) {
+        if (health > this.maxHealth) {
+            this.currentHealth = this.maxHealth;
+        } else if(health < 0) {
+            this.currentHealth = 0;
+        } else {
+            this.currentHealth = health;
+        }
     }
 
     @Override
-    public void setHealth(int damageTaken, ICharacter character) {
-
+    public void applyDamage(int damage, ICharacter character) {
+        int currentHealth = character.getCurrentHealth() - damage;
+        character.setHealth(currentHealth);
     }
 }

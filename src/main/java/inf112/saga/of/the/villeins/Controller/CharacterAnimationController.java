@@ -54,7 +54,7 @@ public class CharacterAnimationController {
      */
     public void render() {
         if (character.isMoving()) activeAnimation = walkAnimation;
-        else                      activeAnimation = walkAnimation;
+        else                      activeAnimation = idleAnimation;
 
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
@@ -70,8 +70,7 @@ public class CharacterAnimationController {
     private static Vector2 calculateRenderPosition(TextureRegion currentSprite, ICharacter character) {
         Vector2 characterPosition = character.getPosition();
         float spriteX = characterPosition.x - (currentSprite.getRegionWidth() / 2.0f);
-        float spriteY = characterPosition.y - (currentSprite.getRegionHeight() / 3.0f);
-//        float spriteY = characterPosition.y;
+        float spriteY = characterPosition.y - (currentSprite.getRegionHeight() / 2.0f);
         return new Vector2(spriteX, spriteY);
     }
 }
