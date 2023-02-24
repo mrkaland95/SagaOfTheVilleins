@@ -15,7 +15,6 @@ import inf112.saga.of.the.villeins.Controller.GameController;
 public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Player player;
-
 	CharacterAnimationController playerAnimation;
 	private TiledMap map;
 	private HexagonalTiledMapRenderer renderer;
@@ -59,11 +58,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		renderer.render();
 		camera.update();
 		player.setDestination(clickPosition);
-
-		// Temp for fun.
-//		camera.translate(player.getxCurrentPosition(), player.getyCurrentPosition(), 0f);
-
-
 		player.update();
 		playerAnimation.render();
 		spriteBatch.end();

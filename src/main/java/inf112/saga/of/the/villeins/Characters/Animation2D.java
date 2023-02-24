@@ -33,7 +33,7 @@ public class Animation2D {
         int cols = this.FRAME_COLUMNS;
 
         this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
-        // The texture region class' split function only takens in a 2d array, so despite our sheets being 1d,
+        // The texture region class' split function only takes in a 2d array, so despite our sheets being 1d,
         // We need to initialize it as a 2d array.
         TextureRegion[][] tempTextures = TextureRegion.split(animationSheet,
                 animationSheet.getWidth() / FRAME_COLUMNS,
@@ -50,13 +50,12 @@ public class Animation2D {
             }
         }
         float frameDuration = 1f / FRAME_COLUMNS;
-        float animationPlaybackSpeed = frameDuration * playerbackMultiplier;
+        float animationPlaybackSpeed = frameDuration * (1 / playerbackMultiplier);
         this.elapsedAnimationTime = 0f;
-        return new Animation<TextureRegion>(animationPlaybackSpeed, animationFrames);
+        return new Animation<>(animationPlaybackSpeed, animationFrames);
     }
 
     public TextureRegion getImageToRender(float deltaTime, boolean looping) {
-//        float deltaTime = Gdx.graphics.getDeltaTime();
         elapsedAnimationTime += deltaTime;
         return animation.getKeyFrame(elapsedAnimationTime, looping);
     }

@@ -15,7 +15,6 @@ public class CharacterAnimationController {
     private Animation2D idleAnimation;
     private Animation2D walkAnimation;
     private Animation2D attackAnimation;
-
     private Animation2D activeAnimation;
     private final ICharacter character;
     private final SpriteBatch spriteBatch;
@@ -41,12 +40,14 @@ public class CharacterAnimationController {
         }
     }
 
+    /**
+     * Function responsible for getting and rendering a character's sprite. Needs to be called
+     * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
+     */
     public void render() {
-        if (character.isMoving()) {
-            activeAnimation = walkAnimation;
-        } else {
-            activeAnimation = idleAnimation;
-        }
+        if (character.isMoving()) activeAnimation = walkAnimation;
+        else                      activeAnimation = walkAnimation;
+
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, this.character);
