@@ -45,39 +45,7 @@ public class Player implements ICharacter {
 //        TextureRegion currentImage = currentAnimation.getImageToRender();
 //        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
         if (destinationPosition != null){
-            this.moveToPosition(this.destinationPosition.x, this.destinationPosition.y);
-        }
-    }
-
-    @Override
-    public void moveToPosition(float xPosition, float yPosition) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
-
-        destinationPosition.x = xPosition;
-        destinationPosition.y = yPosition;
-
-        // Temp variable until we can make the character go to the center of a tile.
-        // Used to snap the character's position to the destination once it's within this threshold.
-        float positionMarginOfError = 5.0f;
-
-        if ((Math.abs(destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
-            this.moving = true;
-            float pathX = destinationPosition.x - xCurrentPosition;
-            float pathY = destinationPosition.y - yCurrentPosition;
-            float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
-            float directiontoMoveX = pathX / distanceToMove;
-            float directiontoMoveY = pathY / distanceToMove;
-
-            // TODO implement a "ramping" function so the character accelerates and slows down when moving.
-            // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
-            this.xCurrentPosition += directiontoMoveX * deltaTime * this.moveSpeed;
-            this.yCurrentPosition += directiontoMoveY * deltaTime * this.moveSpeed;
-        } else {
-            // Is the player within the margin of error?
-            // Then snap the player's position to the desired spot.
-            xCurrentPosition = destinationPosition.x;
-            yCurrentPosition = destinationPosition.y;
-            this.moving = false;
+            this.moveToPosition(destinationPosition);
         }
     }
 
@@ -151,7 +119,7 @@ public class Player implements ICharacter {
     }
 
     @Override
-    public int getHealth() {
+    public int getCurrentHealth() {
         return this.currentHealth;
     }
 
@@ -179,6 +147,6 @@ public class Player implements ICharacter {
 
     @Override
     public void setHealth(int damageTaken, ICharacter character) {
-        this.currentHealth = character.getHealth() - damageTaken;
+        this.currentHealth = character.getCurrentHealth() - damageTaken;
     }
 }

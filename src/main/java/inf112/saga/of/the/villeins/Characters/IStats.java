@@ -1,7 +1,7 @@
 package inf112.saga.of.the.villeins.Characters;
 
 public interface IStats {
-    int getHealth();
+    int getCurrentHealth();
     int getStrength();
     int getDefense();
     int getMaxHealth();

@@ -34,14 +34,6 @@ public interface IMovable2D {
      * @param yPosition The y coordinate to set
      */
     public void setPosition(float xPosition, float yPosition);
-
-    /**
-     * Sets a movable objects position, i.e "teleports" there if it already has a position.
-     * @param xDestination a float of the x position that the movable object should move to.
-     * @param yDestination a float of the y position that the movable object should move to.
-     */
-    void moveToPosition(float xDestination, float yDestination);
-
     /**
      * Method intended to gradually move a movable object to a position, rather than "teleporting" there
      * @param Destination A Vector2 of the x and y position that the movable should move to.
