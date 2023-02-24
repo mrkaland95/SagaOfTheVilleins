@@ -3,14 +3,15 @@ package inf112.saga.of.the.villeins.Game;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
+import java.util.function.IntToDoubleFunction;
 
 
 public class HexGridMapPosition {
 //    private int x;
 //    private int y;
 
-    private final float hexPixelsWidth = 200f;
-    private final float hexPixelsHeight = 200f;
+    private final Double hexPixelsDimension = 200.0;
+
 
     Vector2 worldCoordinate;
 
@@ -24,14 +25,26 @@ public class HexGridMapPosition {
 
 
     private Vector2 CalculateHexGridPosition(int gridX, int gridY) {
-        // Define base case.
-//        if (x == 0) {
-//            wor
-//        }
-//
-        float worldX = gridX * ((3f / 2f) * hexPixelsWidth);
-        float worldY = gridY * ((2f * hexPixelsHeight) - ((hexPixelsHeight / 2f * (gridX % 2)) + (hexPixelsHeight * (gridX % 2))));
-        return new Vector2(worldX, worldY);
+        double doubleX = gridX;
+        double doubleY = gridY;
+        double x = 0.0;
+        double y = 0.0;
+      
+        if(gridY % 2 == 0){
+            x = 100 + 200*doubleX;
+            y = 100 + 150*doubleY;
+        }
+        else{
+            x = 200 + 200*doubleX;
+            y = 250 + 150*(doubleY-1);
+            
+        }
+
+        
+        float floatX = (float) x;
+        float floatY = (float) y;
+        return new Vector2(floatX, floatY);
+
     }
 
     public Vector2 getHexPosition() {

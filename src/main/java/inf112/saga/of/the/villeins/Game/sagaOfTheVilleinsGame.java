@@ -34,7 +34,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		GameController = new GameController(null, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
-		HexGridMapPosition test = new HexGridMapPosition(4, 0);
+		HexGridMapPosition test = new HexGridMapPosition(1, 5);
 		Vector2 testPosition = test.getHexPosition();
 		float playerXStartPosition = testPosition.x;
 		float playerYStartPosition = testPosition.y;
