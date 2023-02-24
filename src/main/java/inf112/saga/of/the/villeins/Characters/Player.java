@@ -17,8 +17,6 @@ public class Player implements ICharacter {
     private int score;
     private boolean moving;
 
-    // TODO make a new class for loading in all the animations.
-
     public Player(float startingXPosition,
                   float startingYPosition,
                   int maxHealth,
@@ -27,7 +25,6 @@ public class Player implements ICharacter {
 
         this.xCurrentPosition = startingXPosition;
         this.yCurrentPosition = startingYPosition;
-//        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
 
         this.destinationPosition = new Vector2(startingXPosition, startingYPosition);
         this.maxHealth = maxHealth;
@@ -39,43 +36,8 @@ public class Player implements ICharacter {
 
     @Override
     public void update() {
-        // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
-//        TextureRegion currentImage = currentAnimation.getImageToRender();
-//        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
         if (destinationPosition != null){
-            this.moveToPosition(this.destinationPosition.x, destinationPosition.y);
-        }
-    }
-
-    @Override
-    public void moveToPosition(float xPosition, float yPosition) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
-
-        destinationPosition.x = xPosition;
-        destinationPosition.y = yPosition;
-
-        // Temp variable until we can make the character go to the center of a tile.
-        // Used to snap the character's position to the destination once it's within this threshold.
-        float positionMarginOfError = 5.0f;
-
-        if ((Math.abs(destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
-            this.moving = true;
-            float pathX = destinationPosition.x - xCurrentPosition;
-            float pathY = destinationPosition.y - yCurrentPosition;
-            float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
-            float directiontoMoveX = pathX / distanceToMove;
-            float directiontoMoveY = pathY / distanceToMove;
-
-            // TODO implement a "ramping" function so the character accelerates and slows down when moving.
-            // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
-            this.xCurrentPosition += directiontoMoveX * deltaTime * this.moveSpeed;
-            this.yCurrentPosition += directiontoMoveY * deltaTime * this.moveSpeed;
-        } else {
-            // Is the player within the margin of error?
-            // Then snap the player's position to the desired spot.
-            xCurrentPosition = destinationPosition.x;
-            yCurrentPosition = destinationPosition.y;
-            this.moving = false;
+            this.moveToPosition(destinationPosition);
         }
     }
 
@@ -88,9 +50,11 @@ public class Player implements ICharacter {
 
     // Temp variable until we can make the character go to the center of a tile.
     // Used to snap the character's position to the destination once it's within this threshold.
-        float positionMarginOfError = 5.0f;
+        float positionMarginOfError = 3.0f;
 
-        if ((Math.abs(this.destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+        if ((Math.abs(this.xCurrentPosition - destinationPosition.x) > positionMarginOfError) ||
+            (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+            moving = true;
             float pathX = destinationPosition.x - xCurrentPosition;
             float pathY = destinationPosition.y - yCurrentPosition;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
@@ -98,6 +62,7 @@ public class Player implements ICharacter {
             float directiontoMoveY = pathY / distanceToMove;
 
             // TODO implement a "ramping" function so the character accelerates and slows down when moving.
+            // Something similar to this.
             // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
             this.xCurrentPosition += directiontoMoveX * deltaTime * this.moveSpeed;
             this.yCurrentPosition += directiontoMoveY * deltaTime * this.moveSpeed;
@@ -106,6 +71,7 @@ public class Player implements ICharacter {
             // Then snap the player's position to the desired spot.
             xCurrentPosition = destinationPosition.x;
             yCurrentPosition = destinationPosition.y;
+            moving = false;
         }
     }
 
@@ -120,11 +86,6 @@ public class Player implements ICharacter {
     @Override
     public Vector2 getPosition() {
         return new Vector2(this.xCurrentPosition, this.yCurrentPosition);
-    }
-
-    public void setPosition(float xPosition, float yPosition) {
-        this.xCurrentPosition = xPosition;
-        this.yCurrentPosition = yPosition;
     }
     @Override
     public float getxCurrentPosition() {
@@ -145,9 +106,13 @@ public class Player implements ICharacter {
         yCurrentPosition += distance;
     }
 
+    public void setPosition(float xPosition, float yPosition) {
+        this.xCurrentPosition = xPosition;
+        this.yCurrentPosition = yPosition;
+    }
 
     @Override
-    public int getHealth() {
+    public int getCurrentHealth() {
         return this.currentHealth;
     }
 
@@ -187,7 +152,7 @@ public class Player implements ICharacter {
 
     @Override
     public void applyDamage(int damage, ICharacter character) {
-        int currentHealth = character.getHealth() - damage;
+        int currentHealth = character.getCurrentHealth() - damage;
         character.setHealth(currentHealth);
     }
 }

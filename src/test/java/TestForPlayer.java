@@ -79,7 +79,7 @@ public class TestForPlayer {
     public void testGetHealth(){
         Player testPlayer123 = new Player(0,0,  40, 2, 5);
         int expectedHealth = 40;
-        int result = testPlayer123.getHealth(); 
+        int result = testPlayer123.getCurrentHealth();
         assertEquals(expectedHealth, result);
     }
 
@@ -124,7 +124,7 @@ public class TestForPlayer {
         Player testplayer123 = new Player(0, 0, 10, 0, 0);
         int expectedHealth = 5;
         testplayer123.setHealth(expectedHealth);
-        int result = testplayer123.getHealth();
+        int result = testplayer123.getCurrentHealth();
         assertEquals(expectedHealth, result);
     }
 
@@ -136,7 +136,7 @@ public class TestForPlayer {
         int expectedHealth = 5;
         int damage = 5;
         testplayer1.applyDamage(damage, testplayer2);
-        int result = testplayer2.getHealth();
+        int result = testplayer2.getCurrentHealth();
         assertEquals(expectedHealth, result);
     }
     

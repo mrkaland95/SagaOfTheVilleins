@@ -12,10 +12,21 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
  * Class for handling the animation of characters, separate from the character objects.
  */
 public class CharacterAnimationController {
+    enum Animations {
+        IDLE,
+        MOVING,
+        ATTACKING
+    }
+    enum AnimationDirections {
+
+    }
     private Animation2D idleAnimation;
     private Animation2D walkAnimation;
     private Animation2D attackAnimation;
     private Animation2D activeAnimation;
+
+    private int idleFrameCols;
+    private int idleframeRows;
     private final ICharacter character;
     private final SpriteBatch spriteBatch;
 
@@ -25,18 +36,32 @@ public class CharacterAnimationController {
                                         String idleAnimationPath,
                                         String walkAnimationPath,
                                         String attackAnimationPath,
-                                        SpriteBatch spriteBatch) {
+                                        SpriteBatch spriteBatch,
+                                        Integer rows,
+                                        Integer cols) {
         this.character = character;
         this.spriteBatch = spriteBatch;
         // very temporary solution until sprites/animations are made.
+
+
+        if (rows != null) {
+            idleframeRows = rows.intValue();
+        }
+        if (rows != null) {
+            idleFrameCols = cols.intValue();
+        }
+
+
         if (idleAnimationPath != null) {
-            this.idleAnimation = new Animation2D(idleAnimationPath, 1, 2, playbackSpeedMultiplier);
+            this.idleAnimation = new Animation2D(idleAnimationPath, idleframeRows, idleFrameCols, playbackSpeedMultiplier);
         }
         if (walkAnimationPath != null) {
             this.walkAnimation = new Animation2D(walkAnimationPath, playbackSpeedMultiplier);
         }
         if (attackAnimationPath != null){
             this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
+
+
         }
     }
 
@@ -46,7 +71,7 @@ public class CharacterAnimationController {
      */
     public void render() {
         if (character.isMoving()) activeAnimation = walkAnimation;
-        else                      activeAnimation = walkAnimation;
+        else                      activeAnimation = idleAnimation;
 
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
