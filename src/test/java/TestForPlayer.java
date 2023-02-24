@@ -51,7 +51,7 @@ public class TestForPlayer {
     @Test
     public void testGetStrength(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition,40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition,40, 0, 5);
         int expectedStrength = 0;
         int result = testPlayer123.getStrength();
         assertEquals(expectedStrength, result);
@@ -72,8 +72,8 @@ public class TestForPlayer {
     @Test
     public void testGetDefence(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer = new Player(startingPosition,40, 2, 5);
         int expectedDefence = 10;
+        Player testPlayer = new Player(startingPosition,40, 2, expectedDefence);
         int result = testPlayer.getDefense();
         assertEquals(expectedDefence, result);
     }
@@ -81,7 +81,7 @@ public class TestForPlayer {
     @Test
     public void testGetMaxHealth(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition,40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition,20, 2, 5);
         int expectedMaxHealth = 20;
         int result = testPlayer123.getMaxHealth();
         assertEquals(expectedMaxHealth, result);
