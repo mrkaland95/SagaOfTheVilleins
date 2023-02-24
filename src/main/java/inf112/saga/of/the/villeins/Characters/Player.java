@@ -17,8 +17,6 @@ public class Player implements ICharacter {
     private int score;
     private boolean moving;
 
-    // TODO make a new class for loading in all the animations.
-
     public Player(float startingXPosition,
                   float startingYPosition,
                   int maxHealth,
@@ -38,11 +36,6 @@ public class Player implements ICharacter {
 
     @Override
     public void update() {
-        // Updates the state of the
-
-        // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
-//        TextureRegion currentImage = currentAnimation.getImageToRender();
-//        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
         if (destinationPosition != null){
             this.moveToPosition(destinationPosition);
         }
@@ -57,9 +50,11 @@ public class Player implements ICharacter {
 
     // Temp variable until we can make the character go to the center of a tile.
     // Used to snap the character's position to the destination once it's within this threshold.
-        float positionMarginOfError = 5.0f;
+        float positionMarginOfError = 3.0f;
 
-        if ((Math.abs(this.destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+        if ((Math.abs(this.xCurrentPosition - destinationPosition.x) > positionMarginOfError) ||
+            (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+            moving = true;
             float pathX = destinationPosition.x - xCurrentPosition;
             float pathY = destinationPosition.y - yCurrentPosition;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
@@ -76,6 +71,7 @@ public class Player implements ICharacter {
             // Then snap the player's position to the desired spot.
             xCurrentPosition = destinationPosition.x;
             yCurrentPosition = destinationPosition.y;
+            moving = false;
         }
     }
 

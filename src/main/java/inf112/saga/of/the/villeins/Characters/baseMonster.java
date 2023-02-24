@@ -14,9 +14,14 @@ public class baseMonster implements ICharacter {
     private final float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
 
+    public baseMonster(Vector2 startPosition, int maxHealth, int strength, int defense) {
+        this.position = startPosition;
+        this.maxHealth = maxHealth;
+        this.strength = strength;
+        this.defense = defense;
+    }
     @Override
     public void update() {
-
     }
 
     @Override
@@ -47,6 +52,10 @@ public class baseMonster implements ICharacter {
     @Override
     public void setPosition(float xPosition, float yPosition) {
         this.position = new Vector2(xPosition, yPosition);
+    }
+
+    public void setDestinationPosition(Vector2 destination) {
+        this.destinationPosition = destination;
     }
 
     @Override

@@ -24,6 +24,9 @@ public class CharacterAnimationController {
     private Animation2D walkAnimation;
     private Animation2D attackAnimation;
     private Animation2D activeAnimation;
+
+    private int idleFrameCols;
+    private int idleframeRows;
     private final ICharacter character;
     private final SpriteBatch spriteBatch;
 
@@ -33,18 +36,32 @@ public class CharacterAnimationController {
                                         String idleAnimationPath,
                                         String walkAnimationPath,
                                         String attackAnimationPath,
-                                        SpriteBatch spriteBatch) {
+                                        SpriteBatch spriteBatch,
+                                        Integer rows,
+                                        Integer cols) {
         this.character = character;
         this.spriteBatch = spriteBatch;
         // very temporary solution until sprites/animations are made.
+
+
+        if (rows != null) {
+            idleframeRows = rows.intValue();
+        }
+        if (rows != null) {
+            idleFrameCols = cols.intValue();
+        }
+
+
         if (idleAnimationPath != null) {
-            this.idleAnimation = new Animation2D(idleAnimationPath, 1, 2, playbackSpeedMultiplier);
+            this.idleAnimation = new Animation2D(idleAnimationPath, idleframeRows, idleFrameCols, playbackSpeedMultiplier);
         }
         if (walkAnimationPath != null) {
             this.walkAnimation = new Animation2D(walkAnimationPath, playbackSpeedMultiplier);
         }
         if (attackAnimationPath != null){
             this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
+
+
         }
     }
 
