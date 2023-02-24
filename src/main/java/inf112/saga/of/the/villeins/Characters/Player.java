@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Game.Main;
 
 public class Player implements ICharacter {
-    private float xCurrentPosition;
-    private float yCurrentPosition;
+    Vector2 currentPosition;
     Vector2 destinationPosition;
     private String name;
     private int maxHealth;
@@ -17,16 +16,12 @@ public class Player implements ICharacter {
     private int score;
     private boolean moving;
 
-    public Player(float startingXPosition,
-                  float startingYPosition,
+    public Player(Vector2 startingPosition,
                   int maxHealth,
                   int strength,
                   int defense) {
-
-        this.xCurrentPosition = startingXPosition;
-        this.yCurrentPosition = startingYPosition;
-
-        this.destinationPosition = new Vector2(startingXPosition, startingYPosition);
+        this.currentPosition = startingPosition;
+        this.destinationPosition = startingPosition;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.strength = strength;
@@ -42,9 +37,9 @@ public class Player implements ICharacter {
     }
 
     @Override
-    public void moveToPosition(Vector2 Destination) {
+    public void moveToPosition(Vector2 destination) {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        this.destinationPosition = Destination;
+        this.destinationPosition = destination;
 
         if (destinationPosition == null) return;
 
@@ -52,11 +47,11 @@ public class Player implements ICharacter {
     // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 3.0f;
 
-        if ((Math.abs(this.xCurrentPosition - destinationPosition.x) > positionMarginOfError) ||
-            (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+        if ((Math.abs(currentPosition.x - destinationPosition.x) > positionMarginOfError) ||
+            (Math.abs(currentPosition.y - destinationPosition.y) > positionMarginOfError)) {
             moving = true;
-            float pathX = destinationPosition.x - xCurrentPosition;
-            float pathY = destinationPosition.y - yCurrentPosition;
+            float pathX = destinationPosition.x - currentPosition.x;
+            float pathY = destinationPosition.y - currentPosition.y;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
             float directiontoMoveX = pathX / distanceToMove;
             float directiontoMoveY = pathY / distanceToMove;
@@ -64,13 +59,13 @@ public class Player implements ICharacter {
             // TODO implement a "ramping" function so the character accelerates and slows down when moving.
             // Something similar to this.
             // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
-            this.xCurrentPosition += directiontoMoveX * deltaTime * this.moveSpeed;
-            this.yCurrentPosition += directiontoMoveY * deltaTime * this.moveSpeed;
+            this.currentPosition.x += directiontoMoveX * deltaTime * this.moveSpeed;
+            this.currentPosition.y += directiontoMoveY * deltaTime * this.moveSpeed;
         } else {
             // Is the player within the margin of error?
             // Then snap the player's position to the desired spot.
-            xCurrentPosition = destinationPosition.x;
-            yCurrentPosition = destinationPosition.y;
+            currentPosition.x = destinationPosition.x;
+            currentPosition.y = destinationPosition.y;
             moving = false;
         }
     }
@@ -83,32 +78,18 @@ public class Player implements ICharacter {
     public void setDestination(Vector2 destinationPosition){
         this.destinationPosition = destinationPosition;
     }
+
+    @Override
+    public Vector2 getDestination() {
+        return destinationPosition;
+    }
     @Override
     public Vector2 getPosition() {
-        return new Vector2(this.xCurrentPosition, this.yCurrentPosition);
+        return currentPosition;
     }
     @Override
-    public float getxCurrentPosition() {
-        return xCurrentPosition;
-    }
-    @Override
-    public float getyCurrentPosition() {
-        return yCurrentPosition;
-    }
-
-    @Override
-    public void moveXAxis(float distance) {
-        xCurrentPosition += distance;
-    }
-
-    @Override
-    public void moveYAxis(float distance) {
-        yCurrentPosition += distance;
-    }
-
-    public void setPosition(float xPosition, float yPosition) {
-        this.xCurrentPosition = xPosition;
-        this.yCurrentPosition = yPosition;
+    public void setPosition(Vector2 position) {
+        this.currentPosition = position;
     }
 
     @Override
