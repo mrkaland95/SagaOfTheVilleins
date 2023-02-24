@@ -34,8 +34,10 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		GameController = new GameController(null, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
-		float playerXStartPosition = 580f;
-		float playerYStartPosition = 500f;
+		HexGridMapPosition test = new HexGridMapPosition(1, 5);
+		Vector2 testPosition = test.getHexPosition();
+		float playerXStartPosition = testPosition.x;
+		float playerYStartPosition = testPosition.y;
 		// Inits the player character and sets the position.
 		player = new Player(playerXStartPosition, playerYStartPosition, 20, 10, 10);
 		playerAnimation = new CharacterAnimationController(player, idleWarriorPath, walkingWarriorPath, null, spriteBatch);
