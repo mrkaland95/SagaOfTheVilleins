@@ -10,8 +10,6 @@ public class Monster implements ICharacter {
     private int strength;
     private int defense;
 
-
-
     @Override
     public void update() {
 

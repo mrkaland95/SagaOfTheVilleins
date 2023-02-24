@@ -15,7 +15,6 @@ import inf112.saga.of.the.villeins.Controller.GameController;
 public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Player player;
-
 	CharacterAnimationController playerAnimation;
 	private TiledMap map;
 	private HexagonalTiledMapRenderer renderer;
@@ -46,7 +45,7 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 
 	/**
-	 * This is the render loop of the program.
+	 * This is the render/game loop of the game.
 	 * Essentially all the objects or methods that need to be updated every frame should go in here.
 	 */
 	@Override
@@ -59,7 +58,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		camera.update();
 		player.setDestination(clickPosition);
 
-		// Temp for fun.
 //		camera.translate(player.getxCurrentPosition(), player.getyCurrentPosition(), 0f);
 
 

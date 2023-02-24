@@ -20,8 +20,6 @@ public class Player implements ICharacter {
 
     private boolean moving;
 
-    // TODO make a new class for loading in all the animations.
-
     public Player(float startingXPosition,
                   float startingYPosition,
                   int maxHealth,
@@ -30,7 +28,6 @@ public class Player implements ICharacter {
 
         this.xCurrentPosition = startingXPosition;
         this.yCurrentPosition = startingYPosition;
-//        this.positionToMoveTo = new Vector2(startingXPosition, startingYPosition);
 
         this.destinationPosition = new Vector2(startingXPosition, startingYPosition);
         this.maxHealth = maxHealth;
@@ -42,11 +39,13 @@ public class Player implements ICharacter {
 
     @Override
     public void update() {
+        // Updates the state of the
+
         // Method that needs to be called in the render loop, which will draw the correct animation depending on the set current animation state.
 //        TextureRegion currentImage = currentAnimation.getImageToRender();
 //        this.spriteBatch.draw(currentImage, this.xCurrentPosition, this.yCurrentPosition);
         if (destinationPosition != null){
-            this.moveToPosition(this.destinationPosition.x, destinationPosition.y);
+            this.moveToPosition(this.destinationPosition.x, this.destinationPosition.y);
         }
     }
 
