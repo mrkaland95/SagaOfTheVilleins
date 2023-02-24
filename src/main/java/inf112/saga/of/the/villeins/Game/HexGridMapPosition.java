@@ -7,10 +7,6 @@ import java.util.function.IntToDoubleFunction;
 
 
 public class HexGridMapPosition {
-//    private int x;
-//    private int y;
-
-    private final Double hexPixelsDimension = 200.0;
 
 
     Vector2 worldCoordinate;
@@ -19,24 +15,25 @@ public class HexGridMapPosition {
 
 
     public HexGridMapPosition(int x, int y) {
-        worldCoordinate = CalculateHexGridPosition(x, y);
+        double hexagonDimension = 400;
+        worldCoordinate = CalculateHexGridPosition(x, y, hexagonDimension);
         System.out.println(worldCoordinate);
     }
 
 
-    private Vector2 CalculateHexGridPosition(int gridX, int gridY) {
+    public Vector2 CalculateHexGridPosition(int gridX, int gridY, double hexagonDimension) {        
         double doubleX = gridX;
         double doubleY = gridY;
         double x = 0.0;
         double y = 0.0;
       
         if(gridY % 2 == 0){
-            x = 100 + 200*doubleX;
-            y = 100 + 150*doubleY;
+            x = hexagonDimension/2 + hexagonDimension*doubleX;
+            y = hexagonDimension/2 + hexagonDimension/4*3*doubleY;
         }
         else{
-            x = 200 + 200*doubleX;
-            y = 250 + 150*(doubleY-1);
+            x = hexagonDimension + hexagonDimension*doubleX;
+            y = ((hexagonDimension/4) + hexagonDimension) + (hexagonDimension/4)*3*(doubleY-1);
             
         }
 
