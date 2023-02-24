@@ -26,9 +26,10 @@ PROSJEKTRAPPORT
         - Organisere og sette opp workflow
         - Assistere team-medlemmer iht. git
     
-    * Grafisk designer
-        - Lage grafikk
-        - Få grafikk til å samhandle 
+    * Grafisk designer og algoritmeansvarlig
+        - Lage grafikk og animasjon
+        - Få grafikk til å samhandle
+        - Lage algoritmer
 
 * Synes teamet at valgene vi har tatt er gode?
 
@@ -41,22 +42,13 @@ PROSJEKTRAPPORT
 
 * Hva har vi gjort klart til nå og hva må forbedres? (Prosjektstruktur, ikke kode)
     
-    Forberingspotensialet ligger blant annet i å sørge for kommunikasjon fra hvert medlem til alle i fellesskap om nøyaktig hva de driver med og tenker om veien videre. Små tendenser til at alle holder på med sitt, men er ikke sikkert det krever stort til forbedring, da det forsåvidt fungerer greit. Det blir i større grad viktig at hvert medlem går inn og sjekker de ulike filene for å oppdatere seg selv. Etterhvert som prosjektet går på frem kan det muligens være lurt at hvert medlem går gjennom koden sin og presenterer den for de resterende medlemmene i gruppen. 
+    Forberingspotensialet ligger blant annet i å sørge for kommunikasjon fra hvert medlem til alle i fellesskap om nøyaktig hva de driver med og tenker om veien videre. Små tendenser til at alle holder på med sitt, men er ikke sikkert det krever stort til forbedring, da det forsåvidt fungerer greit. Det blir i større grad viktig at hvert medlem går inn og sjekker de ulike filene for å oppdatere seg selv. Etterhvert som prosjektet går på frem kan det muligens være lurt at hvert medlem går gjennom koden sin og presenterer den for de resterende medlemmene i gruppen slik at alle har oversikt og forståelse.
 
 * Kort forklaring på hvorfor det er ulik balanse i hvem som comitter kode
 
     Som nevnt i orientering av medlemmenes ferdigheter er det stort sprik i tidligere erfaring i henhold til kode, men også spill. Ett av gruppemedlemmene har kun INF100 som bakgrunn, og lærer java fortløpende i prosjektet. Det vil derav være naturlig at vedkommende ikke produserer like mye kode, men forsøker etter evne og forhåpentligvis kan bidra mer og mer etterhvert. Gruppemedlemmet har prosjektlederrolle, som gjør at det er mange andre oppgaver forutenom kode som også skal gjennomføres. Frem til nå har de andre gruppemedlemmene vært svært hjelpsomme og viser stor grad av toleranse og pedagogisk evne ved assistanse. 
 
-    Det kan også nevnes at samme gruppemedlem har hatt oppstartsproblemer med Port22 feil ut februar måned, og derav hatt store problemer med å committe til git. 
-
-    /*
-    git clone git@git.app.uib.no:SagaOfTheVilleins/sagaofthevilleins.git
-    Cloning into 'sagaofthevilleins'...
-    ssh: connect to host git.app.uib.no port 22: Connection refused
-    fatal: Could not read from remote repository.
-    Please make sure you have the correct access rights
-    and the repository exists.
-    *\
+    Det kan også nevnes at samme gruppemedlem har hatt oppstartsproblemer med Port22 feil ut februar måned, og derav hatt store problemer med å committe til git. Problemet ble løst i samarbeid med gruppemedlemmer, gruppeleder og foreleser. 
 
 
 * Referater fra møter
@@ -72,6 +64,29 @@ Ved oppstart av prosjektet gjennomførte vi en "brainstorming" for å kartlegge 
 
 Ved prioritering ble det satt fokus på å sørge for en grunnmur som var lett å bygge på. Ved å opprette rikig rekkefølge, sørger vi for å være sikre på at det viktigste kommer med, samtidig som vi kan bygge videre så langt det rekker, helt til siste tidsfrist. 
 
+Grov liste som resultat av brainstorm
+- Angreknapp (3)
+- End turn (2)
+- Flere karakterer (5)
+- Klikke bevegelse (1)
+- Høyde (3)
+- Karma system (3)
+- Inventory system (2)
+- Consumables (4)
+- Hjelpeside (1)
+- Startside (1)
+- Karakterer player og fiende (1)
+- Impassable terrain (4)
+- Items in map (4)
+- Shop (5)
+- Character info ved å klikke på tile (2)
+- Lifebars (2)
+- Zoome funksjon (3)
+- Path map (4)
+- Turnbased (1)
+- Skill tree (3)
+- Buffs/debuffs (3)
+
 * Sette opp for hvert krav
     * brukerhistorier
     * akseptansekriterier (i form av tester)
@@ -82,6 +97,14 @@ Ved prioritering ble det satt fokus på å sørge for en grunnmur som var lett �
 PRODUKT OG KODE
 
 * Liste over "dette har vi fikset siden sist"
+
+    * At det nå går det ann å flytte kameraet ved å holde inn enn knapp på musen og deretter scrolle.
+    * At spillfiguren kun er i bevegelse som en respons av klikk, ikke kontinuerlig som tidligere.
+    * Gått fra at spillfiguren flytter seg fra tærne til klikket punkt, til at spillfiguren sentreres over klikket punkt.
+    * Fikset at kameraposisjonen ikke lengre kan reise gjennom spillet (gå bak grafikken og vri den).
+    * Fikset at player tar inn nødvendige parametere
+    * Fikset sentrering av spillfigur på tiles
+
 * Klassediagram
 
 
