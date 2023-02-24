@@ -102,3 +102,20 @@ Femte gruppetime
 * Addert metoder for Player
 * Justeringer i constructor for player
 * Ordnet opp i merge conflicts
+
+
+Fredag 27/02-23
+Kl. 10:00-14:00
+Leon, Malene og Steffen
+
+Arbeidsøkt på Realfagsbygget
+* Så på algoritmer for koordinering av karakterer på grid
+* Tester for animasjoner og spillerlister 
+* Føring av prosessdokumentasjon 
+    * Utarbeidet fremdriftsplanen i større detailj
+    * Prosjektlog 
+    * Addering av brukerhistorier og krav
+    * Oppføring av løste problemer 
+    * Oppdatering av innhold i oblig1 fil
+* Lage klassediagram
+* Opprettet klasse for fiende 
