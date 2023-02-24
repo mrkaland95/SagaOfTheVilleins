@@ -85,8 +85,20 @@ kl. 10:15 - 14:00
 Malene, Markus og Steffen (Leon syk)
 
 Arbeidsøkt på Realfagsbygget
-* Sette opp digital Kanban
-* Skrive dokumentasjon som svarer til oblig1 og sette tag
+* Satt opp digital Kanban
+* Skrev dokumentasjon som svarer til oblig1 og satt tag
+* Skrev tester vha. parprogrammering
+* Utforsket og utviklet egenskaper til mapet 
 
+Agenda frem mot torsdag 23.02-23
+* Malene: skrive tester på resterende funksjoner
 
+Torsdag 23/02-23
+Kl. 08:15 - 10:00
+Malene og Steffen
 
+Femte gruppetime
+* Ferdigstilt tester for playerklassen (parprogramering)
+* Addert metoder for Player
+* Justeringer i constructor for player
+* Ordnet opp i merge conflicts

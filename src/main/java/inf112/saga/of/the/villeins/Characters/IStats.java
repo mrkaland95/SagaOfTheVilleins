@@ -7,7 +7,9 @@ public interface IStats {
     int getMaxHealth();
     void setStrength(int strength);
 
-    // Perhaps change this to "damageCharacter" or something along those lines?
-    void setHealth(int damageTaken, ICharacter character);
+    // Maybe change this to "damageCharacter" or something along this lines?
+    void setHealth(int health);
+
+    void applyDamage( int damage, ICharacter character);
 
 }

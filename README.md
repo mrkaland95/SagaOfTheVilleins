@@ -7,8 +7,8 @@ https://git.app.uib.no/SagaOfTheVilleins/sagaofthevilleins
 Om spillet
 En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og ferdighetene, samt bedre rustningen sin må han bekjempe en rekke fiender med økende vanskelighetsgrad.
 
-### Spillkontroller:
-* Flytt karateren rundt med høyre museknapp
+### (Foreløpelig)Spillkontroller:
+* Flytt karakteren rundt ved å trykke med høyre museknapp
 * Man kan flytte kamera ved å trykke midt/skrolle knappen, eller ved WASD.
 * Man can zoome inn/ut ved å skrolle på musen, eller ved Z/X
 
