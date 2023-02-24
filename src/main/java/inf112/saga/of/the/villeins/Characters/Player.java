@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Game.Main;
 
-
 public class Player implements ICharacter {
     private float xCurrentPosition;
     private float yCurrentPosition;
@@ -15,10 +14,10 @@ public class Player implements ICharacter {
     private int strength;
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
-
     private int score;
-
     private boolean moving;
+
+    // TODO make a new class for loading in all the animations.
 
     public Player(float startingXPosition,
                   float startingYPosition,
@@ -54,15 +53,13 @@ public class Player implements ICharacter {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.destinationPosition = Destination;
 
-        if (destinationPosition == null) {
-            return;
-        }
+        if (destinationPosition == null) return;
 
     // Temp variable until we can make the character go to the center of a tile.
     // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 5.0f;
 
-        if ((Math.abs(destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
+        if ((Math.abs(this.destinationPosition.x - this.xCurrentPosition) > positionMarginOfError) || (Math.abs(this.yCurrentPosition - destinationPosition.y) > positionMarginOfError)) {
             float pathX = destinationPosition.x - xCurrentPosition;
             float pathY = destinationPosition.y - yCurrentPosition;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
@@ -131,6 +128,7 @@ public class Player implements ICharacter {
 
     @Override
     public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     @Override
@@ -146,7 +144,19 @@ public class Player implements ICharacter {
 
 
     @Override
-    public void setHealth(int damageTaken, ICharacter character) {
-        this.currentHealth = character.getCurrentHealth() - damageTaken;
+    public void setHealth(int health) {
+        if (health > this.maxHealth) {
+            this.currentHealth = this.maxHealth;
+        } else if(health < 0) {
+            this.currentHealth = 0;
+        } else {
+            this.currentHealth = health;
+        }
+    }
+
+    @Override
+    public void applyDamage(int damage, ICharacter character) {
+        int currentHealth = character.getHealth() - damage;
+        character.setHealth(currentHealth);
     }
 }

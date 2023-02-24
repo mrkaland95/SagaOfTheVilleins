@@ -8,6 +8,8 @@ public interface IStats {
     void setStrength(int strength);
 
     // Maybe change this to "damageCharacter" or something along this lines?
-    void setHealth(int damageTaken, ICharacter character);
+    void setHealth(int health);
+
+    void applyDamage( int damage, ICharacter character);
 
 }

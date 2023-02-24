@@ -27,7 +27,7 @@ public class CharacterAnimationController {
     private final ICharacter character;
     private final SpriteBatch spriteBatch;
 
-    private final float playbackMultiplier = 1f;
+    private final float playbackSpeedMultiplier = 1f;
 
     public CharacterAnimationController(ICharacter character,
                                         String idleAnimationPath,
@@ -38,22 +38,24 @@ public class CharacterAnimationController {
         this.spriteBatch = spriteBatch;
         // very temporary solution until sprites/animations are made.
         if (idleAnimationPath != null) {
-            this.idleAnimation = new Animation2D(idleAnimationPath, 1, 2, playbackMultiplier);
+            this.idleAnimation = new Animation2D(idleAnimationPath, 1, 2, playbackSpeedMultiplier);
         }
         if (walkAnimationPath != null) {
-            this.walkAnimation = new Animation2D(walkAnimationPath, playbackMultiplier);
+            this.walkAnimation = new Animation2D(walkAnimationPath, playbackSpeedMultiplier);
         }
         if (attackAnimationPath != null){
-            this.attackAnimation = new Animation2D(attackAnimationPath, playbackMultiplier);
+            this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
         }
     }
 
+    /**
+     * Function responsible for getting and rendering a character's sprite. Needs to be called
+     * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
+     */
     public void render() {
-        if (character.isMoving()) {
-            activeAnimation = walkAnimation;
-        } else {
-            activeAnimation = idleAnimation;
-        }
+        if (character.isMoving()) activeAnimation = walkAnimation;
+        else                      activeAnimation = walkAnimation;
+
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, this.character);
