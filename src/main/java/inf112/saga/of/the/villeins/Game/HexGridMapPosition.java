@@ -15,13 +15,20 @@ public class HexGridMapPosition {
 
 
     public HexGridMapPosition(int x, int y) {
-        double hexagonDimension = 400;
+        double hexagonDimension = 200;
         worldCoordinate = CalculateHexGridPosition(x, y, hexagonDimension);
         System.out.println(worldCoordinate);
     }
 
 
-    public Vector2 CalculateHexGridPosition(int gridX, int gridY, double hexagonDimension) {        
+    /**
+     * Function for calculating the world coordinate of a hexagon tile, given its position in the tilemap.
+     * @param gridX x position in the tilemap
+     * @param gridY y position in the tilemap
+     * @param hexagonDimension the dimensions of a hexagon tile, i.e. it's width and height.
+     * @return Vector2 carrying the world coordinate of a hex tile.
+     */
+    public Vector2 CalculateHexGridPosition(int gridX, int gridY, double hexagonDimension) {
         double doubleX = gridX;
         double doubleY = gridY;
         double x = 0.0;
