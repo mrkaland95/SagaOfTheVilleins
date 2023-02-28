@@ -9,15 +9,14 @@ import com.badlogic.gdx.math.Vector3;
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class CameraProcessor implements IInputProcessor {
-	private final float minimumZoomLevel = 0.5f;
-
-	private final float zoomAmount = 0.10f;
-
     private OrthographicCamera camera;
-
+	private final float minimumZoomLevel = 0.5f;
+	private final float zoomAmount = 0.10f;
+	private final Vector3 current = new Vector3();
+	private final Vector3 last = new Vector3(-1, -1, -1);
+	private final Vector3 delta = new Vector3();
 	private Vector2 moveClickCoordinates;
 
-	private Vector2 lastCameraCoordinates = new Vector2();
 
 
     public CameraProcessor(OrthographicCamera camera){
@@ -75,12 +74,6 @@ public class CameraProcessor implements IInputProcessor {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			this.camera.unproject(cameraCoordinates);
 			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
-			return true;
-
-		} else if (button == Input.Buttons.MIDDLE) {
-			// Stores the position if the middle mouse button was clicked.
-			this.lastCameraCoordinates.set(screenX, screenY);
-			return true;
 		}
 		return false;
 	}
@@ -88,20 +81,25 @@ public class CameraProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if (button == Input.Buttons.MIDDLE) {
+			// Stores the position if the middle mouse button was clicked.
+			last.set(-1, -1, -1);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
-			Vector2 NewCameraCoordinates = new Vector2(screenX, screenY);
-			Vector2 delta = NewCameraCoordinates.cpy().sub(lastCameraCoordinates);
-			camera.translate(-delta.x, delta.y);
-			lastCameraCoordinates = NewCameraCoordinates;
-			return true;
-		} else {
-			return false;
+			camera.unproject(current.set(screenX, screenY, 0));
+			if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
+				camera.unproject(delta.set(last.x, last.y, 0));
+				delta.sub(current);
+				camera.position.add(delta.x, delta.y, 0);
+			}
 		}
+		last.set(screenX, screenY, 0);
+		return false;
 	}
 
 	@Override
