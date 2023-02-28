@@ -43,10 +43,10 @@ public class CharacterAnimationController {
 
 
         if (rows != null) {
-            idleframeRows = rows.intValue();
+            idleframeRows = rows;
         }
         if (rows != null) {
-            idleFrameCols = cols.intValue();
+            idleFrameCols = cols;
         }
 
 

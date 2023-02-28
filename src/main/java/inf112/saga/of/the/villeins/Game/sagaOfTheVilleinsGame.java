@@ -24,7 +24,6 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private GameController GameController;
 
-
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
 	public void create () {
@@ -37,20 +36,18 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		GameController = new GameController(null, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
 
-		Vector2 slimePosition = new HexGridMapPosition(1, 4).getHexPosition();
+		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(1, 4);
+		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(1, 5);
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
 
-		HexGridMapPosition test = new HexGridMapPosition(1, 5);
-		Vector2 testPosition = test.getHexPosition();
-
 		// TEMP init characters
 		// TODO move the initialization of these into the game controller and/or an object factory.
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
-		player = new Player(testPosition, playerAnimation, 20, 10, 10);
+		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
 		// Inits camera and sets it's starting position and zoom.
-		camera.translate(testPosition.x, testPosition.y, 0f);
+		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
 	}
 
@@ -67,9 +64,9 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
+
 		player.setDestination(clickPosition);
 
-//		camera.translate(player.getxCurrentPosition(), player.getyCurrentPosition(), 0f);
 
 		player.update();
 		slime.update();
