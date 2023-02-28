@@ -3,6 +3,8 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Game.HexGridMapPosition;
+import inf112.saga.of.the.villeins.Game.HexTilePosition;
 import inf112.saga.of.the.villeins.Game.Main;
 
 public class Player implements ICharacter {
@@ -35,9 +37,18 @@ public class Player implements ICharacter {
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        this.moveToPosition(destinationPosition, deltaTime);
         this.animationController.render(this);
+        this.moveToTile(destinationPosition, deltaTime);
     }
+
+
+    private void moveToTile(Vector2 destination, float deltaTime) {
+        if (destination == null) return;
+        HexTilePosition clickedPosition = HexGridMapPosition.findHexTile(destination);
+        Vector2 calculatedDestination = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(clickedPosition.row(), clickedPosition.col());
+        moveToPosition(calculatedDestination, deltaTime);
+    }
+
 
     @Override
     public void moveToPosition(Vector2 destination, float deltaTime) {
@@ -135,7 +146,6 @@ public class Player implements ICharacter {
             this.currentHealth = health;
         }
     }
-
     @Override
     public void applyDamage(int damage, ICharacter character) {
         int currentHealth = character.getCurrentHealth() - damage;
