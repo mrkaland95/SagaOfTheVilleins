@@ -37,15 +37,18 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		GameController = new GameController(null, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
 
-		Vector2 slimetestPosition = new HexGridMapPosition(1, 4).getHexPosition();
+		Vector2 slimePosition = new HexGridMapPosition(1, 4).getHexPosition();
 
-		slime = new Slime(slimetestPosition, 30, 10, 4);
-		slimeAnimation = new CharacterAnimationController(slime, idleSlimePath, null, null, spriteBatch, 1, 4);
+		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
+		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
 
 		HexGridMapPosition test = new HexGridMapPosition(1, 5);
 		Vector2 testPosition = test.getHexPosition();
-		player = new Player(testPosition, 20, 10, 10);
-		playerAnimation = new CharacterAnimationController(player, idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
+
+		// TEMP init characters
+		// TODO move the initialization of these into the game controller and/or an object factory.
+		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
+		player = new Player(testPosition, playerAnimation, 20, 10, 10);
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(testPosition.x, testPosition.y, 0f);
 		camera.zoom = 1.5f;
@@ -68,11 +71,8 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 
 //		camera.translate(player.getxCurrentPosition(), player.getyCurrentPosition(), 0f);
 
-
 		player.update();
-		playerAnimation.render();
 		slime.update();
-		slimeAnimation.render();
 		spriteBatch.end();
 	}
 	
