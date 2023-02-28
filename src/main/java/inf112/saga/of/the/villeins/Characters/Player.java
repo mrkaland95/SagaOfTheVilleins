@@ -2,6 +2,7 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Game.Main;
 
 public class Player implements ICharacter {
@@ -31,9 +32,7 @@ public class Player implements ICharacter {
 
     @Override
     public void update() {
-        if (destinationPosition != null){
-            this.moveToPosition(destinationPosition);
-        }
+        this.moveToPosition(destinationPosition);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class Player implements ICharacter {
             float directiontoMoveX = pathX / distanceToMove;
             float directiontoMoveY = pathY / distanceToMove;
 
-            // TODO implement a "ramping" function so the character accelerates and slows down when moving.
+            // TODO implement a "ramping" or "ease in/out" function so the character accelerates and slows down when moving.
             // Something similar to this.
             // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
             this.currentPosition.x += directiontoMoveX * deltaTime * this.moveSpeed;
@@ -66,6 +65,7 @@ public class Player implements ICharacter {
             // Then snap the player's position to the desired spot.
             currentPosition.x = destinationPosition.x;
             currentPosition.y = destinationPosition.y;
+            destinationPosition = null;
             moving = false;
         }
     }

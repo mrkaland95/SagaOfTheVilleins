@@ -87,7 +87,7 @@ public class PlayerProcessor implements IInputProcessor {
 		float x = Gdx.input.getDeltaX();
 		float y = Gdx.input.getDeltaY();
 		camera.translate(-x, -y);
-		return false;
+		return true;
 	}
 
 	@Override
