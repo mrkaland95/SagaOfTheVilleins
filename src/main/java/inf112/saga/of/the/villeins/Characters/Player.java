@@ -9,6 +9,7 @@ public class Player implements ICharacter {
     Vector2 currentPosition;
     Vector2 destinationPosition;
     private String name;
+    CharacterAnimationController animationController;
     private int maxHealth;
     private int currentHealth;
     private int strength;
@@ -18,11 +19,12 @@ public class Player implements ICharacter {
     private boolean moving;
 
     public Player(Vector2 startingPosition,
+                  CharacterAnimationController animationController,
                   int maxHealth,
                   int strength,
                   int defense) {
         this.currentPosition = startingPosition;
-        this.destinationPosition = startingPosition;
+        this.animationController = animationController;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.strength = strength;
@@ -32,22 +34,25 @@ public class Player implements ICharacter {
 
     @Override
     public void update() {
-        this.moveToPosition(destinationPosition);
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        this.moveToPosition(destinationPosition, deltaTime);
+        this.animationController.render(this);
     }
 
     @Override
-    public void moveToPosition(Vector2 destination) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public void moveToPosition(Vector2 destination, float deltaTime) {
+        // TODO deltatime should be moved out and be given as a paramater, to make testing this possible.
         this.destinationPosition = destination;
 
         if (destinationPosition == null) return;
 
-    // Temp variable until we can make the character go to the center of a tile.
-    // Used to snap the character's position to the destination once it's within this threshold.
+        // Temp variable until we can make the character go to the center of a tile.
+        // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 3.0f;
 
         if ((Math.abs(currentPosition.x - destinationPosition.x) > positionMarginOfError) ||
             (Math.abs(currentPosition.y - destinationPosition.y) > positionMarginOfError)) {
+
             moving = true;
             float pathX = destinationPosition.x - currentPosition.x;
             float pathY = destinationPosition.y - currentPosition.y;
