@@ -73,9 +73,6 @@ public class CameraProcessor implements IInputProcessor {
 
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
-			// TODO fjern dette senere
-			// Her trengte vi bare å kalle på "unproject" for å få riktige 2d koordinater.
-			// Unproject gjør setter de riktige verdiene på cameracoordinates objektet.
 			this.camera.unproject(cameraCoordinates);
 			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 			return true;
@@ -124,7 +121,7 @@ public class CameraProcessor implements IInputProcessor {
 	}
 
 
-	public Vector2 getMoveClickCoordinates() {
+	public Vector2 getClickCoordinates() {
 		return this.moveClickCoordinates;
 	}
     

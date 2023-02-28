@@ -63,7 +63,6 @@ public class PlayerProcessor implements IInputProcessor {
 //		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
 //		System.out.println(worldCoordinate);
 
-
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			// TODO fjern dette senere
@@ -73,7 +72,9 @@ public class PlayerProcessor implements IInputProcessor {
 			clickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	@Override
@@ -106,8 +107,7 @@ public class PlayerProcessor implements IInputProcessor {
 		return false;
 	}
 
-
-	public Vector2 getMoveClickCoordinates() {
+	public Vector2 getClickCoordinates() {
 		return this.clickCoordinates;
 	}
     

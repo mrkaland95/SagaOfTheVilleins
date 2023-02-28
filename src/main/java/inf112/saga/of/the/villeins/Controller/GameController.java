@@ -23,7 +23,6 @@ public class GameController {
         // this.turnCounter = 0;
         this.processorList = new ArrayList<>();
         this.currentProcessor = null;
-
         initializeProcessors(camera);
     }
 

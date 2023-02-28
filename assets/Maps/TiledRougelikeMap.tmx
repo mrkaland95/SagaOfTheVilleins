@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="hexagonal" renderorder="right-down" width="20" height="20" tilewidth="200" tileheight="200" infinite="0" hexsidelength="100" staggeraxis="y" staggerindex="odd" nextlayerid="2" nextobjectid="1">
- <tileset firstgid="1" source="../Green_Hex.tsx"/>
+ <tileset firstgid="1" source="./Tiles/Green_Hex.tsx"/>
  <layer id="1" name="Tile Layer 1" width="20" height="20">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

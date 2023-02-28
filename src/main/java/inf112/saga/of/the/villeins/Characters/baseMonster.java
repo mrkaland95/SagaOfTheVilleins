@@ -2,37 +2,46 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Game.Main;
 
-public class Player implements ICharacter {
-    Vector2 currentPosition;
-    Vector2 destinationPosition;
-    private String name;
-    private int maxHealth;
+public class baseMonster implements ICharacter {
+    private Vector2 currentPosition;
+    private Vector2 destinationPosition;
     private int currentHealth;
+    private int maxHealth;
     private int strength;
     private int defense;
-    private float moveSpeed = Main.globalDefaultMoveSpeed;
-    private int score;
+    private final float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
 
-    public Player(Vector2 startingPosition,
-                  int maxHealth,
-                  int strength,
-                  int defense) {
-        this.currentPosition = startingPosition;
-        this.destinationPosition = startingPosition;
+    public baseMonster(Vector2 startPosition, int maxHealth, int strength, int defense) {
+        this.currentPosition = startPosition;
         this.maxHealth = maxHealth;
-        this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
     }
-
-
     @Override
     public void update() {
-        this.moveToPosition(destinationPosition);
+    }
+
+    @Override
+    public Vector2 getPosition() {
+        return currentPosition;
+    }
+
+    @Override
+    public void setPosition(Vector2 position) {
+        this.currentPosition = position;
+    }
+
+    @Override
+    public void setDestination(Vector2 destination) {
+        this.destinationPosition = destination;
+    }
+
+    @Override
+    public Vector2 getDestination() {
+        return destinationPosition;
     }
 
     @Override
@@ -42,8 +51,8 @@ public class Player implements ICharacter {
 
         if (destinationPosition == null) return;
 
-    // Temp variable until we can make the character go to the center of a tile.
-    // Used to snap the character's position to the destination once it's within this threshold.
+        // Temp variable until we can make the character go to the center of a tile.
+        // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 3.0f;
 
         if ((Math.abs(currentPosition.x - destinationPosition.x) > positionMarginOfError) ||
@@ -55,7 +64,7 @@ public class Player implements ICharacter {
             float directiontoMoveX = pathX / distanceToMove;
             float directiontoMoveY = pathY / distanceToMove;
 
-            // TODO implement a "ramping" or "ease in/out" function so the character accelerates and slows down when moving.
+            // TODO implement a "ramping" function so the character accelerates and slows down when moving.
             // Something similar to this.
             // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
             this.currentPosition.x += directiontoMoveX * deltaTime * this.moveSpeed;
@@ -65,7 +74,6 @@ public class Player implements ICharacter {
             // Then snap the player's position to the desired spot.
             currentPosition.x = destinationPosition.x;
             currentPosition.y = destinationPosition.y;
-            destinationPosition = null;
             moving = false;
         }
     }
@@ -74,38 +82,18 @@ public class Player implements ICharacter {
     public boolean isMoving() {
         return this.moving;
     }
-
-    public void setDestination(Vector2 destinationPosition){
-        this.destinationPosition = destinationPosition;
-    }
-
-    @Override
-    public Vector2 getDestination() {
-        return destinationPosition;
-    }
-    @Override
-    public Vector2 getPosition() {
-        return currentPosition;
-    }
-    @Override
-    public void setPosition(Vector2 position) {
-        this.currentPosition = position;
-    }
-
     @Override
     public int getCurrentHealth() {
         return this.currentHealth;
     }
 
-
-    @Override
-    public int getStrength() {
-        return this.strength;
-    }
-
     @Override
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+    @Override
+    public int getStrength() {
+        return this.strength;
     }
 
     @Override
@@ -113,12 +101,10 @@ public class Player implements ICharacter {
         return this.defense;
     }
 
-
     @Override
     public int getMaxHealth() {
         return this.maxHealth;
     }
-
 
     @Override
     public void setHealth(int health) {
