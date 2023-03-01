@@ -3,13 +3,14 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
-import inf112.saga.of.the.villeins.Game.HexGridMapPosition;
-import inf112.saga.of.the.villeins.Game.HexTilePosition;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
+import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import inf112.saga.of.the.villeins.Game.Main;
 
+import java.util.List;
+
 public class Player implements ICharacter {
-    Vector2 currentPosition;
-    Vector2 destinationPosition;
     private String name;
     CharacterAnimationController animationController;
     private int maxHealth;
@@ -19,6 +20,12 @@ public class Player implements ICharacter {
     private float moveSpeed = Main.globalDefaultMoveSpeed;
     private int score;
     private boolean moving;
+
+    Vector2 currentPosition;
+    Vector2 clickedPosition;
+    Vector2 destinationPosition;
+    List<TilePosition> pathToMove;
+    TilePosition currentTile;
 
     public Player(Vector2 startingPosition,
                   CharacterAnimationController animationController,
@@ -38,35 +45,59 @@ public class Player implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this);
-        this.moveToTile(destinationPosition, deltaTime);
+        if (clickedPosition != null) {
+            TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
+            TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
+            pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+            System.out.println(pathToMove);
+        }
+
+        setCurrentDestination(pathToMove);
+        moveToPosition(this.destinationPosition, deltaTime);
+        clickedPosition = null;
+    }
+
+    private void setCurrentDestination(List<TilePosition> pathToMove) {
+        if (pathToMove == null || pathToMove.size() == 0) return;
+
+        if (destinationPosition == null) {
+            currentTile = pathToMove.get(0);
+            destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
+            System.out.println(destinationPosition);
+            pathToMove.remove(0);
+
+//            if (pathToMove.size() >= 1) {
+//            }
+
+        }
     }
 
 
-    private void moveToTile(Vector2 destination, float deltaTime) {
-        if (destination == null) return;
-        HexTilePosition clickedPosition = HexGridMapPosition.findHexTile(destination);
-        Vector2 calculatedDestination = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(clickedPosition.row(), clickedPosition.col());
-        moveToPosition(calculatedDestination, deltaTime);
-    }
+
+//    private void moveToTile(float deltaTime) {
+//        if (destinationPosition == null) return;
+////        Vector2 calculatedDestination = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(clickedPosition.x(), clickedPosition.y());
+////        moveToPosition(calculatedDestination, deltaTime);
+//    }
 
 
     @Override
     public void moveToPosition(Vector2 destination, float deltaTime) {
         // TODO deltatime should be moved out and be given as a paramater, to make testing this possible.
-        this.destinationPosition = destination;
+        this.clickedPosition = destination;
 
-        if (destinationPosition == null) return;
+        if (clickedPosition == null) return;
 
         // Temp variable until we can make the character go to the center of a tile.
         // Used to snap the character's position to the destination once it's within this threshold.
         float positionMarginOfError = 3.0f;
 
-        if ((Math.abs(currentPosition.x - destinationPosition.x) > positionMarginOfError) ||
-            (Math.abs(currentPosition.y - destinationPosition.y) > positionMarginOfError)) {
+        if ((Math.abs(currentPosition.x - clickedPosition.x) > positionMarginOfError) ||
+            (Math.abs(currentPosition.y - clickedPosition.y) > positionMarginOfError)) {
 
             moving = true;
-            float pathX = destinationPosition.x - currentPosition.x;
-            float pathY = destinationPosition.y - currentPosition.y;
+            float pathX = clickedPosition.x - currentPosition.x;
+            float pathY = clickedPosition.y - currentPosition.y;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
             float directiontoMoveX = pathX / distanceToMove;
             float directiontoMoveY = pathY / distanceToMove;
@@ -79,8 +110,8 @@ public class Player implements ICharacter {
         } else {
             // Is the player within the margin of error?
             // Then snap the player's position to the desired spot.
-            currentPosition.x = destinationPosition.x;
-            currentPosition.y = destinationPosition.y;
+            currentPosition.x = clickedPosition.x;
+            currentPosition.y = clickedPosition.y;
             destinationPosition = null;
             moving = false;
         }
@@ -92,12 +123,12 @@ public class Player implements ICharacter {
     }
 
     public void setDestination(Vector2 destinationPosition){
-        this.destinationPosition = destinationPosition;
+        this.clickedPosition = destinationPosition;
     }
 
     @Override
     public Vector2 getDestination() {
-        return destinationPosition;
+        return clickedPosition;
     }
     @Override
     public Vector2 getPosition() {

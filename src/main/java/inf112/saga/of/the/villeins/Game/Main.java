@@ -1,6 +1,5 @@
 package inf112.saga.of.the.villeins.Game;
 
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -16,6 +15,6 @@ public class Main {
 		config.setForegroundFPS(60);
 		config.setTitle("Saga Of The Villeins");
 		config.setWindowedMode(800, 600);
-		new Lwjgl3Application(new sagaOfTheVilleinsGame(), config);
+		new Lwjgl3Application(new Game(), config);
 	}
 }

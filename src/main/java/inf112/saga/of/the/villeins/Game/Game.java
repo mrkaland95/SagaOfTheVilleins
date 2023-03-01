@@ -8,14 +8,22 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Slime;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
+import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
-public class sagaOfTheVilleinsGame extends ApplicationAdapter {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Game extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Player player;
+	Player player2;
 	Slime slime;
 	CharacterAnimationController slimeAnimation;
 	CharacterAnimationController playerAnimation;
@@ -23,6 +31,9 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 	private GameController GameController;
+	private final List<ICharacter> characterList = new ArrayList<>();
+
+	List<TilePosition> pathToMove;
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 	@Override
@@ -36,8 +47,15 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		GameController = new GameController(null, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
 
-		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(1, 4);
-		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(1, 5);
+		TilePosition playerTile = new TilePosition(1, 4);
+		TilePosition player2Tile = new TilePosition(1, 5);
+		TilePosition slimeTile = new TilePosition(1, 6);
+
+		TilePosition playerDestination = new TilePosition(4, 8);
+
+		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
+		Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
+		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
@@ -46,9 +64,18 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 		// TODO move the initialization of these into the game controller and/or an object factory.
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
+		player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
+
+		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
+		System.out.println(pathToMove);
+
+		characterList.add(player);
+		characterList.add(player2);
+		characterList.add(slime);
+
 	}
 
 
@@ -58,18 +85,18 @@ public class sagaOfTheVilleinsGame extends ApplicationAdapter {
 	 */
 	@Override
 	public void render () {
-		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
+		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		spriteBatch.begin();
 		renderer.setView(camera);
 		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
-
 		player.setDestination(clickPosition);
 
+		for (ICharacter character : characterList) {
+			character.update();
+		}
 
-		player.update();
-		slime.update();
 		spriteBatch.end();
 	}
 	
