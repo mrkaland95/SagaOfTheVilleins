@@ -120,7 +120,10 @@ public class CameraProcessor implements IInputProcessor {
 
 
 	public Vector2 getClickCoordinates() {
-		return this.moveClickCoordinates;
+		Vector2 temp = moveClickCoordinates;
+		moveClickCoordinates = null;
+		return temp;
 	}
+
     
 }

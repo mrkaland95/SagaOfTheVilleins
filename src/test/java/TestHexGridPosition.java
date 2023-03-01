@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import com.badlogic.gdx.math.Vector2;
 
-import inf112.saga.of.the.villeins.Game.HexGridMapPosition;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 
 
 public class TestHexGridPosition {
@@ -26,15 +26,15 @@ public class TestHexGridPosition {
     public void dynamicHexagonSizeTest(){
         int targetX = 0;
         int targetY = 0;
-        Vector2 Expected = new Vector2((float) 200.0, (float) 200.0);
+        Vector2 Expected = new Vector2((float) 100.0, (float) 100.0);
         assertEquals(Expected, HexGridMapPosition.calculateWorldCoordinateFromHexGrid(targetX, targetY));
         targetX = 0;
         targetY = 1;
-        Expected = new Vector2((float) 400.0, (float) 500.0);
+        Expected = new Vector2((float) 200.0, (float) 250.0);
         assertEquals(Expected, HexGridMapPosition.calculateWorldCoordinateFromHexGrid(targetX, targetY));
         targetX = 1;
         targetY = 2;
-        Expected = new Vector2((float) 600, (float) 800);
+        Expected = new Vector2((float) 300.0, (float) 400.0);
         assertEquals(Expected, HexGridMapPosition.calculateWorldCoordinateFromHexGrid(targetX, targetY));
 
     }

@@ -1,17 +1,23 @@
-package inf112.saga.of.the.villeins.Game;
+package inf112.saga.of.the.villeins.MapUtils;
 
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class HexGridMapPosition {
     Vector2 worldCoordinate;
+    // TODO this should take in the hexagon dimension as a parameter,
+    // so it can be dynamically changed if the hexagon size should ever be changed in the future.
     static double hexagonDimension = 200;
-    private HashMap<HexTilePosition, Vector2> hexToWorldCoordinatesMap;
+    private Map<TilePosition, Vector2> gridToCoordinatesMap = new HashMap<>();
 
 
+
+    // TODO add rows and cols so the size of the grid, as well as the map of
     public HexGridMapPosition() {
+
     }
 
 
@@ -46,33 +52,33 @@ public class HexGridMapPosition {
     }
 
 
-    public static HexTilePosition findHexTile(Vector2 worldCoordinate) {
+    public static TilePosition findHexTile(Vector2 worldCoordinate) {
         // Adapted from here: https://gamedevelopment.tutsplus.com/tutorials/creating-hexagonal-minesweeper--cms-28655
-        double xHexTile = Math.floor(worldCoordinate.x / hexagonDimension);
-        double yHexTile = Math.floor(worldCoordinate.y / (hexagonDimension * (3d/4d)));
+        double hexTileX = Math.floor(worldCoordinate.x / hexagonDimension);
+        double hexTileY = Math.floor(worldCoordinate.y / (hexagonDimension * (3d/4d)));
         double dX = (worldCoordinate.x) % hexagonDimension;
         double dY = (worldCoordinate.y) % (hexagonDimension * (3d/4d));
         double slope = (hexagonDimension / 4d )/ (hexagonDimension / 2d);
         double caldY = dX * slope;
         double delta = (hexagonDimension/4) - caldY;
-        if (yHexTile % 2 == 0) {
+        if (hexTileY % 2 == 0) {
             if (Math.abs(delta) > dY) {
-                xHexTile--;
+                hexTileX--;
             }
         } else {
             if (dX > (hexagonDimension / 2d)) {
                 if (dY < ((hexagonDimension / 2d) - caldY)) {
-                    yHexTile--;
+                    hexTileY--;
                 }
             } else {
                 if (dY > caldY) {
-                    xHexTile--;
+                    hexTileX--;
                 } else {
-                    yHexTile--;
+                    hexTileY--;
                 }
             }
         }
-        return new HexTilePosition((int) xHexTile, (int) yHexTile);
+        return new TilePosition((int) hexTileX, (int) hexTileY);
     }
 
 
