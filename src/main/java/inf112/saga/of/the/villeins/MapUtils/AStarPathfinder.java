@@ -33,11 +33,16 @@ public class AStarPathfinder {
             closed.add(current);
             for (TilePosition neighbor : getNeighbors(current.position)) {
                 Node neighborNode = new Node(neighbor, current, current.g + 1, heuristic(neighbor, end));
+
                 if (closed.contains(neighborNode)) {
                     continue;
                 }
+                if(neighborNode.position.equals(end)){
+                    getPath(neighborNode);
+                }
                 if (!open.contains(neighborNode)) {
                     open.add(neighborNode);
+                    
                 } else {
                     for (Node openNode : open) {
                         if (openNode.equals(neighborNode) && openNode.g > neighborNode.g) {
@@ -45,6 +50,7 @@ public class AStarPathfinder {
                             open.add(neighborNode);
                             break;
                         }
+
                     }
                 }
             }
@@ -65,13 +71,23 @@ public class AStarPathfinder {
     ArrayList<TilePosition> neighbors = new ArrayList<>();
     int x = position.x();
     int y = position.y();
+    if(y % 2 != 0){
+        neighbors.add(new TilePosition(x+1, y-1));
+        neighbors.add(new TilePosition(x+1, y));
+        neighbors.add(new TilePosition(x+1, y+1));
+        neighbors.add(new TilePosition(x, y+1));
+        neighbors.add(new TilePosition(x-1, y));
+        neighbors.add(new TilePosition(x, y-1));
+    }
+    else{
+        neighbors.add(new TilePosition(x-1, y+1));
+        neighbors.add(new TilePosition(x, y+1));
+        neighbors.add(new TilePosition(x+1, y));
+        neighbors.add(new TilePosition(x, y-1));
+        neighbors.add(new TilePosition(x-1, y-1));
+        neighbors.add(new TilePosition(x-1, y));
+    }
 
-    neighbors.add(new TilePosition(x-1, y+1));
-    neighbors.add(new TilePosition(x, y+1));
-    neighbors.add(new TilePosition(x+1, y));
-    neighbors.add(new TilePosition(x, y-1));
-    neighbors.add(new TilePosition(x-1, y-1));
-    neighbors.add(new TilePosition(x-1, y));
     // implementation of getNeighbors method depends on your specific grid structure
     // for a hexagonal grid, this could involve checking the six neighboring tiles
     // around the current position and returning any that are valid for movement
