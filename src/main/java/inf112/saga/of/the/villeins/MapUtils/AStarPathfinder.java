@@ -66,7 +66,7 @@ public class AStarPathfinder {
     int x = position.x();
     int y = position.y();
 
-    neighbors.add(new TilePosition(x+1, y+1));
+    neighbors.add(new TilePosition(x-1, y+1));
     neighbors.add(new TilePosition(x, y+1));
     neighbors.add(new TilePosition(x+1, y));
     neighbors.add(new TilePosition(x, y-1));
