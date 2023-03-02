@@ -63,7 +63,13 @@ public class HexGridMapPosition {
         double delta = (hexagonDimension/4) - caldY;
         if (hexTileY % 2 == 0) {
             if (Math.abs(delta) > dY) {
-                hexTileX--;
+                if(delta > 0){
+                    hexTileX --;
+                    hexTileY --;
+                }
+                else{
+                    hexTileY --;
+                }
             }
         } else {
             if (dX > (hexagonDimension / 2d)) {
