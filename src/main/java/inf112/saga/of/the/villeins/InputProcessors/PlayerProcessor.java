@@ -5,18 +5,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+import inf112.saga.of.the.villeins.Controller.GameController;
+
 
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class PlayerProcessor implements IInputProcessor {
     private OrthographicCamera camera;
+	private final float minimumZoomLevel = 0.5f;
+	private final float zoomAmount = 0.10f;
 	private final Vector3 current = new Vector3();
-	private final Vector3 last = new Vector3();
+	private final Vector3 last = new Vector3(-1, -1, -1);
 	private final Vector3 delta = new Vector3();
-	public Vector2 clickCoordinates = new Vector2();
+	private Vector2 moveClickCoordinates;
+	private GameController controller;
 
-    public PlayerProcessor(OrthographicCamera camera){
+
+
+    public PlayerProcessor(OrthographicCamera camera, GameController controller){
         this.camera = camera;
+		this.controller = controller;
     }
 
     @Override
@@ -32,27 +40,35 @@ public class PlayerProcessor implements IInputProcessor {
 	@Override
 	public boolean keyTyped(char character) {
 		if(character == 'w'){
-			camera.translate(0, 20, 0);
+			camera.translate(0, 10, 0);
 			return true;
 		}
 		if(character == 's'){
-			camera.translate(0, -20,0);
+			camera.translate(0, -10,0);
 			return true;
 		}
 		if(character == 'a'){
-			camera.translate(-20, 0 ,0);
+			camera.translate(-10, 0 ,0);
 			return true;
 		}
 		if(character == 'd'){
-			camera.translate(20, 0 ,0);
+			camera.translate(10, 0 ,0);
 			return true;
 		}
-		if(character == 'z'){
-			camera.zoom += 0.10f;
+		if(character == 'z') {
+			camera.zoom += 0.05;
 			return true;
 		}
-		if(character == 'x'){
-			camera.zoom -= 0.10f;
+		if(character == 'x') {
+			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
+				camera.zoom = minimumZoomLevel;
+			} else {
+				camera.zoom -= 0.05;
+			}
+			return true;
+		}
+		if(character == 'n'){
+			controller.nextTurn();
 			return true;
 		}
 
@@ -61,33 +77,34 @@ public class PlayerProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
-//		System.out.println(worldCoordinate);
 
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
-			camera.unproject(cameraCoordinates);
-			clickCoordinates.x = cameraCoordinates.x;
-			clickCoordinates.y = cameraCoordinates.y;
-			return true;
+			this.camera.unproject(cameraCoordinates);
+			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
+
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if (button == Input.Buttons.MIDDLE) {
+			// Stores the position if the middle mouse button was clicked.
+			last.set(-1, -1, -1);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		camera.unproject(current.set(screenX, screenY, 0));
-		if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
-			camera.unproject(delta.set(last.x, last.y, 0));
-			delta.sub(current);
-			camera.position.add(delta.x, delta.y, 0);
+		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
+			camera.unproject(current.set(screenX, screenY, 0));
+			if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
+				camera.unproject(delta.set(last.x, last.y, 0));
+				delta.sub(current);
+				camera.position.add(delta.x, delta.y, 0);
+			}
 		}
 		last.set(screenX, screenY, 0);
 		return false;
@@ -101,17 +118,20 @@ public class PlayerProcessor implements IInputProcessor {
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
 		float zoomMultiplier = 0.20f;
-		float zoomMinimumLevel = 0.5f;
-		if (camera.zoom + amountY * zoomMultiplier < zoomMinimumLevel) {
-			camera.zoom = zoomMinimumLevel;
+		if (camera.zoom + amountY * zoomMultiplier < this.minimumZoomLevel) {
+			camera.zoom = this.minimumZoomLevel;
 		} else {
-			camera.zoom += amountY * 0.25f;
+			camera.zoom += amountY * zoomMultiplier;
 		}
 		return false;
 	}
 
+
 	public Vector2 getClickCoordinates() {
-		return this.clickCoordinates;
+		Vector2 temp = moveClickCoordinates;
+		moveClickCoordinates = null;
+		return temp;
 	}
+
     
 }

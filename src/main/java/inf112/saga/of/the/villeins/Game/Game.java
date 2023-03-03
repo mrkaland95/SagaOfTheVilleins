@@ -44,9 +44,7 @@ public class Game extends ApplicationAdapter {
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
 		camera = new OrthographicCamera();
-		GameController = new GameController(null, camera);
-		renderer = new HexagonalTiledMapRenderer(map);
-
+		
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
@@ -60,11 +58,21 @@ public class Game extends ApplicationAdapter {
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
 
-		// TEMP init characters
-		// TODO move the initialization of these into the game controller and/or an object factory.
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
 		player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
+		
+		characterList.add(player);
+		characterList.add(player2);
+		characterList.add(slime);
+
+		GameController = new GameController(characterList, camera);
+		renderer = new HexagonalTiledMapRenderer(map);
+
+
+		// TEMP init characters
+		// TODO move the initialization of these into the game controller and/or an object factory.
+
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
@@ -72,10 +80,7 @@ public class Game extends ApplicationAdapter {
 		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
 		System.out.println(pathToMove);
 
-		characterList.add(player);
-		characterList.add(player2);
-		characterList.add(slime);
-
+		
 	}
 
 

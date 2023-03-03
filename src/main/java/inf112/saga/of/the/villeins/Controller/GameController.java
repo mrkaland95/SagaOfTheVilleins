@@ -1,29 +1,35 @@
 package inf112.saga.of.the.villeins.Controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.InputProcessors.CameraProcessor;
-import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
+import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.PlayerProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.TestProcessor;
 
 public class GameController {
 
-    private ArrayList<ICharacter> playerlist;
+    private List<ICharacter> playerlist;
     // private int turnCounter;
-    private ArrayList<InputProcessor> processorList;
+    private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
+    private LinkedList<ICharacter> turnList;
 
-    public GameController(ArrayList<ICharacter> playerlist, OrthographicCamera camera){
+    public GameController(List<ICharacter> playerlist, OrthographicCamera camera){
         this.playerlist = playerlist;
+        this.turnList = new LinkedList<ICharacter>();
+
         // this.turnCounter = 0;
-        this.processorList = new ArrayList<>();
+        this.processorList = new HashMap<String, IInputProcessor>();
         this.currentProcessor = null;
-        initializeProcessors(camera);
+
+        initializeGame(camera);
     }
 
     public int playerCount(){
@@ -35,6 +41,14 @@ public class GameController {
          * TODO: Setup system for who's turn it is
          *
          */
+        if(currentChar instanceof Player){
+            this.currentProcessor = processorList.get("player");
+            Gdx.input.setInputProcessor(currentProcessor);
+        }
+        else{
+            this.currentProcessor = processorList.get("notPlayer");
+            Gdx.input.setInputProcessor(currentProcessor);
+        }
     }
 
     public void nextTurn(){
@@ -43,6 +57,11 @@ public class GameController {
          * Should also change which processor in use based on if its a playerturn or AI-turn
          * Maybe also use turnConter if needed
          */
+        
+        ICharacter currentTurn = turnList.poll();
+        turn(currentTurn);
+        turnList.add(currentTurn);
+         
     }
 
         /*
@@ -50,15 +69,20 @@ public class GameController {
         *
         *   Add new processors to this method as they are created.
         */
-
+    private void initializeGame(OrthographicCamera camera){
+        initializeProcessors(camera);
+        turnList.addAll(playerlist);
+        
+    }
+    
     private void initializeProcessors(OrthographicCamera camera){
-        IInputProcessor game = new CameraProcessor(camera);
-        IInputProcessor player = new PlayerProcessor(camera);
+        IInputProcessor player = new PlayerProcessor(camera, this);
+        IInputProcessor notPlayer = new TestProcessor(camera, this);
 
-        processorList.add(game);
-        processorList.add(player);
+        processorList.put("notPlayer", notPlayer);
+        processorList.put("player", player);
 
-        this.currentProcessor = game;
-        Gdx.input.setInputProcessor(game);
+        this.currentProcessor = player;
+        Gdx.input.setInputProcessor(player);
     }
 }   

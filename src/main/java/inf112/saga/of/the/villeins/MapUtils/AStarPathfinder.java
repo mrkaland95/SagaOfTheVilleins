@@ -37,9 +37,6 @@ public class AStarPathfinder {
                 if (closed.contains(neighborNode)) {
                     continue;
                 }
-                if(neighborNode.position.equals(end)){
-                    getPath(neighborNode);
-                }
                 if (!open.contains(neighborNode)) {
                     open.add(neighborNode);
                     

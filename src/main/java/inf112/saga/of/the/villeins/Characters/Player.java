@@ -49,7 +49,7 @@ public class Player implements ICharacter {
             TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
             TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
             pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
-            System.out.println(pathToMove);
+            //System.out.println(pathToMove);
         }
 
         setCurrentDestination(pathToMove);
@@ -63,7 +63,7 @@ public class Player implements ICharacter {
         if (destinationPosition == null) {
             currentTile = pathToMove.get(0);
             destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
-            System.out.println(destinationPosition);
+            //System.out.println(destinationPosition);
             pathToMove.remove(0);
 
 //            if (pathToMove.size() >= 1) {
