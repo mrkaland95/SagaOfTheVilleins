@@ -106,16 +106,20 @@ Grov liste som resultat av brainstorm
 - Skill tree (3)
 - Buffs/debuffs (3)
 
-Per dags dato har vi en spillfigur med animasjon som kan bevege seg på mapet, har riktig plassering i tiles og forfytter seg rikig fra tile til tile. Mapet har også koordinater som oppgir posisjoner av relevans. Kamera er innstilt rikig og kan beveges av spilleren.  
+Per dags dato har vi:
+* En spillfigur med animasjon som kan bevege vertikalt, horisontalt og diagonalt. 
+* Et tile-basert map med koordinater som spillfiguren kan stå og bevege seg på.
 
 * Sette opp for hvert krav
     * brukerhistorier
     * akseptansekriterier (i form av tester)
     * arbeidsoppgaver
+
 * Har vi gjort justeringer i kravene til MVP? eventuelt hvorfor?
+    Vi har ikke endret på kravene til MVP, da vi ikke har oppdaget at det er noe som mangler enda. 
 
 * Oppgi hvilke bugs som finnes
-    * 
+    Disse er oppgitt i README filen.
 
 PRODUKT OG KODE
 
@@ -128,6 +132,7 @@ PRODUKT OG KODE
     * Fikset sentrering av spillfigur på tiles
     * Fikset at kameraet er en-til-en ved forflyttning
     * Fikset at spilleren tar korteste vei fra tile til tile ved forlyttning
+    * Fikset at clics innenfor tiles blir riktig. Hadde probelmer med om y (oddetall/ partall).
 
 * Klassediagram
 

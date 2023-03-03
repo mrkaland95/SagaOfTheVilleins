@@ -124,7 +124,6 @@ Arbeidsøkt på Realfagsbygget
   * Addering av brukerhistorier og krav
   * Oppføring av løste problemer
   * Oppdatering av innhold i oblig1 fil
-* Lage klassediagram
 * Opprettet klasse for fiende
 
 
@@ -145,8 +144,13 @@ Malene, Markus og Steffen
 
 Arbeidsøkt på Realfagsbygget
 * Se på hvordan begrense hvilke tiles som er tilgjengelige for spilleren, samt visualisering av det
-  * Endre på farge på tiles
-* Se på turn-based?
+  * Lage ny tile med ulik farge
+* Se på turn-based system
 * Fullføre utkast 1 av oblig 2. Få alle til å lese gjennom og komme med tilbakemeldinger innen torsdag 9. mars.
 
-
+Agenda til neste gang:
+* Skrive tester for å øke coverage
+* Lese gjennom alt av prosjektdokumneter og komme med kommentarer
+* Fortsette med påbegynte oppgaver i henhold til avgrensede tiles og turned-based system
+* Lage klassediagram
+* Oppdatere oblig1
