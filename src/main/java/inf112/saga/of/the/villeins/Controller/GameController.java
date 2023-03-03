@@ -33,6 +33,15 @@ public class GameController {
         return this.playerlist.size();
     }
 
+    public void update(){
+        /*
+         * This method should be added to render function in Game.java to keep updating the controller with correct values.
+         * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
+         * 
+         */
+
+    }
+
     public void turn(ICharacter currentChar){
         /*
          * TODO: Setup system for who's turn it is
