@@ -76,7 +76,6 @@ Oppfølging av arbeid
 	* Timelister og prosjektlog
 
 
-
 Deling og oppbevaring av felles data
 * Har opprettet en onenote notatbok hvor alle har tilgang og kan skrive ned ideer, kommentarer og lignende.
 * Har opprettet et google sheet for logføring av timer og oppgaver
