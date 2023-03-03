@@ -16,7 +16,6 @@ import inf112.saga.of.the.villeins.InputProcessors.TestProcessor;
 public class GameController {
 
     private List<ICharacter> playerlist;
-    // private int turnCounter;
     private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
     private LinkedList<ICharacter> turnList;
@@ -24,8 +23,6 @@ public class GameController {
     public GameController(List<ICharacter> playerlist, OrthographicCamera camera){
         this.playerlist = playerlist;
         this.turnList = new LinkedList<ICharacter>();
-
-        // this.turnCounter = 0;
         this.processorList = new HashMap<String, IInputProcessor>();
         this.currentProcessor = null;
 
