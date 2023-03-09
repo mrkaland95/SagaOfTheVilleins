@@ -15,14 +15,15 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
 
 A2 – røff beskrivelse av hva som inngår i spillet
 
-* Spillfigur som kan gå frem, tilbake og diagonalt
-* Todimensjonal verden
-	* Plattform bestående av tiles som spillfiguren kan stå og bevege seg på
-* Turn-based interaksjon med fiende
-* Spilleren kan øke i «skill» ved å bekjempe fiender av stadig vanskeligere grad
-* Spilleren kan, potensielt, øke inventory kapasitet ved å plukke med seg gjenstander
-* Spilleren følger et map som består av strategiske valg i form av spill med fiende, samt andre quests
-* Målet med spillet er å bekjempe alle de ulike fiendene, plukke med seg gjenstander, forflytte seg til enden på   in-between-games-map og bedre skill/karma.
+
+* Spillfigur som kan gå frem, tilbake og diagonalt  
+* Todimensjonal verden  
+	* Plattform bestående av hexagon tiles som spillfiguren kan stå og bevege seg på   
+* Turn-based interaksjon med fiende  
+* Spilleren kan øke i «skill» ved å bekjempe fiender av stadig vanskeligere grad  
+* Spilleren kan plukke med seg gjenstander  
+* Spilleren følger et map som består av strategiske valg i form av spill med fiende, og impassable terreng 
+* Målet med spillet er å bekjempe alle de ulike fiendene, plukke med seg gjenstander, forflytte seg til enden på   in-between-games-map og bedre skill/karma.  
 
 Spill som illustrer konseptet: roguelike, civilization 5 og 6 og xcom.
 
