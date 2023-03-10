@@ -34,7 +34,7 @@ Når det kommer til prosjektmetodikk, har teamet blitt enige om følgende;
 
 * Parprogrammering er en metode som fungerer bra for å involvere medlem med svakere programmeringsferdigheter. Dette er derfor en metode vi har valgt å inkludere, men med et begrenset omfang.
 
-* Kanban er en oversiktlig metodikk hvor vi alle får innsikt i hva som foregår og hva som trengs. Bruker derav en digital kanban som kan modifiseres fortløpende.
+* Extreme Programming er en metodikk som ligger nært slik vi arbeider naturlig og gir god fleksibilitet.
 
 
 
@@ -156,12 +156,10 @@ Middels
 Under middels
 * Logføring av timearbeid per medlem utenom felles møtetider/arbeidsøkter
 * Fordeling av varierte arbeidsoppgaver
-* Foreløpig ujevn arbeidsmengde gjennomført av de ulike medlemmene, av ulike årsaker
 
 
 Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgende;
 * Aktiv bruk av timelister
-* Aktiv bruk av digital Kanban
 * Følge møteplan strukturert og systematisk
 
 Ting som har fungert under middels har vært basert på typisk oppstartsfase faktorer, samt gjennomføringsevne.  
