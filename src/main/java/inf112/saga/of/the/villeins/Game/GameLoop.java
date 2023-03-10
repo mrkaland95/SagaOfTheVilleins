@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GameLoop extends ApplicationAdapter {
+public class GameLoop implements Screen {
+	Game game;
 	SpriteBatch spriteBatch;
 	Player player;
-	Player player2;
 	Slime slime;
 	CharacterAnimationController slimeAnimation;
 	CharacterAnimationController playerAnimation;
@@ -34,46 +34,35 @@ public class GameLoop extends ApplicationAdapter {
 	private GameController GameController;
 	private final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap; // crashes with lower vlaues we should investiagtes
-
 	List<TilePosition> pathToMove;
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
-	@Override
-	public void create () {
+
+
+	public GameLoop(Game game) {
+		this.game = game;
 		spriteBatch = new SpriteBatch();
 		String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
 
-		// Temp for testing.
-//		int width = map.getProperties().get("width", Integer.class);
-//		int height = map.getProperties().get("height", Integer.class);
-//
-//		System.out.println(width);
-
-
 		camera = new OrthographicCamera();
 
 		GameLoop.infoMap = new Imap(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
-		
-		
+
+
 		TilePosition playerTile = new TilePosition(1, 4);
-		//TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
 		ArrayList<Boolean> temp = new ArrayList<>();
 		temp.add(false);
 		temp.add(false);
 		infoMap.map.put(slimeTile, temp);
-		System.out.println(infoMap.map);
-
-		
 
 		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
-		//Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, 1, 4);
@@ -81,10 +70,8 @@ public class GameLoop extends ApplicationAdapter {
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
-		//player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
-		
+
 		characterList.add(player);
-		//characterList.add(player2);
 		characterList.add(slime);
 
 		GameController = new GameController(characterList, camera);
@@ -99,10 +86,8 @@ public class GameLoop extends ApplicationAdapter {
 		camera.zoom = 1.5f;
 
 		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
-		System.out.println(pathToMove);
-
-		
 	}
+
 
 
 	/**
@@ -110,7 +95,7 @@ public class GameLoop extends ApplicationAdapter {
 	 * Essentially all the objects or methods that need to be updated every frame should go in here.
 	 */
 	@Override
-	public void render () {
+	public void render (float deltaTime) {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		spriteBatch.begin();
 		renderer.setView(camera);
@@ -122,7 +107,6 @@ public class GameLoop extends ApplicationAdapter {
 			character.update();
 		}
 
-		
 		spriteBatch.end();
 	}
 	
@@ -134,9 +118,28 @@ public class GameLoop extends ApplicationAdapter {
 	}
 
 	@Override
+	public void show() {
+
+	}
+	@Override
 	public void resize(int width, int height){
 		camera.viewportHeight = height;
 		camera.viewportWidth = width;
 		camera.update();
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void hide() {
+
 	}
 }
