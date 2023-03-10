@@ -59,7 +59,7 @@ PROSJEKTRAPPORT
 
     Timelistene er ikke i aktiv bruk av alle medlemmene på nåværende tidspunkt - her er det forbedringspotensiale. Sammen med dette er det forbedringspotensiale i kommunikasjon om når og hva de forskjellige på gruppen jobber med, for å passe på å fordele arbeidet bra.
 
-* Kort forklaring på hvorfor det er ulik balanse i hvem som comitter kode
+* Kort forklaring på hvorfor det er ulik balanse i hvem som commiter kode
     Som nevnt i orientering av medlemmenes ferdigheter er det stort sprik i tidligere erfaring i henhold til kode, men også spill. Ett av gruppemedlemmene har kun INF100 som bakgrunn, og lærer java fortløpende i prosjektet. Det vil derav være naturlig at vedkommende ikke produserer like mye kode, men forsøker etter evne og forhåpentligvis kan bidra mer og mer etterhvert. Gruppemedlemmet har prosjektlederrolle, som gjør at det er mange andre oppgaver forutenom kode som også skal gjennomføres. Frem til nå har de andre gruppemedlemmene vært svært hjelpsomme og viser stor grad av toleranse og pedagogisk evne ved assistanse. 
 
     Det kan også nevnes at samme gruppemedlem har hatt oppstartsproblemer med Port22 feil ut februar måned, og derav hatt store problemer med å committe til git. Problemet ble løst i samarbeid med gruppemedlemmer, gruppeleder og foreleser. 
@@ -70,7 +70,7 @@ PROSJEKTRAPPORT
 * Referater fra møter
     Disse kan lokaliseres i egen fil; Porsjektlog.md.
 
-* Enighet om tre forbedringspunkter fra retrospektivet
+* Enighet om forbedringspunkter fra retrospektivet
     1. Aktiv bruk av timelister 
     2. Presentere kode for hverandre
 
@@ -114,9 +114,9 @@ Per dags dato har vi:
 * Gode tester for nesten alt til nå som kan testes med junit-tests. 
 
 * Sette opp for hvert krav
-    * brukerhistorier (finner vi i oblig 1 filen)
+    * brukerhistorier (finnes i oblig 1 filen)
     * akseptansekriterier (i form av tester)
-    * arbeidsoppgaver (legges til etter hvert som de finnes, i form av issues)
+    * arbeidsoppgaver (legges til etter hvert som de oppstår, i form av issues)
 
 * Har vi gjort justeringer i kravene til MVP? eventuelt hvorfor?
     Vi har ikke endret på kravene til MVP, da vi ikke har oppdaget at det er noe som mangler enda. 
@@ -136,10 +136,9 @@ PRODUKT OG KODE
     * Fikset at kameraet er en-til-en ved forflyttning
     * Fikset at spilleren tar korteste vei fra tile til tile ved forlyttning
     * Fikset at clics innenfor tiles blir riktig. Hadde probelmer med y (oddetall/ partall).
-    * 
 
 * Klassediagram
-
+Se vedlagt fil "Klassediagram_uke_10.pdf" i doc-mappen.
 
 
 
