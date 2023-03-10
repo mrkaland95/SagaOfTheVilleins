@@ -52,10 +52,15 @@ public class GameLoop extends ApplicationAdapter {
 
 
 		camera = new OrthographicCamera();
+
+		Imap infoMap = new Imap(20, 20);
+		
 		
 		TilePosition playerTile = new TilePosition(1, 4);
 		//TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
+
+		System.out.println(infoMap.map);
 
 		TilePosition playerDestination = new TilePosition(4, 8);
 
