@@ -20,7 +20,7 @@ import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game extends ApplicationAdapter {
+public class GameLoop extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Player player;
 	Player player2;

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
-public class TestProcessor implements IInputProcessor {
+public class InactivePlayerProcessor implements IInputProcessor {
     private OrthographicCamera camera;
 	private final Vector3 current = new Vector3();
 	private final Vector3 last = new Vector3();
@@ -14,7 +14,7 @@ public class TestProcessor implements IInputProcessor {
 	public Vector2 clickCoordinates = new Vector2();
 	public boolean endTurn;
 
-    public TestProcessor(OrthographicCamera camera){
+    public InactivePlayerProcessor(OrthographicCamera camera){
         this.camera = camera;
 		this.endTurn = false;
     }

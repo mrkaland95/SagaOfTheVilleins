@@ -10,9 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.InputProcessors.PlayerProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
-import inf112.saga.of.the.villeins.InputProcessors.TestProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
 
@@ -95,8 +95,8 @@ public class GameController {
     }
     
     private void initializeProcessors(OrthographicCamera camera){
-        IInputProcessor player = new PlayerProcessor(camera);
-        IInputProcessor notPlayer = new TestProcessor(camera);
+        IInputProcessor player = new ActivePlayerProcessor(camera);
+        IInputProcessor notPlayer = new InactivePlayerProcessor(camera);
 
         processorList.put("notPlayer", notPlayer);
         processorList.put("player", player);
