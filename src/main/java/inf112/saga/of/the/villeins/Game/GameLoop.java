@@ -20,7 +20,7 @@ import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game extends ApplicationAdapter {
+public class GameLoop extends ApplicationAdapter {
 	SpriteBatch spriteBatch;
 	Player player;
 	Player player2;
@@ -43,13 +43,21 @@ public class Game extends ApplicationAdapter {
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
+
+		// Temp for testing.
+//		int width = map.getProperties().get("width", Integer.class);
+//		int height = map.getProperties().get("height", Integer.class);
+//
+//		System.out.println(width);
+
+
 		camera = new OrthographicCamera();
 
 		Imap infoMap = new Imap(20, 20);
 		
 		
 		TilePosition playerTile = new TilePosition(1, 4);
-		TilePosition player2Tile = new TilePosition(1, 5);
+		//TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
 		System.out.println(infoMap.map);
@@ -57,18 +65,18 @@ public class Game extends ApplicationAdapter {
 		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
-		Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
+		//Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
 
-		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
+		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
-		player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
+		//player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
 		
 		characterList.add(player);
-		characterList.add(player2);
+		//characterList.add(player2);
 		characterList.add(slime);
 
 		GameController = new GameController(characterList, camera);
@@ -98,15 +106,15 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		spriteBatch.begin();
 		renderer.setView(camera);
-		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
-		player.setDestination(clickPosition);
+		GameController.update();
 
 		for (ICharacter character : characterList) {
 			character.update();
 		}
 
+		
 		spriteBatch.end();
 	}
 	

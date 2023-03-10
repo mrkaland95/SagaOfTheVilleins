@@ -15,6 +15,6 @@ public class Main {
 		config.setForegroundFPS(60);
 		config.setTitle("Saga Of The Villeins");
 		config.setWindowedMode(800, 600);
-		new Lwjgl3Application(new Game(), config);
+		new Lwjgl3Application(new GameLoop(), config);
 	}
 }

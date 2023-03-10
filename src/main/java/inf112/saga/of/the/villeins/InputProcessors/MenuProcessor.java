@@ -47,4 +47,16 @@ public class MenuProcessor implements IInputProcessor{
     public boolean scrolled(float v, float v1) {
         return false;
     }
+
+    @Override
+    public boolean checkTurn() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkTurn'");
+    }
+
+    @Override
+    public void endTurn() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'endTurn'");
+    }
 }

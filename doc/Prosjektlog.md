@@ -154,3 +154,25 @@ Agenda til neste gang:
 * Fortsette med påbegynte oppgaver i henhold til avgrensede tiles og turned-based system
 * Lage klassediagram
 * Oppdatere oblig1
+
+Torsdag 09/03-23
+Kl. 08:15-10:00
+Leon, Malene, Markus og Steffen
+
+Syvende gruppetime
+* Undersøke pipeline failed problematikk 
+* Bytte program for klassediagram
+
+Fredag 10/03-23
+Kl. 10:15-14:00
+Leon, Malene, Markus og Steffen
+
+Arbeidsøkt på Realfagsbygget
+* Fullføre klassediagram
+* Fullføre retrospektivet
+* Dobbeltsjekke at alt er med og up to date i README, oblig1 og oblig2
+* Skrive resterende tester
+
+Til neste gang:
+* Ta opp implementasjon av AI/model-view-controller problem med gruppeleder
+
