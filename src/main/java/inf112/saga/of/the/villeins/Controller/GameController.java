@@ -1,40 +1,72 @@
 package inf112.saga.of.the.villeins.Controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.InputProcessors.CameraProcessor;
+import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
-import inf112.saga.of.the.villeins.InputProcessors.PlayerProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
 
-    private ArrayList<ICharacter> playerlist;
-    // private int turnCounter;
-    private ArrayList<InputProcessor> processorList;
+    private List<ICharacter> characterList;
+    private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
+    private LinkedList<ICharacter> turnList;
+    private ICharacter playerCharacter;
+    private ICharacter currentCharacter;
 
-    public GameController(ArrayList<ICharacter> playerlist, OrthographicCamera camera){
-        this.playerlist = playerlist;
-        // this.turnCounter = 0;
-        this.processorList = new ArrayList<>();
+    public GameController(List<ICharacter> characterList, OrthographicCamera camera){
+        this.characterList = characterList;
+        this.turnList = new LinkedList<ICharacter>();
+        this.processorList = new HashMap<String, IInputProcessor>();
         this.currentProcessor = null;
-        initializeProcessors(camera);
+        this.playerCharacter = null;
+        this.currentCharacter = null;
+
+        initializeGame(camera);
     }
 
     public int playerCount(){
-        return this.playerlist.size();
+        return this.characterList.size();
+    }
+
+    public void update(){
+        /*
+         * This method should be added to render function in Game.java to keep updating the controller with correct values.
+         * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
+         * 
+         */
+        
+        if(currentCharacter instanceof Player){
+            Vector2 clickPosition = currentProcessor.getClickCoordinates();
+            currentCharacter.setDestination(clickPosition);
+        }
+        if(this.currentProcessor.checkTurn()){
+            this.currentProcessor.endTurn();
+            nextTurn();        
+        }
+
     }
 
     public void turn(ICharacter currentChar){
-        /*
-         * TODO: Setup system for who's turn it is
-         *
-         */
+        this.currentCharacter = currentChar;
+
+        if(currentChar instanceof Player){
+            currentProcessor = processorList.get("player");
+            Gdx.input.setInputProcessor(currentProcessor);
+        }
+        else{
+            currentProcessor = processorList.get("notPlayer");
+            Gdx.input.setInputProcessor(currentProcessor);
+        }
     }
 
     public void nextTurn(){
@@ -43,6 +75,11 @@ public class GameController {
          * Should also change which processor in use based on if its a playerturn or AI-turn
          * Maybe also use turnConter if needed
          */
+        
+        ICharacter currentTurn = turnList.poll();
+        turn(currentTurn);
+        turnList.add(currentTurn);
+         
     }
 
         /*
@@ -50,15 +87,29 @@ public class GameController {
         *
         *   Add new processors to this method as they are created.
         */
-
-    private void initializeProcessors(OrthographicCamera camera){
-        IInputProcessor game = new CameraProcessor(camera);
-        IInputProcessor player = new PlayerProcessor(camera);
-
-        processorList.add(game);
-        processorList.add(player);
-
-        this.currentProcessor = game;
-        Gdx.input.setInputProcessor(game);
+    private void initializeGame(OrthographicCamera camera){
+        initializeProcessors(camera);
+        turnList.addAll(characterList);
+        initialGetPlayer();
+        nextTurn();
     }
+    
+    private void initializeProcessors(OrthographicCamera camera){
+        IInputProcessor player = new ActivePlayerProcessor(camera);
+        IInputProcessor notPlayer = new InactivePlayerProcessor(camera);
+
+        processorList.put("notPlayer", notPlayer);
+        processorList.put("player", player);
+
+        this.currentProcessor = player;
+        Gdx.input.setInputProcessor(player);
+    }
+
+    private void initialGetPlayer(){
+        for (ICharacter character : characterList) {
+            if(character instanceof Player){
+                this.playerCharacter = character;
+            }
+        }
+    }   
 }   

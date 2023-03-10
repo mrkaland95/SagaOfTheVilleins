@@ -27,28 +27,26 @@ public class CharacterAnimationController {
 
     private int idleFrameCols;
     private int idleframeRows;
-    private final ICharacter character;
     private final SpriteBatch spriteBatch;
 
     private final float playbackSpeedMultiplier = 1f;
 
-    public CharacterAnimationController(ICharacter character,
+    public CharacterAnimationController(
                                         String idleAnimationPath,
                                         String walkAnimationPath,
                                         String attackAnimationPath,
                                         SpriteBatch spriteBatch,
                                         Integer rows,
                                         Integer cols) {
-        this.character = character;
         this.spriteBatch = spriteBatch;
         // very temporary solution until sprites/animations are made.
 
 
         if (rows != null) {
-            idleframeRows = rows.intValue();
+            idleframeRows = rows;
         }
         if (rows != null) {
-            idleFrameCols = cols.intValue();
+            idleFrameCols = cols;
         }
 
 
@@ -60,8 +58,6 @@ public class CharacterAnimationController {
         }
         if (attackAnimationPath != null){
             this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
-
-
         }
     }
 
@@ -69,13 +65,13 @@ public class CharacterAnimationController {
      * Function responsible for getting and rendering a character's sprite. Needs to be called
      * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
      */
-    public void render() {
+    public void render(ICharacter character) {
         if (character.isMoving()) activeAnimation = walkAnimation;
         else                      activeAnimation = idleAnimation;
 
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
-        Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, this.character);
+        Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, character);
         spriteBatch.draw(currentSprite, spriteRenderPosition.x, spriteRenderPosition.y);
     }
 

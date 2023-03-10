@@ -2,11 +2,14 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Game.Main;
 
-public class baseMonster implements ICharacter {
+public class BaseMonster implements ICharacter {
     private Vector2 currentPosition;
     private Vector2 destinationPosition;
+
+    CharacterAnimationController animationController;
     private int currentHealth;
     private int maxHealth;
     private int strength;
@@ -14,14 +17,25 @@ public class baseMonster implements ICharacter {
     private final float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
 
-    public baseMonster(Vector2 startPosition, int maxHealth, int strength, int defense) {
+    public BaseMonster(Vector2 startPosition,
+                       CharacterAnimationController animationController,
+                       int maxHealth,
+                       int strength,
+                       int defense) {
         this.currentPosition = startPosition;
+        this.animationController = animationController;
         this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
     }
     @Override
     public void update() {
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        // Moves the character if it has a destination.
+        moveToPosition(destinationPosition, deltaTime);
+        // Renders the character's animation the character's position.
+        this.animationController.render(this);
     }
 
     @Override
@@ -45,8 +59,8 @@ public class baseMonster implements ICharacter {
     }
 
     @Override
-    public void moveToPosition(Vector2 destination) {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public void moveToPosition(Vector2 destination, float deltaTime) {
+        // TODO move this into a shared class, that can be injected into all the various characters?
         this.destinationPosition = destination;
 
         if (destinationPosition == null) return;
