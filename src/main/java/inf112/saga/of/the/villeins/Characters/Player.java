@@ -66,19 +66,8 @@ public class Player implements ICharacter {
             //System.out.println(destinationPosition);
             pathToMove.remove(0);
 
-//            if (pathToMove.size() >= 1) {
-//            }
-
         }
     }
-
-
-
-//    private void moveToTile(float deltaTime) {
-//        if (destinationPosition == null) return;
-////        Vector2 calculatedDestination = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(clickedPosition.x(), clickedPosition.y());
-////        moveToPosition(calculatedDestination, deltaTime);
-//    }
 
 
     @Override
