@@ -2,6 +2,9 @@ package inf112.saga.of.the.villeins.MapUtils;
 
 import java.util.*;
 
+import inf112.saga.of.the.villeins.Game.GameLoop;
+import inf112.saga.of.the.villeins.Game.Imap;
+
 public class AStarPathfinder {
 
     // List of tiles that are blocked by a character, tiles where movement is disallowed etc.
@@ -21,6 +24,7 @@ public class AStarPathfinder {
 //
 //
     public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end) {
+
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(Node::getF));
         HashSet<Node> closed = new HashSet<>();
         open.add(new Node(start, null, 0, heuristic(start, end)));
@@ -66,24 +70,39 @@ public class AStarPathfinder {
 
     private static ArrayList<TilePosition> getNeighbors(TilePosition position) {
     ArrayList<TilePosition> neighbors = new ArrayList<>();
+    ArrayList<TilePosition> tempneighbors = new ArrayList<>();
     int x = position.x();
     int y = position.y();
     if(y % 2 != 0){
-        neighbors.add(new TilePosition(x+1, y-1));
-        neighbors.add(new TilePosition(x+1, y));
-        neighbors.add(new TilePosition(x+1, y+1));
-        neighbors.add(new TilePosition(x, y+1));
-        neighbors.add(new TilePosition(x-1, y));
-        neighbors.add(new TilePosition(x, y-1));
+        tempneighbors.add(new TilePosition(x+1, y-1));
+        tempneighbors.add(new TilePosition(x+1, y));
+        tempneighbors.add(new TilePosition(x+1, y+1));
+        tempneighbors.add(new TilePosition(x, y+1));
+        tempneighbors.add(new TilePosition(x-1, y));
+        tempneighbors.add(new TilePosition(x, y-1));
+
     }
     else{
-        neighbors.add(new TilePosition(x-1, y+1));
-        neighbors.add(new TilePosition(x, y+1));
-        neighbors.add(new TilePosition(x+1, y));
-        neighbors.add(new TilePosition(x, y-1));
-        neighbors.add(new TilePosition(x-1, y-1));
-        neighbors.add(new TilePosition(x-1, y));
+        tempneighbors.add(new TilePosition(x-1, y+1));
+        tempneighbors.add(new TilePosition(x, y+1));
+        tempneighbors.add(new TilePosition(x+1, y));
+        tempneighbors.add(new TilePosition(x, y-1));
+        tempneighbors.add(new TilePosition(x-1, y-1));
+        tempneighbors.add(new TilePosition(x-1, y));
     }
+
+    //makes sure that th charcther dosnt move over illgal tiles 
+    for (TilePosition maybeTilePosition : tempneighbors) {
+        if(GameLoop.infoMap.map.get(maybeTilePosition)!= null){
+            if(GameLoop.infoMap.map.get(maybeTilePosition).get(0) == true){
+                neighbors.add(maybeTilePosition);
+            }
+        }
+
+    }
+
+  
+    
 
     // implementation of getNeighbors method depends on your specific grid structure
     // for a hexagonal grid, this could involve checking the six neighboring tiles

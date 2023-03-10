@@ -18,6 +18,7 @@ import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameLoop extends ApplicationAdapter {
@@ -32,6 +33,7 @@ public class GameLoop extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private GameController GameController;
 	private final List<ICharacter> characterList = new ArrayList<>();
+	public static Imap infoMap; // crashes with lower vlaues we should investiagtes
 
 	List<TilePosition> pathToMove;
 
@@ -53,14 +55,20 @@ public class GameLoop extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 
-		Imap infoMap = new Imap(20, 20);
+		GameLoop.infoMap = new Imap(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
 		
 		
 		TilePosition playerTile = new TilePosition(1, 4);
 		//TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
+		ArrayList<Boolean> temp = new ArrayList<>();
+		temp.add(false);
+		temp.add(false);
+		infoMap.map.put(slimeTile, temp);
 		System.out.println(infoMap.map);
+
+		
 
 		TilePosition playerDestination = new TilePosition(4, 8);
 
