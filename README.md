@@ -34,3 +34,5 @@ LibGDX
 Markus - Laget tiles og kart
 
 Leon - Laget "Spritene" og animasjonene.
+
+Looka.com - Generert logo/fremside

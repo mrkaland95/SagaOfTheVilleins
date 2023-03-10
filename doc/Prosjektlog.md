@@ -161,17 +161,19 @@ Leon, Malene, Markus og Steffen
 
 Syvende gruppetime
 * Undersøke pipeline failed problematikk 
-* Bytte program for klassediagram
+* Byttet program for klassediagram
+* Planlegging rundt hvordan implimentere ai, samt generering av map-posisjonene
 
 Fredag 10/03-23
 Kl. 10:15-14:00
-Leon, Malene, Markus og Steffen
+Malene, Markus og Steffen
 
 Arbeidsøkt på Realfagsbygget
 * Fullføre klassediagram
 * Fullføre retrospektivet
 * Dobbeltsjekke at alt er med og up to date i README, oblig1 og oblig2
 * Skrive resterende tester
+* Lage main menu screen
 
 Til neste gang:
 * Ta opp implementasjon av AI/model-view-controller problem med gruppeleder
