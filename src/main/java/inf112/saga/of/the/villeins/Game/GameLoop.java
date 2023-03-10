@@ -34,8 +34,6 @@ public class GameLoop implements Screen {
 	private GameController GameController;
 	private final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap; // crashes with lower vlaues we should investiagtes
-	List<TilePosition> pathToMove;
-
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 
 
@@ -51,7 +49,6 @@ public class GameLoop implements Screen {
 
 		GameLoop.infoMap = new Imap(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
 
-
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
@@ -59,8 +56,6 @@ public class GameLoop implements Screen {
 		temp.add(false);
 		temp.add(false);
 		infoMap.map.put(slimeTile, temp);
-
-		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
@@ -84,8 +79,6 @@ public class GameLoop implements Screen {
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
-
-		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
 	}
 
 

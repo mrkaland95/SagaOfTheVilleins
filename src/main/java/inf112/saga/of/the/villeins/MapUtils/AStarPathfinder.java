@@ -9,20 +9,6 @@ public class AStarPathfinder {
 
     // List of tiles that are blocked by a character, tiles where movement is disallowed etc.
     List<TilePosition> blockedTiles = new ArrayList<>();
-
-    public AStarPathfinder(TilePosition a, TilePosition b, TilePosition c) {
-        // Used for testing purposes.
-        this.blockedTiles.add(a);
-        this.blockedTiles.add(b);
-        this.blockedTiles.add(c);
-    }
-
-//    public void aStarAlgorithm(TilePosition startPosition, TilePosition destPosition) {
-//        Queue<TilePosition> frontier = new PriorityQueue<>();
-//        frontier.add(startPosition);
-//    }
-//
-//
     public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end) {
 
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(Node::getF));
@@ -101,9 +87,6 @@ public class AStarPathfinder {
 
     }
 
-  
-    
-
     // implementation of getNeighbors method depends on your specific grid structure
     // for a hexagonal grid, this could involve checking the six neighboring tiles
     // around the current position and returning any that are valid for movement
@@ -116,8 +99,6 @@ public class AStarPathfinder {
 
         return Math.abs(current.x() - end.x()) + Math.abs(current.y() - end.y());
         // Uses something called "Chebyshev" distance
-
-//        return Math.max((current.x() - end.x()), (current.y()) - end.y());
     }
 
     private static class Node {

@@ -77,9 +77,4 @@ public class HexGridMapPosition {
         }
         return new TilePosition((int) hexTileX, (int) hexTileY);
     }
-
-
-    public Vector2 getHexPosition() {
-        return worldCoordinate;
-    }
 }

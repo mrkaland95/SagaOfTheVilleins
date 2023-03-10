@@ -65,9 +65,6 @@ public class InactivePlayerProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//		Vector3 worldCoordinate = camera.project(new Vector3(screenX, screenY, pointer));
-//		System.out.println(worldCoordinate);
-
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			camera.unproject(cameraCoordinates);

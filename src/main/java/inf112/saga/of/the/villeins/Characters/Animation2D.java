@@ -29,9 +29,6 @@ public class Animation2D {
 
 
     private Animation<TextureRegion> loadAnimation(String pathToSpriteSheet, float playerbackMultiplier) {
-        //int rows = this.FRAME_ROWS;
-        //int cols = this.FRAME_COLUMNS;
-
         this.animationSheet = new Texture(Gdx.files.internal(pathToSpriteSheet));
         // The texture region class' split function only takes in a 2d array, so despite our sheets being 1d,
         // We need to initialize it as a 2d array.

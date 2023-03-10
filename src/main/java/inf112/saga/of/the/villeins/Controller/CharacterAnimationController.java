@@ -58,8 +58,6 @@ public class CharacterAnimationController {
         }
         if (attackAnimationPath != null){
             this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
-
-
         }
     }
 
