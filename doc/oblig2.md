@@ -132,7 +132,8 @@ PRODUKT OG KODE
     * Fikset sentrering av spillfigur på tiles
     * Fikset at kameraet er en-til-en ved forflyttning
     * Fikset at spilleren tar korteste vei fra tile til tile ved forlyttning
-    * Fikset at clics innenfor tiles blir riktig. Hadde probelmer med om y (oddetall/ partall).
+    * Fikset at clics innenfor tiles blir riktig. Hadde probelmer med y (oddetall/ partall).
+    * 
 
 * Klassediagram
 

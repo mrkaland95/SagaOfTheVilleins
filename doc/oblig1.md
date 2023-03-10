@@ -124,7 +124,7 @@ Spillers perspektiv
 8. Som spiller trenger en å kunne avslutte spillet og lukke det, slik at en ikke blir låst inne
 
 
-Programmerers perpektiv
+Programmerers perspektiv
 1. Som programmerer trenger en å vite plasseringen til spillfiguren slik at en kan avgjøre hvilke handlinger som er gjennomførbare
 2. Som programmerer trenger en lett leslig kode for å kunne forstå inneholdet, spesielt også ved behov for små justeringer og ytterligere endringer
 3. Som programmerer trenger en å ta i bruk objektorienterte prinsipper for å oppnå god kode og struktur
