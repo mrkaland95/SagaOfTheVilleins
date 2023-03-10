@@ -43,6 +43,14 @@ public class GameLoop extends ApplicationAdapter {
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
+
+		// Temp for testing.
+//		int width = map.getProperties().get("width", Integer.class);
+//		int height = map.getProperties().get("height", Integer.class);
+//
+//		System.out.println(width);
+
+
 		camera = new OrthographicCamera();
 		
 		TilePosition playerTile = new TilePosition(1, 4);
