@@ -173,3 +173,6 @@ Arbeidsøkt på Realfagsbygget
 * Dobbeltsjekke at alt er med og up to date i README, oblig1 og oblig2
 * Skrive resterende tester
 
+Til neste gang:
+* Ta opp implementasjon av AI/model-view-controller problem med gruppeleder
+
