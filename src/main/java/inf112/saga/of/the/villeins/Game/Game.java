@@ -46,24 +46,24 @@ public class Game extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		
 		TilePosition playerTile = new TilePosition(1, 4);
-		TilePosition player2Tile = new TilePosition(1, 5);
+		//TilePosition player2Tile = new TilePosition(1, 5);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
 		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
-		Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
+		//Vector2 playerPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(player2Tile.x(), player2Tile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
 
-		slimeAnimation = new CharacterAnimationController(idleSlimePath, null, null, spriteBatch, 1, 4);
+		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, 1, 2);
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
-		player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
+		//player2 = new Player(playerPosition2, playerAnimation, 20, 10, 10);
 		
 		characterList.add(player);
-		characterList.add(player2);
+		//characterList.add(player2);
 		characterList.add(slime);
 
 		GameController = new GameController(characterList, camera);
@@ -93,15 +93,15 @@ public class Game extends ApplicationAdapter {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		spriteBatch.begin();
 		renderer.setView(camera);
-		Vector2 clickPosition = GameController.currentProcessor.getClickCoordinates();
 		renderer.render();
 		camera.update();
-		player.setDestination(clickPosition);
+		GameController.update();
 
 		for (ICharacter character : characterList) {
 			character.update();
 		}
 
+		
 		spriteBatch.end();
 	}
 	
