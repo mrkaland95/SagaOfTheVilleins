@@ -11,15 +11,6 @@ public class HexGridMapPosition {
     // TODO this should take in the hexagon dimension as a parameter,
     // so it can be dynamically changed if the hexagon size should ever be changed in the future.
     static double hexagonDimension = 200;
-    private Map<TilePosition, Vector2> gridToCoordinatesMap = new HashMap<>();
-
-
-
-    // TODO add rows and cols so the size of the grid, as well as the map of
-    public HexGridMapPosition() {
-
-    }
-
 
     /**
      * Function for calculating the world coordinate of a hexagon tile, given its position in the tilemap.
