@@ -57,7 +57,7 @@ PROSJEKTRAPPORT
     
     Forberingspotensialet ligger blant annet i å sørge for kommunikasjon fra hvert medlem til alle i fellesskap om nøyaktig hva de driver med og tenker om veien videre. Små tendenser til at alle holder på med sitt, men er ikke sikkert det krever stort til forbedring, da det forsåvidt fungerer greit. En konsekvens er at det i større grad blir viktig at hvert medlem går inn og sjekker de ulike filene for å oppdatere seg selv. Etterhvert som prosjektet går på frem kan det muligens være lurt at hvert medlem går gjennom koden sin og presenterer den for de resterende medlemmene i gruppen slik at alle har oversikt og forståelse.
 
-    Timelistene er ikke i aktiv bruk av alle medlemmene på nåværende tidspunkt - her er det forbedringspotensiale.
+    Timelistene er ikke i aktiv bruk av alle medlemmene på nåværende tidspunkt - her er det forbedringspotensiale. Sammen med dette er det forbedringspotensiale i kommunikasjon om når og hva de forskjellige på gruppen jobber med, for å passe på å fordele arbeidet bra.
 
 * Kort forklaring på hvorfor det er ulik balanse i hvem som comitter kode
     Som nevnt i orientering av medlemmenes ferdigheter er det stort sprik i tidligere erfaring i henhold til kode, men også spill. Ett av gruppemedlemmene har kun INF100 som bakgrunn, og lærer java fortløpende i prosjektet. Det vil derav være naturlig at vedkommende ikke produserer like mye kode, men forsøker etter evne og forhåpentligvis kan bidra mer og mer etterhvert. Gruppemedlemmet har prosjektlederrolle, som gjør at det er mange andre oppgaver forutenom kode som også skal gjennomføres. Frem til nå har de andre gruppemedlemmene vært svært hjelpsomme og viser stor grad av toleranse og pedagogisk evne ved assistanse. 
@@ -109,11 +109,14 @@ Grov liste som resultat av brainstorm
 Per dags dato har vi:
 * En spillfigur med animasjon som kan bevege vertikalt, horisontalt og diagonalt. 
 * Et tile-basert map med koordinater som spillfiguren kan stå og bevege seg på.
+* Et turn-system som separerer spillere og fiender/monstere, og stopper spilleren fra å gjøre endringer når det ikke er deres tur.
+* En godt optimisert pathfinding funksjon for hexgridet vårt som funker raskt og alltid gir en optimal path. Denne kan også utvides for å kunne unngå tiles som ikke er lovlig å gå på uten endringer til det vi allerede har gjort, bare legge til litt ekstra.
+* Gode tester for nesten alt til nå som kan testes med junit-tests. 
 
 * Sette opp for hvert krav
-    * brukerhistorier
+    * brukerhistorier (finner vi i oblig 1 filen)
     * akseptansekriterier (i form av tester)
-    * arbeidsoppgaver
+    * arbeidsoppgaver (legges til etter hvert som de finnes, i form av issues)
 
 * Har vi gjort justeringer i kravene til MVP? eventuelt hvorfor?
     Vi har ikke endret på kravene til MVP, da vi ikke har oppdaget at det er noe som mangler enda. 
