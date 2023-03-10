@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
@@ -15,22 +16,26 @@ import inf112.saga.of.the.villeins.InputProcessors.TestProcessor;
 
 public class GameController {
 
-    private List<ICharacter> playerlist;
+    private List<ICharacter> characterList;
     private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
     private LinkedList<ICharacter> turnList;
+    private ICharacter playerCharacter;
+    private ICharacter currentCharacter;
 
-    public GameController(List<ICharacter> playerlist, OrthographicCamera camera){
-        this.playerlist = playerlist;
+    public GameController(List<ICharacter> characterList, OrthographicCamera camera){
+        this.characterList = characterList;
         this.turnList = new LinkedList<ICharacter>();
         this.processorList = new HashMap<String, IInputProcessor>();
         this.currentProcessor = null;
+        this.playerCharacter = null;
+        this.currentCharacter = null;
 
         initializeGame(camera);
     }
 
     public int playerCount(){
-        return this.playerlist.size();
+        return this.characterList.size();
     }
 
     public void update(){
@@ -39,20 +44,27 @@ public class GameController {
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
+        
+        if(currentCharacter instanceof Player){
+            Vector2 clickPosition = currentProcessor.getClickCoordinates();
+            currentCharacter.setDestination(clickPosition);
+        }
+        if(this.currentProcessor.checkTurn()){
+            this.currentProcessor.endTurn();
+            nextTurn();        
+        }
 
     }
 
     public void turn(ICharacter currentChar){
-        /*
-         * TODO: Setup system for who's turn it is
-         *
-         */
+        this.currentCharacter = currentChar;
+
         if(currentChar instanceof Player){
-            this.currentProcessor = processorList.get("player");
+            currentProcessor = processorList.get("player");
             Gdx.input.setInputProcessor(currentProcessor);
         }
         else{
-            this.currentProcessor = processorList.get("notPlayer");
+            currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
         }
     }
@@ -77,13 +89,14 @@ public class GameController {
         */
     private void initializeGame(OrthographicCamera camera){
         initializeProcessors(camera);
-        turnList.addAll(playerlist);
-        
+        turnList.addAll(characterList);
+        initialGetPlayer();
+        nextTurn();
     }
     
     private void initializeProcessors(OrthographicCamera camera){
-        IInputProcessor player = new PlayerProcessor(camera, this);
-        IInputProcessor notPlayer = new TestProcessor(camera, this);
+        IInputProcessor player = new PlayerProcessor(camera);
+        IInputProcessor notPlayer = new TestProcessor(camera);
 
         processorList.put("notPlayer", notPlayer);
         processorList.put("player", player);
@@ -91,4 +104,12 @@ public class GameController {
         this.currentProcessor = player;
         Gdx.input.setInputProcessor(player);
     }
+
+    private void initialGetPlayer(){
+        for (ICharacter character : characterList) {
+            if(character instanceof Player){
+                this.playerCharacter = character;
+            }
+        }
+    }   
 }   

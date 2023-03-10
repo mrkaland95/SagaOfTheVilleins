@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-import inf112.saga.of.the.villeins.Controller.GameController;
-
-
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class TestProcessor implements IInputProcessor {
@@ -15,11 +12,11 @@ public class TestProcessor implements IInputProcessor {
 	private final Vector3 last = new Vector3();
 	private final Vector3 delta = new Vector3();
 	public Vector2 clickCoordinates = new Vector2();
-	private GameController controller;
+	public boolean endTurn;
 
-    public TestProcessor(OrthographicCamera camera, GameController controller){
+    public TestProcessor(OrthographicCamera camera){
         this.camera = camera;
-		this.controller = controller;
+		this.endTurn = false;
     }
 
     @Override
@@ -59,7 +56,7 @@ public class TestProcessor implements IInputProcessor {
 			return true;
 		}
 		if(character == 'n'){
-			controller.nextTurn();
+			this.endTurn = true;
 			return true;
 		}
 
@@ -119,6 +116,16 @@ public class TestProcessor implements IInputProcessor {
 
 	public Vector2 getClickCoordinates() {
 		return this.clickCoordinates;
+	}
+
+	@Override
+	public void endTurn() {
+		this.endTurn = false;
+	}
+
+	@Override
+	public boolean checkTurn() {
+		return this.endTurn;
 	}
     
 }
