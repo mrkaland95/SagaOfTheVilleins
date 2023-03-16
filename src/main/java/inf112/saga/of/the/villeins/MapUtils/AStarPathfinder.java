@@ -94,7 +94,7 @@ public class AStarPathfinder {
     //makes sure that th charcther dosnt move over illgal tiles 
     for (TilePosition maybeTilePosition : tempneighbors) {
         if(GameLoop.infoMap.map.get(maybeTilePosition)!= null){
-            if(GameLoop.infoMap.map.get(maybeTilePosition).get(0) == true){
+            if(GameLoop.infoMap.movable(maybeTilePosition) == true){
                 neighbors.add(maybeTilePosition);
             }
         }
