@@ -2,11 +2,16 @@ package inf112.saga.of.the.villeins.Controller;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import org.w3c.dom.Text;
+
+import java.awt.*;
 
 /**
  * Class for handling the animation of characters, separate from the character objects.
@@ -32,12 +37,12 @@ public class CharacterAnimationController {
     private final float playbackSpeedMultiplier = 1f;
 
     public CharacterAnimationController(
-                                        String idleAnimationPath,
-                                        String walkAnimationPath,
-                                        String attackAnimationPath,
-                                        SpriteBatch spriteBatch,
-                                        Integer rows,
-                                        Integer cols) {
+            String idleAnimationPath,
+            String walkAnimationPath,
+            String attackAnimationPath,
+            SpriteBatch spriteBatch,
+            Integer rows,
+            Integer cols) {
         this.spriteBatch = spriteBatch;
         // very temporary solution until sprites/animations are made.
 
@@ -70,12 +75,39 @@ public class CharacterAnimationController {
     public void render(ICharacter character) {
         if (character.isMoving()) activeAnimation = walkAnimation;
         else                      activeAnimation = idleAnimation;
-
+        ShapeRenderer renderer = new ShapeRenderer();
         float deltaTime = Gdx.graphics.getDeltaTime();
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, character);
+        drawHealthbar(currentSprite, character, renderer);
         spriteBatch.draw(currentSprite, spriteRenderPosition.x, spriteRenderPosition.y);
+
+
     }
+
+
+    private void drawHealthbar(TextureRegion sprite, ICharacter character, ShapeRenderer renderer) {
+        float barWidth = sprite.getRegionWidth();
+
+        float barHeight = 5;
+
+        float characterHeight = sprite.getRegionHeight();
+
+
+        int healthPercentage = character.getMaxHealth() / character.getCurrentHealth();
+        float healthBarWidth = barWidth * healthPercentage;
+        float healthBarX = character.getPosition().x;
+        float healthBarY = character.getPosition().y + characterHeight + 10;
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.setColor(1, 0, 0, 1);
+        renderer.rect(healthBarX, healthBarY, healthBarWidth, barHeight);
+        renderer.setColor(0, 1, 0, 1);
+        renderer.rect(healthBarX, healthBarY, healthBarWidth, barHeight);
+        renderer.end();
+    }
+
+
+
 
     /**
      * Since the draw position renders at the bottom left of the sprite/texture, we need to calculate which world
