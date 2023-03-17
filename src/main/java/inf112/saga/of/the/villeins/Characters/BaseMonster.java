@@ -41,8 +41,6 @@ public class BaseMonster implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        // Renders the character's animation the character's position.
-
         this.animationController.render(this);
         if (clickedPosition != null) {
             TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
