@@ -19,8 +19,8 @@ public class BaseMonster implements ICharacter {
     private final float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
     Vector2 currentPosition;
-    Vector2 clickedPosition;
     Vector2 destinationPosition;
+    Vector2 destinationPosition2;
     List<TilePosition> pathToMove;
     TilePosition currentTile;
 
@@ -44,23 +44,24 @@ public class BaseMonster implements ICharacter {
         // Renders the character's animation the character's position.
 
         this.animationController.render(this);
-        if (clickedPosition != null) {
+        if (destinationPosition != null) {
             TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-            TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-            pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+            TilePosition destinationTile = HexGridMapPosition.findHexTile(destinationPosition);
+            pathToMove = AStarPathfinder.findPath(currentTile, destinationTile);
+            pathToMove.remove(pathToMove.size()-1); // Life hack
         }
 
         setCurrentDestination(pathToMove);
-        moveToPosition(this.destinationPosition, deltaTime);
-        clickedPosition = null;
+        moveToPosition(this.destinationPosition2, deltaTime);
+        destinationPosition = null;
     }
 
     private void setCurrentDestination(List<TilePosition> pathToMove) {
     if (pathToMove == null || pathToMove.size() == 0) return;
 
-    if (destinationPosition == null) {
+    if (destinationPosition2 == null) {
         currentTile = pathToMove.get(0);
-        destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
+        destinationPosition2 = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
         pathToMove.remove(0);
         }
     }
@@ -117,6 +118,7 @@ public class BaseMonster implements ICharacter {
             // Then snap the player's position to the desired spot.
             currentPosition.x = destinationPosition.x;
             currentPosition.y = destinationPosition.y;
+            destinationPosition2 = null;
             moving = false;
         }
     }

@@ -186,3 +186,11 @@ Malene, Markus, Steffen, Leon
 * Jobbet på Imap implementering og testing
 * Jobbet med healthbar og angrepsfunksjon
 * Diskuterte gamedesign og problemstillinger omgående angrep og bevegelse
+
+Fredag 17/03-23
+Kl. 11.0-14.00
+Markus, Steffen
+
+Digital arbeidsøkt
+* Jobbet med pathfinding/bevegelse til fiender
+* Jobbet med å vise fram healthbar dynamisk/generell UI.

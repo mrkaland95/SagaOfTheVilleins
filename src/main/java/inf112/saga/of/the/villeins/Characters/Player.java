@@ -53,6 +53,7 @@ public class Player implements ICharacter {
 
         setCurrentDestination(pathToMove);
         moveToPosition(this.destinationPosition, deltaTime);
+        
         clickedPosition = null;
     }
 

@@ -66,6 +66,7 @@ public class GameController {
         else{
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
+            currentCharacter.setDestination(playerCharacter.getPosition());
         }
     }
 
