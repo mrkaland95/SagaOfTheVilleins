@@ -100,7 +100,7 @@ public class CharacterAnimationController {
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, character);
         spriteBatch.draw(currentSprite, spriteRenderPosition.x, spriteRenderPosition.y);
-        drawHealthbar(currentSprite, character, renderer);
+        //drawHealthbar(currentSprite, character, renderer);
     }
 
     /**
