@@ -3,8 +3,6 @@ package inf112.saga.of.the.villeins.Game;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class Imap{
@@ -23,6 +21,33 @@ public class Imap{
             }
         }
     }
+
+    public boolean movable(TilePosition tile){
+        return map.get(tile).get(0);
+    }
+
+    public boolean isOccupied(TilePosition tile){
+        return map.get(tile).get(1);
+    }
+
+    public void onMove(TilePosition start, TilePosition end){
+        ArrayList<Boolean> startList = new ArrayList<>();
+        startList.add(true);
+        startList.add(false);
+        map.put(start, startList);
+
+        ArrayList<Boolean> endList = new ArrayList<>();
+        endList.add(false);
+        endList.add(true);
+        map.put(end, endList);
+    }
+    public void InitialSet(TilePosition tile){
+        ArrayList<Boolean> initial = new ArrayList<>();
+        initial.add(false);
+        initial.add(true);
+        map.put(tile, initial);
+    }
+
 
     
 }
