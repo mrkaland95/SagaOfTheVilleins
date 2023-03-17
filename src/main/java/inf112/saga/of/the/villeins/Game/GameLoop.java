@@ -77,6 +77,7 @@ public class GameLoop implements Screen {
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
+		player.setHealth(10);
 
 		characterList.add(player);
 		characterList.add(slime);
@@ -104,7 +105,7 @@ public class GameLoop implements Screen {
 	@Override
 	public void render (float deltaTime) {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
-		spriteBatch.begin();
+//		spriteBatch.begin();
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -116,8 +117,8 @@ public class GameLoop implements Screen {
 		for (ICharacter character : characterList) {
 			character.update();
 		}
+//		spriteBatch.end();
 
-		spriteBatch.end();
 	}
 	
 	@Override
