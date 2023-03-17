@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Game.Main;
+import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+
+import java.util.List;
 
 public class BaseMonster implements ICharacter {
-    private Vector2 currentPosition;
-    private Vector2 destinationPosition;
-
     CharacterAnimationController animationController;
     private int currentHealth;
     private int maxHealth;
@@ -16,6 +18,12 @@ public class BaseMonster implements ICharacter {
     private int defense;
     private final float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
+    Vector2 currentPosition;
+    Vector2 clickedPosition;
+    Vector2 destinationPosition;
+    List<TilePosition> pathToMove;
+    TilePosition currentTile;
+
 
     public BaseMonster(Vector2 startPosition,
                        CharacterAnimationController animationController,
@@ -32,11 +40,32 @@ public class BaseMonster implements ICharacter {
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        // Moves the character if it has a destination.
-        moveToPosition(destinationPosition, deltaTime);
+
         // Renders the character's animation the character's position.
+
         this.animationController.render(this);
+        if (clickedPosition != null) {
+            TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
+            TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
+            pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+        }
+
+        setCurrentDestination(pathToMove);
+        moveToPosition(this.destinationPosition, deltaTime);
+        clickedPosition = null;
     }
+
+    private void setCurrentDestination(List<TilePosition> pathToMove) {
+    if (pathToMove == null || pathToMove.size() == 0) return;
+
+    if (destinationPosition == null) {
+        currentTile = pathToMove.get(0);
+        destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
+        pathToMove.remove(0);
+        }
+    }
+
+
 
     @Override
     public Vector2 getPosition() {
