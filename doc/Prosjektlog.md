@@ -178,3 +178,11 @@ Arbeidsøkt på Realfagsbygget
 Til neste gang:
 * Ta opp implementasjon av AI/model-view-controller problem med gruppeleder
 
+Torsdag 16/03-23
+Kl. 8.15-10.00
+Malene, Markus, Steffen, Leon
+
+Åttende gruppetime
+* Jobbet på Imap implementering og testing
+* Jobbet med healthbar og angrepsfunksjon
+* Diskuterte gamedesign og problemstillinger omgående angrep og bevegelse
