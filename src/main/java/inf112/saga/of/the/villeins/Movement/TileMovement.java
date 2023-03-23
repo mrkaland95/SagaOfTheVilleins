@@ -24,9 +24,17 @@ public class TileMovement {
     }
 
     public void move(float deltaTime) {
-        // If there is no path set yet, or if the character has already walked the length of the path.
         if (pathToMove == null || pathIndex >= pathToMove.size()) {
+            if (character.isMoving()) {
+                // Set isMoving to false when character reaches the final tile
+                character.setMoving(false);
+            }
             return;
+        }
+
+        if (!character.isMoving()) {
+            // Set isMoving to true when character starts moving along the array of tiles
+            character.setMoving(true);
         }
 
         TilePosition currentTile = pathToMove.get(pathIndex);
@@ -36,9 +44,10 @@ public class TileMovement {
             character.setDestinationPosition(destinationPosition);
         }
 
-        MovementUtils.moveToPosition(character, character.getDestinationPosition(), deltaTime);
+        Vector2 newPosition = MovementUtils.moveToPosition(character.getCurrentPosition(), character.getDestinationPosition(), deltaTime, character.getMoveSpeed());
+        character.setCurrentPosition(newPosition);
 
-        if (!character.isMoving()) {
+        if (newPosition.equals(destinationPosition)) {
             pathIndex++;
             character.setDestinationPosition(null);
         }

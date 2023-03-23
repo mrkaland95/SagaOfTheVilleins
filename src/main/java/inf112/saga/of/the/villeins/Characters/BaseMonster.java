@@ -48,6 +48,8 @@ public class BaseMonster implements ICharacter {
         this.tileMovement.move(deltaTime);
     }
 
+
+
     void calculatePathToMove(Vector2 clickedDestination) {
         if (clickedDestination == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
