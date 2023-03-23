@@ -2,13 +2,14 @@ package inf112.saga.of.the.villeins.MapUtils;
 
 import java.util.*;
 
-import inf112.saga.of.the.villeins.Game.GameLoop;
+import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Game.Imap;
 
 public class AStarPathfinder {
 
     // List of tiles that are blocked by a character, tiles where movement is disallowed etc.
     List<TilePosition> blockedTiles = new ArrayList<>();
+    static Imap Imap = new Imap(20, 20);
 
     public AStarPathfinder(TilePosition a, TilePosition b, TilePosition c) {
         // Used for testing purposes.
@@ -31,7 +32,7 @@ public class AStarPathfinder {
 
         while (!open.isEmpty()) {
             Node current = open.poll();
-            if (current.position.equals(end)) {
+            if (current.position.equals(end)) {    
                 return getPath(current);
             }
             closed.add(current);
@@ -93,8 +94,8 @@ public class AStarPathfinder {
 
     //makes sure that th charcther dosnt move over illgal tiles 
     for (TilePosition maybeTilePosition : tempneighbors) {
-        if(GameLoop.infoMap.map.get(maybeTilePosition)!= null){
-            if(GameLoop.infoMap.movable(maybeTilePosition) == true){
+        if(Imap.map.get(maybeTilePosition)!= null){
+            if(Imap.movable(maybeTilePosition) == true){
                 neighbors.add(maybeTilePosition);
             }
         }
@@ -108,6 +109,14 @@ public class AStarPathfinder {
     // for a hexagonal grid, this could involve checking the six neighboring tiles
     // around the current position and returning any that are valid for movement
     return neighbors;
+    }
+
+    public static void initializePlayerPositions(List<ICharacter> charList){
+        TilePosition playerTile = new TilePosition(1, 4);
+		TilePosition slimeTile = new TilePosition(1, 6);
+
+		Imap.InitialSet(slimeTile);
+        Imap.InitialSet(playerTile);
     }
 
     private static int heuristic(TilePosition current, TilePosition end) {

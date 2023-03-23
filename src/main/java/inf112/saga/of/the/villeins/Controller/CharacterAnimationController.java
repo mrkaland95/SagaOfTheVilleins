@@ -72,7 +72,7 @@ public class CharacterAnimationController {
     private void drawHealthbar(TextureRegion sprite, ICharacter character, ShapeRenderer renderer) {
         float totalBarWidth = 100;
 //        System.out.println(sprite.getRegionWidth());
-        System.out.println(sprite.getRegionHeight());
+        //System.out.println(sprite.getRegionHeight());
         int currentHealthPercentage = character.getMaxHealth() / character.getCurrentHealth();
         float characterHeight = sprite.getRegionHeight() / 2;
         float totalBarHeight = 8f;

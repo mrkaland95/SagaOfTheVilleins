@@ -42,11 +42,16 @@ public class BaseMonster implements ICharacter {
         float deltaTime = Gdx.graphics.getDeltaTime();
 
         this.animationController.render(this);
+        
         if (destinationPosition != null) {
+            System.out.println(destinationPosition);
             TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
             TilePosition destinationTile = HexGridMapPosition.findHexTile(destinationPosition);
             pathToMove = AStarPathfinder.findPath(currentTile, destinationTile);
-            pathToMove.remove(pathToMove.size()-1); // Life hack
+            if(pathToMove != null){
+                pathToMove.remove(pathToMove.size()-1); // Life hack
+            }
+            
         }
 
         setCurrentDestination(pathToMove);
