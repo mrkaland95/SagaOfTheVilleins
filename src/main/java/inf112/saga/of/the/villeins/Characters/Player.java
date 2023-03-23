@@ -7,6 +7,7 @@ import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import inf112.saga.of.the.villeins.Game.Main;
+import inf112.saga.of.the.villeins.Movement.TileMovement;
 
 import java.util.List;
 
@@ -23,9 +24,8 @@ public class Player implements ICharacter {
 
     Vector2 currentPosition;
     Vector2 clickedPosition;
-    Vector2 destinationPosition;
     List<TilePosition> pathToMove;
-    TilePosition currentTile;
+    TileMovement tileMovement;
 
     public Player(Vector2 startingPosition,
                   CharacterAnimationController animationController,
@@ -38,6 +38,7 @@ public class Player implements ICharacter {
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
+        this.tileMovement = new TileMovement(this);
     }
 
 
@@ -45,85 +46,55 @@ public class Player implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this);
-        if (clickedPosition != null) {
-            TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-            TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-            pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
-        }
+        calculatePathToMove(clickedPosition);
+        this.tileMovement.move(deltaTime);
 
-        setCurrentDestination(pathToMove);
-        moveToPosition(this.destinationPosition, deltaTime);
-        
-        clickedPosition = null;
-    }
-
-    private void setCurrentDestination(List<TilePosition> pathToMove) {
-        if (pathToMove == null || pathToMove.size() == 0) return;
-
-        if (destinationPosition == null) {
-            currentTile = pathToMove.get(0);
-            destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
-            pathToMove.remove(0);
-
-        }
     }
 
 
-    @Override
-    public void moveToPosition(Vector2 destination, float deltaTime) {
-        // TODO deltatime should be moved out and be given as a paramater, to make testing this possible.
-        this.clickedPosition = destination;
-
-        if (clickedPosition == null) return;
-
-        // Temp variable until we can make the character go to the center of a tile.
-        // Used to snap the character's position to the destination once it's within this threshold.
-        float positionMarginOfError = 3.0f;
-
-        if ((Math.abs(currentPosition.x - clickedPosition.x) > positionMarginOfError) ||
-            (Math.abs(currentPosition.y - clickedPosition.y) > positionMarginOfError)) {
-
-            moving = true;
-            float pathX = clickedPosition.x - currentPosition.x;
-            float pathY = clickedPosition.y - currentPosition.y;
-            float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
-            float directiontoMoveX = pathX / distanceToMove;
-            float directiontoMoveY = pathY / distanceToMove;
-
-            // TODO implement a "ramping" or "ease in/out" function so the character accelerates and slows down when moving.
-            // Something similar to this.
-            // https://frc1756-argos.github.io/ArgoBot-Drive-Training/tutorials/8/
-            this.currentPosition.x += directiontoMoveX * deltaTime * this.moveSpeed;
-            this.currentPosition.y += directiontoMoveY * deltaTime * this.moveSpeed;
-        } else {
-            // Is the player within the margin of error?
-            // Then snap the player's position to the desired spot.
-            currentPosition.x = clickedPosition.x;
-            currentPosition.y = clickedPosition.y;
-            destinationPosition = null;
-            moving = false;
-        }
+    void calculatePathToMove(Vector2 clickedDestination) {
+        if (clickedDestination == null) return;
+        TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
+        TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
+        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+        tileMovement.setPath(pathToMove);
     }
+
 
     @Override
     public boolean isMoving() {
         return this.moving;
     }
 
-    public void setDestination(Vector2 destinationPosition){
+    @Override
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    @Override
+    public float getMoveSpeed() {
+        return this.moveSpeed;
+    }
+
+    @Override
+    public void setMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
+
+    public void setDestinationPosition(Vector2 destinationPosition){
         this.clickedPosition = destinationPosition;
     }
 
     @Override
-    public Vector2 getDestination() {
+    public Vector2 getDestinationPosition() {
         return clickedPosition;
     }
     @Override
-    public Vector2 getPosition() {
+    public Vector2 getCurrentPosition() {
         return currentPosition;
     }
     @Override
-    public void setPosition(Vector2 position) {
+    public void setCurrentPosition(Vector2 position) {
         this.currentPosition = position;
     }
 
@@ -131,7 +102,6 @@ public class Player implements ICharacter {
     public int getCurrentHealth() {
         return this.currentHealth;
     }
-
 
     @Override
     public int getStrength() {
@@ -147,7 +117,6 @@ public class Player implements ICharacter {
     public int getDefense() {
         return this.defense;
     }
-
 
     @Override
     public int getMaxHealth() {

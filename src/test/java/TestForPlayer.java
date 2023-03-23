@@ -1,7 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.Player;
 
@@ -22,7 +20,7 @@ public class TestForPlayer {
         float expectedPositionX = 10f;
         float expectedPositionY = 10f;
         Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
-        testPlayer123.setPosition(expectedResult);
+        testPlayer123.setCurrentPosition(expectedResult);
         Vector2 result = testPlayer123.getPosition(); 
         assertEquals(expectedResult, result);
     }
@@ -33,7 +31,7 @@ public class TestForPlayer {
         Vector2 startingPosition = new Vector2(0f, 0f);
         Player testPlayer123 = new Player(startingPosition, null,40, 2, 5);
         Vector2 expectedZPosition = new Vector2(10f,10f);
-        testPlayer123.setPosition(expectedZPosition);
+        testPlayer123.setCurrentPosition(expectedZPosition);
         Vector2 result = testPlayer123.getPosition();
         assertEquals(expectedZPosition, result);
 

@@ -47,7 +47,7 @@ public class GameController {
         
         if(currentCharacter instanceof Player){
             Vector2 clickPosition = currentProcessor.getClickCoordinates();
-            currentCharacter.setDestination(clickPosition);
+            currentCharacter.setDestinationPosition(clickPosition);
         }
         if(this.currentProcessor.checkTurn()){
             this.currentProcessor.endTurn();
@@ -66,7 +66,7 @@ public class GameController {
         else{
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
-            currentCharacter.setDestination(playerCharacter.getPosition());
+            currentCharacter.setDestinationPosition(playerCharacter.getCurrentPosition());
         }
     }
 

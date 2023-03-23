@@ -22,8 +22,8 @@ public class GameUI {
     float totalBarHeight = 5;
     int currentHealthPercentage = character.getMaxHealth() / character.getCurrentHealth();
     float currentHealthBarWidth = totalBarWidth * currentHealthPercentage;
-    float healthBarX = character.getPosition().x;
-    float healthBarY = character.getPosition().y + characterHeight + 10;
+    float healthBarX = character.getCurrentPosition().x;
+    float healthBarY = character.getCurrentPosition().y + characterHeight + 10;
     renderer.begin(ShapeRenderer.ShapeType.Filled);
     renderer.setColor(1, 0, 0, 1);
 //        renderer.rect(healthBarX, healthBarY, totalBarWidth, totalBarHeight);

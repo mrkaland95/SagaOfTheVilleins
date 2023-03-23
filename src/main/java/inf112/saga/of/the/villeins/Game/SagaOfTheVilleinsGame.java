@@ -15,7 +15,12 @@ public class SagaOfTheVilleinsGame extends Game {
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         font = new BitmapFont();
-        setScreen(new MainMenuScreen(this));
+
+        // Uncomment this to when testing the main menu
+        // setScreen(new MainMenuScreen(this));
+
+        // Uncomment/Comment this when testing other screens.
+        setScreen(new GameLoop(this));
     }
 
     @Override

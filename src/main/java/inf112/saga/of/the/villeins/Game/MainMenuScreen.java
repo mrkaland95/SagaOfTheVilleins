@@ -25,6 +25,7 @@ public class MainMenuScreen implements Screen {
     private Sprite sprite;
     private Camera camera;
 
+
     public MainMenuScreen(SagaOfTheVilleinsGame game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
@@ -62,10 +63,11 @@ public class MainMenuScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.spriteBatch.begin();
+
         float gameWidth = Gdx.graphics.getWidth();
         float gameHeight = Gdx.graphics.getHeight();
-
 
         game.spriteBatch.draw(menuBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 

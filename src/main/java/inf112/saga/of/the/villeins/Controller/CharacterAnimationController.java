@@ -70,21 +70,48 @@ public class CharacterAnimationController {
     }
 
     private void drawHealthbar(TextureRegion sprite, ICharacter character, ShapeRenderer renderer) {
-        float totalBarWidth = 100;
-//        System.out.println(sprite.getRegionWidth());
-        System.out.println(sprite.getRegionHeight());
-        int currentHealthPercentage = character.getMaxHealth() / character.getCurrentHealth();
-        float characterHeight = sprite.getRegionHeight() / 2;
+
+        float characterWidth = sprite.getRegionWidth();
+        float characterHeight = sprite.getRegionHeight() / 2f;
+
+        // Gets the size of the bar for "current" health.
+        float currentHealthPercentage = (float) character.getMaxHealth() / character.getCurrentHealth();
+//        float currentHealthBarWidth = totalBarWidth / currentHealthPercentage;
+
+        float totalBarWidth = 40f;
         float totalBarHeight = 8f;
-        float currentHealthBarWidth = totalBarWidth / currentHealthPercentage;
-        float healthBarX = character.getPosition().x - sprite.getRegionWidth();
-        float healthBarY = character.getPosition().y + characterHeight + 10;
+
+
+        float healthBarX = character.getCurrentPosition().x - characterWidth;
+        float healthBarY = character.getCurrentPosition().y + characterHeight + 10f;
+
+        // Padding for the background healthbar
+        float paddingX = 1.5f;
+        float paddingY = 1.5f;
+
         renderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        // Background bar/total health bar
         renderer.setColor(1, 0, 0, 1);
         renderer.rect(healthBarX, healthBarY, totalBarWidth, totalBarHeight);
+
+        // Current health bar.
         renderer.setColor(0, 1, 0, 1);
-        renderer.rect(healthBarX + 1, healthBarY + 1, currentHealthBarWidth, totalBarHeight + 5);
+        renderer.rect(
+                healthBarX + paddingX,
+                healthBarY + paddingY,
+                (characterWidth - 2 * paddingX) / currentHealthPercentage,
+                totalBarHeight - 2 * paddingY);
         renderer.end();
+
+
+
+//        renderer.begin(ShapeRenderer.ShapeType.Filled);
+//        renderer.setColor(1, 0, 0, 1);
+//        renderer.rect(healthBarX, healthBarY, totalBarWidth, totalBarHeight);
+//        renderer.setColor(0, 1, 0, 1);
+//        renderer.rect(healthBarX + 1, healthBarY + 1, currentHealthBarWidth, totalBarHeight + 5);
+//        renderer.end();
     }
 
     /**
@@ -96,8 +123,6 @@ public class CharacterAnimationController {
         else                      activeAnimation = idleAnimation;
 
         float deltaTime = Gdx.graphics.getDeltaTime();
-
-
 
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, character);
@@ -113,7 +138,7 @@ public class CharacterAnimationController {
      * Helper method that calculates this.
      */
     private static Vector2 calculateRenderPosition(TextureRegion currentSprite, ICharacter character) {
-        Vector2 characterPosition = character.getPosition();
+        Vector2 characterPosition = character.getCurrentPosition();
         float spriteX = characterPosition.x - (currentSprite.getRegionWidth() / 2.0f);
         float spriteY = characterPosition.y - (currentSprite.getRegionHeight() / 2.0f);
         return new Vector2(spriteX, spriteY);
