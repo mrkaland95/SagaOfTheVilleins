@@ -10,7 +10,7 @@ public class TestForPlayer {
         Vector2 startingPosition = new Vector2(0f, 0f);
         Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5);
         Vector2 expectedPosition = new Vector2(0,0);
-        Vector2 result = testPlayer123.getPosition();
+        Vector2 result = testPlayer123.getCurrentPosition();
         assertEquals(expectedPosition, result);
     }
     @Test
@@ -21,7 +21,7 @@ public class TestForPlayer {
         float expectedPositionY = 10f;
         Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
         testPlayer123.setCurrentPosition(expectedResult);
-        Vector2 result = testPlayer123.getPosition(); 
+        Vector2 result = testPlayer123.getCurrentPosition();
         assertEquals(expectedResult, result);
     }
 
@@ -32,7 +32,7 @@ public class TestForPlayer {
         Player testPlayer123 = new Player(startingPosition, null,40, 2, 5);
         Vector2 expectedZPosition = new Vector2(10f,10f);
         testPlayer123.setCurrentPosition(expectedZPosition);
-        Vector2 result = testPlayer123.getPosition();
+        Vector2 result = testPlayer123.getCurrentPosition();
         assertEquals(expectedZPosition, result);
 
     }

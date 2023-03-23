@@ -5,18 +5,13 @@ import inf112.saga.of.the.villeins.Characters.IMovable2D;
 
 public class MovementUtils {
 
-    public static void moveToPosition(IMovable2D character, Vector2 destination, float deltaTime) {
-        Vector2 currentPosition = character.getCurrentPosition();
-        float moveSpeed = character.getMoveSpeed();
-
-        if (destination == null) return;
+    public static Vector2 moveToPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
+        if (destination == null) return currentPosition;
 
         float positionMarginOfError = 3.0f;
 
         if ((Math.abs(currentPosition.x - destination.x) > positionMarginOfError) ||
             (Math.abs(currentPosition.y - destination.y) > positionMarginOfError)) {
-
-            character.setMoving(true);
             float pathX = destination.x - currentPosition.x;
             float pathY = destination.y - currentPosition.y;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
@@ -28,10 +23,8 @@ public class MovementUtils {
         } else {
             currentPosition.x = destination.x;
             currentPosition.y = destination.y;
-            character.setDestinationPosition(null);
-            character.setMoving(false);
         }
 
-        character.setCurrentPosition(currentPosition);
+        return currentPosition;
     }
 }
