@@ -194,3 +194,12 @@ Markus, Steffen
 Digital arbeidsøkt
 * Jobbet med pathfinding/bevegelse til fiender
 * Jobbet med å vise fram healthbar dynamisk/generell UI.
+
+Torsdag 23/03-23
+* Fordelt arbeidsoppgaver for veien videre
+  Leon: utvide grafikk for tiles
+  Malene: utbedre/utvide hva testene dekker, samt fullføre påbegynte, lage monster og skrive på akseptansekriterier
+  Markus: se på turbased 
+  Steffen: se på attack funksjon og health bar
+* Jobbet med dokumentasjon
+* Utbedre brukerhistorier og akseptansekrivterier
