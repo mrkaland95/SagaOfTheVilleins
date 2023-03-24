@@ -3,7 +3,6 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
-import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -22,11 +21,9 @@ public class BaseMonster implements ICharacter {
     private float moveSpeed = Main.globalDefaultMoveSpeed;
     private boolean moving;
     Vector2 currentPosition;
-    Vector2 destinationPosition;
-    Vector2 clickedPosition;
+    Vector2 endPosition;
     List<TilePosition> pathToMove;
-    TilePosition currentTile;
-    private TileMovement tileMovement;
+    private final TileMovement tileMovement;
 
 
     public BaseMonster(Vector2 startPosition,
@@ -42,22 +39,41 @@ public class BaseMonster implements ICharacter {
         this.defense = defense;
         this.tileMovement = new TileMovement(this);
     }
+
+    public BaseMonster(TilePosition startingTile,
+                       CharacterAnimationController animationController,
+                       int maxHealth,
+                       int strength,
+                       int defense) {
+        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingTile);
+        this.animationController = animationController;
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
+        this.strength = strength;
+        this.defense = defense;
+        this.tileMovement = new TileMovement(this);
+    }
+
+
+
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this);
-        calculatePathToMove(clickedPosition);
+        calculatePathToMove(this.endPosition);
         this.tileMovement.move(deltaTime);
     }
 
 
 
-    void calculatePathToMove(Vector2 clickedDestination) {
-        if (clickedDestination == null) return;
+    void calculatePathToMove(Vector2 endGoal) {
+        if (this.moving) return;
+        if (endGoal == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-        TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile, GameLoop.infoMap);
-        pathToMove.remove(pathToMove.size()-1); // Life hack
+        TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
+        pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
+        System.out.println(pathToMove);
+//        pathToMove.remove(pathToMove.size() - 1); // Life hack
         tileMovement.setPath(pathToMove);
     }
 
@@ -74,13 +90,13 @@ public class BaseMonster implements ICharacter {
     }
 
     @Override
-    public void setDestinationPosition(Vector2 destination) {
-        this.destinationPosition = destination;
+    public void setEndPosition(Vector2 endPosition) {
+        this.endPosition = endPosition;
     }
 
     @Override
-    public Vector2 getDestinationPosition() {
-        return destinationPosition;
+    public Vector2 getEndPosition() {
+        return endPosition;
     }
     @Override
     public boolean isMoving() {

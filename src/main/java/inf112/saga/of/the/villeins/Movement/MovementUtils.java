@@ -1,11 +1,10 @@
 package inf112.saga.of.the.villeins.Movement;
 
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Characters.IMovable2D;
 
 public class MovementUtils {
 
-    public static Vector2 moveToPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
+    public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
         if (destination == null) return currentPosition;
 
         float positionMarginOfError = 3.0f;

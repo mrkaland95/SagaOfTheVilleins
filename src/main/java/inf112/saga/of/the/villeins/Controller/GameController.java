@@ -10,10 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Game.Imap;
+import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class GameController {
@@ -47,9 +48,16 @@ public class GameController {
          * 
          */
         
-        if(currentCharacter instanceof Player){
+        if(currentCharacter instanceof Player) {
+//            if (!currentCharacter.isMoving()) {
+//
+//            }
             Vector2 clickPosition = currentProcessor.getClickCoordinates();
-            currentCharacter.setDestinationPosition(clickPosition);
+            currentCharacter.setEndPosition(clickPosition);
+
+
+            // Update the IMap with player positions here.
+
         }
         if(this.currentProcessor.checkTurn()){
             this.currentProcessor.endTurn();
@@ -61,6 +69,12 @@ public class GameController {
     public void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
+        for (ICharacter character : characterList) {
+            TilePosition currentPosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
+            GameLoop.infoMap.setMoveable(currentPosition, false);
+        }
+
+
         if(currentChar instanceof Player){
             currentProcessor = processorList.get("player");
             Gdx.input.setInputProcessor(currentProcessor);
@@ -68,9 +82,7 @@ public class GameController {
         else{
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
-            currentCharacter.setDestinationPosition(playerCharacter.getCurrentPosition());
-            Vector2 destinationPosition = playerCharacter.getCurrentPosition();
-            currentCharacter.setDestinationPosition(destinationPosition);
+            currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
         }
     }
 

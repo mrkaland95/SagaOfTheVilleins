@@ -12,12 +12,12 @@ public interface IMovable2D {
     /**
      * @param destination Vector2 representing the destination a character should move to.
      */
-    void setDestinationPosition(Vector2 destination);
+    void setEndPosition(Vector2 destination);
 
     /**
      * @return Vector2 of character's destination.
      */
-    Vector2 getDestinationPosition();
+    Vector2 getEndPosition();
     /**
      * @return Whether the object is moving or not.
      */

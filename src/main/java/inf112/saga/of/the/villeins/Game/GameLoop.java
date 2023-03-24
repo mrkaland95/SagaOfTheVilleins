@@ -18,7 +18,6 @@ import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GameLoop implements Screen {
@@ -56,8 +55,8 @@ public class GameLoop implements Screen {
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
-		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
-		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
+		Vector2 playerPosition = HexGridMapPosition.calculateVectorCoordinate(playerTile);
+		Vector2 slimePosition = HexGridMapPosition.calculateVectorCoordinate(slimeTile);
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, shapeRenderer, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);

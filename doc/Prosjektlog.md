@@ -214,5 +214,8 @@ Torsdag 23/03-23
 * Utbedre brukerhistorier og akseptansekrivterier
 
 Fredag 23/03-23
-* Leon - Jobbet med animasjoner.
+Kl 10.20 til 14.20
+* Leon - Jobbet med animasjoner og nytt kart.
 * Steffen - faktorisert mye av "tile" bevegelsen ut til egen klasse.
+* Markus og Steffen - Jobbet med Imap(informasjon om hvilke tiles er lovlig å gå på), håndtering av dette, og AI til fiender.
+* Jobbet med refaktoring av navn på metoder og variabler.

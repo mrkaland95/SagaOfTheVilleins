@@ -2,25 +2,20 @@ package inf112.saga.of.the.villeins.MapUtils;
 
 import java.util.*;
 
-import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Game.Imap;
 
 public class AStarPathfinder {
 
-    // List of tiles that are blocked by a character, tiles where movement is disallowed etc.
-    List<TilePosition> blockedTiles = new ArrayList<>();
-    public AStarPathfinder(TilePosition a, TilePosition b, TilePosition c) {
-        // Used for testing purposes.
-        this.blockedTiles.add(a);
-        this.blockedTiles.add(b);
-        this.blockedTiles.add(c);
-    }
-
-//    public void aStarAlgorithm(TilePosition startPosition, TilePosition destPosition) {
-//        Queue<TilePosition> frontier = new PriorityQueue<>();
-//        frontier.add(startPosition);
-
-
+    /**
+     * Class responsible for
+     *
+     *
+     *
+     * @param start
+     * @param end
+     * @param infomap
+     * @return
+     */
     public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, Imap infomap) {
 
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(Node::getF));
@@ -49,7 +44,6 @@ public class AStarPathfinder {
                             open.add(neighborNode);
                             break;
                         }
-
                     }
                 }
             }
@@ -94,8 +88,9 @@ public class AStarPathfinder {
 
         // Checks if a Tile is blocked by it's type
         for (TilePosition maybeTilePosition : tempneighbors) {
-            if(Imap.map.get(maybeTilePosition)!= null){
-                if(Imap.movable(maybeTilePosition) == true){
+
+            if (Imap.isMovable(maybeTilePosition) != null) {
+                if (Imap.isMovable(maybeTilePosition)) {
                     neighbors.add(maybeTilePosition);
                 }
             }

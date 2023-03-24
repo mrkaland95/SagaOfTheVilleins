@@ -3,7 +3,6 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
-import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -23,9 +22,8 @@ public class Player implements ICharacter {
     private float moveSpeed = Main.globalDefaultMoveSpeed;
     private int score;
     private boolean moving;
-
     Vector2 currentPosition;
-    Vector2 clickedPosition;
+    Vector2 endPosition;
     List<TilePosition> pathToMove;
     TileMovement tileMovement;
 
@@ -48,16 +46,16 @@ public class Player implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this);
-        calculatePathToMove(clickedPosition);
+        calculatePathToMove(endPosition);
         this.tileMovement.move(deltaTime);
     }
 
 
-    void calculatePathToMove(Vector2 clickedDestination) {
-        if (clickedDestination == null) return;
+    void calculatePathToMove(Vector2 endGoal) {
+        if (endGoal == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-        TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile, GameLoop.infoMap);
+        TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
+        pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
         tileMovement.setPath(pathToMove);
     }
 
@@ -82,13 +80,13 @@ public class Player implements ICharacter {
         this.moveSpeed = moveSpeed;
     }
 
-    public void setDestinationPosition(Vector2 destinationPosition){
-        this.clickedPosition = destinationPosition;
+    public void setEndPosition(Vector2 destinationPosition){
+        this.endPosition = destinationPosition;
     }
 
     @Override
-    public Vector2 getDestinationPosition() {
-        return clickedPosition;
+    public Vector2 getEndPosition() {
+        return endPosition;
     }
     @Override
     public Vector2 getCurrentPosition() {

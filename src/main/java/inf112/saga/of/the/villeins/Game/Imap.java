@@ -1,52 +1,50 @@
 package inf112.saga.of.the.villeins.Game;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class Imap{
-    public static HashMap<TilePosition, ArrayList<Boolean>> map = new HashMap<>();
-    public Imap(int col, int row){
+    private final HashMap<TilePosition, Boolean> map = new HashMap<>();
+    public Imap(int rows, int cols){
         //creates a simple hashmap so we cna get information from diffrent tiles using Tileposition
-        for (int i = 0; i < col; i++) {
-            for (int j = 0; j < row; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 TilePosition temp = new TilePosition(i, j);
                 // they arrylist uses a standardnized setup where index 0 is if tile is movable, 
                 // 1 is wheter or not there is a charachter there
-                ArrayList<Boolean> templist = new ArrayList<>();
-                templist.add(true);
-                templist.add(false);
-                map.put(temp, templist);
+                map.put(temp, true);
             }
         }
+        System.out.println(map);
+    }
+    public Boolean isMovable(TilePosition tile){
+        return map.get(tile);
     }
 
-    public boolean movable(TilePosition tile){
-        return map.get(tile).get(0);
+    public void setMoveable(TilePosition tile, Boolean moveable) {
+        this.map.put(tile, moveable);
     }
 
-    public boolean isOccupied(TilePosition tile){
-        return map.get(tile).get(1);
-    }
+
+
 
     public void onMove(TilePosition start, TilePosition end){
-        ArrayList<Boolean> startList = new ArrayList<>();
-        startList.add(true);
-        startList.add(false);
-        map.put(start, startList);
+        map.put(start, true);
+        map.put(end, false);
+    }
 
-        ArrayList<Boolean> endList = new ArrayList<>();
-        endList.add(false);
-        endList.add(true);
-        map.put(end, endList);
-    }
-    public void InitialSet(TilePosition tile){
-        ArrayList<Boolean> initial = new ArrayList<>();
-        initial.add(false);
-        initial.add(true);
-        map.put(tile, initial);
-    }
+//        ArrayList<Boolean> endList = new ArrayList<>();
+//        endList.add(false);
+//        endList.add(true);
+//        map.put(end, endList);
+//    }
+
+//    public void setMap(TilePosition tile, ArrayList<Boolean>) {
+//        map.put()
+//    }
 
 
     

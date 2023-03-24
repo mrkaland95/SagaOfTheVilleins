@@ -25,7 +25,7 @@ public class TestForBasemonster {
         float expectedPositionX = 10f;
         float expectedPositionY = 10f;
         Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
-        testMonster.setDestinationPosition(expectedResult);
+        testMonster.setEndPosition(expectedResult);
         Vector2 result = testMonster.getCurrentPosition();
         assertEquals(expectedResult, result);
     }
@@ -36,8 +36,8 @@ public class TestForBasemonster {
         CharacterAnimationController animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5);
         Vector2 expectedDestination = new Vector2(10f, 10f);
-        testMonster.setDestinationPosition(expectedDestination);
-        Vector2 result = testMonster.getDestinationPosition();
+        testMonster.setEndPosition(expectedDestination);
+        Vector2 result = testMonster.getEndPosition();
         assertEquals(expectedDestination, result);
     }
 
@@ -47,8 +47,8 @@ public class TestForBasemonster {
         CharacterAnimationController animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5);
         Vector2 expectedDestination = new Vector2(10f, 10f);
-        testMonster.setDestinationPosition(expectedDestination);
-        Vector2 result = testMonster.getDestinationPosition();
+        testMonster.setEndPosition(expectedDestination);
+        Vector2 result = testMonster.getEndPosition();
         assertEquals(expectedDestination, result);
     }
 

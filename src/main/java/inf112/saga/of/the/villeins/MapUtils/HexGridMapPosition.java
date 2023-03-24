@@ -2,9 +2,6 @@ package inf112.saga.of.the.villeins.MapUtils;
 
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class HexGridMapPosition {
     Vector2 worldCoordinate;
@@ -14,18 +11,17 @@ public class HexGridMapPosition {
 
     /**
      * Function for calculating the world coordinate of a hexagon tile, given its position in the tilemap.
-     * @param gridX x position in the tilemap
-     * @param gridY y position in the tilemap
+     * @param tilePosition A position representing a tile in the map.
 //     * @param hexagonDimension the dimensions of a hexagon tile, i.e. it's width and height.
      * @return Vector2 carrying the world coordinate of a hex tile.
      */
-    public static Vector2 calculateWorldCoordinateFromHexGrid(int gridX, int gridY) {
-        double doubleX = gridX;
-        double doubleY = gridY;
+    public static Vector2 calculateVectorCoordinate(TilePosition tilePosition) {
+        double doubleX = tilePosition.x();
+        double doubleY = tilePosition.y();
         double x = 0.0;
         double y = 0.0;
       
-        if(gridY % 2 == 0){
+        if(tilePosition.y() % 2 == 0){
             x = hexagonDimension/2 + hexagonDimension*doubleX;
             y = hexagonDimension/2 + hexagonDimension/4*3*doubleY;
         }
@@ -76,10 +72,5 @@ public class HexGridMapPosition {
             }
         }
         return new TilePosition((int) hexTileX, (int) hexTileY);
-    }
-
-
-    public Vector2 getHexPosition() {
-        return worldCoordinate;
     }
 }
