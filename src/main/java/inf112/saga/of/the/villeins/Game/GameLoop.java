@@ -47,7 +47,7 @@ public class GameLoop implements Screen {
 		String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
-		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
+		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMapUpdated.tmx");
 		
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
