@@ -2,6 +2,7 @@ package inf112.saga.of.the.villeins.Movement;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.IMovable2D;
+import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class TileMovement {
     private List<TilePosition> pathToMove;
     private int pathIndex;
-    private IMovable2D character;
+    private final IMovable2D character;
 
     public TileMovement(IMovable2D character) {
         this.character = character;
@@ -28,6 +29,7 @@ public class TileMovement {
             if (character.isMoving()) {
                 // Set isMoving to false when character reaches the final tile
                 character.setMoving(false);
+                GameLoop.infoMap.onMove(this.pathToMove.get(0), this.pathToMove.get(pathToMove.size() - 1));
             }
             return;
         }
@@ -38,18 +40,18 @@ public class TileMovement {
         }
 
         TilePosition currentTile = pathToMove.get(pathIndex);
-        Vector2 destinationPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(currentTile.x(), currentTile.y());
+        Vector2 destinationPosition = HexGridMapPosition.calculateVectorCoordinate(currentTile);
 
-        if (character.getDestinationPosition() == null) {
-            character.setDestinationPosition(destinationPosition);
+        if (character.getEndPosition() == null) {
+            character.setEndPosition(destinationPosition);
         }
 
-        Vector2 newPosition = MovementUtils.moveToPosition(character.getCurrentPosition(), character.getDestinationPosition(), deltaTime, character.getMoveSpeed());
+        Vector2 newPosition = MovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), character.getEndPosition(), deltaTime, character.getMoveSpeed());
         character.setCurrentPosition(newPosition);
 
         if (newPosition.equals(destinationPosition)) {
             pathIndex++;
-            character.setDestinationPosition(null);
+            character.setEndPosition(null);
         }
     }
 }

@@ -15,11 +15,9 @@ import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GameLoop implements Screen {
@@ -35,8 +33,8 @@ public class GameLoop implements Screen {
 	private OrthographicCamera camera;
 	private GameController GameController;
 	private final List<ICharacter> characterList = new ArrayList<>();
-	public static Imap infoMap; // crashes with lower vlaues we should investiagtes
-	List<TilePosition> pathToMove;
+	public static Imap infoMap;
+
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 
@@ -48,29 +46,17 @@ public class GameLoop implements Screen {
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
-
+		infoMap = new Imap(20, 20);
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
 
 		shapeRenderer = new ShapeRenderer();
 
-		GameLoop.infoMap = new Imap(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
-
-
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
-		ArrayList<Boolean> temp = new ArrayList<>();
-		temp.add(false);
-		temp.add(false);
-		infoMap.map.put(slimeTile, temp);
-
-		TilePosition playerDestination = new TilePosition(4, 8);
-
-		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
-		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
-
-
+		Vector2 playerPosition = HexGridMapPosition.calculateVectorCoordinate(playerTile);
+		Vector2 slimePosition = HexGridMapPosition.calculateVectorCoordinate(slimeTile);
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, shapeRenderer, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);
@@ -81,6 +67,9 @@ public class GameLoop implements Screen {
 
 		characterList.add(player);
 		characterList.add(slime);
+
+		//int height = map.getProperties().get("height", Integer.class);
+		//int width = map.getProperties().get("width", Integer.class);
 
 		GameController = new GameController(characterList, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
@@ -93,7 +82,6 @@ public class GameLoop implements Screen {
 		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
 
-		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
 	}
 
 
@@ -117,8 +105,6 @@ public class GameLoop implements Screen {
 		for (ICharacter character : characterList) {
 			character.update();
 		}
-//		spriteBatch.end();
-
 	}
 	
 	@Override
