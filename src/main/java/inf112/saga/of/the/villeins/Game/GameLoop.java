@@ -15,7 +15,6 @@ import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class GameLoop implements Screen {
 	private OrthographicCamera camera;
 	private GameController GameController;
 	private final List<ICharacter> characterList = new ArrayList<>();
-	public static Imap infoMap; // crashes with lower vlaues we should investiagtes
-	List<TilePosition> pathToMove;
+	public static Imap infoMap;
+
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
 
@@ -48,19 +47,14 @@ public class GameLoop implements Screen {
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
-		
+		infoMap = new Imap(20, 20);
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
 
 		shapeRenderer = new ShapeRenderer();
 
-
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
-
-		AStarPathfinder.initializePlayerPositions(characterList);
-
-		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
@@ -89,7 +83,6 @@ public class GameLoop implements Screen {
 		camera.translate(playerPosition.x, playerPosition.y, 0f);
 		camera.zoom = 1.5f;
 
-		pathToMove = AStarPathfinder.findPath(playerTile, playerDestination);
 	}
 
 
@@ -113,8 +106,6 @@ public class GameLoop implements Screen {
 		for (ICharacter character : characterList) {
 			character.update();
 		}
-//		spriteBatch.end();
-
 	}
 	
 	@Override

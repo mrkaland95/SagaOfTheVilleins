@@ -3,6 +3,8 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
@@ -54,7 +56,7 @@ public class BaseMonster implements ICharacter {
         if (clickedDestination == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
         TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile, GameLoop.infoMap);
         pathToMove.remove(pathToMove.size()-1); // Life hack
         tileMovement.setPath(pathToMove);
     }

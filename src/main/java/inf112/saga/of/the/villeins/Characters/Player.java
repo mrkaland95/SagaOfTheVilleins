@@ -3,6 +3,8 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
@@ -48,7 +50,6 @@ public class Player implements ICharacter {
         this.animationController.render(this);
         calculatePathToMove(clickedPosition);
         this.tileMovement.move(deltaTime);
-
     }
 
 
@@ -56,7 +57,7 @@ public class Player implements ICharacter {
         if (clickedDestination == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
         TilePosition clickedTile = HexGridMapPosition.findHexTile(clickedPosition);
-        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile);
+        pathToMove = AStarPathfinder.findPath(currentTile, clickedTile, GameLoop.infoMap);
         tileMovement.setPath(pathToMove);
     }
 

@@ -17,7 +17,7 @@ public class SagaOfTheVilleinsGame extends Game {
         font = new BitmapFont();
 
         // Uncomment this to when testing the main menu
-        // setScreen(new MainMenuScreen(this));
+//         setScreen(new MainMenuScreen(this));
 
         // Uncomment/Comment this when testing other screens.
         setScreen(new GameLoop(this));

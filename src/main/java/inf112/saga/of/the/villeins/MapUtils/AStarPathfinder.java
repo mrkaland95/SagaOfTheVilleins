@@ -9,8 +9,6 @@ public class AStarPathfinder {
 
     // List of tiles that are blocked by a character, tiles where movement is disallowed etc.
     List<TilePosition> blockedTiles = new ArrayList<>();
-    static Imap Imap = new Imap(20, 20);
-
     public AStarPathfinder(TilePosition a, TilePosition b, TilePosition c) {
         // Used for testing purposes.
         this.blockedTiles.add(a);
@@ -23,7 +21,7 @@ public class AStarPathfinder {
 //        frontier.add(startPosition);
 
 
-    public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end) {
+    public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, Imap infomap) {
 
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(Node::getF));
         HashSet<Node> closed = new HashSet<>();
@@ -35,7 +33,7 @@ public class AStarPathfinder {
                 return getPath(current);
             }
             closed.add(current);
-            for (TilePosition neighbor : getNeighbors(current.position)) {
+            for (TilePosition neighbor : getNeighbors(current.position, infomap)) {
                 Node neighborNode = new Node(neighbor, current, current.g + 1, heuristic(neighbor, end));
 
                 if (closed.contains(neighborNode)) {
@@ -68,54 +66,41 @@ public class AStarPathfinder {
         return path;
     }
 
-    private static ArrayList<TilePosition> getNeighbors(TilePosition position) {
-    ArrayList<TilePosition> neighbors = new ArrayList<>();
-    ArrayList<TilePosition> tempneighbors = new ArrayList<>();
-    int x = position.x();
-    int y = position.y();
-    if(y % 2 != 0){
-        tempneighbors.add(new TilePosition(x+1, y-1));
-        tempneighbors.add(new TilePosition(x+1, y));
-        tempneighbors.add(new TilePosition(x+1, y+1));
-        tempneighbors.add(new TilePosition(x, y+1));
-        tempneighbors.add(new TilePosition(x-1, y));
-        tempneighbors.add(new TilePosition(x, y-1));
+    private static ArrayList<TilePosition> getNeighbors(TilePosition position, Imap Imap) {
+        // implementation of getNeighbors method depends on your specific grid structure
+        // for a hexagonal grid, this could involve checking the six neighboring tiles
+        // around the current position and returning any that are valid for movement
 
-    }
-    else{
-        tempneighbors.add(new TilePosition(x-1, y+1));
-        tempneighbors.add(new TilePosition(x, y+1));
-        tempneighbors.add(new TilePosition(x+1, y));
-        tempneighbors.add(new TilePosition(x, y-1));
-        tempneighbors.add(new TilePosition(x-1, y-1));
-        tempneighbors.add(new TilePosition(x-1, y));
-    }
-
-    //makes sure that th charcther dosnt move over illgal tiles 
-    for (TilePosition maybeTilePosition : tempneighbors) {
-        if(Imap.map.get(maybeTilePosition)!= null){
-            if(Imap.movable(maybeTilePosition) == true){
-                neighbors.add(maybeTilePosition);
-            }
+        ArrayList<TilePosition> neighbors = new ArrayList<>();
+        ArrayList<TilePosition> tempneighbors = new ArrayList<>();
+        int x = position.x();
+        int y = position.y();
+        if(y % 2 != 0) {
+            tempneighbors.add(new TilePosition(x+1, y-1));
+            tempneighbors.add(new TilePosition(x+1, y));
+            tempneighbors.add(new TilePosition(x+1, y+1));
+            tempneighbors.add(new TilePosition(x, y+1));
+            tempneighbors.add(new TilePosition(x-1, y));
+            tempneighbors.add(new TilePosition(x, y-1));
+        }
+        else {
+            tempneighbors.add(new TilePosition(x-1, y+1));
+            tempneighbors.add(new TilePosition(x, y+1));
+            tempneighbors.add(new TilePosition(x+1, y));
+            tempneighbors.add(new TilePosition(x, y-1));
+            tempneighbors.add(new TilePosition(x-1, y-1));
+            tempneighbors.add(new TilePosition(x-1, y));
         }
 
-    }
-
-  
-    
-
-    // implementation of getNeighbors method depends on your specific grid structure
-    // for a hexagonal grid, this could involve checking the six neighboring tiles
-    // around the current position and returning any that are valid for movement
+        // Checks if a Tile is blocked by it's type
+        for (TilePosition maybeTilePosition : tempneighbors) {
+            if(Imap.map.get(maybeTilePosition)!= null){
+                if(Imap.movable(maybeTilePosition) == true){
+                    neighbors.add(maybeTilePosition);
+                }
+            }
+        }
     return neighbors;
-    }
-
-    public static void initializePlayerPositions(List<ICharacter> charList){
-        TilePosition playerTile = new TilePosition(1, 4);
-		TilePosition slimeTile = new TilePosition(1, 6);
-
-		Imap.InitialSet(slimeTile);
-        Imap.InitialSet(playerTile);
     }
 
     private static int heuristic(TilePosition current, TilePosition end) {
