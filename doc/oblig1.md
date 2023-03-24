@@ -112,27 +112,24 @@ Krav til MVP
 
 Brukerhistorier
 
-
 Spillers perspektiv
-1. Som spiller trenger en å forstå hvilket type spill det er ved å se på det for å kunne avgjøre interesse
-2. Som spiller trenger en å intuivit forstå hvilken spillfigur det er mulig å styre for å kunne iteragere i spillet
-3. Som spiller trenger en å forstå hvor det er mulig å forflytte spillfiguren, samt hvor det ikke er det, for å kunne interagere i spillet
-4. Som spiller trenger en å vite hvordan en forflytter spillfiguren for å kunne interagere i spillet
-5. Som spiller trenger en å vite hvordan en styrer kameraet, slik at en kan orientere seg på skjermen
-6. Som spiller trenger en å bli presentert egen og motstander(nes) health slik at en har en oversikt over spillets gang og kan ta strategiske valg videre
-7. Som spiller trenger en å bli presentert for konsekvensen av ulike handlinger, slik at en skal kunne ta strategiske valg
-8. Som spiller trenger en å kunne avslutte spillet og lukke det, slik at en ikke blir låst inne
+1. Som spiller ønsker jeg å forstå hvilket type spill det er (ved å se på det), slik at jeg kan avgjøre interesse
+2. Som spiller ønsker jeg å intuivit forstå hvilken spillfigur det er mulig å styre, slik at jeg kan iteragere i spillet
+3. Som spiller ønsker jeg å forstå hvor det er mulig å forflytte spillfiguren, samt hvor det ikke er det, slik at jeg lykkes med å interagere i spillet
+4. Som spiller ønsker jeg å vite hvordan jeg forflytter spillfiguren, slik at jeg kan interagere i spillet
+5. Som spiller ønsker jeg å vite hvordan en styrer kameraet, slik at jeg kan orientere meg på skjermen
+6. Som spiller ønsker jeg å bli presentert egen og motstander(nes) health, slik at jeg har en oversikt over spillets gang og kan ta strategiske valg videre
+7. Som spiller ønsker jeg å bli presentert for konsekvensen av ulike handlinger, slik at jeg skal kunne ta strategiske valg
+8. Som spiller ønsker jeg å kunne avslutte spillet og lukke det, slik at jeg ikke blir låst inne
+9. Som spiller ønsker jeg å kunne velge når spillet starter, slik at jeg er forberedt.
+10. Som spiller ønsker jeg å kunne vite spillereglene før spillet starter, slik at jeg kan ta informerte valg
+
+Løsningsbeskrivelse
 
 
-Programmerers perspektiv
-1. Som programmerer trenger en å vite plasseringen til spillfiguren slik at en kan avgjøre hvilke handlinger som er gjennomførbare
-2. Som programmerer trenger en lett leslig kode for å kunne forstå inneholdet, spesielt også ved behov for små justeringer og ytterligere endringer
-3. Som programmerer trenger en å ta i bruk objektorienterte prinsipper for å oppnå god kode og struktur
-4. Som programmerer trenger en å ha et systematisk system i form av koordinater eller lignende for å kunne avgjøre posisjonering av figurer i henhold til tiles og kartet mer generelt
-5. Som programmerer trenger en at parameterene som påvirkes på tvers av karakterene lagres ned slik at handlingene forblir avhengige av hverandre
-6. Som programmerer trenger en at mapper og filer har intuitive navn og plasseringer slik at en kan få oversikt, samt orientere seg til ønsket sted
-7. Som programmerer trenger en en liste som holder kontroll på hvilken karakter som skal handle, for at riktig karakter skal handle på riktig tidspunkt
-
+Akseptasekriterier
+Gitt at , så skal 
+1. 
 
 
 A5 - oppsummering

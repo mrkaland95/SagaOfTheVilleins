@@ -10,9 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.Game.Imap;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class GameController {
 
@@ -67,6 +69,8 @@ public class GameController {
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
             currentCharacter.setDestinationPosition(playerCharacter.getCurrentPosition());
+            Vector2 destinationPosition = playerCharacter.getPosition();
+            currentCharacter.setDestination(destinationPosition);
         }
     }
 
@@ -94,7 +98,7 @@ public class GameController {
         initialGetPlayer();
         nextTurn();
     }
-    
+
     private void initializeProcessors(OrthographicCamera camera){
         IInputProcessor player = new ActivePlayerProcessor(camera);
         IInputProcessor notPlayer = new InactivePlayerProcessor(camera);

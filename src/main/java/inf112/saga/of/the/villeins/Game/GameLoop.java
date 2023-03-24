@@ -48,29 +48,22 @@ public class GameLoop implements Screen {
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
-
+		
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
 
 		shapeRenderer = new ShapeRenderer();
 
-		GameLoop.infoMap = new Imap(map.getProperties().get("width", Integer.class), map.getProperties().get("height", Integer.class));
-
 
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
-		ArrayList<Boolean> temp = new ArrayList<>();
-		temp.add(false);
-		temp.add(false);
-		infoMap.map.put(slimeTile, temp);
+		AStarPathfinder.initializePlayerPositions(characterList);
 
 		TilePosition playerDestination = new TilePosition(4, 8);
 
 		Vector2 playerPosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(playerTile.x(), playerTile.y());
 		Vector2 slimePosition = HexGridMapPosition.calculateWorldCoordinateFromHexGrid(slimeTile.x(), slimeTile.y());
-
-
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, shapeRenderer, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);
@@ -81,6 +74,9 @@ public class GameLoop implements Screen {
 
 		characterList.add(player);
 		characterList.add(slime);
+
+		//int height = map.getProperties().get("height", Integer.class);
+		//int width = map.getProperties().get("width", Integer.class);
 
 		GameController = new GameController(characterList, camera);
 		renderer = new HexagonalTiledMapRenderer(map);
