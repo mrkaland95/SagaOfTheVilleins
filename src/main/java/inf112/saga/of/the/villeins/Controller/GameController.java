@@ -69,8 +69,8 @@ public class GameController {
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
             currentCharacter.setDestinationPosition(playerCharacter.getCurrentPosition());
-            Vector2 destinationPosition = playerCharacter.getPosition();
-            currentCharacter.setDestination(destinationPosition);
+            Vector2 destinationPosition = playerCharacter.getCurrentPosition();
+            currentCharacter.setDestinationPosition(destinationPosition);
         }
     }
 

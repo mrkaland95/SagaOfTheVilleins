@@ -21,7 +21,7 @@ import inf112.saga.of.the.villeins.Game.GameLoop;
 public class MainMenuScreen implements Screen {
     private SagaOfTheVilleinsGame game;
     private Stage stage;
-    private Texture menuBackground;
+    private final Texture menuBackground;
     private Sprite sprite;
     private Camera camera;
 

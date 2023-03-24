@@ -203,3 +203,16 @@ Torsdag 23/03-23
   Steffen: se på attack funksjon og health bar
 * Jobbet med dokumentasjon
 * Utbedre brukerhistorier og akseptansekrivterier
+
+Torsdag 23/03-23
+* Fordelt arbeidsoppgaver for veien videre
+  Leon: utvide grafikk for tiles
+  Malene: utbedre/utvide hva testene dekker, samt fullføre påbegynte, lage monster og skrive på akseptansekriterier
+  Markus: se på turbased 
+  Steffen: se på attack funksjon og health bar
+* Jobbet med dokumentasjon
+* Utbedre brukerhistorier og akseptansekrivterier
+
+Fredag 23/03-23
+* Leon - Jobbet med animasjoner.
+* Steffen - faktorisert mye av "tile" bevegelsen ut til egen klasse.
