@@ -52,28 +52,17 @@ public class TestForBasemonster {
         assertEquals(expectedDestination, result);
     }
 
-//    @Test
-//    public void testMoveToPosition(){
-//        Vector2 startingPosition = new Vector2(0f, 0f);
-//        BaseMonster testMonster = new BaseMonster(startingPosition, null, 0, 0, 0);
-//        Vector2 destination = new Vector2(10f, 10f);
-//        testMonster.setDestinationPosition(destination);
-//
-//        float time = 0.06f;
-//        long timeElapsed = 0;
-//        while (timeElapsed < 1000) {
-//        testMonster.moveToPosition(destination, time);
-//        timeElapsed += 100;
-//        }
-//
-//        assertFalse(testMonster.isMoving());
-//        while (timeElapsed < 2000) {
-//        testMonster.moveToPosition(destination, time);
-//        timeElapsed += 100;
-//
-//        assertFalse(testMonster.isMoving());
-//        assertEquals(destination, testMonster.getPosition());
-//
+    @Test
+    public void testMoveToPosition(){
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        BaseMonster testMonster = new BaseMonster(startingPosition, null, 0, 0, 0);
+        Vector2 destination = new Vector2(10f, 10f);
+        float time = 0.06f;
+        testMonster.setEndPosition(destination);
+        testMonster.setMoveSpeed(time);
+       assertFalse(testMonster.isMoving());
+       assertEquals(destination, testMonster.getEndPosition());
+    }
 
     @Test
     public void testGetCurrentHealth(){

@@ -128,8 +128,11 @@ Løsningsbeskrivelse
 
 
 Akseptasekriterier
-Gitt at , så skal 
-1. 
+1. Gitt at jeg har åpnet spillet, så skal jeg kunne se om det er et spill jeg ønsker å spille
+2. Gitt at jeg har åpnet spillet, så skal jeg kunne finne informasjon på hva spillet innebærer
+3. Gitt at jeg har åpnet spillet, så skal jeg kunne starte spillet
+4. Gitt at jeg har startet spillet, så skal jeg kunne se avslutte det når jeg ønsker
+5. Gitt at jeg har startet spillet, så skal jeg 
 
 
 A5 - oppsummering
