@@ -102,12 +102,26 @@ public class TestForPlayer {
         Vector2 initialPosition = new Vector2(0, 0);
         Player testplayer1 = new Player(initialPosition, null,  10, 0, 0);
         Player testplayer2 = new Player(initialPosition, null,  10, 0, 0);
-        int expectedHealth = 5;
-        int damage = 5;
-        testplayer1.applyDamage(damage, testplayer2);
-        int result = testplayer2.getCurrentHealth();
-        assertEquals(expectedHealth, result);
-    }
-    
+       
+        // innenfor
+        int damage1 = 5;
+        int expectedHealth1 = 5;
+        testplayer1.applyDamage(damage1, testplayer2);
+        int result1 = testplayer2.getCurrentHealth();
+        assertEquals(expectedHealth1, result1);
+        
+        // mer enn
+        int damage2 = 15;
+        int expectedHealth2 = 0;
+        testplayer1.applyDamage(damage2, testplayer2);
+        int result2 = testplayer2.getCurrentHealth();
+        assertEquals(expectedHealth2, result2);
 
-}
+        // Negativ damage - får ikke til å fungere, tror ikke ApplyDamage hånterer det
+        // int damage3 = -5;
+        // int expectedHealth3 = 10;
+        // testplayer1.applyDamage(damage3, testplayer2);
+        // int result3 = testplayer2.getCurrentHealth();
+        // assertEquals(expectedHealth3, result3);
+     }
+ }
