@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 
+import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Game.GameLoop;
@@ -28,8 +29,8 @@ public class GameController {
 
     public GameController(List<ICharacter> characterList, OrthographicCamera camera){
         this.characterList = characterList;
-        this.turnList = new LinkedList<ICharacter>();
-        this.processorList = new HashMap<String, IInputProcessor>();
+        this.turnList = new LinkedList<>();
+        this.processorList = new HashMap<>();
         this.currentProcessor = null;
         this.playerCharacter = null;
         this.currentCharacter = null;
@@ -49,20 +50,14 @@ public class GameController {
          */
         
         if(currentCharacter instanceof Player) {
-//            if (!currentCharacter.isMoving()) {
-//
-//            }
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
             if (attackPosition != null) {
                 currentCharacter.attack(attackPosition);
             }
-
-            else if (movePosition != null) {
+            else if (movePosition != null && currentCharacter.getCharacterState() == CharacterState.IDLE) {
                 currentCharacter.setEndPosition(movePosition);
             }
-
-
 
             // Update the IMap with player positions here.
 
