@@ -13,11 +13,6 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
  * Class for handling the animation of characters, separate from the character objects.
  */
 public class CharacterAnimationController {
-    enum Animations {
-        IDLE,
-        MOVING,
-        ATTACKING
-    }
     enum AnimationDirections {
 
     }
@@ -68,6 +63,7 @@ public class CharacterAnimationController {
     }
 
     private void drawHealthbar(TextureRegion sprite, ICharacter character, ShapeRenderer renderer) {
+        // TODO Dette burde antageligvis flyttes ut til "GameUI" klassen eller noe sånt.
 
         float characterWidth = sprite.getRegionWidth();
         float characterHeight = sprite.getRegionHeight() / 2f;

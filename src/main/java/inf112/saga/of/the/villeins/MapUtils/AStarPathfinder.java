@@ -12,7 +12,7 @@ public class AStarPathfinder {
      *
      * @param start Starting tile
      * @param end Destination Tile
-     * @param infomap
+     * @param infomap Class containing information about blocked tile.
      * @return An Arraylist of TilePosition objects, representing the shortest possible path to a destination tile.
      */
     public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, Imap infomap) {

@@ -8,6 +8,7 @@ package inf112.saga.of.the.villeins.Utils;
 
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
@@ -29,7 +30,8 @@ public class AttackUtils {
 
         if (opponent == null) return false;
         if (this.character.equals(opponent)) return false;
-        if(!characterInRange(this.character, opponent, this.attackRange)) return false; // If the current character is not in range, don't attack.
+        if (!(this.character.getCharacterState() == CharacterState.IDLE)) return false; // Kan kun angripe hvis karakteren er idle.
+        if (!characterInRange(this.character, opponent, this.attackRange)) return false; // If the current character is not in range, don't attack.
 
         // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
 //        int damage = opponent.getDefense() / 2 - this.character.getStrength();
