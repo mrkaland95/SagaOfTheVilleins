@@ -1,8 +1,8 @@
 package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.IMovable2D;
-import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -26,17 +26,17 @@ public class TileMovement {
 
     public void move(float deltaTime) {
         if (pathToMove == null || pathIndex >= pathToMove.size()) {
-            if (character.isMoving()) {
+            if (character.getCharacterState() == CharacterState.MOVING) {
                 // Set isMoving to false when character reaches the final tile
-                character.setMoving(false);
+                character.setCharacterState(CharacterState.IDLE);
 //                GameLoop.infoMap.onMove(this.pathToMove.get(0), this.pathToMove.get(pathToMove.size() - 1));
             }
             return;
         }
 
-        if (!character.isMoving()) {
+        if (!(character.getCharacterState() == CharacterState.MOVING)) {
             // Set isMoving to true when character starts moving along the array of tiles
-            character.setMoving(true);
+            character.setCharacterState(CharacterState.MOVING);
         }
 
         TilePosition nextTilePosition = pathToMove.get(pathIndex);

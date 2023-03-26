@@ -64,7 +64,7 @@ public class GameLoop implements Screen {
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, shapeRenderer, 1, 4);
 		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);
 
-		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4);
+		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4, 1);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
 		player.setHealth(10);
 

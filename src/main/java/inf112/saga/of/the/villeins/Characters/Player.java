@@ -21,19 +21,21 @@ public class Player implements ICharacter {
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
     private int score;
-    private boolean moving;
     Vector2 currentPosition;
     Vector2 endPosition;
     List<TilePosition> pathToMove;
     TileMovement tileMovement;
     CharacterAnimationController animationController;
     AttackUtils attackUtils;
+    CharacterState characterState;
 
     public Player(Vector2 startingPosition,
                   CharacterAnimationController animationController,
                   int maxHealth,
                   int strength,
                   int defense) {
+        // TODO legg til "AttackRange" som en parameter.
+
         this.currentPosition = startingPosition;
         this.animationController = animationController;
         this.maxHealth = maxHealth;
@@ -42,6 +44,7 @@ public class Player implements ICharacter {
         this.defense = defense;
         this.tileMovement = new TileMovement(this);
         this.attackUtils = new AttackUtils(this, 1);
+        this.characterState = CharacterState.IDLE;
     }
 
 
@@ -65,13 +68,13 @@ public class Player implements ICharacter {
 
 
     @Override
-    public boolean isMoving() {
-        return this.moving;
+    public CharacterState getCharacterState() {
+        return this.characterState;
     }
 
     @Override
-    public void setMoving(boolean moving) {
-        this.moving = moving;
+    public void setCharacterState(CharacterState characterState) {
+        this.characterState = characterState;
     }
 
     @Override

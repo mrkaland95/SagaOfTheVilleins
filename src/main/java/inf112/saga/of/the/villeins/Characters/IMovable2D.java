@@ -19,11 +19,14 @@ public interface IMovable2D {
      * @return Vector2 of character's destination.
      */
     Vector2 getEndPosition();
+
     /**
-     * @return Whether the object is moving or not.
+     * Henter "tilstanden" til en karakter. F.eks om den ikke gjør noe("Idle")
+     * Beveger seg osv.
+     * @return
      */
-    boolean isMoving();
-    void setMoving(boolean moving);
+    CharacterState getCharacterState();
+    void setCharacterState(CharacterState characterState);
     float getMoveSpeed();
     void setMoveSpeed(float moveSpeed);
 

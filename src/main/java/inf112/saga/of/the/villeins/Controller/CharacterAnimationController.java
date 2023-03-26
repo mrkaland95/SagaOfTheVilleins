@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 
-import java.awt.*;
-
 /**
  * Class for handling the animation of characters, separate from the character objects.
  */
@@ -119,8 +117,13 @@ public class CharacterAnimationController {
      * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
      */
     public void render(ICharacter character) {
-        if (character.isMoving()) activeAnimation = walkAnimation;
-        else                      activeAnimation = idleAnimation;
+
+        switch(character.getCharacterState()) {
+            case IDLE   -> activeAnimation = idleAnimation;
+            case MOVING -> activeAnimation = walkAnimation;
+            case ATTACK -> activeAnimation = idleAnimation; // TODO endre dette når attack animasjon er laget.
+            default     -> activeAnimation = idleAnimation;
+        }
 
         float deltaTime = Gdx.graphics.getDeltaTime();
 

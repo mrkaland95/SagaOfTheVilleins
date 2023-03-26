@@ -20,10 +20,10 @@ public class BaseMonster implements ICharacter {
     private int strength;
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
-    private boolean moving;
     Vector2 currentPosition;
     Vector2 endPosition;
     List<TilePosition> pathToMove;
+    private CharacterState characterState;
     private final TileMovement tileMovement;
     private final AttackUtils attackUtils;
 
@@ -32,7 +32,9 @@ public class BaseMonster implements ICharacter {
                        CharacterAnimationController animationController,
                        int maxHealth,
                        int strength,
-                       int defense) {
+                       int defense,
+                       int attackRange) {
+
         this.currentPosition = startPosition;
         this.animationController = animationController;
         this.maxHealth = maxHealth;
@@ -40,22 +42,26 @@ public class BaseMonster implements ICharacter {
         this.strength = strength;
         this.defense = defense;
         this.tileMovement = new TileMovement(this);
-        this.attackUtils = new AttackUtils(this, 1);
+        this.attackUtils = new AttackUtils(this, attackRange);
+        this.characterState = CharacterState.IDLE;
+
     }
 
     public BaseMonster(TilePosition startingTile,
                        CharacterAnimationController animationController,
                        int maxHealth,
                        int strength,
-                       int defense, AttackUtils attackUtils) {
+                       int defense,
+                       int attackRange) {
         this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingTile);
         this.animationController = animationController;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
-        this.attackUtils = attackUtils;
+        this.attackUtils = new AttackUtils(this, attackRange);
         this.tileMovement = new TileMovement(this);
+        this.characterState = CharacterState.IDLE;
     }
 
 
@@ -64,21 +70,21 @@ public class BaseMonster implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this);
-        calculatePathToMove(this.endPosition);
+        this.calculatePathToMove();
         this.tileMovement.move(deltaTime);
     }
 
 
 
-    void calculatePathToMove(Vector2 endGoal) {
-        if (this.moving) return;
-        if (endGoal == null) return;
+    void calculatePathToMove() {
+        if (this.characterState == CharacterState.MOVING) return;
+        if (this.endPosition == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-        TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
-        pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
-        System.out.println(pathToMove);
+        TilePosition finalTile = HexGridMapPosition.findHexTile(endPosition);
+        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
 //        pathToMove.remove(pathToMove.size() - 1); // Life hack
-        tileMovement.setPath(pathToMove);
+        this.tileMovement.setPath(pathToMove);
+        this.endPosition = null;
     }
 
 
@@ -115,13 +121,13 @@ public class BaseMonster implements ICharacter {
         return endPosition;
     }
     @Override
-    public boolean isMoving() {
-        return this.moving;
+    public CharacterState getCharacterState() {
+        return this.characterState;
     }
 
     @Override
-    public void setMoving(boolean moving) {
-        this.moving = moving;
+    public void setCharacterState(CharacterState characterState) {
+        this.characterState = characterState;
     }
 
     @Override
@@ -177,5 +183,4 @@ public class BaseMonster implements ICharacter {
     public Boolean attack(Vector2 CoordinateToAttack) {
         return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
     }
-
 }
