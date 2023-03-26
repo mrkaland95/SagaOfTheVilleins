@@ -15,12 +15,12 @@ import java.util.List;
 
 public class Player implements ICharacter {
     private String name;
+    private int score;
     private final int maxHealth;
     private int currentHealth;
     private int strength;
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
-    private int score;
     Vector2 currentPosition;
     Vector2 endPosition;
     List<TilePosition> pathToMove;
@@ -51,7 +51,7 @@ public class Player implements ICharacter {
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        this.animationController.render(this);
+        this.animationController.render(this, deltaTime);
         calculatePathToMove(endPosition);
         this.tileMovement.move(deltaTime);
     }

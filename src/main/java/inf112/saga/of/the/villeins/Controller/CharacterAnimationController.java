@@ -2,6 +2,7 @@ package inf112.saga.of.the.villeins.Controller;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -62,57 +63,11 @@ public class CharacterAnimationController {
         }
     }
 
-    private void drawHealthbar(TextureRegion sprite, ICharacter character, ShapeRenderer renderer) {
-        // TODO Dette burde antageligvis flyttes ut til "GameUI" klassen eller noe sånt.
-
-        float characterWidth = sprite.getRegionWidth();
-        float characterHeight = sprite.getRegionHeight() / 2f;
-
-        // Gets the size of the bar for "current" health.
-        float currentHealthPercentage = (float) character.getMaxHealth() / character.getCurrentHealth();
-//        float currentHealthBarWidth = totalBarWidth / currentHealthPercentage;
-
-        float totalBarWidth = 40f;
-        float totalBarHeight = 8f;
-
-
-        float healthBarX = character.getCurrentPosition().x - characterWidth;
-        float healthBarY = character.getCurrentPosition().y + characterHeight + 10f;
-
-        // Padding for the background healthbar
-        float paddingX = 1.5f;
-        float paddingY = 1.5f;
-
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        // Background bar/total health bar
-        renderer.setColor(1, 0, 0, 1);
-        renderer.rect(healthBarX, healthBarY, totalBarWidth, totalBarHeight);
-
-        // Current health bar.
-        renderer.setColor(0, 1, 0, 1);
-        renderer.rect(
-                healthBarX + paddingX,
-                healthBarY + paddingY,
-                (characterWidth - 2 * paddingX) / currentHealthPercentage,
-                totalBarHeight - 2 * paddingY);
-        renderer.end();
-
-
-
-//        renderer.begin(ShapeRenderer.ShapeType.Filled);
-//        renderer.setColor(1, 0, 0, 1);
-//        renderer.rect(healthBarX, healthBarY, totalBarWidth, totalBarHeight);
-//        renderer.setColor(0, 1, 0, 1);
-//        renderer.rect(healthBarX + 1, healthBarY + 1, currentHealthBarWidth, totalBarHeight + 5);
-//        renderer.end();
-    }
-
-    /**
+        /**
      * Function responsible for getting and rendering a character's sprite. Needs to be called
      * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
      */
-    public void render(ICharacter character) {
+    public void render(ICharacter character, float deltaTime) {
 
         switch(character.getCharacterState()) {
             case IDLE   -> activeAnimation = idleAnimation;
@@ -121,15 +76,16 @@ public class CharacterAnimationController {
             default     -> activeAnimation = idleAnimation;
         }
 
-        float deltaTime = Gdx.graphics.getDeltaTime();
 
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
         Vector2 spriteRenderPosition = calculateRenderPosition(currentSprite, character);
         spriteBatch.begin();
         spriteBatch.draw(currentSprite, spriteRenderPosition.x, spriteRenderPosition.y);
         spriteBatch.end();
-        drawHealthbar(currentSprite, character, renderer);
+//        drawHealthbar(character, renderer);
     }
+
+
 
     /**
      * Since the draw position renders at the bottom left of the sprite/texture, we need to calculate which world

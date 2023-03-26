@@ -21,8 +21,8 @@ public interface IMovable2D {
     Vector2 getEndPosition();
 
     /**
-     * Henter "tilstanden" til en karakter. F.eks om den ikke gjør noe("Idle")
-     * Beveger seg osv.
+     * Henter "tilstanden" til en karakter. F.eks om den ikke gjør noe("Idle"), går("Moving"), angriper("Attacking") osv.
+     *
      * @return
      */
     CharacterState getCharacterState();

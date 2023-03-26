@@ -14,6 +14,7 @@ import inf112.saga.of.the.villeins.Characters.Slime;
 import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.Controller.GameUI;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -34,6 +35,7 @@ public class GameLoop implements Screen {
 	private GameController GameController;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
+	private GameUI gameUI;
 
 
 	// TODO Make an animation loader class responsible for loading in animations for the characters.
@@ -55,6 +57,8 @@ public class GameLoop implements Screen {
 		spriteBatch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 
+		gameUI = new GameUI(shapeRenderer);
+
 		TilePosition playerTile = new TilePosition(1, 4);
 		TilePosition slimeTile = new TilePosition(1, 6);
 
@@ -66,7 +70,7 @@ public class GameLoop implements Screen {
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4, 1);
 		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
-		player.setHealth(10);
+//		player.setHealth(10);
 
 		characterList.add(player);
 		characterList.add(slime);
@@ -106,6 +110,7 @@ public class GameLoop implements Screen {
 
 		for (ICharacter character : characterList) {
 			character.update();
+			gameUI.drawHealthbar(character);
 		}
 	}
 	

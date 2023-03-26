@@ -69,7 +69,7 @@ public class BaseMonster implements ICharacter {
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        this.animationController.render(this);
+        this.animationController.render(this, deltaTime);
         this.calculatePathToMove();
         this.tileMovement.move(deltaTime);
     }
