@@ -4,9 +4,11 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 
 public interface IInputProcessor extends InputProcessor {
-    public Vector2 getClickCoordinates();
 
-    public boolean checkTurn();
+    Vector2 getLeftClickCoordinates();
+    Vector2 getRightClickCoordinates();
 
-    public void endTurn();
+    boolean checkTurn();
+
+    void endTurn();
 }

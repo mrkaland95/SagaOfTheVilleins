@@ -11,7 +11,8 @@ public class InactivePlayerProcessor implements IInputProcessor {
 	private final Vector3 current = new Vector3();
 	private final Vector3 last = new Vector3();
 	private final Vector3 delta = new Vector3();
-	public Vector2 clickCoordinates = new Vector2();
+	public Vector2 rightClickCoordinates = new Vector2();
+	public Vector2 leftClickCoordinates = new Vector2();
 	public boolean endTurn;
 
     public InactivePlayerProcessor(OrthographicCamera camera){
@@ -71,13 +72,20 @@ public class InactivePlayerProcessor implements IInputProcessor {
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			camera.unproject(cameraCoordinates);
-			clickCoordinates.x = cameraCoordinates.x;
-			clickCoordinates.y = cameraCoordinates.y;
+			rightClickCoordinates.x = cameraCoordinates.x;
+			rightClickCoordinates.y = cameraCoordinates.y;
 			return true;
 		}
-		else {
-			return false;
+
+		else if (button == Input.Buttons.LEFT) {
+			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+			camera.unproject(cameraCoordinates);
+			leftClickCoordinates.x = cameraCoordinates.x;
+			leftClickCoordinates.y = cameraCoordinates.y;
+			return true;
 		}
+
+		return false;
 	}
 
 	@Override
@@ -114,8 +122,13 @@ public class InactivePlayerProcessor implements IInputProcessor {
 		return false;
 	}
 
-	public Vector2 getClickCoordinates() {
-		return this.clickCoordinates;
+	@Override
+	public Vector2 getLeftClickCoordinates() {
+		return this.leftClickCoordinates;
+	}
+
+	public Vector2 getRightClickCoordinates() {
+		return this.rightClickCoordinates;
 	}
 
 	@Override

@@ -10,9 +10,10 @@ public interface IMovable2D {
     void setCurrentPosition(Vector2 position);
 
     /**
-     * @param destination Vector2 representing the destination a character should move to.
+     * Returns a boolean
+     * @param position Vector2 representing the destination a character should move to.
      */
-    void setEndPosition(Vector2 destination);
+    Boolean setEndPosition(Vector2 position);
 
     /**
      * @return Vector2 of character's destination.

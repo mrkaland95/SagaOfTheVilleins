@@ -8,7 +8,8 @@ import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
-import inf112.saga.of.the.villeins.Movement.TileMovement;
+import inf112.saga.of.the.villeins.Utils.AttackUtils;
+import inf112.saga.of.the.villeins.Utils.TileMovement;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class BaseMonster implements ICharacter {
     Vector2 endPosition;
     List<TilePosition> pathToMove;
     private final TileMovement tileMovement;
+    private final AttackUtils attackUtils;
 
 
     public BaseMonster(Vector2 startPosition,
@@ -38,19 +40,21 @@ public class BaseMonster implements ICharacter {
         this.strength = strength;
         this.defense = defense;
         this.tileMovement = new TileMovement(this);
+        this.attackUtils = new AttackUtils(this, 1);
     }
 
     public BaseMonster(TilePosition startingTile,
                        CharacterAnimationController animationController,
                        int maxHealth,
                        int strength,
-                       int defense) {
+                       int defense, AttackUtils attackUtils) {
         this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingTile);
         this.animationController = animationController;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
+        this.attackUtils = attackUtils;
         this.tileMovement = new TileMovement(this);
     }
 
@@ -90,9 +94,21 @@ public class BaseMonster implements ICharacter {
     }
 
     @Override
-    public void setEndPosition(Vector2 endPosition) {
-        this.endPosition = endPosition;
+    public Boolean setEndPosition(Vector2 destinationPosition) {
+        this.endPosition = destinationPosition;
+        return true;
     }
+
+
+//    @Override
+//    public Boolean setEndPosition(Vector2 endPosition) {
+//        if (!this.moving) {
+//            this.endPosition = endPosition;
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     @Override
     public Vector2 getEndPosition() {
@@ -156,4 +172,10 @@ public class BaseMonster implements ICharacter {
         int currentHealth = character.getCurrentHealth() - damage;
         character.setHealth(currentHealth);
     }
+
+    @Override
+    public Boolean attack(Vector2 CoordinateToAttack) {
+        return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
+    }
+
 }

@@ -32,7 +32,7 @@ public class GameLoop implements Screen {
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 	private GameController GameController;
-	private final List<ICharacter> characterList = new ArrayList<>();
+	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
 
 
@@ -41,15 +41,18 @@ public class GameLoop implements Screen {
 
 	public GameLoop(Game game) {
 		this.game = game;
-		spriteBatch = new SpriteBatch();
 		String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
 		String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
 		String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
 		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
+
 		infoMap = new Imap(20, 20);
+
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 		camera.setToOrtho(false);
 
+		spriteBatch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 
 		TilePosition playerTile = new TilePosition(1, 4);
@@ -93,7 +96,6 @@ public class GameLoop implements Screen {
 	@Override
 	public void render (float deltaTime) {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
-//		spriteBatch.begin();
 		camera.update();
 		spriteBatch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);

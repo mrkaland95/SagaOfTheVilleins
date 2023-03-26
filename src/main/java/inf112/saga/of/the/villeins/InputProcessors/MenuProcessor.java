@@ -4,7 +4,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MenuProcessor implements IInputProcessor{
     @Override
-    public Vector2 getClickCoordinates() {
+    public Vector2 getLeftClickCoordinates() {
+        return null;
+    }
+
+    @Override
+    public Vector2 getRightClickCoordinates() {
         return null;
     }
 

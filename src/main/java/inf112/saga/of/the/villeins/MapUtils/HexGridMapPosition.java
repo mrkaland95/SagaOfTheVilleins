@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public class HexGridMapPosition {
-    Vector2 worldCoordinate;
     // TODO this should take in the hexagon dimension as a parameter,
     // so it can be dynamically changed if the hexagon size should ever be changed in the future.
     static double hexagonDimension = 200;

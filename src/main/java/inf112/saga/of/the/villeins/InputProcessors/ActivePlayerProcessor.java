@@ -14,7 +14,7 @@ public class ActivePlayerProcessor implements IInputProcessor {
 	private final Vector3 current = new Vector3();
 	private final Vector3 last = new Vector3(-1, -1, -1);
 	private final Vector3 delta = new Vector3();
-	private Vector2 moveClickCoordinates;
+	private Vector2 rightClickCoordinates;
 	private Vector2 leftClickCoordinates;
 	public boolean endTurn;
 
@@ -23,7 +23,7 @@ public class ActivePlayerProcessor implements IInputProcessor {
     public ActivePlayerProcessor(OrthographicCamera camera){
         this.camera = camera;
 		this.endTurn = false;
-		this.moveClickCoordinates = null;
+		this.rightClickCoordinates = null;
 		this.leftClickCoordinates = null;
     }
 
@@ -81,7 +81,7 @@ public class ActivePlayerProcessor implements IInputProcessor {
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			this.camera.unproject(cameraCoordinates);
-			this.moveClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			this.rightClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		}
 		if (button == Input.Buttons.LEFT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
@@ -131,9 +131,9 @@ public class ActivePlayerProcessor implements IInputProcessor {
 		return false;
 	}
 
-	public Vector2 getClickCoordinates() {
-		Vector2 temp = moveClickCoordinates;
-		moveClickCoordinates = null;
+	public Vector2 getRightClickCoordinates() {
+		Vector2 temp = rightClickCoordinates;
+		rightClickCoordinates = null;
 		return temp;
 	}
 

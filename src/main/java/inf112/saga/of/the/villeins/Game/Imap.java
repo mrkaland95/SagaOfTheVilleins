@@ -1,24 +1,32 @@
 package inf112.saga.of.the.villeins.Game;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
-public class Imap{
+/**
+ * Class intended for storing information about tiles, whether they are movable etc. This makes it simpler to access
+ * Than using the map object directly, because we can use our own TilePosition objects
+ * in addition, our own properties that may not be inherently part of the map object.
+ */
+public class Imap {
     private final HashMap<TilePosition, Boolean> map = new HashMap<>();
+    private final int rows;
+    private final int cols;
+
     public Imap(int rows, int cols){
+        this.rows = rows;
+        this.cols = cols;
         //creates a simple hashmap so we cna get information from diffrent tiles using Tileposition
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 TilePosition temp = new TilePosition(i, j);
-                // they arrylist uses a standardnized setup where index 0 is if tile is movable, 
-                // 1 is wheter or not there is a charachter there
                 map.put(temp, true);
             }
         }
-        System.out.println(map);
     }
     public Boolean isMovable(TilePosition tile){
         return map.get(tile);
@@ -28,13 +36,27 @@ public class Imap{
         this.map.put(tile, moveable);
     }
 
-
-
-
     public void onMove(TilePosition start, TilePosition end){
         map.put(start, true);
         map.put(end, false);
     }
+
+    public void reset(List<ICharacter> characterList) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                TilePosition temp = new TilePosition(i, j);
+                map.put(temp, true);
+            }
+        }
+
+        for (ICharacter character : characterList) {
+            TilePosition characterPosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
+            map.put(characterPosition, false);
+            }
+        }
+
+
+
 
 //        ArrayList<Boolean> endList = new ArrayList<>();
 //        endList.add(false);

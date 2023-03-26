@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.Movement;
+package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
 

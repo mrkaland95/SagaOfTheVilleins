@@ -8,14 +8,14 @@ import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.Movement.TileMovement;
+import inf112.saga.of.the.villeins.Utils.AttackUtils;
+import inf112.saga.of.the.villeins.Utils.TileMovement;
 
 import java.util.List;
 
 public class Player implements ICharacter {
     private String name;
-    CharacterAnimationController animationController;
-    private int maxHealth;
+    private final int maxHealth;
     private int currentHealth;
     private int strength;
     private int defense;
@@ -26,6 +26,8 @@ public class Player implements ICharacter {
     Vector2 endPosition;
     List<TilePosition> pathToMove;
     TileMovement tileMovement;
+    CharacterAnimationController animationController;
+    AttackUtils attackUtils;
 
     public Player(Vector2 startingPosition,
                   CharacterAnimationController animationController,
@@ -39,6 +41,7 @@ public class Player implements ICharacter {
         this.strength = strength;
         this.defense = defense;
         this.tileMovement = new TileMovement(this);
+        this.attackUtils = new AttackUtils(this, 1);
     }
 
 
@@ -55,8 +58,9 @@ public class Player implements ICharacter {
         if (endGoal == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
         TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
-        pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
-        tileMovement.setPath(pathToMove);
+        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
+        this.tileMovement.setPath(pathToMove);
+        this.endPosition = null;
     }
 
 
@@ -80,8 +84,21 @@ public class Player implements ICharacter {
         this.moveSpeed = moveSpeed;
     }
 
-    public void setEndPosition(Vector2 destinationPosition){
-        this.endPosition = destinationPosition;
+
+//    @Override
+//    public Boolean setEndPosition(Vector2 destinationPosition){
+//        if (!this.moving) {
+//            this.endPosition = destinationPosition;
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
+    @Override
+    public Boolean setEndPosition(Vector2 endPosition) {
+        this.endPosition = endPosition;
+        return true;
     }
 
     @Override
@@ -135,7 +152,19 @@ public class Player implements ICharacter {
     }
     @Override
     public void applyDamage(int damage, ICharacter character) {
-        int currentHealth = character.getCurrentHealth() - damage;
-        character.setHealth(currentHealth);
+        int newHealth;
+        if (damage >= character.getCurrentHealth()) {
+            newHealth = 0;
+        } else if (damage < 0) {
+            newHealth = getCurrentHealth();
+        } else {
+            newHealth = character.getCurrentHealth() - damage;
+        }
+        character.setHealth(newHealth);
+    }
+
+    @Override
+    public Boolean attack(Vector2 CoordinateToAttack) {
+        return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
     }
 }

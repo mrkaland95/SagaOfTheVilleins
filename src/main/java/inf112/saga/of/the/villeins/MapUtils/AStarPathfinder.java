@@ -7,14 +7,13 @@ import inf112.saga.of.the.villeins.Game.Imap;
 public class AStarPathfinder {
 
     /**
-     * Class responsible for
+     * Class responsible for finding the shortest possible path along tiles to a given destination tile.
+     * Takes in an "IMap" object, which is responsible for holding information about whether a tile is walkable or not.
      *
-     *
-     *
-     * @param start
-     * @param end
+     * @param start Starting tile
+     * @param end Destination Tile
      * @param infomap
-     * @return
+     * @return An Arraylist of TilePosition objects, representing the shortest possible path to a destination tile.
      */
     public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, Imap infomap) {
 
@@ -61,14 +60,18 @@ public class AStarPathfinder {
     }
 
     private static ArrayList<TilePosition> getNeighbors(TilePosition position, Imap Imap) {
-        // implementation of getNeighbors method depends on your specific grid structure
-        // for a hexagonal grid, this could involve checking the six neighboring tiles
-        // around the current position and returning any that are valid for movement
 
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();
         int x = position.x();
         int y = position.y();
+
+
+        // implementation of getNeighbors method depends on your specific grid structure
+        // for a hexagonal grid, this could involve checking the six neighboring tiles
+        // around the current position and returning any that are valid for movement
+
+
         if(y % 2 != 0) {
             tempneighbors.add(new TilePosition(x+1, y-1));
             tempneighbors.add(new TilePosition(x+1, y));
@@ -86,15 +89,16 @@ public class AStarPathfinder {
             tempneighbors.add(new TilePosition(x-1, y));
         }
 
-        // Checks if a Tile is blocked by it's type
+        // Checks if a Tile can be walked on.
         for (TilePosition maybeTilePosition : tempneighbors) {
 
-            if (Imap.isMovable(maybeTilePosition) != null) {
-                if (Imap.isMovable(maybeTilePosition)) {
-                    neighbors.add(maybeTilePosition);
-                }
+            if (Imap.isMovable(maybeTilePosition) == null) {
+                continue;
             }
-        }
+            if (Imap.isMovable(maybeTilePosition)) {
+                neighbors.add(maybeTilePosition);
+            }
+    }
     return neighbors;
     }
 

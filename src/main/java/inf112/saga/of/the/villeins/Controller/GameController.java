@@ -52,8 +52,16 @@ public class GameController {
 //            if (!currentCharacter.isMoving()) {
 //
 //            }
-            Vector2 clickPosition = currentProcessor.getClickCoordinates();
-            currentCharacter.setEndPosition(clickPosition);
+            Vector2 movePosition = currentProcessor.getRightClickCoordinates();
+            Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
+            if (attackPosition != null) {
+                currentCharacter.attack(attackPosition);
+            }
+
+            else if (movePosition != null) {
+                currentCharacter.setEndPosition(movePosition);
+            }
+
 
 
             // Update the IMap with player positions here.

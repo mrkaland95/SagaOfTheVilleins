@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.Movement;
+package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.IMovable2D;
@@ -29,7 +29,7 @@ public class TileMovement {
             if (character.isMoving()) {
                 // Set isMoving to false when character reaches the final tile
                 character.setMoving(false);
-                GameLoop.infoMap.onMove(this.pathToMove.get(0), this.pathToMove.get(pathToMove.size() - 1));
+//                GameLoop.infoMap.onMove(this.pathToMove.get(0), this.pathToMove.get(pathToMove.size() - 1));
             }
             return;
         }
@@ -39,19 +39,14 @@ public class TileMovement {
             character.setMoving(true);
         }
 
-        TilePosition currentTile = pathToMove.get(pathIndex);
-        Vector2 destinationPosition = HexGridMapPosition.calculateVectorCoordinate(currentTile);
+        TilePosition nextTilePosition = pathToMove.get(pathIndex);
+        Vector2 nextTileCoordinate = HexGridMapPosition.calculateVectorCoordinate(nextTilePosition);
 
-        if (character.getEndPosition() == null) {
-            character.setEndPosition(destinationPosition);
-        }
-
-        Vector2 newPosition = MovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), character.getEndPosition(), deltaTime, character.getMoveSpeed());
+        Vector2 newPosition = MovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
         character.setCurrentPosition(newPosition);
 
-        if (newPosition.equals(destinationPosition)) {
+        if (newPosition.equals(nextTileCoordinate)) {
             pathIndex++;
-            character.setEndPosition(null);
         }
     }
 }
