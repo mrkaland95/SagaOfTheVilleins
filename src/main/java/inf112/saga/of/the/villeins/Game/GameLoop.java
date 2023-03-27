@@ -28,7 +28,7 @@ public class GameLoop implements Screen {
 	Player player;
 	Slime slime;
 	CharacterAnimationController slimeAnimation;
-	CharacterAnimationController playerAnimation;
+	CharacterAnimationController playerWarriorAnimation;
 	private TiledMap map;
 	private HexagonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
@@ -66,11 +66,10 @@ public class GameLoop implements Screen {
 		Vector2 slimePosition = HexGridMapPosition.calculateVectorCoordinate(slimeTile);
 
 		slimeAnimation = new CharacterAnimationController(idleSlimePath, idleSlimePath, null, spriteBatch, shapeRenderer, 1, 4);
-		playerAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);
+		playerWarriorAnimation = new CharacterAnimationController(idleWarriorPath, walkingWarriorPath, null, spriteBatch, shapeRenderer,1, 2);
 
 		slime = new Slime(slimePosition, slimeAnimation,30, 10, 4, 1);
-		player = new Player(playerPosition, playerAnimation, 20, 10, 10);
-//		player.setHealth(10);
+		player = new Player(playerPosition, playerWarriorAnimation, 20, 10, 10);
 
 		characterList.add(player);
 		characterList.add(slime);
@@ -104,14 +103,20 @@ public class GameLoop implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
+
 		renderer.setView(camera);
 		renderer.render();
 		GameController.update();
+
+		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
+		// Men dette vil fungere for øyeblikket.
+		characterList.removeIf(character -> character.getCurrentHealth() == 0);
 
 		for (ICharacter character : characterList) {
 			character.update();
 			gameUI.drawHealthbar(character);
 		}
+
 	}
 	
 	@Override

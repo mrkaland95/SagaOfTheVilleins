@@ -27,7 +27,6 @@ public class HexGridMapPosition {
         else{
             x = hexagonDimension + hexagonDimension*doubleX;
             y = ((hexagonDimension/4) + hexagonDimension) + (hexagonDimension/4)*3*(doubleY-1);
-            
         }
 
         

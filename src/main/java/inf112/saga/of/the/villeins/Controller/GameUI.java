@@ -1,5 +1,6 @@
 package inf112.saga.of.the.villeins.Controller;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
@@ -26,7 +27,7 @@ public class GameUI {
         float healthBarY = character.getCurrentPosition().y + 100f;
 
 
-        // Gets the size of the bar for "current" health.
+        // Gets the percentage of current health for the healthbar.
         float currentHealthPercentage = (float) character.getMaxHealth() / character.getCurrentHealth();
 
         // Padding for the background healthbar
@@ -48,6 +49,4 @@ public class GameUI {
                 barHeight - 2 * paddingY);
         renderer.end();
     }
-
-
 }
