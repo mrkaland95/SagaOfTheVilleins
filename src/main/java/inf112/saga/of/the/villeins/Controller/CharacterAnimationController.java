@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
@@ -25,41 +24,36 @@ public class CharacterAnimationController {
     private int idleFrameCols;
     private int idleframeRows;
     private final SpriteBatch spriteBatch;
-    private final ShapeRenderer renderer;
 
     private final float playbackSpeedMultiplier = 1f;
 
     public CharacterAnimationController(
-                                        String idleAnimationPath,
-                                        String walkAnimationPath,
-                                        String attackAnimationPath,
-                                        SpriteBatch spriteBatch,
-                                        ShapeRenderer renderer,
-                                        Integer rows,
-                                        Integer cols) {
-        this.spriteBatch = spriteBatch;
-        this.renderer = renderer;
+            Texture idleAnimationTexture,
+            Texture walkAnimationTexture,
+            Texture attackAnimationTexture,
+            SpriteBatch spriteBatch,
+            Integer rows,
+            Integer cols) {
 
+        this.spriteBatch = spriteBatch;
 
         // very temporary solution until sprites/animations are made.
         if (rows != null) {
             idleframeRows = rows;
         }
-        if (rows != null) {
+        if (cols != null) {
             idleFrameCols = cols;
         }
 
 
-        if (idleAnimationPath != null) {
-            this.idleAnimation = new Animation2D(idleAnimationPath, idleframeRows, idleFrameCols, playbackSpeedMultiplier);
+        if (idleAnimationTexture != null) {
+            this.idleAnimation = new Animation2D(idleAnimationTexture, idleframeRows, idleFrameCols, playbackSpeedMultiplier);
         }
-        if (walkAnimationPath != null) {
-            this.walkAnimation = new Animation2D(walkAnimationPath, playbackSpeedMultiplier);
+        if (walkAnimationTexture != null) {
+            this.walkAnimation = new Animation2D(walkAnimationTexture, playbackSpeedMultiplier);
         }
-        if (attackAnimationPath != null){
-            this.attackAnimation = new Animation2D(attackAnimationPath, playbackSpeedMultiplier);
-
-
+        if (attackAnimationTexture != null){
+            this.attackAnimation = new Animation2D(attackAnimationTexture, playbackSpeedMultiplier);
         }
     }
 
@@ -69,12 +63,11 @@ public class CharacterAnimationController {
      */
     public void render(ICharacter character, float deltaTime) {
 
-        switch(character.getCharacterState()) {
-            case IDLE   -> activeAnimation = idleAnimation;
-            case MOVING -> activeAnimation = walkAnimation;
-            case ATTACK -> activeAnimation = idleAnimation; // TODO endre dette når attack animasjon er laget.
-            default     -> activeAnimation = idleAnimation;
-        }
+        activeAnimation = switch(character.getCharacterState()) {
+            case IDLE   -> idleAnimation;
+            case MOVING -> walkAnimation;
+            case ATTACK -> idleAnimation; // TODO endre denne til "attack" når attack animasjon er laget.
+        };
 
 
         TextureRegion currentSprite = this.activeAnimation.getImageToRender(deltaTime, true);
@@ -82,7 +75,6 @@ public class CharacterAnimationController {
         spriteBatch.begin();
         spriteBatch.draw(currentSprite, spriteRenderPosition.x, spriteRenderPosition.y);
         spriteBatch.end();
-//        drawHealthbar(character, renderer);
     }
 
 
