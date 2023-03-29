@@ -1,7 +1,11 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.*;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.Utils.AttackUtils;
 
 
 public class TestForPlayer {
@@ -25,6 +29,18 @@ public class TestForPlayer {
         assertEquals(expectedResult, result);
     }
 
+    @Test // går utenfor mapet...
+    public void testMoveOutsideMap(){
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5);
+        float newPositionX = 100f;
+        float newPositionY = 100f;
+        Vector2 newPosition = new Vector2(newPositionX, newPositionY);
+        testPlayer123.setCurrentPosition(newPosition);
+        Vector2 expectedPosition = startingPosition;
+        Vector2 result = testPlayer123.getCurrentPosition();
+        assertEquals(expectedPosition, result);
+    }
 
     @Test
     public void testGetZPosition(){
@@ -124,4 +140,9 @@ public class TestForPlayer {
         // int result3 = testplayer2.getCurrentHealth();
         // assertEquals(expectedHealth3, result3);
      }
+
+    //  @Test
+    //  public void testAttack(){
+      
+    //     }
  }

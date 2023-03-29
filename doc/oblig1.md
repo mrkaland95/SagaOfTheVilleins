@@ -112,7 +112,6 @@ Krav til MVP
 
 Brukerhistorier
 
-Spillers perspektiv
 1. Som spiller ønsker jeg å forstå hvilket type spill det er (ved å se på det), slik at jeg kan avgjøre interesse
 2. Som spiller ønsker jeg å intuivit forstå hvilken spillfigur det er mulig å styre, slik at jeg kan iteragere i spillet
 3. Som spiller ønsker jeg å forstå hvor det er mulig å forflytte spillfiguren, samt hvor det ikke er det, slik at jeg lykkes med å interagere i spillet
@@ -124,15 +123,18 @@ Spillers perspektiv
 9. Som spiller ønsker jeg å kunne velge når spillet starter, slik at jeg er forberedt.
 10. Som spiller ønsker jeg å kunne vite spillereglene før spillet starter, slik at jeg kan ta informerte valg
 
-Løsningsbeskrivelse
-
-
 Akseptasekriterier
-1. Gitt at jeg har åpnet spillet, så skal jeg kunne se om det er et spill jeg ønsker å spille
-2. Gitt at jeg har åpnet spillet, så skal jeg kunne finne informasjon på hva spillet innebærer
-3. Gitt at jeg har åpnet spillet, så skal jeg kunne starte spillet
-4. Gitt at jeg har startet spillet, så skal jeg kunne se avslutte det når jeg ønsker
-5. Gitt at jeg har startet spillet, så skal jeg 
+1. Gitt at jeg har åpnet spillet, så skal jeg kunne
+	- Starte spillet
+	- Lukke spillet
+	- Finne informasjon på hva spillet innebærer 
+	- Se om det er et spill jeg ønsker å spille
+2. Gitt at jeg har startet spillet, så skal jeg kunne
+	- Plassere kameraet slik at jeg ser de sentrale elementene i spillet
+	- Finne informasjon på hvordan jeg interagerer i spillet
+	- Vite når det er min tur til å interagere i spillet
+3. Gitt at jeg har gjort en handling i spillet, så skal jeg kunne se konsekvensen av den handlingen
+4. Gitt at jeg har forlatt spillet, så skal jeg kunne komme tilbake til der hvor jeg var i utgangspunktet
 
 
 A5 - oppsummering

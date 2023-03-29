@@ -196,6 +196,10 @@ Digital arbeidsøkt
 * Jobbet med å vise fram healthbar dynamisk/generell UI.
 
 Torsdag 23/03-23
+Kl. 08:15-10:00
+Leon, Markus og Malene (+Steffen, måtte gå tidlig)
+
+Niende gruppetime
 * Fordelt arbeidsoppgaver for veien videre
   Leon: utvide grafikk for tiles
   Malene: utbedre/utvide hva testene dekker, samt fullføre påbegynte, lage monster og skrive på akseptansekriterier
@@ -205,8 +209,18 @@ Torsdag 23/03-23
 * Utbedre brukerhistorier og akseptansekrivterier
 
 Fredag 24/03-23
-Kl 10.20 til 14.20
+Kl 10.20 - 14.20
+Leon, Markus og Steffen
+
+Arbeidsøkt
 * Leon - Jobbet med animasjoner og nytt kart.
 * Steffen - faktorisert mye av "tile" bevegelsen ut til egen klasse.
 * Markus og Steffen - Jobbet med Imap(informasjon om hvilke tiles er lovlig å gå på), håndtering av dette, og AI til fiender.
 * Jobbet med refaktoring av navn på metoder og variabler.
+
+Torsdag 30/03-23
+Kl. 08:15-10:00
+x medlemmer
+
+Tiende gruppetime
+*
