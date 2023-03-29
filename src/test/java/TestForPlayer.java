@@ -12,7 +12,7 @@ public class TestForPlayer {
     @Test
     public void testGetPosition(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
         Vector2 expectedPosition = new Vector2(0,0);
         Vector2 result = testPlayer123.getCurrentPosition();
         assertEquals(expectedPosition, result);
@@ -20,7 +20,7 @@ public class TestForPlayer {
     @Test
     public void testSetPosition(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
         float expectedPositionX = 10f;
         float expectedPositionY = 10f;
         Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
@@ -32,7 +32,7 @@ public class TestForPlayer {
     @Test // går utenfor mapet...
     public void testMoveOutsideMap(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
         float newPositionX = 100f;
         float newPositionY = 100f;
         Vector2 newPosition = new Vector2(newPositionX, newPositionY);
@@ -45,7 +45,7 @@ public class TestForPlayer {
     @Test
     public void testGetZPosition(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null,40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition, null,40, 2, 5, 1);
         Vector2 expectedZPosition = new Vector2(10f,10f);
         testPlayer123.setCurrentPosition(expectedZPosition);
         Vector2 result = testPlayer123.getCurrentPosition();
@@ -56,7 +56,7 @@ public class TestForPlayer {
     @Test
     public void testGetHealth(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition,null, 40, 2, 5);
+        Player testPlayer123 = new Player(startingPosition,null, 40, 2, 5, 1);
         int expectedHealth = 40;
         int result = testPlayer123.getCurrentHealth();
         assertEquals(expectedHealth, result);
@@ -65,7 +65,7 @@ public class TestForPlayer {
     @Test
     public void testGetStrength(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null, 40, 0, 5);
+        Player testPlayer123 = new Player(startingPosition, null, 40, 0, 5, 1);
         int expectedStrength = 0;
         int result = testPlayer123.getStrength();
         assertEquals(expectedStrength, result);
@@ -76,7 +76,7 @@ public class TestForPlayer {
         int initialStrength = 5;
         int newStrength = 10;
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition,null, 40, initialStrength, 5);
+        Player testPlayer123 = new Player(startingPosition,null, 40, initialStrength, 5, 1);
         testPlayer123.setStrength(newStrength);
         int result = testPlayer123.getStrength();
         assertEquals(newStrength, result);
@@ -87,7 +87,7 @@ public class TestForPlayer {
     public void testGetDefence(){
         Vector2 startingPosition = new Vector2(0f, 0f);
         int expectedDefence = 10;
-        Player testPlayer = new Player(startingPosition, null, 40, 2, expectedDefence);
+        Player testPlayer = new Player(startingPosition, null, 40, 2, expectedDefence, 1);
         int result = testPlayer.getDefense();
         assertEquals(expectedDefence, result);
     }
@@ -95,7 +95,7 @@ public class TestForPlayer {
     @Test
     public void testGetMaxHealth(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition,null, 20, 2, 5);
+        Player testPlayer123 = new Player(startingPosition,null, 20, 2, 5, 1);
         int expectedMaxHealth = 20;
         int result = testPlayer123.getMaxHealth();
         assertEquals(expectedMaxHealth, result);
@@ -105,7 +105,7 @@ public class TestForPlayer {
     @Test
     public void testSetHealth(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testplayer123 = new Player(startingPosition, null, 40, 2, 5);
+        Player testplayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
         int expectedHealth = 5;
         testplayer123.setHealth(expectedHealth);
         int result = testplayer123.getCurrentHealth();
@@ -116,8 +116,8 @@ public class TestForPlayer {
     @Test
     public void testApplyDamage(){
         Vector2 initialPosition = new Vector2(0, 0);
-        Player testplayer1 = new Player(initialPosition, null,  10, 0, 0);
-        Player testplayer2 = new Player(initialPosition, null,  10, 0, 0);
+        Player testplayer1 = new Player(initialPosition, null,  10, 0, 0, 1);
+        Player testplayer2 = new Player(initialPosition, null,  10, 0, 0, 1);
        
         // innenfor
         int damage1 = 5;

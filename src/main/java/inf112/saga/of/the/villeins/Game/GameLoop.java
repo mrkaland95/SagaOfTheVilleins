@@ -13,10 +13,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Slime;
-import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.GameUI;
+import inf112.saga.of.the.villeins.Factories.CharacterFactory;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -27,13 +28,14 @@ public class GameLoop implements Screen {
 	Game game;
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
-	CharacterAnimationController slimeAnimation;
-	CharacterAnimationController playerWarriorAnimation;
+	CharacterAnimationHandler slimeAnimation;
+	CharacterAnimationHandler playerWarriorAnimation;
 	private final TiledMap map;
 	private final HexagonalTiledMapRenderer mapRenderer;
 	private final OrthographicCamera camera;
 	private final GameController GameController;
 	private final GameUI gameUI;
+	private final CharacterFactory characterFactory;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
 
@@ -45,7 +47,6 @@ public class GameLoop implements Screen {
 		infoMap = new Imap(20, 20);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
 		camera.setToOrtho(false);
 
 		spriteBatch =   new SpriteBatch();
@@ -53,32 +54,34 @@ public class GameLoop implements Screen {
 
 		gameUI = new GameUI(shapeRenderer);
 
-		TilePosition playerTile = new TilePosition(1, 4);
-		TilePosition slimeTile =  new TilePosition(1, 6);
-
-		Vector2 playerPosition = HexGridMapPosition.calculateVectorCoordinate(playerTile);
-		Vector2 slimePosition =  HexGridMapPosition.calculateVectorCoordinate(slimeTile);
-
 		Texture warriorIdleTexture =    game.assets.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = game.assets.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
 		Texture slimeIdleTexture =      game.assets.manager.get(GameAssetManager.idleSlimePath, Texture.class);
 
 		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
-		slimeAnimation =         new CharacterAnimationController(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
-		playerWarriorAnimation = new CharacterAnimationController(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
+		slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
+		playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
 
-		// TODO move the initialization of these into the game controller and/or an object factory.
-		ICharacter slime =  new Slime(slimePosition, slimeAnimation,30, 10, 4, 1);
-		ICharacter player = new Player(playerPosition, playerWarriorAnimation, 20, 10, 10);
+		characterFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation);
+
+		ICharacter slime =   characterFactory.getSlimeCharacter(new TilePosition(1, 4));
+		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
+		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
+		ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
+
+		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
 
 		characterList.add(player);
 		characterList.add(slime);
+		characterList.add(slime2);
+		characterList.add(slime3);
+		characterList.add(slime4);
 
 		GameController =    new GameController(characterList, camera);
 		mapRenderer =       new HexagonalTiledMapRenderer(map);
 
 		// Inits camera and sets it's starting position and zoom.
-		camera.translate(playerPosition.x, playerPosition.y, 0f);
+		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.zoom = 1.5f;
 	}
 
@@ -109,6 +112,7 @@ public class GameLoop implements Screen {
 			gameUI.drawHealthbar(character);
 		}
 
+		infoMap.reset(characterList);
 	}
 	
 	@Override

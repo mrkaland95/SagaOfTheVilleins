@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.Controller;
+package inf112.saga.of.the.villeins.Animations;
 
 
 import com.badlogic.gdx.Gdx;
@@ -6,13 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Characters.Animation2D;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 
 /**
  * Class for handling the animation of characters, separate from the character objects.
  */
-public class CharacterAnimationController {
+public class CharacterAnimationHandler {
     enum AnimationDirections {
 
     }
@@ -27,7 +26,7 @@ public class CharacterAnimationController {
 
     private final float playbackSpeedMultiplier = 1f;
 
-    public CharacterAnimationController(
+    public CharacterAnimationHandler(
             Texture idleAnimationTexture,
             Texture walkAnimationTexture,
             Texture attackAnimationTexture,
@@ -57,16 +56,14 @@ public class CharacterAnimationController {
         }
     }
 
-        /**
-     * Function responsible for getting and rendering a character's sprite. Needs to be called
-     * Inside the main game loop, i.e the "render" function of the sagaOfTheVilleinsGame
-     */
+
     public void render(ICharacter character, float deltaTime) {
 
         activeAnimation = switch(character.getCharacterState()) {
             case IDLE   -> idleAnimation;
             case MOVING -> walkAnimation;
             case ATTACK -> idleAnimation; // TODO endre denne til "attack" når attack animasjon er laget.
+            case DYING  -> idleAnimation;
         };
 
 

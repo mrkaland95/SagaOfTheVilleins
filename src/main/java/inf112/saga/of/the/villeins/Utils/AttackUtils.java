@@ -28,14 +28,14 @@ public class AttackUtils {
 
         ICharacter opponent = getCharacterToAttack(characterList, clickPosition);
 
-        if (opponent == null) return false;
-        if (this.character.equals(opponent)) return false;
+        if (opponent == null) return false; // Må ha en karakter å angripe
+        if (this.character.equals(opponent)) return false; // En karakter kan ikke angripe seg selv
         if (!(this.character.getCharacterState() == CharacterState.IDLE)) return false; // Kan kun angripe hvis karakteren er idle.
         if (!characterInRange(this.character, opponent, this.attackRange)) return false; // If the current character is not in range, don't attack.
 
         // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
-//        int damage = opponent.getDefense() / 2 - this.character.getStrength();
-        int damage = 5;
+        int damage = this.character.getStrength() / 2;
+//        int damage = this.character.getStrength() / 2;
 
 
         System.out.println("Dealing damage: " + damage);

@@ -15,8 +15,12 @@ public class GameUI {
     }
 
 
+    /**
+     * Tegner en healthbar over hodet til en karakter.
+     * Endrer seg dynamisk hver "frame" og flytter seg sammen med karakteren.
+     * @param character Karakteren som "healthbaren" skal tegnes over.
+     */
     public void drawHealthbar(ICharacter character) {
-        // TODO Dette burde antageligvis flyttes ut til "GameUI" klassen eller noe sånt.
 
         float barWidth = 100f;
         float barHeight = 10f;

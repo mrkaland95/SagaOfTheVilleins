@@ -7,8 +7,6 @@ public interface IInputProcessor extends InputProcessor {
 
     Vector2 getLeftClickCoordinates();
     Vector2 getRightClickCoordinates();
-
     boolean checkTurn();
-
     void endTurn();
 }

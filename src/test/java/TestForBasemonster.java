@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.BaseMonster;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 
 public class TestForBasemonster {
    
@@ -20,7 +20,7 @@ public class TestForBasemonster {
     @Test
     public void testSetCurrentPosition(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        CharacterAnimationController animationController = null;
+        CharacterAnimationHandler animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
         float expectedPositionX = 10f;
         float expectedPositionY = 10f;
@@ -33,7 +33,7 @@ public class TestForBasemonster {
     @Test
     public void testGetDestination(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        CharacterAnimationController animationController = null;
+        CharacterAnimationHandler animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
         Vector2 expectedDestination = new Vector2(10f, 10f);
         testMonster.setEndPosition(expectedDestination);
@@ -44,7 +44,7 @@ public class TestForBasemonster {
     @Test
     public void testSetDestination(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        CharacterAnimationController animationController = null;
+        CharacterAnimationHandler animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
         Vector2 expectedDestination = new Vector2(10f, 10f);
         testMonster.setEndPosition(expectedDestination);
@@ -67,7 +67,7 @@ public class TestForBasemonster {
     @Test
     public void testGetCurrentHealth(){
         Vector2 startingPosition = new Vector2(0f, 0f);
-        CharacterAnimationController animationController = null;
+        CharacterAnimationHandler animationController = null;
         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
         int expectedHealth = 50;
         int result = testMonster.getCurrentHealth();
@@ -135,7 +135,7 @@ public class TestForBasemonster {
     public void testApplyDamage() {
     Vector2 initialPosition = new Vector2(0, 0);
     BaseMonster testMonster = new BaseMonster(initialPosition, null, 10, 0, 0, 1);
-    Player testPlayer = new Player(initialPosition, null, 10, 0, 0);
+    Player testPlayer = new Player(initialPosition, null, 10, 0, 0, 1);
     int expectedHealth = 5;
     int damage = 5;
     testMonster.applyDamage(damage, testPlayer);

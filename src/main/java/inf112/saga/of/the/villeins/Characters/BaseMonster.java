@@ -2,7 +2,7 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -14,22 +14,23 @@ import inf112.saga.of.the.villeins.Utils.TileMovement;
 import java.util.List;
 
 public class BaseMonster implements ICharacter {
-    CharacterAnimationController animationController;
+    private String identifier;
+    private final int maxHealth;
     private int currentHealth;
-    private int maxHealth;
     private int strength;
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
-    Vector2 currentPosition;
-    Vector2 endPosition;
-    List<TilePosition> pathToMove;
+    private Vector2 currentPosition;
+    private Vector2 endPosition;
+    private List<TilePosition> pathToMove;
     private CharacterState characterState;
+    private final CharacterAnimationHandler animationController;
     private final TileMovement tileMovement;
     private final AttackUtils attackUtils;
 
 
     public BaseMonster(Vector2 startPosition,
-                       CharacterAnimationController animationController,
+                       CharacterAnimationHandler animationController,
                        int maxHealth,
                        int strength,
                        int defense,
@@ -48,7 +49,7 @@ public class BaseMonster implements ICharacter {
     }
 
     public BaseMonster(TilePosition startingTile,
-                       CharacterAnimationController animationController,
+                       CharacterAnimationHandler animationController,
                        int maxHealth,
                        int strength,
                        int defense,
@@ -65,6 +66,10 @@ public class BaseMonster implements ICharacter {
     }
 
 
+    @Override
+    public String getIdentifier() {
+        return this.identifier;
+    }
 
     @Override
     public void update() {

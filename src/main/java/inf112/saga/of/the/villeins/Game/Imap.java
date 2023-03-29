@@ -52,8 +52,8 @@ public class Imap {
         for (ICharacter character : characterList) {
             TilePosition characterPosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
             map.put(characterPosition, false);
-            }
         }
+    }
 
 
 

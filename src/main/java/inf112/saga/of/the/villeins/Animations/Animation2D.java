@@ -1,5 +1,4 @@
-package inf112.saga.of.the.villeins.Characters;
-import com.badlogic.gdx.Gdx;
+package inf112.saga.of.the.villeins.Animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,7 +13,7 @@ public class Animation2D {
     Animation<TextureRegion> animation;
 
     // Variable for tracking elapsed time for the animation.
-    float elapsedAnimationTime;
+    float animationStateTime;
 
     public Animation2D(Texture spriteSheet, float playbackMultiplier) {
         this.animation = loadAnimation(spriteSheet, playbackMultiplier);
@@ -30,7 +29,7 @@ public class Animation2D {
 
     private Animation<TextureRegion> loadAnimation(Texture spriteSheet, float playbackMultiplier) {
         this.animationSheet = spriteSheet;
-        // The texture region class' split function only takes in a 2d array, so despite our sheets being 1d,
+        // The texture region class' split function only returns a 2d array, so despite our sheets being 1d,
         // We need to initialize it as a 2d array.
         TextureRegion[][] tempTextures = TextureRegion.split(
                         animationSheet,
@@ -49,13 +48,13 @@ public class Animation2D {
         }
         float frameDuration = 1f / FRAME_COLUMNS;
         float animationPlaybackSpeed = frameDuration * (1 / playbackMultiplier);
-        this.elapsedAnimationTime = 0f;
+        this.animationStateTime = 0f;
         return new Animation<>(animationPlaybackSpeed, animationFrames);
     }
 
     public TextureRegion getImageToRender(float deltaTime, boolean looping) {
-        elapsedAnimationTime += deltaTime;
-        return animation.getKeyFrame(elapsedAnimationTime, looping);
+        animationStateTime += deltaTime;
+        return animation.getKeyFrame(animationStateTime, looping);
     }
 }
 

@@ -25,11 +25,11 @@ public class TileMovement {
     }
 
     public void move(float deltaTime) {
+
+        // If there is no path, then return early. In that case, if the character's state is set to moving, set it to idle.
         if (pathToMove == null || pathIndex >= pathToMove.size()) {
             if (character.getCharacterState() == CharacterState.MOVING) {
-                // Set isMoving to false when character reaches the final tile
                 character.setCharacterState(CharacterState.IDLE);
-//                GameLoop.infoMap.onMove(this.pathToMove.get(0), this.pathToMove.get(pathToMove.size() - 1));
             }
             return;
         }
@@ -41,7 +41,6 @@ public class TileMovement {
 
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
         Vector2 nextTileCoordinate = HexGridMapPosition.calculateVectorCoordinate(nextTilePosition);
-
         Vector2 newPosition = MovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
         character.setCurrentPosition(newPosition);
 

@@ -2,7 +2,7 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Controller.CharacterAnimationController;
+import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -13,8 +13,8 @@ import inf112.saga.of.the.villeins.Utils.TileMovement;
 
 import java.util.List;
 
-public class Player implements ICharacter {
-    private String name;
+public class Player implements ICharacter, IPlayable {
+    private String identifier;
     private int score;
     private final int maxHealth;
     private int currentHealth;
@@ -25,17 +25,18 @@ public class Player implements ICharacter {
     Vector2 endPosition;
     List<TilePosition> pathToMove;
     TileMovement tileMovement;
-    CharacterAnimationController animationController;
+    CharacterAnimationHandler animationController;
     AttackUtils attackUtils;
     CharacterState characterState;
 
     public Player(Vector2 startingPosition,
-                  CharacterAnimationController animationController,
+                  CharacterAnimationHandler animationController,
                   int maxHealth,
                   int strength,
-                  int defense) {
-        // TODO legg til "AttackRange" som en parameter.
+                  int defense,
+                  int attackRange) {
 
+        // TODO legg til "AttackRange" som en parameter.
         this.currentPosition = startingPosition;
         this.animationController = animationController;
         this.maxHealth = maxHealth;
@@ -44,16 +45,40 @@ public class Player implements ICharacter {
         this.defense = defense;
         this.score = 0;
         this.tileMovement = new TileMovement(this);
-        this.attackUtils = new AttackUtils(this, 1);
+        this.attackUtils = new AttackUtils(this, attackRange);
         this.characterState = CharacterState.IDLE;
     }
+
+    public Player(TilePosition startingPosition,
+              CharacterAnimationHandler animationController,
+              int maxHealth,
+              int strength,
+              int defense,
+              int attackRange) {
+
+        // TODO legg til "AttackRange" som en parameter.
+        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingPosition);
+        this.animationController = animationController;
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
+        this.strength = strength;
+        this.defense = defense;
+        this.score = 0;
+        this.tileMovement = new TileMovement(this);
+        this.attackUtils = new AttackUtils(this, attackRange);
+        this.characterState = CharacterState.IDLE;
+    }
+
+
+
+
 
 
     @Override
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this, deltaTime);
-        calculatePathToMove(endPosition);
+        this.calculatePathToMove(endPosition);
         this.tileMovement.move(deltaTime);
     }
 
@@ -67,6 +92,20 @@ public class Player implements ICharacter {
         this.endPosition = null;
     }
 
+
+    @Override
+    public String getIdentifier() {
+        return this.identifier;
+    }
+    @Override
+    public int getScore() {
+        return this.score;
+    }
+
+    @Override
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     @Override
     public CharacterState getCharacterState() {

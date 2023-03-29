@@ -8,5 +8,4 @@ public interface IStats {
     void setStrength(int strength);
     void setHealth(int health);
     void applyDamage( int damage, ICharacter character);
-
 }

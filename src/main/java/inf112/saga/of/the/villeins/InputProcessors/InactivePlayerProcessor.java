@@ -126,11 +126,9 @@ public class InactivePlayerProcessor implements IInputProcessor {
 	public Vector2 getLeftClickCoordinates() {
 		return this.leftClickCoordinates;
 	}
-
 	public Vector2 getRightClickCoordinates() {
 		return this.rightClickCoordinates;
 	}
-
 	@Override
 	public void endTurn() {
 		this.endTurn = false;
