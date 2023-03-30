@@ -220,7 +220,16 @@ Arbeidsøkt
 
 Torsdag 30/03-23
 Kl. 08:15-10:00
-x medlemmer
+Markus og Steffen (Leon og Malene remote i Discord vc)
 
 Tiende gruppetime
-*
+* Bli enige om hvilket språk commits skal være 
+  - norsk
+* Håndtering av hvilken retning en karakter er orientert? 
+  - ventre og høyre
+* Fjerne klasser av monstere - unødvendig, kun bruke basemonster 
+* Design av UI
+  - healthbar
+  - forhåndslaget liste med unike navn
+  - idle animasjon ramme for å visualisere hvem sin tur det er (feks. blå for friendly, rød for fiende)
+  
