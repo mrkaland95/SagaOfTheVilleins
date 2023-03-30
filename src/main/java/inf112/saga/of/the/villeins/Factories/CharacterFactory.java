@@ -1,9 +1,9 @@
 package inf112.saga.of.the.villeins.Factories;
 
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import inf112.saga.of.the.villeins.Characters.BaseMonster;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Characters.Slime;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class CharacterFactory implements ICharacterFactory {
@@ -22,7 +22,7 @@ public class CharacterFactory implements ICharacterFactory {
         return new Player(spawnPosition, this.warriorHandler, 50, 5, 5, 1);
     }
     public ICharacter getSlimeCharacter(TilePosition spawnPosition) {
-        return new Slime(spawnPosition, this.slimeHandler, 25, 5, 5, 1);
+        return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1);
     }
 
     public ICharacter getGhostCharacter() {

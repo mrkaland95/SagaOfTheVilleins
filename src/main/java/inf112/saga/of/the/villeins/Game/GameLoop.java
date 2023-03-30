@@ -12,7 +12,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Characters.Slime;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Controller.GameController;

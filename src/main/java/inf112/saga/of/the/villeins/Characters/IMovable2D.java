@@ -2,7 +2,18 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.math.Vector2;
 
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+
+import java.util.List;
+
+
+
 public interface IMovable2D {
+
+    int getActionPoints();
+    void setActionPoints(int actionPoints);
+    TilePosition getTilePosition();
+    void setTilePosition(TilePosition tilePosition);
     /**
      * @return a Vector2 of the movable object's position
      */
@@ -29,5 +40,6 @@ public interface IMovable2D {
     void setCharacterState(CharacterState characterState);
     float getMoveSpeed();
     void setMoveSpeed(float moveSpeed);
+    void setPathToMove(List<TilePosition> pathToMove);
 
 }

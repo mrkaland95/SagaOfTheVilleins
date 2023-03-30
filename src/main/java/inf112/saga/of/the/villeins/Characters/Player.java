@@ -21,6 +21,7 @@ public class Player implements ICharacter, IPlayable {
     private int strength;
     private int defense;
     private float moveSpeed = Main.globalDefaultMoveSpeed;
+    private int actionPoints;
     Vector2 currentPosition;
     Vector2 endPosition;
     List<TilePosition> pathToMove;
@@ -28,6 +29,7 @@ public class Player implements ICharacter, IPlayable {
     CharacterAnimationHandler animationController;
     AttackUtils attackUtils;
     CharacterState characterState;
+    private int attackRange;
 
     public Player(Vector2 startingPosition,
                   CharacterAnimationHandler animationController,
@@ -43,6 +45,7 @@ public class Player implements ICharacter, IPlayable {
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
+        this.attackRange = attackRange;
         this.score = 0;
         this.tileMovement = new TileMovement(this);
         this.attackUtils = new AttackUtils(this, attackRange);
@@ -158,6 +161,31 @@ public class Player implements ICharacter, IPlayable {
     }
 
     @Override
+    public TilePosition getTilePosition() {
+        return HexGridMapPosition.findHexTile(currentPosition);
+    }
+
+    @Override
+    public void setTilePosition(TilePosition tilePosition) {
+        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(tilePosition);
+    }
+
+    @Override
+    public void setPathToMove(List<TilePosition> pathToMove) {
+        this.pathToMove = pathToMove;
+    }
+
+    @Override
+    public int getActionPoints() {
+        return this.actionPoints;
+    }
+
+    @Override
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
+    }
+
+    @Override
     public int getCurrentHealth() {
         return this.currentHealth;
     }
@@ -209,5 +237,13 @@ public class Player implements ICharacter, IPlayable {
     @Override
     public Boolean attack(Vector2 CoordinateToAttack) {
         return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
+    }
+    @Override
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+    @Override
+    public int getAttackRange() {
+        return this.attackRange;
     }
 }

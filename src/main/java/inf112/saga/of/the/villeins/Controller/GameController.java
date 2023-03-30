@@ -72,12 +72,6 @@ public class GameController {
     public void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
-        for (ICharacter character : characterList) {
-            TilePosition currentPosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
-            GameLoop.infoMap.setMoveable(currentPosition, false);
-        }
-
-
         if(currentChar instanceof Player){
             currentProcessor = processorList.get("player");
             Gdx.input.setInputProcessor(currentProcessor);

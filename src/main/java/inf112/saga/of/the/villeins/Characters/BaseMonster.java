@@ -3,6 +3,7 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -27,7 +28,9 @@ public class BaseMonster implements ICharacter {
     private final CharacterAnimationHandler animationController;
     private final TileMovement tileMovement;
     private final AttackUtils attackUtils;
-
+    private int actionPoints = 10;
+    private int attackRange;
+    private SimpleAI ai; 
 
     public BaseMonster(Vector2 startPosition,
                        CharacterAnimationHandler animationController,
@@ -42,9 +45,11 @@ public class BaseMonster implements ICharacter {
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
+        this.attackRange = attackRange;
         this.tileMovement = new TileMovement(this);
         this.attackUtils = new AttackUtils(this, attackRange);
         this.characterState = CharacterState.IDLE;
+        this.ai = new SimpleAI(null, this);
 
     }
 
@@ -60,6 +65,8 @@ public class BaseMonster implements ICharacter {
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
+        this.attackRange = attackRange;
+
         this.attackUtils = new AttackUtils(this, attackRange);
         this.tileMovement = new TileMovement(this);
         this.characterState = CharacterState.IDLE;
@@ -145,6 +152,11 @@ public class BaseMonster implements ICharacter {
     }
 
     @Override
+    public void setPathToMove(List<TilePosition> pathToMove) {
+        this.pathToMove = pathToMove;
+    }
+
+    @Override
     public int getCurrentHealth() {
         return this.currentHealth;
     }
@@ -187,5 +199,32 @@ public class BaseMonster implements ICharacter {
     @Override
     public Boolean attack(Vector2 CoordinateToAttack) {
         return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
+    }
+
+    @Override
+    public TilePosition getTilePosition() {
+        return HexGridMapPosition.findHexTile(currentPosition);
+    }
+
+    @Override
+    public void setTilePosition(TilePosition tilePosition) {
+        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(tilePosition);
+    }
+    @Override
+    public int getActionPoints() {
+        return this.actionPoints;
+    }
+
+    @Override
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
+    }
+    @Override
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+    @Override
+    public int getAttackRange() {
+        return this.attackRange;
     }
 }

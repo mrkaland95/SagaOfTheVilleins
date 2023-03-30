@@ -9,4 +9,7 @@ public interface IAttackCapable {
      * @return En bool som beskriver om angrepet skjedde eller ikke.
      */
     Boolean attack(Vector2 coordinateToAttack);
+
+    int getAttackRange();
+    void setAttackRange(int attackRange);
 }

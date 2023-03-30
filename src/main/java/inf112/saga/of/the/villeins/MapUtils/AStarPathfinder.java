@@ -102,7 +102,7 @@ public class AStarPathfinder {
     return neighbors;
     }
 
-    private static int heuristic(TilePosition current, TilePosition end) {
+    public static int heuristic(TilePosition current, TilePosition end) {
 
 
 
