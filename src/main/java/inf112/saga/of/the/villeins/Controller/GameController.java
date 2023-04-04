@@ -69,6 +69,10 @@ public class GameController {
 
     }
 
+    public ICharacter getPlayerCharacter() {
+        return this.playerCharacter;
+    }
+
     public void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
@@ -125,5 +129,5 @@ public class GameController {
                 this.playerCharacter = character;
             }
         }
-    }   
+    }
 }   

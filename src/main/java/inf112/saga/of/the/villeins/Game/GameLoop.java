@@ -3,21 +3,19 @@ package inf112.saga.of.the.villeins.Game;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
-import inf112.saga.of.the.villeins.Controller.GameUI;
+import inf112.saga.of.the.villeins.UI.GameUI;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
@@ -27,35 +25,38 @@ public class GameLoop implements Screen {
 	Game game;
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
+	BitmapFont bitmapFont;
 	CharacterAnimationHandler slimeAnimation;
 	CharacterAnimationHandler playerWarriorAnimation;
 	private final TiledMap map;
 	private final HexagonalTiledMapRenderer mapRenderer;
 	private final OrthographicCamera camera;
-	private final GameController GameController;
+	private final OrthographicCamera uiCamera;
+	private final GameController gameController;
 	private final GameUI gameUI;
 	private final CharacterFactory characterFactory;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
 
-
-	public GameLoop(SagaOfTheVilleinsGame game) {
+	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map) {
+		this.map = map;
 		this.game = game;
-		map = new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx");
-
 		infoMap = new Imap(20, 20);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
+		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		uiCamera.setToOrtho(false);
 
-		spriteBatch =   new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
+		spriteBatch   = game.spriteBatch;
+		shapeRenderer = game.shapeRenderer;
+		bitmapFont    = game.bitmapFont;
 
-		gameUI = new GameUI(shapeRenderer);
+		gameUI = new GameUI(shapeRenderer, bitmapFont, spriteBatch, uiCamera);
 
-		Texture warriorIdleTexture =    game.assets.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
+		Texture warriorIdleTexture    = game.assets.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = game.assets.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
-		Texture slimeIdleTexture =      game.assets.manager.get(GameAssetManager.idleSlimePath, Texture.class);
+		Texture slimeIdleTexture      = game.assets.manager.get(GameAssetManager.idleSlimePath, Texture.class);
 
 		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
 		slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
@@ -63,7 +64,7 @@ public class GameLoop implements Screen {
 
 		characterFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation);
 
-		ICharacter slime =   characterFactory.getSlimeCharacter(new TilePosition(1, 4));
+		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
 		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
 		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
 		ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
@@ -76,12 +77,13 @@ public class GameLoop implements Screen {
 		characterList.add(slime3);
 		characterList.add(slime4);
 
-		GameController =    new GameController(characterList, camera);
-		mapRenderer =       new HexagonalTiledMapRenderer(map);
+		gameController = new GameController(characterList, camera);
+		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
 		// Inits camera and sets it's starting position and zoom.
 		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.zoom = 1.5f;
+
 	}
 
 
@@ -94,13 +96,14 @@ public class GameLoop implements Screen {
 	public void render (float deltaTime) {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		camera.update();
+		uiCamera.update();
+
 		spriteBatch.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(camera.combined);
 
-
 		mapRenderer.setView(camera);
 		mapRenderer.render();
-		GameController.update();
+		gameController.update();
 
 		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
 		// Men dette vil fungere for øyeblikket.
@@ -111,11 +114,14 @@ public class GameLoop implements Screen {
 			gameUI.drawHealthbar(character);
 		}
 
+		gameUI.drawScore((IPlayable) gameController.getPlayerCharacter());
+
 		infoMap.reset(characterList);
 	}
 	
 	@Override
 	public void dispose () {
+		shapeRenderer.dispose();
 		spriteBatch.dispose();
 		map.dispose();
 		mapRenderer.dispose();
@@ -127,9 +133,11 @@ public class GameLoop implements Screen {
 	}
 	@Override
 	public void resize(int width, int height){
-		camera.viewportHeight = height;
-		camera.viewportWidth = width;
-		camera.update();
+
+//		uiCamera.viewportWidth = width;
+//		uiCamera.viewportHeight = height;
+    	camera.setToOrtho(false, width, height);
+    	uiCamera.setToOrtho(false, width, height);
 	}
 
 	@Override

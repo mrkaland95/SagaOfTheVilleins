@@ -66,7 +66,7 @@ public class Player implements ICharacter, IPlayable {
         this.currentHealth = maxHealth;
         this.strength = strength;
         this.defense = defense;
-        this.score = 0;
+        this.score = 1250;
         this.tileMovement = new TileMovement(this);
         this.attackUtils = new AttackUtils(this, attackRange);
         this.characterState = CharacterState.IDLE;
