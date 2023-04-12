@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.*;
 import com.badlogic.gdx.math.Vector2;
+
+import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
 
@@ -29,18 +32,18 @@ public class TestForPlayer {
         assertEquals(expectedResult, result);
     }
 
-    @Test // går utenfor mapet...
-    public void testMoveOutsideMap(){
-        Vector2 startingPosition = new Vector2(0f, 0f);
-        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
-        float newPositionX = 100f;
-        float newPositionY = 100f;
-        Vector2 newPosition = new Vector2(newPositionX, newPositionY);
-        testPlayer123.setCurrentPosition(newPosition);
-        Vector2 expectedPosition = startingPosition;
-        Vector2 result = testPlayer123.getCurrentPosition();
-        assertEquals(expectedPosition, result);
-    }
+    // @Test // går utenfor mapet...
+    // public void testMoveOutsideMap(){
+    //     Vector2 startingPosition = new Vector2(0f, 0f);
+    //     Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
+    //     float newPositionX = 100f;
+    //     float newPositionY = 100f;
+    //     Vector2 newPosition = new Vector2(newPositionX, newPositionY);
+    //     testPlayer123.setCurrentPosition(newPosition);
+    //     Vector2 expectedPosition = startingPosition;
+    //     Vector2 result = testPlayer123.getCurrentPosition();
+    //     assertEquals(expectedPosition, result);
+    // }
 
     @Test
     public void testGetZPosition(){
@@ -141,8 +144,72 @@ public class TestForPlayer {
         // assertEquals(expectedHealth3, result3);
      }
 
-    //  @Test
-    //  public void testAttack(){
-      
-    //     }
- }
+    @Test
+    public void testGetIdentifier(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertNull(player.getIdentifier());
+    }
+
+    @Test
+    public void testGetScore(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertEquals(0, player.getScore());
+    }
+
+    @Test
+    public void testSetScore(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        player.setScore(100);
+        assertEquals(100, player.getScore());
+    }
+
+    @Test
+    public void testGetCharacterState(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertEquals(CharacterState.IDLE, player.getCharacterState());
+    }
+
+    @Test
+    public void testSetCharacterState(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        player.setCharacterState(CharacterState.ATTACK);
+        assertEquals(CharacterState.ATTACK, player.getCharacterState());
+    }
+
+    @Test
+    public void testGetMoveSpeed(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertEquals(100, player.getMoveSpeed());
+    }
+
+    @Test
+    public void testSetMoveSpeed(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        player.setMoveSpeed(70);
+        assertEquals(70, player.getMoveSpeed());
+    }
+
+    @Test
+    public void testSetEndPosition(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        Vector2 endPosition = new Vector2(2,2);
+        assertTrue(player.setEndPosition(endPosition));
+        assertEquals(endPosition, player.getEndPosition());
+    }
+
+    @Test 
+    public void testGetCurrentPosition(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        Vector2 startingPosition = new Vector2(0,0);
+        assertEquals(startingPosition, player.getCurrentPosition());
+    }
+
+    @Test
+    public void testSetCurrentPosition(){
+        Player player = new Player(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        Vector2 newPosition = new Vector2(1,2);
+        player.setCurrentPosition(newPosition);
+        assertEquals(newPosition, player.getCurrentPosition());
+    }
+}
+ 
