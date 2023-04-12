@@ -1,10 +1,15 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.BaseMonster;
+import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TestForBasemonster {
    
@@ -143,5 +148,120 @@ public class TestForBasemonster {
     assertEquals(expectedHealth, result);
     }
 
+    // @Test
+    // public void testGetIdentifier(){
+    // }
 
+    @Test
+    public void testSetAndGetEndPosition(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(3,4), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        Vector2 position = new Vector2(5,6);
+        assertTrue(testMonster.setEndPosition(position));
+        assertEquals(position, testMonster.getEndPosition());
+    }
+
+    @Test
+    public void getCurrentPosition(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(3,4), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        Vector2 currentPosition = testMonster.getCurrentPosition();
+        assertEquals(new Vector2(3, 4), currentPosition);
+    }
+
+    @Test
+    public void testGetCharacterState(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertEquals(CharacterState.IDLE, testMonster.getCharacterState());
+    }
+
+    @Test
+    public void testSetCharacterState(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        testMonster.setCharacterState(CharacterState.ATTACK);
+        assertEquals(CharacterState.ATTACK, testMonster.getCharacterState());
+    }
+
+    @Test
+    public void testGetMoveSpeed(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        assertEquals(100, testMonster.getMoveSpeed());
+    }
+
+    @Test
+    public void testSetMoveSpeed(){
+        BaseMonster testMonster = new BaseMonster(new Vector2(0,0), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        testMonster.setMoveSpeed(70);
+        assertEquals(70, testMonster.getMoveSpeed());
+    }
+
+    @Test
+    public void testAttack() {
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        CharacterAnimationHandler animationController = null;
+        BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+        Vector2 coordinateToAttack = new Vector2(5f, 5f);
+        Boolean result = testMonster.attack(coordinateToAttack);
+        assertFalse(result);
+    }
+    
+    // @Test
+    // public void testGetTilePosition() {
+    //     Vector2 startingPosition = new Vector2(0f, 0f);
+    //     CharacterAnimationHandler animationController = null;
+    //     BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+    //     TilePosition expectedTilePosition = new TilePosition(2, 2);
+    //     TilePosition result = testMonster.getTilePosition();
+    //     assertEquals(expectedTilePosition, result);
+    // }
+
+    @Test
+    public void testSetTilePosition() {
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        CharacterAnimationHandler animationController = null;
+        BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+        TilePosition tilePosition = new TilePosition(1, 1);
+        testMonster.setTilePosition(tilePosition);
+        TilePosition result = testMonster.getTilePosition();
+        assertEquals(tilePosition, result);
+    }
+
+    // @Test
+    // public void testGetActionPoints() {
+    //     Vector2 startingPosition = new Vector2(0f, 0f);
+    //     CharacterAnimationHandler animationController = null;
+    //     BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+    //     int expectedActionPoints = 1;
+    //     int result = testMonster.getActionPoints();
+    //     assertEquals(expectedActionPoints, result);
+    // }
+
+    @Test
+    public void testSetActionPoints() {
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        CharacterAnimationHandler animationController = null;
+        BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+        int actionPoints = 2;
+        testMonster.setActionPoints(actionPoints);
+        int result = testMonster.getActionPoints();
+     assertEquals(actionPoints, result);
+    }
+
+    @Test
+    public void testSetAttackRange() {
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        CharacterAnimationHandler animationController = null;
+        BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+        int attackRange = 2;
+        testMonster.setAttackRange(attackRange);
+        int result = testMonster.getAttackRange();
+        assertEquals(attackRange, result);
+    }
+
+    @Test
+    public void testGetAttackRange() {
+        int expectedAttackRange = 5;
+        Vector2 startingPosition = new Vector2(0f, 0f);
+        BaseMonster testMonster = new BaseMonster(startingPosition, null, 40, 2, 5, expectedAttackRange);
+        int result = testMonster.getAttackRange();
+        assertEquals(expectedAttackRange, result);
+    }
 }
