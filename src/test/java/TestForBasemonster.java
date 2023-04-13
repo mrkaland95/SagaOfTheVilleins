@@ -203,15 +203,15 @@ public class TestForBasemonster {
         assertFalse(result);
     }
     
-    // @Test
-    // public void testGetTilePosition() {
-    //     Vector2 startingPosition = new Vector2(0f, 0f);
-    //     CharacterAnimationHandler animationController = null;
-    //     BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
-    //     TilePosition expectedTilePosition = new TilePosition(2, 2);
-    //     TilePosition result = testMonster.getTilePosition();
-    //     assertEquals(expectedTilePosition, result);
-    // }
+    @Test
+    public void testGetTilePosition() {
+        TilePosition startingPosition = new TilePosition(1, 1);
+        CharacterAnimationHandler animationController = null;
+        BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+        TilePosition expectedTilePosition = new TilePosition(1, 1);
+        TilePosition result = testMonster.getTilePosition();
+        assertEquals(expectedTilePosition, result);
+    }
 
     @Test
     public void testSetTilePosition() {
@@ -224,15 +224,15 @@ public class TestForBasemonster {
         assertEquals(tilePosition, result);
     }
 
-    // @Test
-    // public void testGetActionPoints() {
-    //     Vector2 startingPosition = new Vector2(0f, 0f);
-    //     CharacterAnimationHandler animationController = null;
-    //     BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
-    //     int expectedActionPoints = 1;
-    //     int result = testMonster.getActionPoints();
-    //     assertEquals(expectedActionPoints, result);
-    // }
+     @Test
+     public void testGetActionPoints() {
+         Vector2 startingPosition = new Vector2(0f, 0f);
+         CharacterAnimationHandler animationController = null;
+         BaseMonster testMonster = new BaseMonster(startingPosition, animationController, 50, 10, 5, 1);
+         int expectedActionPoints = 10;
+         int result = testMonster.getActionPoints();
+         assertEquals(expectedActionPoints, result);
+     }
 
     @Test
     public void testSetActionPoints() {

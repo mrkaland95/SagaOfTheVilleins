@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TileMovement;
 import org.junit.jupiter.api.*;
 import com.badlogic.gdx.math.Vector2;
 
@@ -210,6 +212,17 @@ public class TestForPlayer {
         Vector2 newPosition = new Vector2(1,2);
         player.setCurrentPosition(newPosition);
         assertEquals(newPosition, player.getCurrentPosition());
+    }
+
+    @Test
+    public void testSetPathToMove() {
+        Player player = new Player(new TilePosition(1, 2), new CharacterAnimationHandler(null, null, null, null, null, null), 100, 10, 5, 3);
+        ArrayList<TilePosition> expectedList = new ArrayList<>();
+        expectedList.add(new TilePosition(1, 2));
+        expectedList.add(new TilePosition(1, 3));
+        expectedList.add(new TilePosition(1, 4));
+        player.setPathToMove(expectedList);
+        assertEquals(expectedList, player.getPathToMove());
     }
 }
  

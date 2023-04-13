@@ -59,7 +59,6 @@ public class Player implements ICharacter, IPlayable {
               int defense,
               int attackRange) {
 
-        // TODO legg til "AttackRange" som en parameter.
         this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingPosition);
         this.animationController = animationController;
         this.maxHealth = maxHealth;
@@ -173,6 +172,10 @@ public class Player implements ICharacter, IPlayable {
     @Override
     public void setPathToMove(List<TilePosition> pathToMove) {
         this.pathToMove = pathToMove;
+    }
+
+    public List<TilePosition> getPathToMove() {
+        return pathToMove;
     }
 
     @Override

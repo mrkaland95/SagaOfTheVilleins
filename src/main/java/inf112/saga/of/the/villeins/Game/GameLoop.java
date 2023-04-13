@@ -41,6 +41,7 @@ public class GameLoop implements Screen {
 	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map) {
 		this.map = map;
 		this.game = game;
+		map.getProperties();
 		infoMap = new Imap(20, 20);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
