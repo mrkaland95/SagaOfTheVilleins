@@ -29,7 +29,10 @@ public class SimpleAI {
     }
 
     public boolean AImakeDecision() {
-        if (currentCharacter.attack(targetCharacter.getCurrentPosition())) {
+        if (targetCharacter == null) {
+            return false;
+        }
+        else if (currentCharacter.attack(targetCharacter.getCurrentPosition())) {
             currentCharacter.setActionPoints(0);
             return true;
         } else {
@@ -37,6 +40,7 @@ public class SimpleAI {
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
                     if (AttackUtils.characterInRange(targetCharacter, currentCharacter, currentCharacter.getAttackRange())) {
+                       
                         TilePosition temp = new TilePosition(i, j);
                         if (GameLoop.infoMap.isMovable(temp)) {
                             tempTiles.add(temp);
@@ -44,7 +48,7 @@ public class SimpleAI {
                     }
                 }
             }
-
+            System.out.print(tempTiles);
             // Finner den tilen som er nærmest karakteren, og går der.
             TilePosition smallestHeuristic = tempTiles.get(0);            
             for (TilePosition tilePosition : tempTiles) {
@@ -61,6 +65,14 @@ public class SimpleAI {
 
             return false;
         }
+    }
+
+    public void setTargetCharacter(ICharacter target){
+        this.targetCharacter = target;
+    }
+
+    public ICharacter getTargetCharacter(){
+        return this.targetCharacter;
     }
 
 }

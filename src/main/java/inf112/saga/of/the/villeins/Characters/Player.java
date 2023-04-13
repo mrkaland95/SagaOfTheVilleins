@@ -246,4 +246,16 @@ public class Player implements ICharacter, IPlayable {
     public int getAttackRange() {
         return this.attackRange;
     }
+
+    @Override
+    public void setTargetCharacter(ICharacter target) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setTargetCharacter'");
+    }
+
+    @Override
+    public ICharacter getTargetCharacter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTargetCharacter'");
+    }
 }

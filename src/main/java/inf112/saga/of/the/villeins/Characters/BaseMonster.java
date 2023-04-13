@@ -30,7 +30,7 @@ public class BaseMonster implements ICharacter {
     private final AttackUtils attackUtils;
     private int actionPoints = 10;
     private int attackRange;
-    private SimpleAI ai; 
+    private SimpleAI ai;
 
     public BaseMonster(Vector2 startPosition,
                        CharacterAnimationHandler animationController,
@@ -70,6 +70,7 @@ public class BaseMonster implements ICharacter {
         this.attackUtils = new AttackUtils(this, attackRange);
         this.tileMovement = new TileMovement(this);
         this.characterState = CharacterState.IDLE;
+        this.ai = new SimpleAI(null, this);
     }
 
 
@@ -82,6 +83,7 @@ public class BaseMonster implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this, deltaTime);
+        this.ai.AImakeDecision();
         this.calculatePathToMove();
         this.tileMovement.move(deltaTime);
     }
@@ -117,6 +119,15 @@ public class BaseMonster implements ICharacter {
         return true;
     }
 
+    @Override
+    public void setTargetCharacter(ICharacter target){
+        this.ai.setTargetCharacter(target);
+    }
+
+    @Override
+    public ICharacter getTargetCharacter() {
+        return this.ai.getTargetCharacter();
+    }
 
 //    @Override
 //    public Boolean setEndPosition(Vector2 endPosition) {
@@ -227,4 +238,6 @@ public class BaseMonster implements ICharacter {
     public int getAttackRange() {
         return this.attackRange;
     }
+
+ 
 }

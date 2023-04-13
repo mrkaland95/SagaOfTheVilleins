@@ -65,17 +65,17 @@ public class GameLoop implements Screen {
 		characterFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation);
 
 		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
-		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
-		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
-		ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
+		//ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
+		//ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
+		//ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
 
 		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
 
 		characterList.add(player);
 		characterList.add(slime);
-		characterList.add(slime2);
-		characterList.add(slime3);
-		characterList.add(slime4);
+		//characterList.add(slime2);
+		//characterList.add(slime3);
+		//characterList.add(slime4);
 
 		gameController = new GameController(characterList, camera);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);

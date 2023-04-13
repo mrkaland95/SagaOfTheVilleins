@@ -62,6 +62,7 @@ public class GameController {
             // Update the IMap with player positions here.
 
         }
+        
         if(this.currentProcessor.checkTurn()){
             this.currentProcessor.endTurn();
             nextTurn();        
@@ -81,6 +82,7 @@ public class GameController {
             Gdx.input.setInputProcessor(currentProcessor);
         }
         else{
+            this.currentCharacter.setTargetCharacter(playerCharacter);
             currentProcessor = processorList.get("notPlayer");
             Gdx.input.setInputProcessor(currentProcessor);
             currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
