@@ -67,10 +67,7 @@ public class AttackUtils {
     public static boolean characterInRange(ICharacter character, ICharacter character2, int attackRange) {
         TilePosition character1TilePosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
         TilePosition character2TilePosition = HexGridMapPosition.findHexTile(character2.getCurrentPosition());
-        System.out.println(attackRange);
-        int distance = cubeDistance(character1TilePosition, character2TilePosition);
-        System.out.println(distance);
-        return attackRange >= distance;
+        return attackRange >= cubeDistance(character1TilePosition, character2TilePosition);
     }
 
 
