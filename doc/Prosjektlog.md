@@ -233,3 +233,35 @@ Tiende gruppetime
   - forhåndslaget liste med unike navn
   - idle animasjon ramme for å visualisere hvem sin tur det er (feks. blå for friendly, rød for fiende)
   
+  Torsdag 13/04-23
+  Kl. 08:15-10:00
+  Leon, Malene, Markus og Steffen
+
+  Elevte gruppetime
+  * Diskusjon av veien videre og prioriteringer
+    - ai
+    - endre slik at player og basemonster arver av en egen classe? må da skrive om testene også
+    - inventory
+    - lyd
+    - design
+  * Agenda for neste arbeidsøkt 
+    - Kommentere hva vi har testet og hvorfor
+    - Jobbe med ui
+    - Lese på kode og få et oversiktsbilde, samt danne forståelse for de ulike delene
+    - Lage oppdatert klassediagram
+    - Skrive features og lage manuelle tester for GUI-et basert på akseptansekriteriene 
+    - Undersøke SpotBugs og SonarQube
+    - Dokumentere i henhold til teori
+    - Skrive tester for characterFactory ++
+    - Sørge for at vi svarer på tilbakemeldingene fra sist 
+
+
+  Fredag 14/04-23
+  Kl. 10:15-14:00
+  Medlemmer
+
+  Arbeidsøkt på realfagsbygget
+  * 
+  
+
+
