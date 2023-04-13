@@ -36,7 +36,7 @@ public class SagaOfTheVilleinsGame extends Game {
         assets.load();
         assets.manager.finishLoading();
 
-        maps.add(new TmxMapLoader().load("./assets/Maps/TiledRougelikeMap.tmx"));
+        maps.add(new TmxMapLoader().load("./assets/Maps/TiledRougelikeMapUpdated.tmx"));
 
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
