@@ -11,10 +11,11 @@ public class TestAttackUtils {
         TilePosition position1 = new TilePosition(1, 2);
         TilePosition position2 = new TilePosition(3, 3);
 
+
+
         int expectedResult = 3;
         int result = AttackUtils.cubeDistance(position1, position2);
 
         assertEquals(expectedResult, result);
     }
-
 }

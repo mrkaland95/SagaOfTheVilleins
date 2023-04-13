@@ -68,6 +68,9 @@ public class GameUI {
         renderer.end();
     }
 
+
+
+
     public void drawScore(IPlayable player) {
         String scoreText = "Score: " + player.getScore();
         layout.setText(font, scoreText);

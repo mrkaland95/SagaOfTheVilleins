@@ -13,9 +13,13 @@ public class CharacterFactory implements ICharacterFactory {
     CharacterAnimationHandler ghostHandler;
 
     public CharacterFactory(CharacterAnimationHandler warriorHandler,
-                            CharacterAnimationHandler slimeHandler) {
+                            CharacterAnimationHandler slimeHandler,
+                            CharacterAnimationHandler dragonHandler,
+                            CharacterAnimationHandler ghostHandler) {
         this.warriorHandler = warriorHandler;
         this.slimeHandler   = slimeHandler;
+        this.dragonHandler  = dragonHandler;
+        this.ghostHandler   = ghostHandler;
     }
 
     public ICharacter getWarriorCharacter(TilePosition spawnPosition) {
@@ -29,7 +33,7 @@ public class CharacterFactory implements ICharacterFactory {
         throw new IllegalArgumentException("Not implemented yet");
     }
 
-    public ICharacter getDragonCharacter() {
-        throw new IllegalArgumentException("Not implemented yet");
+    public ICharacter getDragonCharacter(TilePosition spawnPosition) {
+        return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1);
     }
 }
