@@ -42,10 +42,10 @@ PROSJEKTRAPPORT
     
  
 * Hvordan er gruppedynamikken? Problemer som må løses?
- 
+    Gruppedynamikken er god. Per dags dato har vi ingen problemer som må løses. Den gode dynamikken er basert på toleranse, kommunikasjon og lojalitet mellom medlemmene. 
 
 * Hvordan fungerer kommuniksasjon?
-    
+    Kommunikasjon fungerer bra. Dette begrunnes med at alle medlemmene 
 
 * Hva har vi klart til nå og hva må forbedres? (Prosjektstruktur, ikke kode)
    
@@ -55,7 +55,7 @@ PROSJEKTRAPPORT
 
     Det kan også nevnes at samme gruppemedlem har hatt oppstartsproblemer med Port22 feil ut februar måned, og derav hatt store problemer med å committe til git. Problemet ble løst i samarbeid med gruppemedlemmer, gruppeleder og foreleser. 
 
-    Forutenom prosjektleder, er det også noe ubalanse blant de andre medlemmene. Dette kan begrunnes med at techlead har måttet klippe og lime en del ved oppståtte branch conflicts, og derav endt opp med å både ha git blame på mye kode, samt flest commits. Dette er anses også naturlig iom. at techlead har hovedavsvar for git og er best på det.
+    Forutenom prosjektleder, er det også noe ubalanse blant de andre medlemmene. Dette kan begrunnes med at techlead har måttet klippe og lime en del ved oppståtte branch conflicts, og derav endt opp med å både ha git blame på mye kode, samt flest commits. Dette anses også naturlig iom. at techlead har hovedavsvar for git og har mest kompetanse på det.
 
 
 * Referater fra møter
@@ -77,14 +77,15 @@ Per dags dato har vi:
 * En godt optimisert pathfinding funksjon for hexgridet vårt som funker raskt og alltid gir en optimal path. Denne kan også utvides for å kunne unngå tiles som ikke er lovlig å gå på uten endringer til det vi allerede har gjort, bare legge til litt ekstra.
 * Gode tester for nesten alt til nå som kan testes med junit-tests. 
 * En synlig healthbar som følger spillfigur
-* Turnbased funskjon
+* Turnbased funksjon
 
-* Sette opp for hvert krav
-    * brukerhistorier (finnes i oblig 1 filen)
+* Sette opp for hvert krav (kan lokaliseres i oblig 1 filen)
+    * brukerhistorier
     * akseptansekriterier
     * arbeidsoppgaver (legges til etter hvert som de oppstår, i form av issues)
 
 * Har vi gjort justeringer i kravene til MVP? eventuelt hvorfor?
+    Vi har ikke gjort endringen i MVP, da MVP dekker de nødvendige funskjonene og ytterlige faktorene.
 
 * Oppgi hvilke bugs som finnes
     Disse er oppgitt i README filen.
@@ -93,6 +94,17 @@ PRODUKT OG KODE
 
 * Liste over "dette har vi fikset siden sist"
     * Turnbased funksjon
-    * Visudalisering av helathbar
+    * Visualisering av helathbar
+    * Ai kan angripe 
+    * Visuelaisering av score
+    * Opprettet map med forbudte tiles 
+    * Fikset attackrange fra alle Tiles
+
+Tester
+* Vi har tatt utgangspunkt i å lage automatiske tester for metodene i interfacet til de ulike klassene. For GUI-et har vi også lagt til manuelle tester med utgangspunkt i 
 
 * Klassediagram
+
+* Hva ville dere gjort noe annerledes om dere hadde gjort det igjen?
+    - Bruke flere abstrakte klasser til karakterer og inputprocessor istedenfor interface. Dette ville spart oss for mye dobbeltarbeid, samt gitt oss effektiv fleksibilitet ved endringer. 
+    - 
