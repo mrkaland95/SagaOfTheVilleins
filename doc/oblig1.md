@@ -32,7 +32,7 @@ A3 – Velge og tilpasse en prosjektmetodikk for teamet
 
 Når det kommer til prosjektmetodikk, har teamet blitt enige om følgende;
 
-* Parprogrammering er en metode som fungerer bra for å involvere medlem med svakere programmeringsferdigheter. Dette er derfor en metode vi har valgt å inkludere, men med et begrenset omfang.
+* Parprogrammering er en metode som fungerer bra for å  komme frem til god kode raskt, samt involvere medlem med svakere programmeringsferdigheter. Det øker også hyppigheten av å oppdage feil og ting som ikke ville fungert ved at flere ser på det. Dette er derfor en metode vi har valgt å inkludere.
 
 * Extreme Programming er en metodikk som ligger nært slik vi arbeider naturlig og gir god fleksibilitet.
 
@@ -72,22 +72,22 @@ Oppfølging av arbeid
 	* Oppfølging i løpet av arbeidsøkter
 	* Oppfølging i Discord fortløpende mellom møter/arbeidsøkter
 	* Oppfølging ved oppdateringer i git
-	* Digital kanban fil
 	* TODO tags i terminalen
 	* Timelister og prosjektlog
+	* Issue tracker
 
 
 Deling og oppbevaring av felles data
 * Har opprettet en onenote notatbok hvor alle har tilgang og kan skrive ned ideer, kommentarer og lignende.
 * Har opprettet et google sheet for logføring av timer og oppgaver
-* Koden oppbevares i develop brach i gitlab
+* Koden oppbevares i development brach i gitlab
 
 
 A3 - oversikt over forventet produkt
 
 
 Spesifikasjon
-* Det overordnede målet for applikasjonen er å bekjempe en rekke fiender for å komme til enden av mapet og bli "fri".
+* Det overordnede målet for applikasjonen er å bekjempe en rekke fiender for å bli "fri".
 
 
 Krav til MVP
@@ -156,12 +156,8 @@ Middels
 
 
 Under middels
-* Logføring av timearbeid per medlem utenom felles møtetider/arbeidsøkter
-* Fordeling av varierte arbeidsoppgaver
-
+* Prioritere strengt i henhold til MVP
 
 Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgende;
-* Aktiv bruk av timelister
 * Følge møteplan strukturert og systematisk
 
-Ting som har fungert under middels har vært basert på typisk oppstartsfase faktorer, samt gjennomføringsevne.  

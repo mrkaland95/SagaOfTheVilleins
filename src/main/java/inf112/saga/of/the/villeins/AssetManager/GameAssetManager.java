@@ -8,6 +8,7 @@ public class GameAssetManager {
     public static final String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
     public static final String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
     public static final String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
+    public static final String dragonAttackPath = "./assets/Sprites/Dragon/dragon_attack.png";
     public static final String testMapPath = "./assets/Maps/TiledRougelikeMap.tmx";
     public static final String menuBackgroundPath = "./assets/MenuAssets/MenuBackground.png";
 
@@ -16,6 +17,7 @@ public class GameAssetManager {
         manager.load(idleWarriorPath, Texture.class);
         manager.load(walkingWarriorPath, Texture.class);
         manager.load(idleSlimePath, Texture.class);
+        manager.load(dragonAttackPath, Texture.class);
 
         manager.load(menuBackgroundPath, Texture.class);
 

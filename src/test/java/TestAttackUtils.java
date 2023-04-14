@@ -16,5 +16,4 @@ public class TestAttackUtils {
 
         assertEquals(expectedResult, result);
     }
-
 }
