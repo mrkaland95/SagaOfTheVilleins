@@ -237,7 +237,7 @@ Tiende gruppetime
   Kl. 08:15-10:00
   Leon, Malene, Markus og Steffen
 
-  Elevte gruppetime
+  Ellevte gruppetime
   * Diskusjon av veien videre og prioriteringer
     - ai
     - endre slik at player og basemonster arver av en egen classe? må da skrive om testene også
@@ -252,16 +252,24 @@ Tiende gruppetime
     - Skrive features og lage manuelle tester for GUI-et basert på akseptansekriteriene 
     - Undersøke SpotBugs og SonarQube
     - Dokumentere i henhold til teori
-    - Skrive tester for characterFactory ++
     - Sørge for at vi svarer på tilbakemeldingene fra sist 
+    - Skrive tester for characterFactory ++
 
 
   Fredag 14/04-23
   Kl. 10:15-14:00
-  Medlemmer
+  Markus, Malene og Steffen
 
   Arbeidsøkt på realfagsbygget
-  * 
+  - Kommentere hva vi har testet og hvorfor
+  - Jobbe med ui
+  - Lese på kode og få et oversiktsbilde, samt danne forståelse for de ulike delene
+  - Lage oppdatert klassediagram
+  - Skrive features og lage manuelle tester for GUI-et basert på akseptansekriteriene 
+  - Undersøke SpotBugs og SonarQube
+  - Dokumentere i henhold til teori
+  - Sørge for at vi svarer på tilbakemeldingene fra sist 
+  - Skrive tester for characterFactory ++
   
 
 
