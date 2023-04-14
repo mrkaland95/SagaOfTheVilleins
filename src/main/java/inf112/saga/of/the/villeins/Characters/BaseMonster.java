@@ -93,11 +93,7 @@ public class BaseMonster implements ICharacter {
     void calculatePathToMove() {
         if (this.characterState == CharacterState.MOVING) return;
         if (this.endPosition == null) return;
-        TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-        TilePosition finalTile = HexGridMapPosition.findHexTile(endPosition);
-        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
-//        pathToMove.remove(pathToMove.size() - 1); // Life hack
-        this.tileMovement.setPath(pathToMove);
+        this.tileMovement.setPath(this.pathToMove);
         this.endPosition = null;
     }
 

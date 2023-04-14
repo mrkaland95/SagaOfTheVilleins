@@ -39,16 +39,15 @@ public class SimpleAI {
             List<TilePosition> tempTiles = new ArrayList<>();
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
-                    if (AttackUtils.characterInRange(targetCharacter, currentCharacter, currentCharacter.getAttackRange())) {
-                       
-                        TilePosition temp = new TilePosition(i, j);
+                    TilePosition temp = new TilePosition(i, j);
+                    if (AttackUtils.cubeDistance(temp, targetCharacter.getTilePosition()) <= currentCharacter.getAttackRange()) {
                         if (GameLoop.infoMap.isMovable(temp)) {
                             tempTiles.add(temp);
                         }
                     }
                 }
             }
-            System.out.print(tempTiles);
+            //System.out.print(tempTiles);
             // Finner den tilen som er nærmest karakteren, og går der.
             TilePosition smallestHeuristic = tempTiles.get(0);            
             for (TilePosition tilePosition : tempTiles) {
@@ -58,6 +57,7 @@ public class SimpleAI {
                         smallestHeuristic = tilePosition;
                 }
             }
+            
 
             // Finner "pathen" til nærmeste gyldige tile, som kan angripe "target"
             List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameLoop.infoMap);
