@@ -42,7 +42,7 @@ public class SagaOfTheVilleinsGame extends Game {
         shapeRenderer = new ShapeRenderer();
         bitmapFont = new BitmapFont();
 
-        // Uncomment this to when testing the main menu
+//         Uncomment this to when testing the main menu
 //         setScreen(new MainMenuScreen(this));
 
         // Uncomment/Comment this when testing other screens.

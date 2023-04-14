@@ -13,6 +13,9 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 * Man can zoome inn/ut ved å skrolle på musen, eller ved Z/X
 
 
+
+
+
 ### Kjøring 
 * Kompileres med "mvn package".
 * Kjøres med java -jar target/SagaOfTheVilleins-1.0-SNAPSHOT-fat.jar
