@@ -3,11 +3,8 @@ package inf112.saga.of.the.villeins.Characters.AI;
 import java.util.ArrayList;
 import java.util.List;
 
-import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Game.GameLoop;
-import inf112.saga.of.the.villeins.Utils.AttackUtils;
-import inf112.saga.of.the.villeins.Utils.TileMovement;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -29,35 +26,31 @@ public class SimpleAI {
     }
 
     public boolean AImakeDecision() {
+        if(currentCharacter.getActionPoints() == 0){
+            return false;
+        }
         if (targetCharacter == null) {
             return false;
         }
         else if (currentCharacter.attack(targetCharacter.getCurrentPosition())) {
-            currentCharacter.setActionPoints(0);
             return true;
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    TilePosition temp = new TilePosition(i, j);
-                    if (AttackUtils.cubeDistance(temp, targetCharacter.getTilePosition()) <= currentCharacter.getAttackRange()) {
-                        if (GameLoop.infoMap.isMovable(temp)) {
-                            tempTiles.add(temp);
-                        }
-                    }
+            for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameLoop.infoMap)) {
+                if(GameLoop.infoMap.isMovable(tilePosition)){
+                    tempTiles.add(tilePosition);
                 }
             }
-            //System.out.print(tempTiles);
+
             // Finner den tilen som er nærmest karakteren, og går der.
-            TilePosition smallestHeuristic = tempTiles.get(0);            
+
+            TilePosition smallestHeuristic = tempTiles.get(0);   
             for (TilePosition tilePosition : tempTiles) {
-            
                 if (AStarPathfinder.heuristic(tilePosition, currentCharacter.getTilePosition()) < 
                     AStarPathfinder.heuristic(smallestHeuristic, currentCharacter.getTilePosition())) {
                         smallestHeuristic = tilePosition;
                 }
             }
-            
 
             // Finner "pathen" til nærmeste gyldige tile, som kan angripe "target"
             List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameLoop.infoMap);

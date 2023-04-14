@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestAttackUtils {
 
     @Test
-    public void testCubeDistance() {
+    public void testHexDistance() {
         TilePosition position1 = new TilePosition(1, 2);
         TilePosition position2 = new TilePosition(3, 3);
 
-        int expectedResult = 3;
-        int result = AttackUtils.cubeDistance(position1, position2);
+        double expectedResult = 3;
+        double result = AttackUtils.hexDistance(position1, position2);
 
         assertEquals(expectedResult, result);
     }
