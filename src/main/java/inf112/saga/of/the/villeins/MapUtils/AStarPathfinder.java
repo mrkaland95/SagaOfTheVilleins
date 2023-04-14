@@ -59,7 +59,7 @@ public class AStarPathfinder {
         return path;
     }
 
-    private static ArrayList<TilePosition> getNeighbors(TilePosition position, Imap Imap) {
+    public static ArrayList<TilePosition> getNeighbors(TilePosition position, Imap Imap) {
 
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();

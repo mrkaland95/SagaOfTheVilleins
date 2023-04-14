@@ -11,12 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 public class GameController {
 
@@ -48,7 +45,6 @@ public class GameController {
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
-        
         if(currentCharacter instanceof Player) {
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
@@ -58,16 +54,16 @@ public class GameController {
             else if (movePosition != null && currentCharacter.getCharacterState() == CharacterState.IDLE) {
                 currentCharacter.setEndPosition(movePosition);
             }
-
+            if(this.currentProcessor.checkTurn()){
+                this.currentProcessor.endTurn();
+                nextTurn();        
+            }    
             // Update the IMap with player positions here.
 
         }
-        
-        if(this.currentProcessor.checkTurn()){
-            this.currentProcessor.endTurn();
-            nextTurn();        
+        else if(currentCharacter.getActionPoints() <= 0){
+                nextTurn();
         }
-
     }
 
     public ICharacter getPlayerCharacter() {
@@ -98,6 +94,7 @@ public class GameController {
         
         ICharacter currentTurn = turnList.poll();
         turn(currentTurn);
+        currentTurn.setActionPoints(2);
         turnList.add(currentTurn);
          
     }

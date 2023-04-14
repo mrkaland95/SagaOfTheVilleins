@@ -67,7 +67,7 @@ public class AttackUtils {
     public static boolean characterInRange(ICharacter character, ICharacter character2, int attackRange) {
         TilePosition character1TilePosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
         TilePosition character2TilePosition = HexGridMapPosition.findHexTile(character2.getCurrentPosition());
-        return attackRange >= cubeDistance(character1TilePosition, character2TilePosition);
+        return attackRange >= hexDistance(character1TilePosition, character2TilePosition);
     }
 
 
@@ -79,25 +79,24 @@ public class AttackUtils {
      * @param tile2
      * @return Antall tiles imellom tile1 og tile2.
      */
-    public static int cubeDistance(TilePosition tile1, TilePosition tile2) {
-        int x1 = tile1.x();
-        int x2 = tile2.x();
 
-        int y1 = tile1.y();
-        int y2 = tile2.y();
+    public static double hexDistance(TilePosition tile1, TilePosition tile2) {
+        int a0 = tile1.x();
+        int a1 = tile2.x();
 
-        int deltaX = Math.abs(x1 - x2);
-        int deltaY = Math.abs(y1 - y2);
-        if(deltaX != 0 && deltaY != 0){
-            return (Math.abs(deltaX - deltaY)/2);
-        }
-        else{
-            return (Math.abs(deltaX - deltaY));
-        }
+        int b0 = tile1.y();
+        int b1 = tile2.y();
 
+        double x0 = a0 - Math.floor(b0/2);
+        double y0 = b0;
+        double x1 = a1 - Math.floor(b1/2);
+        double y1 = b1;
 
-  
+        double dx = x1 - x0;
+        double dy = y1 - y0;
 
+        double max1 = Math.max(Math.abs(dx), Math.abs(dy));
+        return Math.max(max1, Math.abs(dx+dy));
 
     }
 }

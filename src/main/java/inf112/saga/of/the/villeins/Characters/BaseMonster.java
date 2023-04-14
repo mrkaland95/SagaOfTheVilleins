@@ -6,7 +6,6 @@ import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
@@ -201,6 +200,7 @@ public class BaseMonster implements ICharacter {
     public void applyDamage(int damage, ICharacter character) {
         int currentHealth = character.getCurrentHealth() - damage;
         character.setHealth(currentHealth);
+        setActionPoints(0);
     }
 
     @Override
