@@ -59,7 +59,7 @@ PROSJEKTRAPPORT
 
 
 * Referater fra møter
-    Disse kan lokaliseres i egen fil; Porsjektlog.md.
+    Disse kan lokaliseres i egen fil; Prosjektlog.md.
 
 * Enighet om forbedringspunkter fra retrospektivet
    - Flinkere på å la alle medlemmene prate hver for seg og legge inn god tid
@@ -71,16 +71,18 @@ KRAV OG SPESIFIKASJON
 * Hvilke krav vi har prioritert og hva vi har gjort siden sist:
 
 
-Per dags dato har vi:
+Per dags dato har vi disse featurene:
 * En spillfigur med animasjon som kan beveges vertikalt, horisontalt og diagonalt. 
 * Et tile-basert map med koordinater som spillfiguren kan stå og bevege seg på.
 * Et turn-system som separerer spillere og fiender/monstere, og stopper spilleren fra å gjøre endringer når det ikke er deres tur.
 * En godt optimisert pathfinding funksjon for hexgridet vårt som funker raskt og alltid gir en optimal path. Denne kan også utvides for å kunne unngå tiles som ikke er lovlig å gå på uten endringer til det vi allerede har gjort, bare legge til litt ekstra.
 * Gode tester for omtrentlig alt som kan testes med junit-tests. 
 * En synlig healthbar som følger spillfigur
-* Turnbased funksjon
+* (Turnbased funksjon) avskrudd for øyeblikket
 * Tiles som ikke kan benyttes av spillfigurene  
-* 
+* Visualisering av score
+* Ai som kan angripe
+* Spesifisert attackrange i henhold til figurer
 
 * Sette opp for hvert krav (kan lokaliseres i oblig 1 filen)
     * brukerhistorier
@@ -96,12 +98,14 @@ Per dags dato har vi:
 PRODUKT OG KODE
 
 * Liste over "dette har vi fikset siden sist"
-    * Turnbased funksjon
-    * Visualisering av helathbar
+    * (Turnbased funksjon) ikke aktiv per nå
+    * Visualisering av healthbar
     * Ai kan angripe 
-    * Visuelaisering av score
+    * Visualisering av score
     * Opprettet map med forbudte tiles 
     * Fikset attackrange fra alle tiles
+    * Bevegelses input fullføres før et nytt kan bli satt
+    * Fikset glitch ved ankomst til nye tiles på veg til ny destinasjon
 
 Tester
 * Vi har tatt utgangspunkt i å lage automatiske tester for metodene i interfacet til de ulike klassene. For GUI-et har vi også lagt til manuelle tester med utgangspunkt i akseptansekriteriene.

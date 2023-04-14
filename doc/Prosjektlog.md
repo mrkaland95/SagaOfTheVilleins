@@ -258,7 +258,7 @@ Tiende gruppetime
 
   Fredag 14/04-23
   Kl. 10:15-14:00
-  Markus, Malene og Steffen
+  Markus, Malene og Steffen (Markus måtte gå tidlig)
 
   Arbeidsøkt på realfagsbygget
   - Kommentere hva vi har testet og hvorfor
@@ -269,7 +269,5 @@ Tiende gruppetime
   - Undersøke SpotBugs og SonarQube
   - Dokumentere i henhold til teori
   - Sørge for at vi svarer på tilbakemeldingene fra sist 
-  - Skrive tester for characterFactory ++
-  
 
 

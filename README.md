@@ -11,9 +11,7 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 * Flytt karakteren rundt ved å trykke med høyre museknapp
 * Man kan flytte kamera ved å trykke midt/skrolle knappen, eller ved WASD.
 * Man can zoome inn/ut ved å skrolle på musen, eller ved Z/X
-
-
-
+* Angripe andre karakterer med venstre museknapp
 
 
 ### Kjøring 
@@ -23,7 +21,6 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 
 ### Kjente feil
 
-* Spriten blir rendret ned fra venstre hjørnet, heller enn fra midten av "Spriten".
 * For øyeblikket må du sørge for at "assets" mappen ligger i samme rotmappe som den kompilerte pakken for at programmet skal kunne kjøres
 * Får opp pipeline failed. Mistenker at spillet ikke kompileres med Linux pga case-sensitivitet.
 * På OS X følger ikke spriten med om en endrer størrelsen på vinduet. Feilen løses foreløpig ved å kommentere ut setWindowMode.
@@ -37,5 +34,7 @@ LibGDX
 Markus - Laget tiles og kart
 
 Leon - Laget "Spritene" og animasjonene.
+
+Malene - Laget drage og spøkelse "spritene"
 
 Looka.com - Generert logo/fremside
