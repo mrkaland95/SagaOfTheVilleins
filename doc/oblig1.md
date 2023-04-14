@@ -136,13 +136,14 @@ Akseptasekriterier
 3. Gitt at jeg har gjort en handling i spillet, så skal jeg kunne se konsekvensen av den handlingen
 4. Gitt at jeg har forlatt spillet, så skal jeg kunne komme tilbake til der hvor jeg var i utgangspunktet
 
+
 ### Manuelle tester.
 1. Test om spilleren(ridderen i rustning) går til midten av en tile/flis når man trykker på den, og ikke kan gå utenom tiles.
 2. Test om spilleren går korteste vei til der man trykker.
 3. Sjekke visuelt om det går ann å angripe andre karakterer, og at livet visuelt går ned.
 4. Se at fiender prøver å angripe spilleren når spilleren sin "turn" er over(trykk "n" for å gå til neste turn)
 5. Se at det går ann å flytte på kameraet ved å bruke "WASD" og/eller ved på trykke på midtre museknapp
-
+6. Sjekke at det går ann å zoome in/ut ved å scrolle musen, og med Z/X. Og at det ikke går ann å zoome igjennom kartet.
 
 
 A5 - oppsummering
