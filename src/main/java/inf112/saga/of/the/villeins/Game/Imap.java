@@ -3,6 +3,9 @@ package inf112.saga.of.the.villeins.Game;
 import java.util.HashMap;
 import java.util.List;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
@@ -55,8 +58,15 @@ public class Imap {
         }
     }
 
-
-
+    public void findIllegalTiles(TiledMap tileMap){
+        TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
+        tileMap.getTileSets().getTileSet(6);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.println(tiledLayer.getCell(i, j).getTile());
+            }
+        }
+    }
 
 //        ArrayList<Boolean> endList = new ArrayList<>();
 //        endList.add(false);
