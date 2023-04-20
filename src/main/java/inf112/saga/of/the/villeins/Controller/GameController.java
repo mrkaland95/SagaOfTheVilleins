@@ -45,6 +45,7 @@ public class GameController {
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
+
         if(currentCharacter instanceof Player) {
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
@@ -100,7 +101,7 @@ public class GameController {
     }
 
         /*
-        *   This method initializes the processors needed for the game.
+        *   This method initializes everything needed for the game.
         *
         *   Add new processors to this method as they are created.
         */

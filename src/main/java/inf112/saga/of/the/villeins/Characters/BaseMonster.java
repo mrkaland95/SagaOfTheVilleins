@@ -92,6 +92,10 @@ public class BaseMonster implements ICharacter {
     void calculatePathToMove() {
         if (this.characterState == CharacterState.MOVING) return;
         if (this.endPosition == null) return;
+        if (getActionPoints() == 0) return; 
+        while(this.pathToMove.size() > getActionPoints()+1){
+            this.pathToMove.remove(pathToMove.size()-1);
+        }
         this.tileMovement.setPath(this.pathToMove);
         this.endPosition = null;
     }

@@ -45,6 +45,7 @@ public class TileMovement {
         character.setCurrentPosition(newPosition);
 
         if (newPosition.equals(nextTileCoordinate)) {
+            character.setActionPoints(character.getActionPoints()-1);
             pathIndex++;
         }
     }
