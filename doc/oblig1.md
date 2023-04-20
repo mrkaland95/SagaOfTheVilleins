@@ -15,7 +15,6 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
 
 A2 – røff beskrivelse av hva som inngår i spillet
 
-
 * Spillfigur som kan gå frem, tilbake og diagonalt  
 * Todimensjonal verden  
 	* Plattform bestående av hexagon tiles som spillfiguren kan stå og bevege seg på   
@@ -157,15 +156,15 @@ Bra
 * Diskusjonsprosesser i henhold til spillet, samt å ta valg deretter
 * Opparbeidet god mengde kode med ryddig struktur
 * Hyppig pushing til git
+* Holde oversikt over hva alle medlemmene har gjort til nåværende tidspunkt
 
 
 Middels
-* Holde oversikt over hva alle medlemmene har gjort til nåværende tidspunkt
-* Dokumentere ideer til et felles sted
+* Prioritere strengt i henhold til MVP
 
 
 Under middels
-* Prioritere strengt i henhold til MVP
+* 
 
 Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgende;
 * Følge møteplan strukturert og systematisk

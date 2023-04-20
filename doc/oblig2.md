@@ -139,6 +139,3 @@ PRODUKT OG KODE
 
 * Klassediagram
 Se vedlagt fil "Klassediagram_uke_10.pdf" i doc-mappen.
-
-
-
