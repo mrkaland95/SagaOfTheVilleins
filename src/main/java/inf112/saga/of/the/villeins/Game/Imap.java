@@ -3,8 +3,15 @@ package inf112.saga.of.the.villeins.Game;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.plugins.tiff.TIFFDirectory;
+
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
+import com.badlogic.gdx.utils.SortedIntList.Iterator;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
@@ -36,7 +43,7 @@ public class Imap {
     }
 
     public void setMoveable(TilePosition tile, Boolean moveable) {
-        this.map.put(tile, moveable);
+        map.put(tile, moveable);
     }
 
     public void onMove(TilePosition start, TilePosition end){
@@ -60,10 +67,11 @@ public class Imap {
 
     public void findIllegalTiles(TiledMap tileMap){
         TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
-        tileMap.getTileSets().getTileSet(6);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.println(tiledLayer.getCell(i, j).getTile());
+                if(tiledLayer.getCell(i, j).getTile().getId() == 6){
+                    map.put(new TilePosition(i, j), false);
+               }
             }
         }
     }

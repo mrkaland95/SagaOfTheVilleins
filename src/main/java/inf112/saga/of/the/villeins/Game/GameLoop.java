@@ -45,6 +45,7 @@ public class GameLoop implements Screen {
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
 		infoMap = new Imap(height, width);
+		infoMap.findIllegalTiles(map);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
@@ -125,6 +126,7 @@ public class GameLoop implements Screen {
 		gameUI.drawScore((IPlayable) gameController.getPlayerCharacter());
 
 		infoMap.reset(characterList);
+		infoMap.findIllegalTiles(map);
 	}
 	
 	@Override
