@@ -42,7 +42,9 @@ public class GameLoop implements Screen {
 	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map) {
 		this.map = map;
 		this.game = game;
-		infoMap = new Imap(20, 20);
+		int width = map.getProperties().get("width", Integer.class);
+		int height = map.getProperties().get("height", Integer.class);
+		infoMap = new Imap(height, width);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
