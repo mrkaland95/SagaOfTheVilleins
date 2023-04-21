@@ -270,4 +270,42 @@ Tiende gruppetime
   - Dokumentere i henhold til teori
   - Sørge for at vi svarer på tilbakemeldingene fra sist 
 
+  Torsdag 20/04-23
+  Kl. 08:15-10:00
+  Leon, Markus, Malene og Steffen 
+
+  Tolvte gruppetime
+  - Fikset med actionpoints for fiende
+  - Startet på abstrakt klasse for karakterene
+  - Lagd attack sprite for spøkelse
+  - Sørge for at vanntiles får riktige egenskaper
+  - Begynt på presentasjon
+  - Føre dokumentasjon til oblig4 
+  
+  Agenda videre
+  - Implimentere lyd
+  - Skrive tester for å dekke nye justeringer
+  - Forberede presentasjon videre
+  - Implimentere inventory
+  - Lage knapp med valg om å avslutte/ info om funksjoner osv. 
+  - Fortsette med den abstrakte klassen
+  - Teste gamecontroller, gameloop, +++
+
+Fredag 21/04-23
+Kl. 10:30-13:00
+Leon, Markus, Malene og Steffen
+
+Arbeidsøkt på realfagsbygget
+- Videreutvikle abstrakt klasse
+- Skrive retrospektiv fra prosjektet i sin helhet, i tillegg til ytterligere dokumentasjon
+- UI
+
+Agenda videre
+- Utvikle at spillfigurene endrer seg etter hver kamp
+- Implimentere lyd
+- Skrive tester for å dekke nye justeringer
+- Implimentere inventory
+- Lage knapp med valg om å avslutte/ info om funksjoner osv. 
+- Teste gamecontroller, gameloop, +++
+- Lage klassediagram
 

@@ -9,8 +9,4 @@ public interface ICharacter extends IMovable2D, IStats, IAttackCapable {
      * rendering its sprite, attack etc. Should be called in this function.
      */
     void update();
-
-    void setTargetCharacter(ICharacter target);
-
-    ICharacter getTargetCharacter();
 }

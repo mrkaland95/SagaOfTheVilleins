@@ -75,16 +75,6 @@ public class Imap {
             }
         }
     }
-//        ArrayList<Boolean> endList = new ArrayList<>();
-//        endList.add(false);
-//        endList.add(true);
-//        map.put(end, endList);
-//    }
-
-//    public void setMap(TilePosition tile, ArrayList<Boolean>) {
-//        map.put()
-//    }
-
 
     
 }
