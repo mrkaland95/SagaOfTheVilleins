@@ -75,7 +75,6 @@ public class Imap {
             }
         }
     }
-
 //        ArrayList<Boolean> endList = new ArrayList<>();
 //        endList.add(false);
 //        endList.add(true);

@@ -28,6 +28,7 @@ public class SagaOfTheVilleinsGame extends Game {
     public GameAssetManager assets;
     private List<TiledMap> maps = new ArrayList<>();
     private int mapIndex = 0;
+    private int stageIndex = 1;
 
     @Override
     public void create() {
@@ -46,7 +47,7 @@ public class SagaOfTheVilleinsGame extends Game {
 //         setScreen(new MainMenuScreen(this));
 
         // Uncomment/Comment this when testing other screens.
-        setScreen(new GameLoop(this, getCurrentMap()));
+        setScreen(new GameLoop(this, getCurrentMap(), stageIndex));
     }
 
     @Override
@@ -62,4 +63,17 @@ public class SagaOfTheVilleinsGame extends Game {
         return this.maps.get(mapIndex);
     }
 
+    public int getStageIndex(){
+        return stageIndex;
+    }
+
+    public void nextStage(){
+        stageIndex += 1;
+        setScreen(new GameLoop(this, getCurrentMap(), stageIndex));
+    }
+
+    public void resetGame(){
+        stageIndex = 1;
+        setScreen(new GameLoop(this, getCurrentMap(), stageIndex));
+    }
 }

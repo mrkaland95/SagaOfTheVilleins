@@ -14,6 +14,7 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.Controller.GameState;
 import inf112.saga.of.the.villeins.UI.GameUI;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameLoop implements Screen {
-	Game game;
+	SagaOfTheVilleinsGame game;
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
 	BitmapFont bitmapFont;
@@ -36,12 +37,15 @@ public class GameLoop implements Screen {
 	private final GameController gameController;
 	private final GameUI gameUI;
 	private final CharacterFactory characterFactory;
+	private final GameStage gameStage;
+	private int stage;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
 
-	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map) {
+	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, int stage) {
 		this.map = map;
 		this.game = game;
+		this.stage = stage;
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
 		infoMap = new Imap(height, width);
@@ -68,8 +72,9 @@ public class GameLoop implements Screen {
 		playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
 		dragonAnimation 	   = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
 
+		// characterFactory burde endres basert på current stage
 		characterFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
-
+		gameStage = new GameStage(stage, characterFactory);
 		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
 //		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
 //		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
@@ -103,6 +108,12 @@ public class GameLoop implements Screen {
 	 */
 	@Override
 	public void render (float deltaTime) {
+		if(gameController.getGameState() == GameState.GAMEOVER){
+			this.game.resetGame();
+		}
+		if(gameController.getGameState() == GameState.GAMEWON){
+			this.game.nextStage();
+		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		camera.update();
 		uiCamera.update();
@@ -112,12 +123,13 @@ public class GameLoop implements Screen {
 
 		mapRenderer.setView(camera);
 		mapRenderer.render();
-		gameController.update();
-
+		
 		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
 		// Men dette vil fungere for øyeblikket.
+		
 		characterList.removeIf(character -> character.getCurrentHealth() == 0);
-
+		gameController.update(characterList);
+		
 		for (ICharacter character : characterList) {
 			character.update();
 			gameUI.drawHealthbar(character);

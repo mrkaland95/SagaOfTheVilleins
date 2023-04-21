@@ -43,7 +43,7 @@ public class MainMenuScreen implements Screen {
             @Override
             public boolean keyDown(int keycode) {
                 if (keycode == Input.Keys.SPACE) {
-                    game.setScreen(new GameLoop(game, game.getCurrentMap()));
+                    game.setScreen(new GameLoop(game, game.getCurrentMap(), game.getStageIndex()));
                 }
                 return false;
             }

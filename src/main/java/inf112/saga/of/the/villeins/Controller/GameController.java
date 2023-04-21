@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -11,21 +12,22 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
-
     private List<ICharacter> characterList;
     private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
     private LinkedList<ICharacter> turnList;
     private ICharacter playerCharacter;
     private ICharacter currentCharacter;
+    private GameState gameState;
 
-    public GameController(List<ICharacter> characterList, OrthographicCamera camera){
-        this.characterList = characterList;
+    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera){
+        this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.processorList = new HashMap<>();
         this.currentProcessor = null;
@@ -39,12 +41,19 @@ public class GameController {
         return this.characterList.size();
     }
 
-    public void update(){
+    public void update(List<ICharacter> currentCharList){
         /*
          * This method should be added to render function in Game.java to keep updating the controller with correct values.
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
+        characterList = currentCharList;
+        if(playerCount() == 1 || getPlayer()){
+            gameState = GameState.GAMEWON;
+        }
+        else if(!getPlayer()){
+            gameState = GameState.GAMEOVER;
+        }
 
         if(currentCharacter instanceof Player) {
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
@@ -106,9 +115,10 @@ public class GameController {
         *   Add new processors to this method as they are created.
         */
     private void initializeGame(OrthographicCamera camera){
+        gameState = GameState.PLAYING;
         initializeProcessors(camera);
         turnList.addAll(characterList);
-        initialGetPlayer();
+        getPlayer();
         nextTurn();
     }
 
@@ -123,11 +133,17 @@ public class GameController {
         Gdx.input.setInputProcessor(player);
     }
 
-    private void initialGetPlayer(){
+    private boolean getPlayer(){
         for (ICharacter character : characterList) {
             if(character instanceof Player){
                 this.playerCharacter = character;
+                return true;
             }
         }
+        return false;
+    }
+
+    public GameState getGameState(){
+        return gameState;
     }
 }   
