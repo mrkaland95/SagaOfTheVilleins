@@ -62,7 +62,7 @@ Kommunikasjon mellom møter
 
 
 Arbeidsfordeling
-* Da alle medlemmene har ulik bakgrunn, har det frem til nå vært intuitivt å bestemme hvem som skal ha hvilke arbeidsoppgaver. Kartleggingen av medlemmenes ferdigheter har også bidratt til at vi enkelt og raskt kan få en ide om hvem som kan utføre hva. Har tatt i bruk en digital Kanban hvor arbeidsoppgaver også blir reservert, gjennomført og  forflyttet i dokumentet.
+* Da alle medlemmene har ulik bakgrunn, har det frem til nå vært intuitivt å bestemme hvem som skal ha hvilke arbeidsoppgaver. Kartleggingen av medlemmenes ferdigheter har også bidratt til at vi enkelt og raskt kan få en ide om hvem som kan utføre hva.
 
 
 Oppfølging av arbeid
@@ -143,29 +143,11 @@ Akseptasekriterier
 4. Se at fiender prøver å angripe spilleren når spilleren sin "turn" er over(trykk "n" for å gå til neste turn)
 5. Se at det går ann å flytte på kameraet ved å bruke "WASD" og/eller ved på trykke på midtre museknapp
 6. Sjekke at det går ann å zoome in/ut ved å scrolle musen, og med Z/X. Og at det ikke går ann å zoome igjennom kartet.
+7. Test om spilleren kan gå på forbudte tiles.
+8. Sjekk at spriten følger med ved endring av størrelse på vinduet.
+9. Sjekk at lyd blir avspilt.
+10. Sjekk at spillet lukker seg ved å trykke på knappen om å avslutte. 
 
 
 A5 - oppsummering
-
-Frem til nå har følgende gått bra, middels og under middels:
-
-Bra
-* Kommunikasjon mellom møter
-* Oppmøte på avtalte tidspunkt
-* Bistand mellom medlemmer ved tekniske problemer
-* Diskusjonsprosesser i henhold til spillet, samt å ta valg deretter
-* Opparbeidet god mengde kode med ryddig struktur
-* Hyppig pushing til git
-* Holde oversikt over hva alle medlemmene har gjort til nåværende tidspunkt
-
-
-Middels
-* Prioritere strengt i henhold til MVP
-
-
-Under middels
-* 
-
-Som tiltak for å bedre status til neste gang ønsker vi å implimentere følgende;
-* Følge møteplan strukturert og systematisk
-
+Ligger som retrospektiv i oblig4. 
