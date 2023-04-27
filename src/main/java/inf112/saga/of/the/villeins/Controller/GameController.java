@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
@@ -25,6 +23,7 @@ public class GameController {
     private ICharacter playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
+
 
     public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera){
         this.characterList = initialCharacterList;
@@ -48,7 +47,7 @@ public class GameController {
          * 
          */
         characterList = currentCharList;
-        if(playerCount() == 1 || getPlayer()){
+        if(playerCount() == 1 && getPlayer()){
             gameState = GameState.GAMEWON;
         }
         else if(!getPlayer()){
@@ -56,6 +55,7 @@ public class GameController {
         }
 
         if(currentCharacter instanceof Player) {
+            System.out.println(currentCharacter.getActionPoints());
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
             if (attackPosition != null) {
@@ -72,7 +72,7 @@ public class GameController {
 
         }
         else if(currentCharacter.getActionPoints() <= 0){
-                nextTurn();
+            nextTurn();
         }
     }
 
@@ -80,7 +80,7 @@ public class GameController {
         return this.playerCharacter;
     }
 
-    public void turn(ICharacter currentChar){
+    public void SetHumanOrAITurn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
         if(currentChar instanceof Player){
@@ -103,7 +103,7 @@ public class GameController {
          */
         
         ICharacter currentTurn = turnList.poll();
-        turn(currentTurn);
+        SetHumanOrAITurn(currentTurn);
         currentTurn.setActionPoints(2);
         turnList.add(currentTurn);
          
