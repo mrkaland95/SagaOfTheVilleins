@@ -49,7 +49,7 @@ public class GameLoop implements Screen {
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
 		infoMap = new Imap(height, width);
-		infoMap.addIllegalTiles(map);
+		infoMap.findIllegalTiles(map);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
