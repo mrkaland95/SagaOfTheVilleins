@@ -309,3 +309,9 @@ Agenda videre
 - Teste gamecontroller, gameloop, +++
 - Lage klassediagram
 
+Torsdag 27/04-23
+Kl. 8.00 - 10.00
+Markus, Steffen
+
+Gruppetime på Vilvite:
+* Parkodet og debugget
