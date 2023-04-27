@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +12,6 @@ import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Characters.Player;
-import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
@@ -27,6 +25,7 @@ public class GameController {
     private GameState gameState;
     private InactivePlayerProcessor inActiveProcessor;
     private ActivePlayerProcessor activeProcessor;
+
 
     public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera){
         this.characterList = initialCharacterList;
@@ -50,7 +49,7 @@ public class GameController {
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
-        
+
         characterList = currentCharList;
         if(playerCount() == 1 && getPlayer()){
             gameState = GameState.GAMEWON;
