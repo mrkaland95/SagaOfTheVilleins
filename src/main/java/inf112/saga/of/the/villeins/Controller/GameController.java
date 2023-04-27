@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
@@ -17,26 +18,28 @@ import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
     private List<ICharacter> characterList;
-    private HashMap<String, IInputProcessor> processorList;
     public IInputProcessor currentProcessor;
     private LinkedList<ICharacter> turnList;
     private ICharacter playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
+    private InactivePlayerProcessor inActiveProcessor;
+    private ActivePlayerProcessor activeProcessor;
 
 
     public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera){
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
-        this.processorList = new HashMap<>();
         this.currentProcessor = null;
         this.playerCharacter = null;
         this.currentCharacter = null;
+        activeProcessor = new ActivePlayerProcessor(camera);
+        inActiveProcessor = new InactivePlayerProcessor(camera);
 
         initializeGame(camera);
     }
 
-    public int playerCount(){
+    private int playerCount(){
         return this.characterList.size();
     }
 
@@ -46,6 +49,7 @@ public class GameController {
          * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
          * 
          */
+
         characterList = currentCharList;
         if(playerCount() == 1 && getPlayer()){
             gameState = GameState.GAMEWON;
@@ -54,8 +58,7 @@ public class GameController {
             gameState = GameState.GAMEOVER;
         }
 
-        if(currentCharacter instanceof Player) {
-            System.out.println(currentCharacter.getActionPoints());
+        if(currentCharacter instanceof IPlayable) {
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
             if (attackPosition != null) {
@@ -71,8 +74,12 @@ public class GameController {
             // Update the IMap with player positions here.
 
         }
-        else if(currentCharacter.getActionPoints() <= 0){
+        else if(currentCharacter.getActionPoints() == 0){
             nextTurn();
+        }
+        else {
+            System.out.println(currentCharacter.getActionPoints());
+            System.out.println(currentCharacter.toString());
         }
     }
 
@@ -80,33 +87,35 @@ public class GameController {
         return this.playerCharacter;
     }
 
-    public void SetHumanOrAITurn(ICharacter currentChar){
+    private void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
-        if(currentChar instanceof Player){
-            currentProcessor = processorList.get("player");
+        if(currentChar instanceof IPlayable){
+            currentProcessor = activeProcessor;
             Gdx.input.setInputProcessor(currentProcessor);
         }
         else{
             this.currentCharacter.setTargetCharacter(playerCharacter);
-            currentProcessor = processorList.get("notPlayer");
+            currentProcessor = inActiveProcessor;
             Gdx.input.setInputProcessor(currentProcessor);
             currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
         }
     }
 
-    public void nextTurn(){
+    private void nextTurn(){
         /*
          * Sets the turn to the next charcter in turnList
          * Should also change which processor in use based on if its a playerturn or AI-turn
          * Maybe also use turnConter if needed
          */
-        
-        ICharacter currentTurn = turnList.poll();
-        SetHumanOrAITurn(currentTurn);
-        currentTurn.setActionPoints(2);
-        turnList.add(currentTurn);
-         
+
+         /*
+          * TODO: MÅ FIKSE AT LISTEN BLIR OPPDATERT NÅR NOEN DØR
+          */
+        ICharacter currentTurnChar = turnList.poll();
+        turn(currentTurnChar);
+        currentTurnChar.setActionPoints(2);
+        turnList.add(currentTurnChar);
     }
 
         /*
@@ -123,14 +132,8 @@ public class GameController {
     }
 
     private void initializeProcessors(OrthographicCamera camera){
-        IInputProcessor player = new ActivePlayerProcessor(camera);
-        IInputProcessor notPlayer = new InactivePlayerProcessor(camera);
-
-        processorList.put("notPlayer", notPlayer);
-        processorList.put("player", player);
-
-        this.currentProcessor = player;
-        Gdx.input.setInputProcessor(player);
+        this.currentProcessor = activeProcessor;
+        Gdx.input.setInputProcessor(activeProcessor);
     }
 
     private boolean getPlayer(){

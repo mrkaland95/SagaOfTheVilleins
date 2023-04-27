@@ -82,11 +82,11 @@ public class GameLoop implements Screen {
 
 		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
 
-		ICharacter dragon = characterFactory.getDragonCharacter(new TilePosition(1, 1));
+		//ICharacter dragon = characterFactory.getDragonCharacter(new TilePosition(1, 1));
 
 		characterList.add(player);
 		characterList.add(slime);
-		characterList.add(dragon);
+		//characterList.add(dragon);
 //		characterList.add(slime2);
 //		characterList.add(slime3);
 //		characterList.add(slime4);

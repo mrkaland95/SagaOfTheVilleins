@@ -45,7 +45,13 @@ public class TileMovement {
         character.setCurrentPosition(newPosition);
 
         if (newPosition.equals(nextTileCoordinate)) {
-            character.setActionPoints(character.getActionPoints()-1);
+            /*
+             * Pathen inneholder den tilen som karakteren står på, så vi må passe på å ikke trekke actionpoints før karakteren har
+             * beveget seg
+             */
+            if(pathIndex > 0){
+                character.setActionPoints(character.getActionPoints()-1);
+            }
             pathIndex++;
         }
     }
