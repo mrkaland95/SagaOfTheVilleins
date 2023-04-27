@@ -138,7 +138,7 @@ public class GameLoop implements Screen {
 		gameUI.drawScore((IPlayable) gameController.getPlayerCharacter());
 
 		infoMap.reset(characterList);
-		infoMap.addIllegalTiles(map);
+		infoMap.findIllegalTiles(map);
 	}
 	
 	@Override
