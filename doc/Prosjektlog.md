@@ -315,3 +315,4 @@ Markus, Steffen
 
 Gruppetime på Vilvite:
 * Parkodet og debugget
+* Fikset oppførsel til AI, "turn" systemet og "action points"

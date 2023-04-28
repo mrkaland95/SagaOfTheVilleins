@@ -95,6 +95,7 @@ public class GameLoop implements Screen {
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
 		// Inits camera and sets it's starting position and zoom.
+//		camera.lookAt(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.zoom = 1.5f;
 
@@ -108,10 +109,10 @@ public class GameLoop implements Screen {
 	 */
 	@Override
 	public void render (float deltaTime) {
-		if(gameController.getGameState() == GameState.GAMEOVER){
+		if(gameController.getGameState() == GameState.GAME_OVER){
 			this.game.resetGame();
 		}
-		if(gameController.getGameState() == GameState.GAMEWON){
+		if(gameController.getGameState() == GameState.MAP_WON){
 			this.game.nextStage();
 		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
@@ -156,9 +157,11 @@ public class GameLoop implements Screen {
 	@Override
 	public void resize(int width, int height){
 
-//		uiCamera.viewportWidth = width;
-//		uiCamera.viewportHeight = height;
-    	camera.setToOrtho(false, width, height);
+		camera.viewportWidth = width;
+		camera.viewportHeight = height;
+//		camera.setToOrtho(false);
+		camera.update();
+//    	camera.setToOrtho(false, width, height);
     	uiCamera.setToOrtho(false, width, height);
 	}
 

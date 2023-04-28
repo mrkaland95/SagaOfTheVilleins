@@ -40,7 +40,7 @@ public class AttackUtils {
 
         System.out.println("Dealing damage: " + damage);
         character.applyDamage(damage, opponent);
-        character.setActionPoints(0);
+        character.setCurrentActionPoints(0);
         int opponentHealth = opponent.getCurrentHealth();
         System.out.println("Opponent's current health is: " + opponentHealth);
         return true;

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface IMovable2D {
 
-    int getActionPoints();
-    void setActionPoints(int actionPoints);
+    int getCurrentActionPoints();
+    void setCurrentActionPoints(int actionPoints);
     TilePosition getTilePosition();
     void setTilePosition(TilePosition tilePosition);
     /**

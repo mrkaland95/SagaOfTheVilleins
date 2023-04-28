@@ -6,8 +6,18 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
+
 
 import java.util.List;
 
@@ -19,13 +29,20 @@ public class GameUI {
     private final GlyphLayout layout;
     private final SpriteBatch spriteBatch;
     private final OrthographicCamera uiCamera;
+    private final Stage stage;
+    private final Skin skin;
+    private final Table contextMenu;
 
     public GameUI(ShapeRenderer renderer, BitmapFont bitmapFont, SpriteBatch spriteBatch, OrthographicCamera uiCamera) {
         this.renderer = renderer;
         this.font = bitmapFont;
         this.spriteBatch = spriteBatch;
         this.uiCamera = uiCamera;
+        this.stage = new Stage(new ScreenViewport(uiCamera));
         this.layout = new GlyphLayout();
+        this.skin = new Skin();
+
+        this.contextMenu = new Table(skin);
     }
 
 
@@ -71,32 +88,29 @@ public class GameUI {
 
 
 
+
+    /** Tegner "Skoren" til nåværende spiller på toppen av skjermen.
+     *
+     * @param player
+     */
     public void drawScore(IPlayable player) {
         String scoreText = "Score: " + player.getScore();
+//        font.getData().setScale(1);
+
+        // Denne brukes for å finne bredden på teksten slik at den blir sentrert skikkelig, uansett hvordan vinduet
+        // får endret dimensjoner.
         layout.setText(font, scoreText);
 
+        // Regner ut posisjon på teksten.
         float textX = (Gdx.graphics.getWidth() - layout.width) / 2;
         float textY = Gdx.graphics.getHeight() - layout.height - 10;
 
+        // Tegner "Scoren"
         spriteBatch.setProjectionMatrix(uiCamera.combined);
-
         spriteBatch.begin();
         font.draw(spriteBatch, scoreText, textX, textY);
         spriteBatch.end();
+//        font.getData().setScale(1);
     }
-
-
-
-
-
-
-
-
-    public void drawUI(List<ICharacter> characterList) {
-
-    }
-
-
-
 
 }

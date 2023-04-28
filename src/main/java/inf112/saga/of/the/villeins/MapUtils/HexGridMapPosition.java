@@ -33,7 +33,6 @@ public class HexGridMapPosition {
         float floatX = (float) x;
         float floatY = (float) y;
         return new Vector2(floatX, floatY);
-
     }
 
 

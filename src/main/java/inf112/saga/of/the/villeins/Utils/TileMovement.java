@@ -26,6 +26,8 @@ public class TileMovement {
 
     public void move(float deltaTime) {
 
+        // Hvis det ikke fins noen vei å gå, returner ut av metoden tidlig. Hvis dette er tilfelle,
+        // Sett karakterens tilstand til "Idle"
         // If there is no path, then return early. In that case, if the character's state is set to moving, set it to idle.
         if (pathToMove == null || pathIndex >= pathToMove.size()) {
             if (character.getCharacterState() == CharacterState.MOVING) {
@@ -35,13 +37,13 @@ public class TileMovement {
         }
 
         if (!(character.getCharacterState() == CharacterState.MOVING)) {
-            // Set isMoving to true when character starts moving along the array of tiles
+            // Hvis karakteren's tilsand ikke allerede er sett til "Moving", sett det.
             character.setCharacterState(CharacterState.MOVING);
         }
 
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
         Vector2 nextTileCoordinate = HexGridMapPosition.calculateVectorCoordinate(nextTilePosition);
-        Vector2 newPosition = MovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
+        Vector2 newPosition = VectorMovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
         character.setCurrentPosition(newPosition);
 
         if (newPosition.equals(nextTileCoordinate)) {
@@ -50,7 +52,7 @@ public class TileMovement {
              * beveget seg
              */
             if(pathIndex > 0){
-                character.setActionPoints(character.getActionPoints()-1);
+                character.setCurrentActionPoints(character.getCurrentActionPoints()-1);
             }
             pathIndex++;
         }

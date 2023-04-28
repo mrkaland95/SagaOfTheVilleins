@@ -26,7 +26,7 @@ public class SimpleAI {
     }
 
     public boolean AImakeDecision() {
-        if(currentCharacter.getActionPoints() == 0 || targetCharacter == null){
+        if(currentCharacter.getCurrentActionPoints() == 0 || targetCharacter == null){
             return false;
         }
         else if (currentCharacter.attack(targetCharacter.getCurrentPosition())) {

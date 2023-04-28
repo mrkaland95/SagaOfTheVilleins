@@ -1,6 +1,5 @@
 package inf112.saga.of.the.villeins.Controller;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,8 +32,8 @@ public class GameController {
         this.currentProcessor = null;
         this.playerCharacter = null;
         this.currentCharacter = null;
-        activeProcessor = new ActivePlayerProcessor(camera);
-        inActiveProcessor = new InactivePlayerProcessor(camera);
+        this.activeProcessor = new ActivePlayerProcessor(camera);
+        this.inActiveProcessor = new InactivePlayerProcessor(camera);
 
         initializeGame(camera);
     }
@@ -52,10 +51,10 @@ public class GameController {
 
         characterList = currentCharList;
         if(playerCount() == 1 && getPlayer()){
-            gameState = GameState.GAMEWON;
+            gameState = GameState.MAP_WON;
         }
         else if(!getPlayer()){
-            gameState = GameState.GAMEOVER;
+            gameState = GameState.GAME_OVER;
         }
 
         if(currentCharacter instanceof IPlayable) {
@@ -74,13 +73,13 @@ public class GameController {
             // Update the IMap with player positions here.
 
         }
-        else if(currentCharacter.getActionPoints() == 0){
+        else if(currentCharacter.getCurrentActionPoints() == 0){
             nextTurn();
         }
-        else {
-            System.out.println(currentCharacter.getActionPoints());
-            System.out.println(currentCharacter.toString());
-        }
+//        else {
+//            System.out.println(currentCharacter.getActionPoints());
+//            System.out.println(currentCharacter.toString());
+//        }
     }
 
     public ICharacter getPlayerCharacter() {
@@ -114,7 +113,7 @@ public class GameController {
           */
         ICharacter currentTurnChar = turnList.poll();
         turn(currentTurnChar);
-        currentTurnChar.setActionPoints(2);
+        currentTurnChar.setCurrentActionPoints(2);
         turnList.add(currentTurnChar);
     }
 

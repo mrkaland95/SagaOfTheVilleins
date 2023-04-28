@@ -2,7 +2,7 @@ package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class MovementUtils {
+public class VectorMovementUtils {
 
     public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
         if (destination == null) return currentPosition;
@@ -22,8 +22,6 @@ public class MovementUtils {
         } else {
             currentPosition = destination;
         }
-
         return currentPosition;
-
     }
 }

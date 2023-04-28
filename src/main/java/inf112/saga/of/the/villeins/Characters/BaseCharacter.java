@@ -2,7 +2,6 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
@@ -27,7 +26,8 @@ public abstract class BaseCharacter implements ICharacter {
     CharacterAnimationHandler animationController;
     TileMovement tileMovement;
     private AttackUtils attackUtils;
-    private int actionPoints = 10;
+    private int currentActionPoints = 10;
+    private int maxActionPoints;
     private int attackRange;
 
     public BaseCharacter(TilePosition startingTile,
@@ -132,11 +132,11 @@ public abstract class BaseCharacter implements ICharacter {
     public int getAttackRange() {
         return this.attackRange;
     }
-    public void setActionPoints(int actionPoints) {
-        this.actionPoints = actionPoints;
+    public void setCurrentActionPoints(int actionPoints) {
+        this.currentActionPoints = actionPoints;
     }
-    public int getActionPoints() {
-        return this.actionPoints;
+    public int getCurrentActionPoints() {
+        return this.currentActionPoints;
     }
     public CharacterState getCharacterState() {
         return this.characterState;

@@ -107,9 +107,6 @@ public class AStarPathfinder {
 
 
         return Math.abs(current.x() - end.x()) + Math.abs(current.y() - end.y());
-        // Uses something called "Chebyshev" distance
-
-//        return Math.max((current.x() - end.x()), (current.y()) - end.y());
     }
 
     private static class Node {

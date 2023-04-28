@@ -80,17 +80,17 @@ public class ActivePlayerProcessor implements IInputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-		if (button == Input.Buttons.RIGHT) {
-			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
-			this.camera.unproject(cameraCoordinates);
-			this.rightClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
-		}
 		if (button == Input.Buttons.LEFT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			this.camera.unproject(cameraCoordinates);
 			this.leftClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		}
+		if (button == Input.Buttons.RIGHT) {
+			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+			this.camera.unproject(cameraCoordinates);
+			this.rightClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+		}
+
 		return false;
 	}
 

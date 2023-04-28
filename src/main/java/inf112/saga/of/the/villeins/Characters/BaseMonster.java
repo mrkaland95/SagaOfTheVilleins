@@ -1,12 +1,8 @@
 package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import inf112.saga.of.the.villeins.Characters.AI.IBaseAI;
 import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
-import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 
@@ -38,8 +34,8 @@ public class BaseMonster extends BaseCharacter implements ICharacter {
     void calculatePathToMove() {
         if (this.getCharacterState() == CharacterState.MOVING) return;
         if (this.getEndPosition() == null) return;
-        if (getActionPoints() == 0) return; 
-        while(this.pathToMove.size() > getActionPoints()+1){
+        if (getCurrentActionPoints() == 0) return;
+        while(this.pathToMove.size() > getCurrentActionPoints()+1){
             this.pathToMove.remove(pathToMove.size()-1);
         }
         this.tileMovement.setPath(this.pathToMove);

@@ -1,9 +1,9 @@
 package inf112.saga.of.the.villeins.Controller;
 
 public enum GameState {
-    GAMEOVER,
-    GAMEWON,
+    GAME_OVER,
+    MAP_WON,
     PLAYING,
     PAUSED,
-    MAINMENU
+    MAIN_MENU
 }
