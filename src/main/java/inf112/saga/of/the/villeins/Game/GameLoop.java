@@ -63,21 +63,6 @@ public class GameLoop implements Screen {
 
 		characterList.addAll(gameStage.generateCharacters());
 		ICharacter player = characterList.get(0);
-//		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
-//		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
-//		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
-//		ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
-
-//		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
-
-		//ICharacter dragon = characterFactory.getDragonCharacter(new TilePosition(1, 1));
-
-//		characterList.add(player);
-//		characterList.add(slime);
-		//characterList.add(dragon);
-//		characterList.add(slime2);
-//		characterList.add(slime3);
-//		characterList.add(slime4);
 
 		gameController = new GameController(characterList, camera, player);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
@@ -102,6 +87,7 @@ public class GameLoop implements Screen {
 		}
 		if(gameController.getGameState() == GameState.MAP_WON){
 			this.game.nextStage();
+			this.game.updatePlayer(characterList.get(0));
 		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		camera.update();

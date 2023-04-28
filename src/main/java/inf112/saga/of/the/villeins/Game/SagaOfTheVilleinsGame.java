@@ -10,7 +10,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
+import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
+import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ public class SagaOfTheVilleinsGame extends Game {
     private int stageIndex = 1;
     private GameStage gameStage;
     private CharacterFactory charFactory;
+    private ICharacter player;
 
     @Override
     public void create() {
@@ -61,7 +64,8 @@ public class SagaOfTheVilleinsGame extends Game {
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
-		gameStage = new GameStage(stageIndex, charFactory);
+        player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
+		gameStage = new GameStage(stageIndex, charFactory, player);
 
 //         Uncomment this to when testing the main menu
 //         setScreen(new MainMenuScreen(this));
@@ -89,13 +93,18 @@ public class SagaOfTheVilleinsGame extends Game {
 
     public void nextStage(){
         stageIndex += 1;
-        gameStage = new GameStage(stageIndex, charFactory);
+        gameStage = new GameStage(stageIndex, charFactory, player);
         setScreen(new GameLoop(this, getCurrentMap(), gameStage));
     }
 
     public void resetGame(){
         stageIndex = 1;
-        gameStage = new GameStage(stageIndex, charFactory);
+        player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
+        gameStage = new GameStage(stageIndex, charFactory, player);
         setScreen(new GameLoop(this, getCurrentMap(), gameStage));
+    }
+
+    public void updatePlayer(ICharacter updatedPlayer) {
+        this.player = updatedPlayer;
     }
 }

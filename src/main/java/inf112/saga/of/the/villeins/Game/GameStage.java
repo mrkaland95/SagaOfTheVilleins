@@ -12,10 +12,12 @@ public class GameStage {
     private int stage;
     private CharacterFactory factory;
     private int enemyCount;
+    private ICharacter player;
 
-    public GameStage(int stage, CharacterFactory factory){
+    public GameStage(int stage, CharacterFactory factory, ICharacter player){
         this.stage = stage;
         this.factory = factory;
+        this.player = player;
         this.enemyCount = generateEnemyCount();
     }
 
@@ -23,7 +25,7 @@ public class GameStage {
         ArrayList<ICharacter> generatedCharacters = new ArrayList<>(enemyCount+1);
         ArrayList<TilePosition> spawns = decideSpawns(getPossibleSpawns());
 
-        ICharacter player = factory.getWarriorCharacter(new TilePosition(1, 1));
+        player.setTilePosition(new TilePosition(1, 1));
         generatedCharacters.add(player);
         for (int i = 0; i < enemyCount; i++){
             ICharacter tempEnemy = factory.getSlimeCharacter(spawns.get(i));
