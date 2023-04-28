@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
-import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
@@ -50,7 +49,7 @@ public class GameController {
          */
 
         characterList = currentCharList;
-        boolean getPlayerSuccessful = getPlayer();
+        boolean getPlayerSuccessful = isAlive(playerCharacter);
         if(playerCount() == 1 && getPlayerSuccessful){
             gameState = GameState.MAP_WON;
         }
@@ -123,7 +122,6 @@ public class GameController {
         gameState = GameState.PLAYING;
         initializeProcessors(camera);
         turnList.addAll(characterList);
-        getPlayer();
         nextTurn(characterList);
     }
 
@@ -132,13 +130,9 @@ public class GameController {
         Gdx.input.setInputProcessor(activeProcessor);
     }
 
-    private boolean getPlayer(){
-        for (ICharacter character : characterList) {
-            if(character instanceof IPlayable){
-                return true;
-            }
-        }
-        return false;
+    private boolean isAlive(ICharacter character){
+       if(character == null)  return false;
+       else return true;
     }
 
     public GameState getGameState(){
