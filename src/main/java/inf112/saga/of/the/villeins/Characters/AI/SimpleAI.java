@@ -16,7 +16,7 @@ import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 // 4. Regn ut korteste vei med "Pathfinder" funksjonen.
 
 
-public class SimpleAI {
+public class SimpleAI implements IBaseAI {
     ICharacter targetCharacter;
     ICharacter currentCharacter;
 
@@ -25,7 +25,8 @@ public class SimpleAI {
         this.currentCharacter = currentCharacter;
     }
 
-    public boolean AImakeDecision() {
+    public boolean AIPerformAction() {
+        // Karakteren ikke har noen action points igjen eller ikke har et mål? Gå videre.
         if(currentCharacter.getCurrentActionPoints() == 0 || targetCharacter == null){
             return false;
         }
@@ -40,7 +41,6 @@ public class SimpleAI {
             }
 
             // Finner den tilen som er nærmest karakteren, og går der.
-
             TilePosition smallestHeuristic = tempTiles.get(0);   
             for (TilePosition tilePosition : tempTiles) {
                 if (AStarPathfinder.heuristic(tilePosition, currentCharacter.getTilePosition()) < 
@@ -49,7 +49,7 @@ public class SimpleAI {
                 }
             }
 
-            // Finner "pathen" til nærmeste gyldige tile, som kan angripe "target"
+            // Finner "pathen" til den nærmeste gyldige "tilen, som er innenfor angrepsrekkevidde til målet.
             List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameLoop.infoMap);
             currentCharacter.setPathToMove(pathToAttack);
 
@@ -57,11 +57,11 @@ public class SimpleAI {
         }
     }
 
-    public void setTargetCharacter(ICharacter target){
+    public void setTargetCharacter(ICharacter target) {
         this.targetCharacter = target;
     }
 
-    public ICharacter getTargetCharacter(){
+    public ICharacter getTargetCharacter() {
         return this.targetCharacter;
     }
 

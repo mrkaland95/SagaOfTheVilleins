@@ -2,13 +2,14 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import inf112.saga.of.the.villeins.Characters.AI.IBaseAI;
 import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 
 public class BaseMonster extends BaseCharacter implements ICharacter {
 
-    private SimpleAI ai;
+    private IBaseAI ai;
     public BaseMonster(TilePosition startingTile,
                        CharacterAnimationHandler animationController,
                        int maxHealth,
@@ -24,11 +25,10 @@ public class BaseMonster extends BaseCharacter implements ICharacter {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this, deltaTime);
-        this.ai.AImakeDecision();
+        this.ai.AIPerformAction();
         this.calculatePathToMove();
         this.tileMovement.move(deltaTime);
     }
-
 
 
     void calculatePathToMove() {

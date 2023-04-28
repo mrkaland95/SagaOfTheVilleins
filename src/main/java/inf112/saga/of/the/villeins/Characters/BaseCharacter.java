@@ -21,12 +21,12 @@ public abstract class BaseCharacter implements ICharacter {
     private float moveSpeed = Main.globalDefaultMoveSpeed;
     private Vector2 currentPosition;
     private Vector2 endPosition;
-    List<TilePosition> pathToMove;
     private CharacterState characterState;
+    List<TilePosition> pathToMove;
     CharacterAnimationHandler animationController;
     TileMovement tileMovement;
     private AttackUtils attackUtils;
-    private int currentActionPoints = 10;
+    private int currentActionPoints;
     private int maxActionPoints;
     private int attackRange;
 
@@ -49,6 +49,11 @@ public abstract class BaseCharacter implements ICharacter {
         this.attackUtils = new AttackUtils(this, attackRange);
         this.tileMovement = new TileMovement(this);
         this.characterState = CharacterState.IDLE;
+
+        int tempActionPoints = 10;
+
+        this.currentActionPoints = tempActionPoints;
+        this.maxActionPoints = tempActionPoints;
     }
 
 
@@ -137,6 +142,9 @@ public abstract class BaseCharacter implements ICharacter {
     }
     public int getCurrentActionPoints() {
         return this.currentActionPoints;
+    }
+    public void resetActionPoints() {
+        this.currentActionPoints = this.maxActionPoints;
     }
     public CharacterState getCharacterState() {
         return this.characterState;

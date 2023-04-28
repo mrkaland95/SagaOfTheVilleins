@@ -62,7 +62,7 @@ public class GameLoop implements Screen {
 
 
 		characterList.addAll(gameStage.generateCharacters());
-		ICharacter player = characterList.get(0);
+		IPlayable player = (IPlayable) characterList.get(0);
 
 		gameController = new GameController(characterList, camera, player);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
@@ -110,7 +110,7 @@ public class GameLoop implements Screen {
 			gameUI.drawHealthbar(character);
 		}
 
-		gameUI.drawScore((IPlayable) gameController.getPlayerCharacter());
+		gameUI.drawScore(gameController.getPlayerCharacter());
 
 		infoMap.reset(characterList);
 		infoMap.findIllegalTiles(map);

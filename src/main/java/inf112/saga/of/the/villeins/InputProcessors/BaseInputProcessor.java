@@ -40,21 +40,21 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		float translationAmount = 10f;
+		float cameraTranslationAmount = 10f;
 		if(character == 'w'){
-			camera.translate(0, translationAmount, 0);
+			camera.translate(0, cameraTranslationAmount, 0);
 			return true;
 		}
 		if(character == 's'){
-			camera.translate(0, -translationAmount,0);
+			camera.translate(0, -cameraTranslationAmount,0);
 			return true;
 		}
 		if(character == 'a'){
-			camera.translate(-translationAmount, 0 ,0);
+			camera.translate(-cameraTranslationAmount, 0 ,0);
 			return true;
 		}
 		if(character == 'd'){
-			camera.translate(translationAmount, 0 ,0);
+			camera.translate(cameraTranslationAmount, 0 ,0);
 			return true;
 		}
 		if(character == 'z') {
@@ -152,13 +152,4 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	public boolean checkTurn() {
 		return this.endTurn;
 	}
-
-
-
-
-//
-//    Vector2 getLeftClickCoordinates();
-//    Vector2 getRightClickCoordinates();
-//    boolean checkTurn();
-//    void endTurn();
 }

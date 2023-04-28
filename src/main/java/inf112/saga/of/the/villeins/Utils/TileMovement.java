@@ -1,8 +1,8 @@
 package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Characters.ITurnBasedMovable;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
-import inf112.saga.of.the.villeins.Characters.IMovable2D;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
@@ -11,9 +11,9 @@ import java.util.List;
 public class TileMovement {
     private List<TilePosition> pathToMove;
     private int pathIndex;
-    private final IMovable2D character;
+    private final ITurnBasedMovable character;
 
-    public TileMovement(IMovable2D character) {
+    public TileMovement(ITurnBasedMovable character) {
         this.character = character;
         this.pathToMove = null;
         this.pathIndex = 0;

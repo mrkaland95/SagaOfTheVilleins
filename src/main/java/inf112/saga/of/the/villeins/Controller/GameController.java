@@ -13,13 +13,12 @@ import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
-import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
     private List<ICharacter> characterList;
     private LinkedList<ICharacter> turnList;
-    private ICharacter playerCharacter;
+    private IPlayable playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
     private InactivePlayerProcessor inActiveProcessor;
@@ -27,7 +26,7 @@ public class GameController {
     public BaseInputProcessor currentProcessor;
 
 
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, ICharacter playerChar){
+    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, IPlayable playerChar){
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
@@ -51,10 +50,11 @@ public class GameController {
          */
 
         characterList = currentCharList;
-        if(playerCount() == 1 && getPlayer()){
+        boolean getPlayerSuccessful = getPlayer();
+        if(playerCount() == 1 && getPlayerSuccessful){
             gameState = GameState.MAP_WON;
         }
-        else if(!getPlayer()){
+        else if(!getPlayerSuccessful){
             gameState = GameState.GAME_OVER;
         }
 
@@ -77,7 +77,7 @@ public class GameController {
         }
     }
 
-    public ICharacter getPlayerCharacter() {
+    public IPlayable getPlayerCharacter() {
         return this.playerCharacter;
     }
 
@@ -106,7 +106,7 @@ public class GameController {
         ICharacter currentTurnChar = turnList.poll();
         if(currentCharList.contains(currentTurnChar)){
             turn(currentTurnChar);
-            currentTurnChar.setCurrentActionPoints(2);
+            currentTurnChar.resetActionPoints();
             turnList.add(currentTurnChar);
         }
         else{
@@ -134,8 +134,7 @@ public class GameController {
 
     private boolean getPlayer(){
         for (ICharacter character : characterList) {
-            if(character instanceof Player){
-                this.playerCharacter = character;
+            if(character instanceof IPlayable){
                 return true;
             }
         }

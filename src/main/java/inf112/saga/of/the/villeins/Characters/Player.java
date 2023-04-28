@@ -13,7 +13,7 @@ import inf112.saga.of.the.villeins.Utils.TileMovement;
 
 import java.util.List;
 
-public class Player extends BaseCharacter implements ICharacter, IPlayable {
+public class Player extends BaseCharacter implements IPlayable {
     private int score;
     public Player(TilePosition startingPosition,
               CharacterAnimationHandler animationController,

@@ -9,9 +9,6 @@ import java.util.List;
 
 
 public interface IMovable2D {
-
-    int getCurrentActionPoints();
-    void setCurrentActionPoints(int actionPoints);
     TilePosition getTilePosition();
     void setTilePosition(TilePosition tilePosition);
     /**
@@ -19,7 +16,6 @@ public interface IMovable2D {
      */
     Vector2 getCurrentPosition();
     void setCurrentPosition(Vector2 position);
-
     /**
      * Returns a boolean
      * @param position Vector2 representing the destination a character should move to.

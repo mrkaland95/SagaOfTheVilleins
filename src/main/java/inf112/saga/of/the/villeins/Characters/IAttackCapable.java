@@ -3,6 +3,10 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.math.Vector2;
 
 public interface IAttackCapable {
+    /** Setter skade på en annen karakter.
+     * @param damage Mengden skade
+     * @param character Karakteren som skal bli skadet.
+     */
     void applyDamage( int damage, ICharacter character);
 
     /**
