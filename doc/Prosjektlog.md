@@ -316,3 +316,12 @@ Markus, Steffen
 Gruppetime på Vilvite:
 * Parkodet og debugget
 * Fikset oppførsel til AI, "turn" systemet og "action points"
+
+Torsdag 28/04-23
+Kl. 12.00 - 16.00
+Markus, Steffen
+
+Gruppetime på Vilvite:
+* Jobbet med inventory/loot
+* Jobbet med UI
+* Fikset problemer med turnsystem
