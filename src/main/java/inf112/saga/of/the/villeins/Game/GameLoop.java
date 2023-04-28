@@ -94,7 +94,7 @@ public class GameLoop implements Screen {
 		gameController = new GameController(characterList, camera);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
-		// Inits camera and sets it's starting position and zoom.
+		// Inits camera and sets its starting position and zoom.
 //		camera.lookAt(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.zoom = 1.5f;
