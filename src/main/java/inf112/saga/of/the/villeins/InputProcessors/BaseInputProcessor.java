@@ -1,5 +1,7 @@
 package inf112.saga.of.the.villeins.InputProcessors;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +19,139 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	private Vector2 rightClickCoordinates;
 	private Vector2 leftClickCoordinates;
 	public boolean endTurn;
+
+	BaseInputProcessor(OrthographicCamera camera) {
+		this.camera = camera;
+		this.endTurn = false;
+		this.rightClickCoordinates = null;
+		this.leftClickCoordinates = null;
+	}
+
+
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		float translationAmount = 10f;
+		if(character == 'w'){
+			camera.translate(0, translationAmount, 0);
+			return true;
+		}
+		if(character == 's'){
+			camera.translate(0, -translationAmount,0);
+			return true;
+		}
+		if(character == 'a'){
+			camera.translate(-translationAmount, 0 ,0);
+			return true;
+		}
+		if(character == 'd'){
+			camera.translate(translationAmount, 0 ,0);
+			return true;
+		}
+		if(character == 'z') {
+			camera.zoom += zoomAmount;
+			return true;
+		}
+		if(character == 'x') {
+			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
+				camera.zoom = minimumZoomLevel;
+			} else {
+				camera.zoom -= zoomAmount;
+			}
+			return true;
+		}
+		if(character == 'n'){
+			this.endTurn = true;
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if (button == Input.Buttons.LEFT) {
+			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+			this.camera.unproject(cameraCoordinates);
+			this.leftClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+		}
+		if (button == Input.Buttons.RIGHT) {
+			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+			this.camera.unproject(cameraCoordinates);
+			this.rightClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+		}
+
+		return false;
+	}
+
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if (button == Input.Buttons.MIDDLE) {
+			// Stores the position if the middle mouse button was clicked.
+			last.set(-1, -1, -1);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
+			camera.unproject(current.set(screenX, screenY, 0));
+			if (!(last.x == -1 && last.y == -1 && last.z == -1)) {
+				camera.unproject(delta.set(last.x, last.y, 0));
+				delta.sub(current);
+				camera.position.add(delta.x, delta.y, 0);
+			}
+		}
+		last.set(screenX, screenY, 0);
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(float amountX, float amountY) {
+		float zoomMultiplier = 0.20f;
+		if (camera.zoom + amountY * zoomMultiplier < this.minimumZoomLevel) {
+			camera.zoom = this.minimumZoomLevel;
+		} else {
+			camera.zoom += amountY * zoomMultiplier;
+		}
+		return false;
+	}
+
+	public Vector2 getRightClickCoordinates() {
+		Vector2 temp = rightClickCoordinates;
+		rightClickCoordinates = null;
+		return temp;
+	}
+
+	public Vector2 getLeftClickCoordinates() {
+		Vector2 temp = leftClickCoordinates;
+		leftClickCoordinates = null;
+		return temp;
+	}
+
+	public void endTurn() {
+		this.endTurn = false;
+	}
+
+	public boolean checkTurn() {
+		return this.endTurn;
+	}
 
 
 

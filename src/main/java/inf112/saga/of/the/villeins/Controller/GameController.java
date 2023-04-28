@@ -12,18 +12,19 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.IInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 
 public class GameController {
     private List<ICharacter> characterList;
-    public IInputProcessor currentProcessor;
     private LinkedList<ICharacter> turnList;
     private ICharacter playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
     private InactivePlayerProcessor inActiveProcessor;
     private ActivePlayerProcessor activeProcessor;
+    public BaseInputProcessor currentProcessor;
 
 
     public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, ICharacter playerChar){
