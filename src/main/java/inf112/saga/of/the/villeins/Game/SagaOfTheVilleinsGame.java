@@ -11,7 +11,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
+import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
+import inf112.saga.of.the.villeins.Game.LootSystem.UpgradePlayer;
 import inf112.saga.of.the.villeins.MapUtils.TilePosition;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class SagaOfTheVilleinsGame extends Game {
     private GameStage gameStage;
     private CharacterFactory charFactory;
     private ICharacter player;
+    private UpgradePlayer upgradeApplier;
 
     @Override
     public void create() {
@@ -64,6 +68,7 @@ public class SagaOfTheVilleinsGame extends Game {
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
+        
         player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
 		gameStage = new GameStage(stageIndex, charFactory, player);
 
@@ -104,7 +109,9 @@ public class SagaOfTheVilleinsGame extends Game {
         setScreen(new GameLoop(this, getCurrentMap(), gameStage));
     }
 
-    public void updatePlayer(ICharacter updatedPlayer) {
+    public void updatePlayer(IPlayable updatedPlayer, LootCollection inventory) {
+        upgradeApplier = new UpgradePlayer();
+        updatedPlayer = upgradeApplier.UpgradeStats(updatedPlayer, inventory);
         this.player = updatedPlayer;
     }
 }

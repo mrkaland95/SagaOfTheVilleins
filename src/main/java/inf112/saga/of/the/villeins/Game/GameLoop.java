@@ -2,22 +2,19 @@ package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.GameState;
 import inf112.saga.of.the.villeins.UI.GameUI;
-import inf112.saga.of.the.villeins.Factories.CharacterFactory;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,7 @@ public class GameLoop implements Screen {
 	private final GameStage gameStage;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
+	private LootCollection inventory;
 
 	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
@@ -63,6 +61,9 @@ public class GameLoop implements Screen {
 
 		characterList.addAll(gameStage.generateCharacters());
 		IPlayable player = (IPlayable) characterList.get(0);
+		inventory = new LootCollection();
+		System.out.println(player.getMaxHealth());
+		System.out.println(player.getStrength());
 
 		gameController = new GameController(characterList, camera, player);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
@@ -86,8 +87,8 @@ public class GameLoop implements Screen {
 			this.game.resetGame();
 		}
 		if(gameController.getGameState() == GameState.MAP_WON){
+			this.game.updatePlayer((IPlayable) characterList.get(0), inventory);
 			this.game.nextStage();
-			this.game.updatePlayer(characterList.get(0));
 		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 		camera.update();
@@ -102,7 +103,16 @@ public class GameLoop implements Screen {
 		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
 		// Men dette vil fungere for øyeblikket.
 		
-		characterList.removeIf(character -> character.getCurrentHealth() == 0);
+		//characterList.removeIf(character -> character.getCurrentHealth() == 0);
+		List<ICharacter> removeList = new ArrayList<>();
+		for (ICharacter iCharacter : characterList) {
+			if(iCharacter.getCurrentHealth() == 0){
+				removeList.add(iCharacter);
+				inventory.generateUpgrade();
+			}
+		}
+		characterList.removeAll(removeList);
+
 		gameController.update(characterList);
 		
 		for (ICharacter character : characterList) {

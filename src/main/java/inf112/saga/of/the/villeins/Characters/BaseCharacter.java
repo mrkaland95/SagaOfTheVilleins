@@ -117,6 +117,9 @@ public abstract class BaseCharacter implements ICharacter {
             this.currentHealth = health;
         }
     }
+    public void setMaxHealth(int maxhealth){
+        this.maxHealth = maxhealth;
+    }
     public void applyDamage(int damage, ICharacter character) {
         int newHealth;
         if (damage >= character.getCurrentHealth()) {

@@ -7,4 +7,5 @@ public interface IStats {
     int getCurrentHealth();
     void setStrength(int strength);
     void setHealth(int health);
+    void setMaxHealth(int health);
 }
