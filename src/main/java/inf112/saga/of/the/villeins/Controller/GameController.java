@@ -26,11 +26,11 @@ public class GameController {
     private ActivePlayerProcessor activeProcessor;
 
 
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera){
+    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, ICharacter playerChar){
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
-        this.playerCharacter = null;
+        this.playerCharacter = playerChar;
         this.currentCharacter = null;
         this.activeProcessor = new ActivePlayerProcessor(camera);
         this.inActiveProcessor = new InactivePlayerProcessor(camera);
@@ -68,18 +68,12 @@ public class GameController {
             }
             if(this.currentProcessor.checkTurn()){
                 this.currentProcessor.endTurn();
-                nextTurn();        
+                nextTurn(currentCharList);        
             }    
-            // Update the IMap with player positions here.
-
         }
         else if(currentCharacter.getCurrentActionPoints() == 0){
-            nextTurn();
+            nextTurn(currentCharList);
         }
-//        else {
-//            System.out.println(currentCharacter.getActionPoints());
-//            System.out.println(currentCharacter.toString());
-//        }
     }
 
     public ICharacter getPlayerCharacter() {
@@ -101,20 +95,22 @@ public class GameController {
         }
     }
 
-    private void nextTurn(){
+    private void nextTurn(List<ICharacter> currentCharList){
         /*
          * Sets the turn to the next charcter in turnList
          * Should also change which processor in use based on if its a playerturn or AI-turn
          * Maybe also use turnConter if needed
          */
 
-         /*
-          * TODO: MÅ FIKSE AT LISTEN BLIR OPPDATERT NÅR NOEN DØR
-          */
         ICharacter currentTurnChar = turnList.poll();
-        turn(currentTurnChar);
-        currentTurnChar.setCurrentActionPoints(2);
-        turnList.add(currentTurnChar);
+        if(currentCharList.contains(currentTurnChar)){
+            turn(currentTurnChar);
+            currentTurnChar.setCurrentActionPoints(2);
+            turnList.add(currentTurnChar);
+        }
+        else{
+            nextTurn(currentCharList);
+        }     
     }
 
         /*
@@ -127,7 +123,7 @@ public class GameController {
         initializeProcessors(camera);
         turnList.addAll(characterList);
         getPlayer();
-        nextTurn();
+        nextTurn(characterList);
     }
 
     private void initializeProcessors(OrthographicCamera camera){

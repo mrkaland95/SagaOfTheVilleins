@@ -36,16 +36,14 @@ public class GameLoop implements Screen {
 	private final OrthographicCamera uiCamera;
 	private final GameController gameController;
 	private final GameUI gameUI;
-	private final CharacterFactory characterFactory;
 	private final GameStage gameStage;
-	private int stage;
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static Imap infoMap;
 
-	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, int stage) {
+	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
 		this.game = game;
-		this.stage = stage;
+		this.gameStage = stage;
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
 		infoMap = new Imap(height, width);
@@ -62,36 +60,26 @@ public class GameLoop implements Screen {
 
 		gameUI = new GameUI(shapeRenderer, bitmapFont, spriteBatch, uiCamera);
 
-		Texture warriorIdleTexture    = game.assets.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
-		Texture warriorWalkingTexture = game.assets.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
-		Texture slimeIdleTexture      = game.assets.manager.get(GameAssetManager.idleSlimePath, Texture.class);
-		Texture dragonAttackTexture   = game.assets.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
 
-		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
-		slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
-		playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
-		dragonAnimation 	   = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
-
-		// characterFactory burde endres basert på current stage
-		characterFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
-		gameStage = new GameStage(stage, characterFactory);
-		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
+		characterList.addAll(gameStage.generateCharacters());
+		ICharacter player = characterList.get(0);
+//		ICharacter slime  =  characterFactory.getSlimeCharacter(new TilePosition(1, 4));
 //		ICharacter slime2 =  characterFactory.getSlimeCharacter(new TilePosition(4, 6));
 //		ICharacter slime3 =  characterFactory.getSlimeCharacter(new TilePosition(5, 7));
 //		ICharacter slime4 =  characterFactory.getSlimeCharacter(new TilePosition(7, 1));
 
-		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
+//		ICharacter player =  characterFactory.getWarriorCharacter(new TilePosition(1, 6));
 
 		//ICharacter dragon = characterFactory.getDragonCharacter(new TilePosition(1, 1));
 
-		characterList.add(player);
-		characterList.add(slime);
+//		characterList.add(player);
+//		characterList.add(slime);
 		//characterList.add(dragon);
 //		characterList.add(slime2);
 //		characterList.add(slime3);
 //		characterList.add(slime4);
 
-		gameController = new GameController(characterList, camera);
+		gameController = new GameController(characterList, camera, player);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
 		// Inits camera and sets it's starting position and zoom.
