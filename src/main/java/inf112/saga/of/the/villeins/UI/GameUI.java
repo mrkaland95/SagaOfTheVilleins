@@ -1,25 +1,22 @@
 package inf112.saga.of.the.villeins.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
-
-
-import java.util.List;
 
 
 public class GameUI {
@@ -32,6 +29,13 @@ public class GameUI {
     private final Stage stage;
     private final Skin skin;
     private final Table contextMenu;
+    private Label actionPointsLabel;
+    private Button endTurnButton;
+    private TextureAtlas atlas;
+
+
+
+
 
     public GameUI(ShapeRenderer renderer, BitmapFont bitmapFont, SpriteBatch spriteBatch, OrthographicCamera uiCamera) {
         this.renderer = renderer;
@@ -41,8 +45,16 @@ public class GameUI {
         this.stage = new Stage(new ScreenViewport(uiCamera));
         this.layout = new GlyphLayout();
         this.skin = new Skin();
-
         this.contextMenu = new Table(skin);
+
+        this.endTurnButton = new EndTurnButton(Color.RED, this.renderer);
+
+        // Set the size and position of the button (adjust as needed)
+        this.endTurnButton.setSize(100, 100);
+        this.endTurnButton.setPosition(100, 100);
+
+        // Add the button to the stage
+        this.stage.addActor(endTurnButton);
     }
 
 
@@ -85,10 +97,6 @@ public class GameUI {
         renderer.end();
     }
 
-
-
-
-
     /** Tegner "Skoren" til nåværende spiller på toppen av skjermen.
      *
      * @param player
@@ -110,7 +118,62 @@ public class GameUI {
         spriteBatch.begin();
         font.draw(spriteBatch, scoreText, textX, textY);
         spriteBatch.end();
-//        font.getData().setScale(1);
     }
+
+    public void drawActionPoints(ICharacter character) {
+        // Create a custom large font
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(2);
+
+        String actionPointText = "Action Points: " + character.getCurrentActionPoints();
+        layout.setText(font, actionPointText);
+
+//        Label.LabelStyle labelStyle = new Label.LabelStyle();
+//        labelStyle.font = largeFont;
+//        labelStyle.fontColor = Color.WHITE;
+
+
+//        float yPadding = 10f;
+        float yPadding = Gdx.graphics.getHeight() / 20f;
+
+        float xPadding = Gdx.graphics.getWidth() / 30f;
+
+        float textX = (Gdx.graphics.getWidth() - layout.width) - xPadding;
+        float textY = layout.height + yPadding;
+
+        spriteBatch.setProjectionMatrix(uiCamera.combined);
+        spriteBatch.begin();
+        font.draw(spriteBatch, actionPointText, textX, textY);
+        spriteBatch.end();
+    }
+
+    private void drawText(String text, float xPos, float yPos) {}
+
+
+
+    public void drawUI(float deltaTime) {
+
+        // Set the size and position of the button (adjust as needed)
+        this.endTurnButton.setSize(100, 100);
+        this.endTurnButton.setPosition(100, 100);
+
+        // Add the button to the stage
+        this.stage.addActor(endTurnButton);
+
+
+
+
+
+        this.stage.act(deltaTime);
+        this.stage.draw();
+    }
+
+    public void drawCenteredText(String text, float xPos, float yPos) {
+        layout.setText(font, text);
+        float textX = layout.width / 2f;
+        float textY = layout.height / 2f;
+
+    }
+
 
 }

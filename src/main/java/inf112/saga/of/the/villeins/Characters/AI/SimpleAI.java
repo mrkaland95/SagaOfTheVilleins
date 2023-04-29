@@ -35,7 +35,7 @@ public class SimpleAI implements IBaseAI {
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
             for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameLoop.infoMap)) {
-                if(GameLoop.infoMap.isMovable(tilePosition)){
+                if(GameLoop.infoMap.tileIsMovable(tilePosition)){
                     tempTiles.add(tilePosition);
                 }
             }

@@ -1,86 +1,106 @@
 package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MainMenuScreen implements Screen {
     private SagaOfTheVilleinsGame game;
     private Stage stage;
-    private final Texture menuBackground;
-    private Sprite sprite;
-    private Camera camera;
+    private Texture menuBackground;
+    private BitmapFont font;
+    private GlyphLayout layout;
+    private Skin mySkin;
+    private Table menuTable;
 
-
-    public MainMenuScreen(SagaOfTheVilleinsGame game) {
+    public MainMenuScreen(SagaOfTheVilleinsGame game, Texture menuBackground) {
         this.game = game;
-        stage = new Stage(new ScreenViewport());
-        float screenWidth = Gdx.graphics.getWidth();
-        float screenHeight = Gdx.graphics.getHeight();
-//        camera = new OrthographicCamera(1, screenHeight / screenWidth);
-
+        this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
+        this.menuBackground = menuBackground;
+        this.font = new BitmapFont();
+        this.layout = new GlyphLayout();
+        this.mySkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
+        this.menuTable = new Table(mySkin);
         Gdx.input.setInputProcessor(stage);
-        // Temp intill "AssetManageren" er implementert.
-        String menuBackgroundPath = "./assets/MenuAssets/MenuBackground.png";
-
-
-        menuBackground = new Texture(Gdx.files.internal(menuBackgroundPath));
         menuBackground.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-//        sprite = new Sprite(menuBackground);
-//        sprite.setOrigin(sprite.getWidth() / 2,
-//        sprite.getHeight() / 2);
-//        sprite.setPosition(-sprite.getWidth() / 2, -sprite.getHeight());
+
+
+        Button startGameButton = new TextButton("Start Game", mySkin, "small");
+        startGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                    // Change the screen to the game loop screen
+                game.setScreen(new GameLoop(game, game.getCurrentMap(), game.getCurrentStage()));
+            }
+        });
+
+        Button helpScreenButton = new TextButton("Help Page", mySkin, "small");
+
+        helpScreenButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                    // Change the screen to the game loop screen
+                game.setScreen(new HelpScreen(game));
+            }
+        });
+
+
+
+
+        menuTable.add(startGameButton).expandX().center().row();
+        menuTable.add(helpScreenButton).expandX().center().row();
+        menuTable.setFillParent(true);
+        menuTable.center();
+
+        stage.addActor(menuTable);
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.SPACE) {
-                    game.setScreen(new GameLoop(game, game.getCurrentMap(), game.getStage()));
-                }
-                return false;
-            }
-        });
     }
 
     @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 0);
+    public void render(float deltaTime) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.spriteBatch.begin();
-
-        float gameWidth = Gdx.graphics.getWidth();
-        float gameHeight = Gdx.graphics.getHeight();
-
         game.spriteBatch.draw(menuBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        // TODO Dette burde gjøres med en tabell, men det får fungere for øyeblikket.
-        game.bitmapFont.draw(game.spriteBatch, "Press Spacebar to start the game", gameWidth / 2 - 100, gameHeight - 50);
-
         game.spriteBatch.end();
+
+        stage.act(deltaTime);
+        stage.draw();
 
     }
 
     @Override
-    public void resize(int i, int i1) {}
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+    }
 }

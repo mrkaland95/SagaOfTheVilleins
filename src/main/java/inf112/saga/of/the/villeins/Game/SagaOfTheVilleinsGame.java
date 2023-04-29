@@ -24,31 +24,28 @@ import java.util.List;
 
 /*
 Dette er den øverste klassen som har med "spillet" i seg selv å gjøre. Her blir grafikken, ressurser, spilleren osv.
- Initiert.
+Lastet inn og initiert.
  */
-
-
-
-
 public class SagaOfTheVilleinsGame extends Game {
     SpriteBatch spriteBatch;
     ShapeRenderer shapeRenderer;
     BitmapFont bitmapFont;
-    public GameAssetManager assets;
-    private List<TiledMap> maps = new ArrayList<>();
+    public GameAssetManager assetManager;
+    private final List<TiledMap> maps = new ArrayList<>();
     private int mapIndex = 0;
     private int stageIndex = 1;
     private GameStage gameStage;
     private CharacterFactory charFactory;
     private ICharacter player;
     private UpgradePlayer upgradeApplier;
+    public Texture menuBackground2;
 
     @Override
     public void create() {
         // Last inn alle ressursene(bilder, sprites, kart osv).
-        assets = new GameAssetManager();
-        assets.load();
-        assets.manager.finishLoading();
+        assetManager = new GameAssetManager();
+        assetManager.load();
+        assetManager.manager.finishLoading();
 
         maps.add(new TmxMapLoader().load("./assets/Maps/TiledRougelikeMapUpdated.tmx"));
 
@@ -56,10 +53,13 @@ public class SagaOfTheVilleinsGame extends Game {
         shapeRenderer = new ShapeRenderer();
         bitmapFont = new BitmapFont();
 
-        Texture warriorIdleTexture    = assets.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
-		Texture warriorWalkingTexture = assets.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
-		Texture slimeIdleTexture      = assets.manager.get(GameAssetManager.idleSlimePath, Texture.class);
-		Texture dragonAttackTexture   = assets.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
+        Texture warriorIdleTexture    = assetManager.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
+		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
+		Texture slimeIdleTexture      = assetManager.manager.get(GameAssetManager.idleSlimePath, Texture.class);
+		Texture dragonAttackTexture   = assetManager.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
+
+        Texture menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
+        menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
 
 		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
 		CharacterAnimationHandler slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
@@ -72,11 +72,12 @@ public class SagaOfTheVilleinsGame extends Game {
         player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
 		gameStage = new GameStage(stageIndex, charFactory, player);
 
-//         Uncomment this to when testing the main menu
-//         setScreen(new MainMenuScreen(this));
+        // Uncomment this to when testing the main menu
+        setScreen(new MainMenuScreen(this, menuBackground));
 
-        // Uncomment/Comment this when testing other screens.
-        setScreen(new GameLoop(this, getCurrentMap(), gameStage));
+        // Uncomment/Comment this when testing the game or other screens,
+        // so you don't have to click through the menu every time
+        // setScreen(new GameLoop(this, getCurrentMap(), gameStage));
     }
 
     @Override
@@ -85,14 +86,14 @@ public class SagaOfTheVilleinsGame extends Game {
         spriteBatch.dispose();
         shapeRenderer.dispose();
         bitmapFont.dispose();
-        assets.dispose();
+        assetManager.dispose();
     }
 
     public TiledMap getCurrentMap() {
         return this.maps.get(mapIndex);
     }
 
-    public GameStage getStage(){
+    public GameStage getCurrentStage(){
         return gameStage;
     }
 
