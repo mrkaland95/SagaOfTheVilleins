@@ -183,7 +183,7 @@ Kl. 8.15-10.00
 Malene, Markus, Steffen, Leon
 
 Åttende gruppetime
-* Jobbet på Imap implementering og testing
+* Jobbet på TileInfoMap implementering og testing
 * Jobbet med healthbar og angrepsfunksjon
 * Diskuterte gamedesign og problemstillinger omgående angrep og bevegelse
 
@@ -215,7 +215,7 @@ Leon, Markus og Steffen
 Arbeidsøkt
 * Leon - Jobbet med animasjoner og nytt kart.
 * Steffen - faktorisert mye av "tile" bevegelsen ut til egen klasse.
-* Markus og Steffen - Jobbet med Imap(informasjon om hvilke tiles er lovlig å gå på), håndtering av dette, og AI til fiender.
+* Markus og Steffen - Jobbet med TileInfoMap(informasjon om hvilke tiles er lovlig å gå på), håndtering av dette, og AI til fiender.
 * Jobbet med refaktoring av navn på metoder og variabler.
 
 Torsdag 30/03-23

@@ -1,5 +1,5 @@
 
-import inf112.saga.of.the.villeins.Game.Imap;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,12 +14,12 @@ public class TestAStarPathfinder {
     @Test
     public void testFindPath() {
 
-        Imap imap = new Imap(5,5);
+        TileInfoMap tileInfoMap = new TileInfoMap(5,5);
 
         TilePosition start = new TilePosition(0, 0);
         TilePosition end = new TilePosition(4, 4);
 
-        ArrayList<TilePosition> path = AStarPathfinder.findPath(start, end, imap);
+        ArrayList<TilePosition> path = AStarPathfinder.findPath(start, end, tileInfoMap);
         assertNotNull(path); // sjekker at ikke er null
         assertFalse(path.isEmpty()); // sjekker at det finnes elementer i listen
         assertEquals(start, path.get(0)); // sjekker at det første elementet i listen svarer til start

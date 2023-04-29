@@ -1,12 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.*;
-
-import inf112.saga.of.the.villeins.Game.Imap;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
-
-
-
 public class TestIMap {
 
 

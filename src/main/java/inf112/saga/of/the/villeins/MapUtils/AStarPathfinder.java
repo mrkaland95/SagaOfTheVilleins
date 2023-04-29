@@ -2,7 +2,7 @@ package inf112.saga.of.the.villeins.MapUtils;
 
 import java.util.*;
 
-import inf112.saga.of.the.villeins.Game.Imap;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 
 public class AStarPathfinder {
 
@@ -15,7 +15,7 @@ public class AStarPathfinder {
      * @param infomap Class containing information about blocked tile.
      * @return An Arraylist of TilePosition objects, representing the shortest possible path to a destination tile.
      */
-    public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, Imap infomap) {
+    public static ArrayList<TilePosition> findPath(TilePosition start, TilePosition end, TileInfoMap infomap) {
 
         PriorityQueue<Node> open = new PriorityQueue<>(Comparator.comparingInt(Node::getF));
         HashSet<Node> closed = new HashSet<>();
@@ -59,7 +59,7 @@ public class AStarPathfinder {
         return path;
     }
 
-    public static ArrayList<TilePosition> getNeighbors(TilePosition position, Imap Imap) {
+    public static ArrayList<TilePosition> getNeighbors(TilePosition position, TileInfoMap TileInfoMap) {
 
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();
@@ -92,10 +92,10 @@ public class AStarPathfinder {
         // Checks if a Tile can be walked on.
         for (TilePosition maybeTilePosition : tempneighbors) {
 
-            if (Imap.isMovable(maybeTilePosition) == null) {
+            if (TileInfoMap.tileIsMovable(maybeTilePosition) == null) {
                 continue;
             }
-            if (Imap.isMovable(maybeTilePosition)) {
+            if (TileInfoMap.tileIsMovable(maybeTilePosition)) {
                 neighbors.add(maybeTilePosition);
             }
     }
@@ -103,9 +103,6 @@ public class AStarPathfinder {
     }
 
     public static int heuristic(TilePosition current, TilePosition end) {
-
-
-
         return Math.abs(current.x() - end.x()) + Math.abs(current.y() - end.y());
     }
 
@@ -140,9 +137,4 @@ public class AStarPathfinder {
             return position.hashCode();
         }
     }
-
-
-
-
-
 }

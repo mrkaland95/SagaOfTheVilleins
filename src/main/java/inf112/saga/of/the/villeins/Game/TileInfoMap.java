@@ -3,15 +3,8 @@ package inf112.saga.of.the.villeins.Game;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.imageio.plugins.tiff.TIFFDirectory;
-
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.utils.SortedIntList.Iterator;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
@@ -22,23 +15,23 @@ import inf112.saga.of.the.villeins.MapUtils.TilePosition;
  * Than using the map object directly, because we can use our own TilePosition objects
  * in addition, our own properties that may not be inherently part of the map object.
  */
-public class Imap {
+public class TileInfoMap {
     private final HashMap<TilePosition, Boolean> map = new HashMap<>();
-    private final int rows;
-    private final int cols;
+    private final int mapRows;
+    private final int mapCols;
 
-    public Imap(int rows, int cols){
-        this.rows = rows;
-        this.cols = cols;
+    public TileInfoMap(int mapRows, int mapCols){
+        this.mapRows = mapRows;
+        this.mapCols = mapCols;
         //creates a simple hashmap so we cna get information from diffrent tiles using Tileposition
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < mapRows; i++) {
+            for (int j = 0; j < mapCols; j++) {
                 TilePosition temp = new TilePosition(i, j);
                 map.put(temp, true);
             }
         }
     }
-    public Boolean isMovable(TilePosition tile){
+    public Boolean tileIsMovable(TilePosition tile){
         return map.get(tile);
     }
 
@@ -52,8 +45,8 @@ public class Imap {
     }
 
     public void reset(List<ICharacter> characterList) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < mapRows; i++) {
+            for (int j = 0; j < mapCols; j++) {
                 TilePosition temp = new TilePosition(i, j);
                 map.put(temp, true);
             }
@@ -65,11 +58,12 @@ public class Imap {
         }
     }
 
-    public void findIllegalTiles(TiledMap tileMap){
+    public void addIllegalTiles(TiledMap tileMap){
+        int walkableTileId = 6;
         TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if(tiledLayer.getCell(i, j).getTile().getId() == 6){
+        for (int i = 0; i < mapRows; i++) {
+            for (int j = 0; j < mapCols; j++) {
+                if(tiledLayer.getCell(i, j).getTile().getId() == walkableTileId){
                     map.put(new TilePosition(i, j), false);
                }
             }

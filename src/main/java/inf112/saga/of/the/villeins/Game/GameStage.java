@@ -63,7 +63,7 @@ public class GameStage {
         for (int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 TilePosition possibleSpawn = new TilePosition(i, j);
-                if(GameLoop.infoMap.isMovable(possibleSpawn)){
+                if(GameLoop.infoMap.tileIsMovable(possibleSpawn)){
                     spawns.add(possibleSpawn);
                 }
             }

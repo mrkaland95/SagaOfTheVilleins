@@ -95,7 +95,7 @@ public class GameController {
         }
     }
 
-    private void nextTurn(List<ICharacter> currentCharList){
+    public void nextTurn(List<ICharacter> currentCharList){
         /*
          * Sets the turn to the next charcter in turnList
          * Should also change which processor in use based on if its a playerturn or AI-turn
@@ -115,7 +115,6 @@ public class GameController {
 
         /*
         *   This method initializes everything needed for the game.
-        *
         *   Add new processors to this method as they are created.
         */
     private void initializeGame(OrthographicCamera camera){

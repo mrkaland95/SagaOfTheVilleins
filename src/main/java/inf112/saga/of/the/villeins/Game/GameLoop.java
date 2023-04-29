@@ -9,7 +9,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.GameState;
@@ -24,9 +23,6 @@ public class GameLoop implements Screen {
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
 	BitmapFont bitmapFont;
-	CharacterAnimationHandler slimeAnimation;
-	CharacterAnimationHandler playerWarriorAnimation;
-	CharacterAnimationHandler dragonAnimation;
 	private final TiledMap map;
 	private final HexagonalTiledMapRenderer mapRenderer;
 	private final OrthographicCamera camera;
@@ -35,21 +31,22 @@ public class GameLoop implements Screen {
 	private final GameUI gameUI;
 	private final GameStage gameStage;
 	public static final List<ICharacter> characterList = new ArrayList<>();
-	public static Imap infoMap;
+	public static TileInfoMap infoMap;
 	private LootCollection inventory;
 
 	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
 		this.game = game;
 		this.gameStage = stage;
+		// Hent dimensjonen på kartet og sett det inn i mappet som holder gyldige tiles.
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
-		infoMap = new Imap(height, width);
-		infoMap.findIllegalTiles(map);
+		infoMap = new TileInfoMap(height, width);
+		infoMap.addIllegalTiles(map);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.setToOrtho(false);
 		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.setToOrtho(false);
 		uiCamera.setToOrtho(false);
 
 		spriteBatch   = game.spriteBatch;
@@ -121,9 +118,11 @@ public class GameLoop implements Screen {
 		}
 
 		gameUI.drawScore(gameController.getPlayerCharacter());
+		gameUI.drawActionPoints(gameController.getPlayerCharacter());
+		gameUI.drawUI(deltaTime);
 
 		infoMap.reset(characterList);
-		infoMap.findIllegalTiles(map);
+		infoMap.addIllegalTiles(map);
 	}
 	
 	@Override

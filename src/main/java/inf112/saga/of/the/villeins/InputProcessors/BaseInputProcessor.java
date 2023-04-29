@@ -8,6 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+/**
+ * Base klasse for inputprossesore. Implementerer håndtering av kamera og slikt.
+ */
 abstract public class BaseInputProcessor implements InputProcessor {
     private OrthographicCamera camera;
 	private Stage stage;
