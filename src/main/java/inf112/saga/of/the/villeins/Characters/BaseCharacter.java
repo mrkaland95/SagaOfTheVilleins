@@ -22,6 +22,7 @@ public abstract class BaseCharacter implements ICharacter {
     private Vector2 currentPosition;
     private Vector2 endPosition;
     private CharacterState characterState;
+    private CharacterDirection characterDirection;
     List<TilePosition> pathToMove;
     CharacterAnimationHandler animationController;
     TileMovement tileMovement;
@@ -57,14 +58,8 @@ public abstract class BaseCharacter implements ICharacter {
     }
 
 
-    private void calculatePathToMove(Vector2 endGoal) {
-        if (endGoal == null) return;
-        TilePosition currentTile = HexGridMapPosition.findHexTile(currentPosition);
-        TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
-        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
-        this.tileMovement.setPath(pathToMove);
-        this.endPosition = null;
-    }
+    abstract void calculatePathToMove();
+
 
     public float getMoveSpeed() {
         return this.moveSpeed;
@@ -160,6 +155,4 @@ public abstract class BaseCharacter implements ICharacter {
         this.endPosition = endPosition;
         return true;
     }
-
-
 }

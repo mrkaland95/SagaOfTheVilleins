@@ -31,15 +31,16 @@ public class Player extends BaseCharacter implements IPlayable {
     public void update() {
         float deltaTime = Gdx.graphics.getDeltaTime();
         this.animationController.render(this, deltaTime);
-        this.calculatePathToMove(this.getEndPosition());
+        this.calculatePathToMove();
         this.tileMovement.move(deltaTime);
     }
 
 
-    void calculatePathToMove(Vector2 endGoal) {
-        if (endGoal == null) return;
+    @Override
+    void calculatePathToMove() {
+        if (this.getEndPosition() == null) return;
         TilePosition currentTile = HexGridMapPosition.findHexTile(this.getCurrentPosition());
-        TilePosition finalTile = HexGridMapPosition.findHexTile(endGoal);
+        TilePosition finalTile = HexGridMapPosition.findHexTile(this.getEndPosition());
         this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
         this.tileMovement.setPath(pathToMove);
         this.setEndPosition(null);

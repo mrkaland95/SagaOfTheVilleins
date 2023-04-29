@@ -31,6 +31,7 @@ public class BaseMonster extends BaseCharacter implements ICharacter {
     }
 
 
+    @Override
     void calculatePathToMove() {
         if (this.getCharacterState() == CharacterState.MOVING) return;
         if (this.getEndPosition() == null) return;
