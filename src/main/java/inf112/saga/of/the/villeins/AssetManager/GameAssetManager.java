@@ -8,9 +8,10 @@ public class GameAssetManager {
     public final AssetManager manager = new AssetManager();
     public static final String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
     public static final String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
-    public static final String idleSlimePath = "./assets/Sprites/Slime/SlimeIdle.png";
+    public static final String idleSlimePath = "./assets/Sprites/Slime/Slime_Idle.png";
     public static final String dragonAttackPath = "./assets/Sprites/Dragon/dragon_attack.png";
-    public static final String testMapPath = "./assets/Maps/TiledRougelikeMap.tmx";
+    public static final String ghostIdlePath = "./assets/Sprites/Ghost/ghost_idle.png";
+//    public static final String testMapPath = "./assets/Maps/TiledRougelikeMap.tmx";
     public static final String menuBackgroundPath = "./assets/MenuAssets/MenuBackground.png";
     public static final String menuBackgroundPath2 = "./assets/MenuAssets/MenuBackground2.png";
     public static final String uiSkin = "./assets/Skins/glassy/skin/glassy-ui.json";
@@ -21,6 +22,7 @@ public class GameAssetManager {
         manager.load(walkingWarriorPath, Texture.class);
         manager.load(idleSlimePath, Texture.class);
         manager.load(dragonAttackPath, Texture.class);
+        manager.load(ghostIdlePath, Texture.class);
         manager.load(menuBackgroundPath, Texture.class);
         manager.load(menuBackgroundPath2, Texture.class);
         manager.load(uiSkin, Skin.class);
