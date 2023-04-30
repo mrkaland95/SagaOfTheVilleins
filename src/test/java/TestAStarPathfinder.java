@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 public class TestAStarPathfinder {
     

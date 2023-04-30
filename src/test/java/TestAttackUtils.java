@@ -1,4 +1,4 @@
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class TestAttackUtils {
         TilePosition position2 = new TilePosition(3, 3);
 
         double expectedResult = 3;
-        double result = AttackUtils.hexDistance(position1, position2);
+        double result = TilePosition.hexDistance(position1, position2);
 
         assertEquals(expectedResult, result);
     }

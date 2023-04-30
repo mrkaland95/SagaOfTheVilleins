@@ -7,8 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 /**
  * Class intended for storing information about tiles, whether they are movable etc. This makes it simpler to access
@@ -53,7 +52,7 @@ public class TileInfoMap {
         }
 
         for (ICharacter character : characterList) {
-            TilePosition characterPosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
+            TilePosition characterPosition = TilePosition.findHexTile(character.getCurrentPosition());
             map.put(characterPosition, false);
         }
     }

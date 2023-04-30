@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.MapUtils;
+package inf112.saga.of.the.villeins.MovementUtils;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -85,6 +85,25 @@ public record TilePosition(int x, int y) {
         int z2 = -x2 - y2;
 
         return (Math.abs(x1 - x2) + Math.abs(y1 - y2) + Math.abs(z1 - z2)) / 2;
+    }
+
+    public static double hexDistance(TilePosition tile1, TilePosition tile2) {
+        int a0 = tile1.x();
+        int a1 = tile2.x();
+
+        int b0 = tile1.y();
+        int b1 = tile2.y();
+
+        double x0 = a0 - Math.floor(b0/2);
+        double y0 = b0;
+        double x1 = a1 - Math.floor(b1/2);
+        double y1 = b1;
+
+        double dx = x1 - x0;
+        double dy = y1 - y0;
+
+        double max1 = Math.max(Math.abs(dx), Math.abs(dy));
+        return Math.max(max1, Math.abs(dx+dy));
     }
 }
 

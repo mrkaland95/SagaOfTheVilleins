@@ -1,6 +1,6 @@
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.BaseMonster;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

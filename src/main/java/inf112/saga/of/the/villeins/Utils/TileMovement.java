@@ -3,8 +3,7 @@ package inf112.saga.of.the.villeins.Utils;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.ITurnBasedMovable;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class TileMovement {
         }
 
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
-        Vector2 nextTileCoordinate = HexGridMapPosition.calculateVectorCoordinate(nextTilePosition);
+        Vector2 nextTileCoordinate = TilePosition.findVectorCoordinate(nextTilePosition);
         Vector2 newPosition = VectorMovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
         character.setCurrentPosition(newPosition);
 
