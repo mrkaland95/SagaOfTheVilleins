@@ -5,8 +5,8 @@ import java.util.List;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Game.GameLoop;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 // Midlertidig plan
 // 1. Sjekke om "target" til monsteret er innenfor angrepsrekkevidde. Hvis den er det, angrip "target"

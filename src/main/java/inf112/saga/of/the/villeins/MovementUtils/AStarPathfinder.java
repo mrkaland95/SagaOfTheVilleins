@@ -1,4 +1,4 @@
-package inf112.saga.of.the.villeins.MapUtils;
+package inf112.saga.of.the.villeins.MovementUtils;
 
 import java.util.*;
 

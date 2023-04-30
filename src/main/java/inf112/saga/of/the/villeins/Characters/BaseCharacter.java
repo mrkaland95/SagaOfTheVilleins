@@ -4,9 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameLoop;
 import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
 import inf112.saga.of.the.villeins.Utils.TileMovement;
 
@@ -40,7 +38,7 @@ public abstract class BaseCharacter implements ICharacter {
 
 
 
-        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(startingTile);
+        this.currentPosition = TilePosition.findVectorCoordinate(startingTile);
         this.animationController = animationController;
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
@@ -80,10 +78,10 @@ public abstract class BaseCharacter implements ICharacter {
         return currentPosition;
     }
     public TilePosition getTilePosition() {
-        return HexGridMapPosition.findHexTile(currentPosition);
+        return TilePosition.findHexTile(currentPosition);
     }
     public void setTilePosition(TilePosition tilePosition) {
-        this.currentPosition = HexGridMapPosition.calculateVectorCoordinate(tilePosition);
+        this.currentPosition = TilePosition.findVectorCoordinate(tilePosition);
     }
     public void setPathToMove(List<TilePosition> pathToMove) {
         this.pathToMove = pathToMove;

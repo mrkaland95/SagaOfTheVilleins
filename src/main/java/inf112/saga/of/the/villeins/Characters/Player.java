@@ -1,17 +1,10 @@
 package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameLoop;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.AStarPathfinder;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
-import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.Utils.AttackUtils;
-import inf112.saga.of.the.villeins.Utils.TileMovement;
-
-import java.util.List;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.AStarPathfinder;
 
 public class Player extends BaseCharacter implements IPlayable {
     private int score;
@@ -39,8 +32,8 @@ public class Player extends BaseCharacter implements IPlayable {
     @Override
     void calculatePathToMove() {
         if (this.getEndPosition() == null) return;
-        TilePosition currentTile = HexGridMapPosition.findHexTile(this.getCurrentPosition());
-        TilePosition finalTile = HexGridMapPosition.findHexTile(this.getEndPosition());
+        TilePosition currentTile = TilePosition.findHexTile(this.getCurrentPosition());
+        TilePosition finalTile = TilePosition.findHexTile(this.getEndPosition());
         this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameLoop.infoMap);
         this.tileMovement.setPath(pathToMove);
         this.setEndPosition(null);

@@ -10,8 +10,7 @@ package inf112.saga.of.the.villeins.Utils;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.MapUtils.HexGridMapPosition;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 import java.util.List;
 
@@ -47,9 +46,9 @@ public class AttackUtils {
     }
 
     private ICharacter getCharacterToAttack(List<ICharacter> characterList, Vector2 clickPosition) {
-        TilePosition clickedTile = HexGridMapPosition.findHexTile(clickPosition);
+        TilePosition clickedTile = TilePosition.findHexTile(clickPosition);
         for (ICharacter character : characterList) {
-            TilePosition characterTile = HexGridMapPosition.findHexTile(character.getCurrentPosition());
+            TilePosition characterTile = TilePosition.findHexTile(character.getCurrentPosition());
             if (clickedTile.equals(characterTile)) {
                 return character;
             }
@@ -66,9 +65,9 @@ public class AttackUtils {
      * @return
      */
     public static boolean characterInRange(ICharacter character, ICharacter character2, int attackRange) {
-        TilePosition character1TilePosition = HexGridMapPosition.findHexTile(character.getCurrentPosition());
-        TilePosition character2TilePosition = HexGridMapPosition.findHexTile(character2.getCurrentPosition());
-        return attackRange >= hexDistance(character1TilePosition, character2TilePosition);
+        TilePosition character1TilePosition = TilePosition.findHexTile(character.getCurrentPosition());
+        TilePosition character2TilePosition = TilePosition.findHexTile(character2.getCurrentPosition());
+        return attackRange >= TilePosition.hexDistance(character1TilePosition, character2TilePosition);
     }
 
 
@@ -81,23 +80,4 @@ public class AttackUtils {
      * @return Antall tiles imellom tile1 og tile2.
      */
 
-    public static double hexDistance(TilePosition tile1, TilePosition tile2) {
-        int a0 = tile1.x();
-        int a1 = tile2.x();
-
-        int b0 = tile1.y();
-        int b1 = tile2.y();
-
-        double x0 = a0 - Math.floor(b0/2);
-        double y0 = b0;
-        double x1 = a1 - Math.floor(b1/2);
-        double y1 = b1;
-
-        double dx = x1 - x0;
-        double dy = y1 - y0;
-
-        double max1 = Math.max(Math.abs(dx), Math.abs(dy));
-        return Math.max(max1, Math.abs(dx+dy));
-
-    }
 }

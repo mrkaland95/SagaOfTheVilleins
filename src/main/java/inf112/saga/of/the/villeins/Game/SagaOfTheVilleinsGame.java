@@ -15,7 +15,7 @@ import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
 import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import inf112.saga.of.the.villeins.Game.LootSystem.UpgradePlayer;
-import inf112.saga.of.the.villeins.MapUtils.TilePosition;
+import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,9 @@ Dette er den øverste klassen som har med "spillet" i seg selv å gjøre. Her bl
 Lastet inn og initiert.
  */
 public class SagaOfTheVilleinsGame extends Game {
-    SpriteBatch spriteBatch;
-    ShapeRenderer shapeRenderer;
-    BitmapFont bitmapFont;
+    public SpriteBatch spriteBatch;
+    public ShapeRenderer shapeRenderer;
+    public BitmapFont bitmapFont;
     public GameAssetManager assetManager;
     private final List<TiledMap> maps = new ArrayList<>();
     private int mapIndex = 0;
@@ -57,6 +57,7 @@ public class SagaOfTheVilleinsGame extends Game {
 		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
 		Texture slimeIdleTexture      = assetManager.manager.get(GameAssetManager.idleSlimePath, Texture.class);
 		Texture dragonAttackTexture   = assetManager.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
+		Texture ghostIdleTexture      = assetManager.manager.get(GameAssetManager.ghostIdlePath, Texture.class);
 
         Texture menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
         menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
@@ -65,6 +66,7 @@ public class SagaOfTheVilleinsGame extends Game {
 		CharacterAnimationHandler slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
 		CharacterAnimationHandler playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
 		CharacterAnimationHandler dragonAnimation 	   = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
+		CharacterAnimationHandler ghostAnimation 	   = new CharacterAnimationHandler(ghostIdleTexture, ghostIdleTexture , null, spriteBatch,1, 4);
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
