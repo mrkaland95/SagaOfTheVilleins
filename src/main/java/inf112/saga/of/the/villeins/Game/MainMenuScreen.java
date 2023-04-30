@@ -23,16 +23,16 @@ public class MainMenuScreen implements Screen {
     private Skin mySkin;
     private Table menuTable;
 
-    public MainMenuScreen(SagaOfTheVilleinsGame game, Texture menuBackground) {
+    public MainMenuScreen(SagaOfTheVilleinsGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
-        this.menuBackground = menuBackground;
+        this.menuBackground = this.game.getMenuBackground();
         this.font = new BitmapFont();
         this.layout = new GlyphLayout();
         this.mySkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
         this.menuTable = new Table(mySkin);
         Gdx.input.setInputProcessor(stage);
-        menuBackground.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        this.menuBackground.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         Button startGameButton = new TextButton("Start Game", mySkin, "small");
@@ -40,7 +40,7 @@ public class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                     // Change the screen to the game loop screen
-                game.setScreen(new GameLoop(game, game.getCurrentMap(), game.getCurrentStage()));
+                game.setScreen(new GameScreen(game, game.getCurrentMap(), game.getCurrentStage()));
             }
         });
 
@@ -54,9 +54,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-
-
-
+        // Legg knappene til tabellen og deretter tegn tabellen på midten av skjermen.
         menuTable.add(startGameButton).expandX().center().row();
         menuTable.add(helpScreenButton).expandX().center().row();
         menuTable.setFillParent(true);

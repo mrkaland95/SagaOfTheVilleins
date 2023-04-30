@@ -1,6 +1,7 @@
 package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
@@ -38,7 +40,17 @@ public class SagaOfTheVilleinsGame extends Game {
     private CharacterFactory charFactory;
     private ICharacter player;
     private UpgradePlayer upgradeApplier;
-    public Texture menuBackground2;
+
+
+    private Texture menuBackground2;
+
+
+
+    private Texture menuBackground;
+
+
+
+    private Skin defaultSkin;
 
     @Override
     public void create() {
@@ -52,6 +64,11 @@ public class SagaOfTheVilleinsGame extends Game {
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         bitmapFont = new BitmapFont();
+//        defaultSkin = new Skin(assetManager.manager.get(GameAssetManager.uiSkin, Skin.class));
+
+        defaultSkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
+
+
 
         Texture warriorIdleTexture    = assetManager.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
@@ -59,8 +76,8 @@ public class SagaOfTheVilleinsGame extends Game {
 		Texture dragonAttackTexture   = assetManager.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
 		Texture ghostIdleTexture      = assetManager.manager.get(GameAssetManager.ghostIdlePath, Texture.class);
 
-        Texture menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
-        menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
+        this.menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
+        this.menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
 
 		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
 		CharacterAnimationHandler slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
@@ -69,13 +86,13 @@ public class SagaOfTheVilleinsGame extends Game {
 		CharacterAnimationHandler ghostAnimation 	   = new CharacterAnimationHandler(ghostIdleTexture, ghostIdleTexture , null, spriteBatch,1, 4);
 
 		// characterFactory burde endres basert på current stage
-		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, null);
+		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, ghostAnimation);
         
         player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
 		gameStage = new GameStage(stageIndex, charFactory, player);
 
         // Uncomment this to when testing the main menu
-        setScreen(new MainMenuScreen(this, menuBackground));
+        setScreen(new MainMenuScreen(this));
 
         // Uncomment/Comment this when testing the game or other screens,
         // so you don't have to click through the menu every time
@@ -102,19 +119,30 @@ public class SagaOfTheVilleinsGame extends Game {
     public void nextStage(){
         stageIndex += 1;
         gameStage = new GameStage(stageIndex, charFactory, player);
-        setScreen(new GameLoop(this, getCurrentMap(), gameStage));
+        setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
     public void resetGame(){
         stageIndex = 1;
         player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
         gameStage = new GameStage(stageIndex, charFactory, player);
-        setScreen(new GameLoop(this, getCurrentMap(), gameStage));
+        setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
     public void updatePlayer(IPlayable updatedPlayer, LootCollection inventory) {
         upgradeApplier = new UpgradePlayer();
         updatedPlayer = upgradeApplier.UpgradeStats(updatedPlayer, inventory);
         this.player = updatedPlayer;
+    }
+    public Skin getDefaultSkin() {
+        return defaultSkin;
+    }
+
+    public Texture getMenuBackground() {
+        return menuBackground;
+    }
+
+    public Texture getHelpPageBackground() {
+        return menuBackground2;
     }
 }
