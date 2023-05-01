@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -14,20 +16,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
+import inf112.saga.of.the.villeins.Controller.PlayerAction;
 import inf112.saga.of.the.villeins.Game.SagaOfTheVilleinsGame;
 
 import java.util.List;
 
 
-public class GameUI {
+public class GameUI implements GameUIUpdateListener {
     private final ShapeRenderer renderer;
-    private final BitmapFont font;
-    private final GlyphLayout layout;
-    private final SpriteBatch spriteBatch;
     private final Stage stage;
     private final Skin skin;
-//    private final Table contextMenu;
-    private TextureAtlas atlas;
     private Button endTurnButton;
     private Label actionPointLabel;
     private Label activeCharacterLabel;
@@ -36,37 +34,33 @@ public class GameUI {
     private Label scoreLabel;
     private GameController gameController;
     private ContextMenu contextMenu;
+    private Vector2 clickedWorldCoordinate;
+    private Stage gameCameraStage;
 
 
 
-    public GameUI(SagaOfTheVilleinsGame game, Stage uiStage, GameController controller) {
+    public GameUI(SagaOfTheVilleinsGame game, Stage uiStage, Stage gameCameraStage, GameController controller) {
         this.renderer = game.shapeRenderer;
-        this.font = game.bitmapFont;
-        this.spriteBatch = game.spriteBatch;
         this.stage = uiStage;
-        this.layout = new GlyphLayout();
+        this.gameCameraStage = gameCameraStage;
         this.skin = game.getDefaultSkin();
         this.gameController = controller;
         this.contextMenu = new ContextMenu(this.skin);
 
 
-
-
-
         // Initierer knappene for scoren, "end turn" knappen og gjenværende action points.
         this.initAPAndEndTurnButton();
         this.initScore();
+        this.initContextMenu();
     }
 
-    /** Tegner alle elementene som tilhører UI'en.
+    /** Tegner alle elementene som tilhører UI'en. Healthbar, score, endturn knapp og gjenværende AP.
      * @param deltaTime
      * @param playerCharacter
      * @param characterList
      */
     public void drawUI(float deltaTime, IPlayable playerCharacter, List<ICharacter> characterList) {
 
-
-//        gameController.getCurrentCharacter();
         this.updateAPAndEndTurnButton(gameController.getCurrentCharacter());
         this.updateScore(playerCharacter);
 
@@ -74,18 +68,30 @@ public class GameUI {
             drawHealthbar(character);
         }
 
+        updateContextMenu();
+
         this.stage.act(deltaTime);
         this.stage.draw();
     }
 
-    private void initContextMenu() {
-        this.contextMenu.setVisible(false);
-        this.stage.addActor(contextMenu);
+    public void updateTileInfo(String info) {
+        contextMenu.setTileInfo(info);
+    }
 
+    private void updateContextMenu() {
+        if (this.clickedWorldCoordinate == null) return;
+        contextMenu.setVisible(true);
+        Vector3 projectedCoordinate = this.gameCameraStage.getCamera().project(new Vector3(clickedWorldCoordinate.x, clickedWorldCoordinate.y, 0));
+        contextMenu.setPosition(projectedCoordinate.x, projectedCoordinate.y);
+        clickedWorldCoordinate = null;
+    }
+
+    private void initContextMenu() {
         contextMenu.getAttackButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Your attack logic here
+                // Angreps input her.
+                gameController.setPlayerAction(PlayerAction.ATTACK);
                 contextMenu.setVisible(false);
             }
         });
@@ -93,7 +99,8 @@ public class GameUI {
         contextMenu.getMoveButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Your move logic here
+                // Bevegelses logikk her.
+                gameController.setPlayerAction(PlayerAction.MOVE);
                 contextMenu.setVisible(false);
             }
         });
@@ -101,10 +108,13 @@ public class GameUI {
         contextMenu.getExamineButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Your examine logic here
+                // "Examine" logikk her.
+                gameController.setPlayerAction(PlayerAction.EXAMINE);
                 contextMenu.setVisible(false);
             }
         });
+        this.contextMenu.setVisible(false);
+        this.stage.addActor(contextMenu);
     }
 
 
@@ -133,8 +143,8 @@ public class GameUI {
     private void updateAPAndEndTurnButton(ICharacter character) {
         String actionPointText = "Action Points remaining: " + character.getCurrentActionPoints();
         String currentCharacter = "Current Character: " + character;
-        actionPointLabel.setText(actionPointText);
-        activeCharacterLabel.setText(currentCharacter);
+        this.actionPointLabel.setText(actionPointText);
+        this.activeCharacterLabel.setText(currentCharacter);
     }
 
     private void initScore() {
@@ -143,14 +153,14 @@ public class GameUI {
         this.scoreTable = new Table(skin);
         this.scoreTable.setFillParent(true);
         this.scoreTable.top();
-        scoreTable.add(scoreLabel).row();
-        scoreTable.add(activeCharacterLabel);
-        stage.addActor(scoreTable);
+        this.scoreTable.add(scoreLabel).row();
+        this.scoreTable.add(activeCharacterLabel);
+        this.stage.addActor(scoreTable);
     }
 
     private void updateScore(IPlayable player) {
         String scoreText = "Score: " + player.getScore();
-        scoreLabel.setText(scoreText);
+        this.scoreLabel.setText(scoreText);
     }
 
 
@@ -164,26 +174,23 @@ public class GameUI {
         float barWidth = 100f;
         float barHeight = 10f;
 
-        // TODO For å gjøre denne mer dynamisk ved f.eks store sprites, så må hver "frame" ha samme dimensjoner uansett hvilken type det er.
-        // TODO altså en frame av "Idle" eller "Moving" må ha samme dimensjoner.
         float healthBarX = character.getCurrentPosition().x - 50f;
         float healthBarY = character.getCurrentPosition().y + 100f;
 
-
-        // Gets the percentage of current health for the healthbar.
+        // Henter gjenværende liv som prosent av maks.
         float currentHealthPercentage = (float) character.getMaxHealth() / character.getCurrentHealth();
 
-        // Padding for the background healthbar
+        // Margin for bakgrunns "healthbaren"
         float paddingX = 2f;
         float paddingY = 2f;
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        // "Healthbar" som er i bakgrunnen.
+        // Tegner "Healthbar" som er i bakgrunnen.
         renderer.setColor(1, 0, 0, 1);
         renderer.rect(healthBarX, healthBarY, barWidth, barHeight);
 
-        // "Healthbar" som viser gjenværende liv.
+        // Tegner "Healthbar" som viser gjenværende liv.
         renderer.setColor(0, 1, 0, 1);
         renderer.rect(
                 healthBarX + paddingX,
@@ -192,4 +199,9 @@ public class GameUI {
                 barHeight - 2 * paddingY);
         renderer.end();
     }
+
+    public void setClickedWorldCoordinate(Vector2 clickedWorldCoordinate) {
+        this.clickedWorldCoordinate = clickedWorldCoordinate;
+    }
+
 }

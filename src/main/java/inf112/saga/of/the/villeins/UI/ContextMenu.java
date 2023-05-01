@@ -21,9 +21,9 @@ public class ContextMenu extends Table {
         tileInfoLabel = new Label("", skin);
 
         // Add buttons and label to the table
-        add(attackButton).pad(5);
-        add(moveButton).pad(5);
-        add(examineButton).pad(5);
+        add(attackButton).pad(5).row();
+        add(moveButton).pad(5).row();
+        add(examineButton).pad(5).row();
         row();
         add(tileInfoLabel).colspan(3).pad(5).align(Align.center);
 

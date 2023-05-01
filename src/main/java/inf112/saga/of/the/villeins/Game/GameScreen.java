@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -14,6 +15,9 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.GameState;
+import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
+import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
 import inf112.saga.of.the.villeins.UI.GameUI;
 import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 
@@ -35,7 +39,12 @@ public class GameScreen implements Screen {
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static TileInfoMap infoMap;
 	private LootCollection inventory;
-	private final Stage uiStage;
+	private final Stage uiCameraStage;
+	private final Stage gameCameraStage;
+	private InactivePlayerProcessor computerActiveProcessor;
+    private ActivePlayerProcessor playerActiveProcessor;
+
+
 
 	public GameScreen(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
@@ -52,15 +61,15 @@ public class GameScreen implements Screen {
 		gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		uiStage = new Stage(new ScreenViewport(uiCamera));
+		uiCameraStage = new Stage(new ScreenViewport(uiCamera));
+		gameCameraStage = new Stage(new ScreenViewport(gameCamera));
 
-		gameCamera.setToOrtho(false);
-
+		playerActiveProcessor = new ActivePlayerProcessor(gameCamera);
+        computerActiveProcessor = new InactivePlayerProcessor(gameCamera);
 
 		spriteBatch   = game.spriteBatch;
 		shapeRenderer = game.shapeRenderer;
 		bitmapFont    = game.bitmapFont;
-
 
 
 		characterList.addAll(gameStage.generateCharacters());
@@ -69,11 +78,10 @@ public class GameScreen implements Screen {
 		System.out.println(player.getMaxHealth());
 		System.out.println(player.getStrength());
 
-		gameController = new GameController(characterList, gameCamera, player, uiStage);
+		gameController = new GameController(characterList, player, uiCameraStage, playerActiveProcessor, computerActiveProcessor);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
-		gameUI = new GameUI(game, uiStage, gameController);
-
+		gameUI = new GameUI(game, uiCameraStage, gameCameraStage, gameController);
 		// Inits camera and sets its starting position and zoom.
 //		camera.lookAt(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		gameCamera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
@@ -102,8 +110,12 @@ public class GameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(gameCamera.combined);
 		shapeRenderer.setProjectionMatrix(gameCamera.combined);
 
+		// Tegn kartet.
 		mapRenderer.setView(gameCamera);
 		mapRenderer.render();
+
+
+
 		
 		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
 		// Men dette vil fungere for øyeblikket.
@@ -117,7 +129,7 @@ public class GameScreen implements Screen {
 			}
 		}
 		characterList.removeAll(removeList);
-
+		gameUI.setClickedWorldCoordinate(gameController.getClickedCoordinate());
 		gameController.update(characterList);
 		
 		for (ICharacter character : characterList) {
@@ -145,11 +157,12 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height){
 
-		gameCamera.viewportWidth = width;
-		gameCamera.viewportHeight = height;
-		gameCamera.update();
+//		gameCamera.viewportWidth = width;
+//		gameCamera.viewportHeight = height;
+//		gameCamera.update();
 //    	uiCamera.setToOrtho(false, width, height);
-       	uiStage.getViewport().update(width, height, true);
+       	gameCameraStage.getViewport().update(width, height, true);
+       	uiCameraStage.getViewport().update(width, height, true);
 	}
 
 	@Override

@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 abstract public class BaseInputProcessor implements InputProcessor {
     private OrthographicCamera camera;
-	private Stage stage;
 	private final float minimumZoomLevel = 0.5f;
 	private final float zoomAmount = 0.10f;
 	private final Vector3 current = new Vector3();
@@ -154,5 +153,11 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	public boolean checkTurn() {
 		return this.endTurn;
+	}
+
+	public void resetInput() {
+		this.endTurn = false;
+		this.rightClickCoordinates = null;
+		this.leftClickCoordinates = null;
 	}
 }

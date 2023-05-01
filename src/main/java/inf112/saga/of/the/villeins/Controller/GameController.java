@@ -15,6 +15,7 @@ import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
+import inf112.saga.of.the.villeins.UI.GameUI;
 
 public class GameController {
     private List<ICharacter> characterList;
@@ -29,19 +30,28 @@ public class GameController {
 	private InputMultiplexer playerInputMultiplexer;
 	private InputMultiplexer computerInputMultiplexer;
     private Stage uiStage;
+    private GameUI gameUI;
+    private PlayerAction playerAction;
+    Vector2 clickedPosition;
 
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera gameCamera, IPlayable playerChar, Stage stage) {
+    public GameController(List<ICharacter> initialCharacterList,
+                          IPlayable playerChar,
+                          Stage stage,
+                          ActivePlayerProcessor activePlayerProcessor,
+                          InactivePlayerProcessor inactivePlayerProcessor
+//                          GameUI gameUI) {
+        ){
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
         this.playerCharacter = playerChar;
         this.currentCharacter = null;
-        this.playerActiveProcessor = new ActivePlayerProcessor(gameCamera);
-        this.computerActiveProcessor = new InactivePlayerProcessor(gameCamera);
+        this.playerActiveProcessor = activePlayerProcessor;
+        this.computerActiveProcessor = inactivePlayerProcessor;
         this.playerInputMultiplexer = new InputMultiplexer();
         this.computerInputMultiplexer = new InputMultiplexer();
         this.uiStage = stage;
-
+        this.playerAction = PlayerAction.IDLE;
         initializeGame();
     }
 
@@ -50,7 +60,7 @@ public class GameController {
      * This method should be added to render function in Game.java to keep updating the controller with correct values.
      * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
      */
-    public void update(List<ICharacter> currentCharList){
+    public void update(List<ICharacter> currentCharList) {
         characterList = currentCharList;
         boolean playerIsAlive = isAlive(playerCharacter);
         if(playerCount() == 1 && playerIsAlive) {
@@ -61,15 +71,38 @@ public class GameController {
         }
 
         if(currentCharacter instanceof IPlayable) {
+//            if (playerAction == PlayerAction.ATTACK) {
+//                currentCharacter.attack();
+//            }
+
+
+
             // Spilleren sin input blir utført her.
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
-            if (attackPosition != null) {
-                currentCharacter.attack(attackPosition);
+
+
+
+
+
+
+            if (playerAction == PlayerAction.MOVE && currentCharacter.getCharacterState() == CharacterState.IDLE) {
+                System.out.println(playerAction);
+                System.out.println(clickedPosition);
+
+                currentCharacter.setEndPosition(clickedPosition);
+                playerAction = PlayerAction.IDLE;
+                clickedPosition = null;
             }
-            else if (movePosition != null && currentCharacter.getCharacterState() == CharacterState.IDLE) {
-                currentCharacter.setEndPosition(movePosition);
-            }
+
+//
+//            if (attackPosition != null) {
+//                currentCharacter.attack(attackPosition);
+//            }
+//            else if (clickedPosition != null && currentCharacter.getCharacterState() == CharacterState.IDLE) {
+//                currentCharacter.setEndPosition(movePosition);
+//                clickedPosition = null;
+//            }
             if(this.currentProcessor.checkTurn()){
                 this.currentProcessor.endTurn();
                 nextTurn(currentCharList);        
@@ -81,8 +114,11 @@ public class GameController {
     }
 
 
+    /**
+     * Går til neste tur hvis spilleren er aktiv og ikke utfører en hendelse
+     */
     public void endTurnFromUI() {
-        if (currentCharacter.getCharacterState() == CharacterState.IDLE) {
+        if (currentCharacter.getCharacterState() == CharacterState.IDLE && currentCharacter instanceof IPlayable) {
             nextTurn(characterList);
         }
     }
@@ -108,10 +144,6 @@ public class GameController {
     }
     public GameState getGameState(){
         return gameState;
-    }
-
-    public BaseInputProcessor getCurrentProcessor() {
-        return currentProcessor;
     }
 
     public ICharacter getCurrentCharacter() {
@@ -160,11 +192,11 @@ public class GameController {
         return character != null;
     }
 
-
-    public enum ActionToPerform {
-        ATTACK,
-        MOVE,
-        EXAMINE
+    public void setPlayerAction(PlayerAction playerAction) {
+        this.playerAction = playerAction;
     }
-
+    public Vector2 getClickedCoordinate() {
+        this.clickedPosition = currentProcessor.getLeftClickCoordinates();
+        return clickedPosition;
+    }
 }

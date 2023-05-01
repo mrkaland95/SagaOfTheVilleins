@@ -8,7 +8,6 @@ import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 
 public class BaseMonster extends BaseCharacter implements ICharacter {
-
     private IBaseAI ai;
     private String monsterName;
     public BaseMonster(TilePosition startingTile,
