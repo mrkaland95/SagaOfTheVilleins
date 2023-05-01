@@ -1,8 +1,10 @@
 package inf112.saga.of.the.villeins.MovementUtils;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Characters.ICharacter;
 
 public record TilePosition(int x, int y) {
+
     static double hexagonDimension = 200;
 
     public static TilePosition findHexTile(Vector2 worldCoordinate) {
@@ -66,27 +68,13 @@ public record TilePosition(int x, int y) {
         return new Vector2(floatX, floatY);
     }
 
-    /**
-     * Bruker noe som heter "Kube distanse" til å regne ut hvor mange tiles er imellom to tiles.
-     * Dette er nyttig for å kunne f.eks sjekke om en karakter er nærmt nok til å kunne angripe en annen karakter.
-     *
+    /** Regner ut avstanden mellom to tiles(altså hvor mange tiles som er i mellom to tiles).
+     * Dette er nyttig for å f.eks kunne sjekke om en karakter er nærmt nok til å angripe en annen.
+     * OBS: Virker kun for tileoppsettet vi bruker, dvs. "Odd" stagger index og ved "right-down" render order.
      * @param tile1
      * @param tile2
-     * @return Antall tiles imellom tile1 og tile2.
+     * @return Avstanden mellom tile1 og tile2.
      */
-    public static int cubeDistance(TilePosition tile1, TilePosition tile2) {
-        int x1 = tile1.x();
-        int x2 = tile2.x();
-
-        int y1 = tile1.y();
-        int y2 = tile2.y();
-
-        int z1 = -x1 - y1;
-        int z2 = -x2 - y2;
-
-        return (Math.abs(x1 - x2) + Math.abs(y1 - y2) + Math.abs(z1 - z2)) / 2;
-    }
-
     public static double hexDistance(TilePosition tile1, TilePosition tile2) {
         int a0 = tile1.x();
         int a1 = tile2.x();
@@ -105,6 +93,15 @@ public record TilePosition(int x, int y) {
         double max1 = Math.max(Math.abs(dx), Math.abs(dy));
         return Math.max(max1, Math.abs(dx+dy));
     }
+
+    public static void setHexagonDimension(double hexagonDimension) {
+        TilePosition.hexagonDimension = hexagonDimension;
+    }
+
+    public static ICharacter getCharacterOnTile() {
+        return null;
+    }
+
 }
 
 

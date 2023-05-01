@@ -4,6 +4,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class VectorMovementUtils {
 
+    /**
+     * Regner ut
+     * @param currentPosition
+     * @param destination
+     * @param deltaTime
+     * @param moveSpeed
+     * @return
+     */
     public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
         if (destination == null) return currentPosition;
 

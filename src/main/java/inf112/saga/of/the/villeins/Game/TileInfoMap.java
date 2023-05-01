@@ -57,14 +57,24 @@ public class TileInfoMap {
         }
     }
 
-    public void addIllegalTiles(TiledMap tileMap){
-        int walkableTileId = 6;
+    public void setIllegalTiles(TiledMap tileMap){
         TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
         for (int i = 0; i < mapRows; i++) {
             for (int j = 0; j < mapCols; j++) {
-                if(tiledLayer.getCell(i, j).getTile().getId() == walkableTileId){
+                Boolean isNotWalkable = (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class));
+                if (isNotWalkable == null) continue;
+                else if (isNotWalkable) {
                     map.put(new TilePosition(i, j), false);
-               }
+                }
+
+
+//                if (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class) == false) {
+//                    map.put(new TilePosition(i, j), false);
+//                }
+////                System.out.println(tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable"));
+//                if(tiledLayer.getCell(i, j).getTile().getId() == walkableTileId){
+//                    map.put(new TilePosition(i, j), false);
+//               }
             }
         }
     }

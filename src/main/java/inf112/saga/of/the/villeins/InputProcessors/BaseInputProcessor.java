@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 abstract public class BaseInputProcessor implements InputProcessor {
     private OrthographicCamera camera;
-	private Stage stage;
 	private final float minimumZoomLevel = 0.5f;
 	private final float zoomAmount = 0.10f;
 	private final Vector3 current = new Vector3();
@@ -21,13 +20,15 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	private final Vector3 delta = new Vector3();
 	private Vector2 rightClickCoordinates;
 	private Vector2 leftClickCoordinates;
+	private boolean leftMouseClicked;
 	public boolean endTurn;
 
 	BaseInputProcessor(OrthographicCamera camera) {
 		this.camera = camera;
 		this.endTurn = false;
 		this.rightClickCoordinates = null;
-		this.leftClickCoordinates = null;
+		this.leftMouseClicked = false;
+//		this.leftClickCoordinates = null;
 	}
 
 
@@ -83,9 +84,11 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if (button == Input.Buttons.LEFT) {
-			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
-			this.camera.unproject(cameraCoordinates);
-			this.leftClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			this.leftMouseClicked = true;
+//
+//			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
+//			this.camera.unproject(cameraCoordinates);
+//			this.leftClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
 		}
 		if (button == Input.Buttons.RIGHT) {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
@@ -137,16 +140,12 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	}
 
 	public Vector2 getRightClickCoordinates() {
-		Vector2 temp = rightClickCoordinates;
-		rightClickCoordinates = null;
-		return temp;
+		return rightClickCoordinates;
 	}
 
-	public Vector2 getLeftClickCoordinates() {
-		Vector2 temp = leftClickCoordinates;
-		leftClickCoordinates = null;
-		return temp;
-	}
+//	public boolean getLeftClickCoordinates() {
+//		return leftMouseClicked;
+//	}
 
 	public void endTurn() {
 		this.endTurn = false;
@@ -154,5 +153,16 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	public boolean checkTurn() {
 		return this.endTurn;
+	}
+
+	public void resetInput() {
+		this.endTurn = false;
+		this.rightClickCoordinates = null;
+		this.leftClickCoordinates = null;
+		this.leftMouseClicked = false;
+	}
+
+	public boolean isLeftMouseClicked() {
+		return leftMouseClicked;
 	}
 }

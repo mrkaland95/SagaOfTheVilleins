@@ -4,9 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Vector2;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
@@ -20,121 +21,160 @@ public class GameController {
     private IPlayable playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
-    private InactivePlayerProcessor inActiveProcessor;
-    private ActivePlayerProcessor activeProcessor;
+    private InactivePlayerProcessor computerActiveProcessor;
+    private ActivePlayerProcessor playerActiveProcessor;
     public BaseInputProcessor currentProcessor;
+	private InputMultiplexer playerInputMultiplexer;
+	private InputMultiplexer computerInputMultiplexer;
+    private Stage uiStage;
+    private PlayerAction playerAction;
+    private Vector2 positionToPerformAction;
 
-
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, IPlayable playerChar){
+    public GameController(List<ICharacter> initialCharacterList,
+                          IPlayable playerChar,
+                          Stage stage,
+                          ActivePlayerProcessor activePlayerProcessor,
+                          InactivePlayerProcessor inactivePlayerProcessor
+        ) {
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
         this.playerCharacter = playerChar;
         this.currentCharacter = null;
-        this.activeProcessor = new ActivePlayerProcessor(camera);
-        this.inActiveProcessor = new InactivePlayerProcessor(camera);
-
-        initializeGame(camera);
+        this.playerActiveProcessor = activePlayerProcessor;
+        this.computerActiveProcessor = inactivePlayerProcessor;
+        this.playerInputMultiplexer = new InputMultiplexer();
+        this.computerInputMultiplexer = new InputMultiplexer();
+        this.uiStage = stage;
+        this.playerAction = PlayerAction.IDLE;
+        initializeGame();
     }
 
-    private int playerCount(){
-        return this.characterList.size();
-    }
 
-    public void update(List<ICharacter> currentCharList){
-        /*
-         * This method should be added to render function in Game.java to keep updating the controller with correct values.
-         * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
-         * 
-         */
+    /*
+     * This method should be added to render function in Game.java to keep updating the controller with correct values.
+     * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
+     */
+    public void update(List<ICharacter> currentCharList) {
 
         characterList = currentCharList;
-        boolean getPlayerSuccessful = isAlive(playerCharacter);
-        if(playerCount() == 1 && getPlayerSuccessful){
+        boolean playerIsAlive = isAlive(playerCharacter);
+        if(playerCount() == 1 && playerIsAlive) {
             gameState = GameState.MAP_WON;
         }
-        else if(!getPlayerSuccessful){
+        else if(!playerIsAlive){
             gameState = GameState.GAME_OVER;
         }
 
         if(currentCharacter instanceof IPlayable) {
-            Vector2 movePosition = currentProcessor.getRightClickCoordinates();
-            Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
-            if (attackPosition != null) {
-                currentCharacter.attack(attackPosition);
-            }
-            else if (movePosition != null && currentCharacter.getCharacterState() == CharacterState.IDLE) {
-                currentCharacter.setEndPosition(movePosition);
+            if (currentCharacter.getCharacterState() == CharacterState.IDLE) {
+                if (playerAction == PlayerAction.MOVE) {
+                    currentCharacter.setEndPosition(positionToPerformAction);
+                    positionToPerformAction = null;
+                    playerAction = PlayerAction.IDLE;
+
+                } else if (playerAction == PlayerAction.ATTACK) {
+                    currentCharacter.attack(positionToPerformAction);
+                    positionToPerformAction = null;
+                    playerAction = PlayerAction.IDLE;
+                }
             }
             if(this.currentProcessor.checkTurn()){
                 this.currentProcessor.endTurn();
-                nextTurn(currentCharList);        
-            }    
+                nextTurn(currentCharList);
+            }
+
         }
         else if(currentCharacter.getCurrentActionPoints() == 0){
             nextTurn(currentCharList);
         }
     }
 
+
+    /**
+     * Går til neste tur hvis spilleren er aktiv og ikke utfører en hendelse
+     */
+    public void endTurnFromUI() {
+        if (currentCharacter.getCharacterState() == CharacterState.IDLE && currentCharacter instanceof IPlayable) {
+            nextTurn(characterList);
+        }
+    }
+
+
+    /*
+     * Sets the turn to the next charcter in turnList
+     * Should also change which processor in use based on if its a playerturn or AI-turn
+     * Maybe also use turnConter if needed
+     */
+    private void nextTurn(List<ICharacter> currentCharList) {
+        ICharacter currentTurnChar = turnList.poll();
+        if (currentCharList.contains(currentTurnChar)) {
+            turn(currentTurnChar);
+            currentTurnChar.resetActionPoints();
+            turnList.add(currentTurnChar);
+        } else {
+            nextTurn(currentCharList);
+        }
+    }
     public IPlayable getPlayerCharacter() {
         return this.playerCharacter;
+    }
+    public GameState getGameState(){
+        return gameState;
+    }
+
+    public ICharacter getCurrentCharacter() {
+        return currentCharacter;
     }
 
     private void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
         if(currentChar instanceof IPlayable){
-            currentProcessor = activeProcessor;
-            Gdx.input.setInputProcessor(currentProcessor);
+            currentProcessor = playerActiveProcessor;
+            Gdx.input.setInputProcessor(this.playerInputMultiplexer);
         }
         else{
             this.currentCharacter.setTargetCharacter(playerCharacter);
-            currentProcessor = inActiveProcessor;
-            Gdx.input.setInputProcessor(currentProcessor);
+            currentProcessor = computerActiveProcessor;
+            Gdx.input.setInputProcessor(this.computerInputMultiplexer);
             currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
         }
     }
 
-    public void nextTurn(List<ICharacter> currentCharList){
-        /*
-         * Sets the turn to the next charcter in turnList
-         * Should also change which processor in use based on if its a playerturn or AI-turn
-         * Maybe also use turnConter if needed
-         */
-
-        ICharacter currentTurnChar = turnList.poll();
-        if(currentCharList.contains(currentTurnChar)){
-            turn(currentTurnChar);
-            currentTurnChar.resetActionPoints();
-            turnList.add(currentTurnChar);
-        }
-        else{
-            nextTurn(currentCharList);
-        }     
-    }
-
-        /*
-        *   This method initializes everything needed for the game.
-        *   Add new processors to this method as they are created.
-        */
-    private void initializeGame(OrthographicCamera camera){
+    /**
+     * Initialiser spillet, inputhandlere og initierer "turn" listen for å håndtere hvilken karakter som er aktiv.
+    */
+    private void initializeGame() {
         gameState = GameState.PLAYING;
-        initializeProcessors(camera);
+        this.playerInputMultiplexer.addProcessor(uiStage);
+        this.playerInputMultiplexer.addProcessor(playerActiveProcessor);
+
+        this.computerInputMultiplexer.addProcessor(uiStage);
+        this.computerInputMultiplexer.addProcessor(computerActiveProcessor);
+
+        this.currentProcessor = playerActiveProcessor;
+        Gdx.input.setInputProcessor(playerInputMultiplexer);
+
         turnList.addAll(characterList);
         nextTurn(characterList);
     }
 
-    private void initializeProcessors(OrthographicCamera camera){
-        this.currentProcessor = activeProcessor;
-        Gdx.input.setInputProcessor(activeProcessor);
+    private int playerCount(){
+        return this.characterList.size();
     }
 
     private boolean isAlive(ICharacter character){
-       if(character == null)  return false;
-       else return true;
+        return character != null;
     }
 
-    public GameState getGameState(){
-        return gameState;
+    public void setPlayerAction(PlayerAction playerAction) {
+        this.playerAction = playerAction;
     }
-}   
+    public void setPositionToPerformAction(Vector2 coordinate) {
+        this.positionToPerformAction = coordinate;
+    }
+    public BaseInputProcessor getCurrentProcessor() {
+        return currentProcessor;
+    }
+}
