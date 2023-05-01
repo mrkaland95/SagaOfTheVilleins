@@ -18,7 +18,7 @@ import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLoop implements Screen {
+public class GameScreen implements Screen {
 	SagaOfTheVilleinsGame game;
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
@@ -34,7 +34,7 @@ public class GameLoop implements Screen {
 	public static TileInfoMap infoMap;
 	private LootCollection inventory;
 
-	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
+	public GameScreen(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
 		this.game = game;
 		this.gameStage = stage;

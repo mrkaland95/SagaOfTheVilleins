@@ -47,14 +47,6 @@ public class GameUI {
         this.skin = new Skin();
         this.contextMenu = new Table(skin);
 
-        this.endTurnButton = new EndTurnButton(Color.RED, this.renderer);
-
-        // Set the size and position of the button (adjust as needed)
-        this.endTurnButton.setSize(100, 100);
-        this.endTurnButton.setPosition(100, 100);
-
-        // Add the button to the stage
-        this.stage.addActor(endTurnButton);
     }
 
 
@@ -103,7 +95,6 @@ public class GameUI {
      */
     public void drawScore(IPlayable player) {
         String scoreText = "Score: " + player.getScore();
-//        font.getData().setScale(1);
 
         // Denne brukes for å finne bredden på teksten slik at den blir sentrert skikkelig, uansett hvordan vinduet
         // får endret dimensjoner.
@@ -152,15 +143,6 @@ public class GameUI {
 
 
     public void drawUI(float deltaTime) {
-
-        // Set the size and position of the button (adjust as needed)
-        this.endTurnButton.setSize(100, 100);
-        this.endTurnButton.setPosition(100, 100);
-
-        // Add the button to the stage
-        this.stage.addActor(endTurnButton);
-
-
 
 
 
