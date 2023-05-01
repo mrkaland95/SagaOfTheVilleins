@@ -37,7 +37,6 @@ public abstract class BaseCharacter implements ICharacter {
                          int attackRange) {
 
 
-
         this.currentPosition = TilePosition.findVectorCoordinate(startingTile);
         this.animationController = animationController;
         this.maxHealth = maxHealth;
@@ -48,6 +47,7 @@ public abstract class BaseCharacter implements ICharacter {
         this.attackUtils = new AttackUtils(this, attackRange);
         this.tileMovement = new TileMovement(this);
         this.characterState = CharacterState.IDLE;
+        this.characterDirection = CharacterDirection.LEFT;
 
         int tempActionPoints = 10;
 
@@ -180,5 +180,13 @@ public abstract class BaseCharacter implements ICharacter {
     public Boolean setEndPosition(Vector2 endPosition) {
         this.endPosition = endPosition;
         return true;
+    }
+
+    public CharacterDirection getCharacterDirection() {
+        return characterDirection;
+    }
+
+    public void setCharacterDirection(CharacterDirection characterDirection) {
+        this.characterDirection = characterDirection;
     }
 }

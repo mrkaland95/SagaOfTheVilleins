@@ -138,6 +138,10 @@ public class GameUI implements GameUIUpdateListener {
     }
 
 
+    /**
+     * Lager en knapp der spilleren kan gå videre til neste tur. Lager også en stripe med tekst som viser hvor mange
+     * Action points den aktive karakteren har igjen.
+     */
     private void initAPAndEndTurnButton() {
         actionPointLabel = new Label("", skin);
         endTurnButton = new TextButton("End Turn", skin, "small");

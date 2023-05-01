@@ -1,6 +1,7 @@
 package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Characters.CharacterDirection;
 import inf112.saga.of.the.villeins.Characters.ITurnBasedMovable;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
@@ -43,6 +44,14 @@ public class TileMovement {
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
         Vector2 nextTileCoordinate = TilePosition.findVectorCoordinate(nextTilePosition);
         Vector2 newPosition = VectorMovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
+
+        // Setter retningen som animasjonen skal peke mot.
+        if (newPosition.x > character.getCurrentPosition().x) {
+            character.setCharacterDirection(CharacterDirection.RIGHT);
+        } else if (newPosition.x < character.getCurrentPosition().x) {
+            character.setCharacterDirection(CharacterDirection.LEFT);
+        }
+
         character.setCurrentPosition(newPosition);
 
         if (newPosition.equals(nextTileCoordinate)) {
@@ -51,7 +60,7 @@ public class TileMovement {
              * beveget seg
              */
             if(pathIndex > 0){
-                character.setCurrentActionPoints(character.getCurrentActionPoints()-1);
+                character.setCurrentActionPoints(character.getCurrentActionPoints() - 1);
             }
             pathIndex++;
         }

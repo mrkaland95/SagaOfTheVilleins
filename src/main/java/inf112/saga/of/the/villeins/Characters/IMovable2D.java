@@ -34,6 +34,8 @@ public interface IMovable2D {
      */
     CharacterState getCharacterState();
     void setCharacterState(CharacterState characterState);
+    CharacterDirection getCharacterDirection();
+    void setCharacterDirection(CharacterDirection characterDirection);
     float getMoveSpeed();
     void setMoveSpeed(float moveSpeed);
     void setPathToMove(List<TilePosition> pathToMove);
