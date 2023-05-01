@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 // Siden inputprossesoren håndterer input for "spillet", can vi kanskje kalle den "game" inputprossor eller noe sånt?
 
 public class ActivePlayerProcessor extends BaseInputProcessor {
-
     public ActivePlayerProcessor(OrthographicCamera camera) {
         super(camera);
     }

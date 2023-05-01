@@ -28,17 +28,17 @@ public class CharacterFactory implements ICharacterFactory {
     }
     @Override
     public ICharacter getSlimeCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1);
+        return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1, "Slime");
     }
 
     @Override
     public ICharacter getGhostCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.ghostHandler, 25, 5, 5, 1);
+        return new BaseMonster(spawnPosition, this.ghostHandler, 25, 5, 5, 1, "Ghost");
     }
 
     @Override
     public ICharacter getDragonCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1);
+        return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1, "Dragon");
     }
 
     @Override

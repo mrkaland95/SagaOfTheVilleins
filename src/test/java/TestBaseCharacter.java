@@ -11,7 +11,7 @@ public class TestBaseCharacter {
 
     @BeforeEach
     public void setup() {
-        testMonster = new BaseMonster(new TilePosition(1,1), null, 40, 2, 5, 1);
+        testMonster = new BaseMonster(new TilePosition(1,1), null, 40, 2, 5, 1, "test");
     }
 
     @Test
@@ -19,7 +19,4 @@ public class TestBaseCharacter {
         Vector2 expectedPosition = new Vector2(400.0f,250.0f);
         assertEquals(expectedPosition, testMonster.getCurrentPosition());
     }
-
-
-
 }

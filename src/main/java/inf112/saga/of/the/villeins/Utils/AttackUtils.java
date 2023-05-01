@@ -53,7 +53,6 @@ public class AttackUtils {
                 return character;
             }
         }
-
         return null;
     }
 
@@ -69,15 +68,4 @@ public class AttackUtils {
         TilePosition character2TilePosition = TilePosition.findHexTile(character2.getCurrentPosition());
         return attackRange >= TilePosition.hexDistance(character1TilePosition, character2TilePosition);
     }
-
-
-    /**
-     * Bruker noe som heter "Kube distanse" til å regne ut hvor mange tiles er imellom to tiles.
-     * Dette er nyttig for å kunne f.eks sjekke om en karakter er nærmt nok til å kunne angripe en annen karakter.
-     *
-     * @param tile1
-     * @param tile2
-     * @return Antall tiles imellom tile1 og tile2.
-     */
-
 }
