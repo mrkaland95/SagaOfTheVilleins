@@ -2,7 +2,7 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import inf112.saga.of.the.villeins.Game.GameLoop;
+import inf112.saga.of.the.villeins.Game.GameScreen;
 import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
@@ -56,6 +56,9 @@ public abstract class BaseCharacter implements ICharacter {
     }
 
 
+    /**
+     * Regner ut "tile" veien som en karakter skal gå.
+     */
     abstract void calculatePathToMove();
 
 
@@ -68,21 +71,46 @@ public abstract class BaseCharacter implements ICharacter {
     public String getIdentifier() {
         return this.identifier;
     }
+
+    /** Setter posisjonen til karakteren i verdenskoordinater.
+     * @param position
+     */
     public void setCurrentPosition(Vector2 position) {
         this.currentPosition = position;
     }
+
+    /** Henter ende målet til karakterer, i verdenskoordinater.
+     * @return
+     */
     public Vector2 getEndPosition() {
         return endPosition;
     }
+
+    /** Setter nåværende posisjon til karakteren - I verdenskoordinater.
+     * @return
+     */
     public Vector2 getCurrentPosition() {
         return currentPosition;
     }
+
+    /** Henter tilen som karakteren står på.
+     * @return
+     */
     public TilePosition getTilePosition() {
         return TilePosition.findHexTile(currentPosition);
     }
+
+    /** Setter tilen som karakteren skal flyttes til.
+     * @param tilePosition
+     */
     public void setTilePosition(TilePosition tilePosition) {
         this.currentPosition = TilePosition.findVectorCoordinate(tilePosition);
     }
+
+    /** Setter "tile" stien som karakteren skal bevege seg langs.
+     * Definert av en liste med tiles.
+     * @param pathToMove
+     */
     public void setPathToMove(List<TilePosition> pathToMove) {
         this.pathToMove = pathToMove;
     }
@@ -125,7 +153,7 @@ public abstract class BaseCharacter implements ICharacter {
         character.setHealth(newHealth);
     }
     public Boolean attack(Vector2 CoordinateToAttack) {
-        return this.attackUtils.attackCharacter(GameLoop.characterList, CoordinateToAttack);
+        return this.attackUtils.attackCharacter(GameScreen.characterList, CoordinateToAttack);
     }
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;

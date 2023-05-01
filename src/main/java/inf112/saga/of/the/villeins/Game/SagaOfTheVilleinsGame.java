@@ -40,16 +40,8 @@ public class SagaOfTheVilleinsGame extends Game {
     private CharacterFactory charFactory;
     private ICharacter player;
     private UpgradePlayer upgradeApplier;
-
-
     private Texture menuBackground2;
-
-
-
     private Texture menuBackground;
-
-
-
     private Skin defaultSkin;
 
     @Override
@@ -59,31 +51,29 @@ public class SagaOfTheVilleinsGame extends Game {
         assetManager.load();
         assetManager.manager.finishLoading();
 
-        maps.add(new TmxMapLoader().load("./assets/Maps/TiledRougelikeMapUpdated.tmx"));
+//        maps.add(new TmxMapLoader().load(GameAssetManager.testMapPath));
+        maps.add(assetManager.manager.get(GameAssetManager.testMapPath));
 
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         bitmapFont = new BitmapFont();
-//        defaultSkin = new Skin(assetManager.manager.get(GameAssetManager.uiSkin, Skin.class));
 
-        defaultSkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
-
-
-
+//        defaultSkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
         Texture warriorIdleTexture    = assetManager.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
 		Texture slimeIdleTexture      = assetManager.manager.get(GameAssetManager.idleSlimePath, Texture.class);
 		Texture dragonAttackTexture   = assetManager.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
 		Texture ghostIdleTexture      = assetManager.manager.get(GameAssetManager.ghostIdlePath, Texture.class);
 
+        this.defaultSkin = assetManager.manager.get(GameAssetManager.uiSkin, Skin.class);
+
         this.menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
         this.menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
 
-		// Disse burde antageligvis initialiseres og hentes fra et annet sted.
 		CharacterAnimationHandler slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
 		CharacterAnimationHandler playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
-		CharacterAnimationHandler dragonAnimation 	   = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
-		CharacterAnimationHandler ghostAnimation 	   = new CharacterAnimationHandler(ghostIdleTexture, ghostIdleTexture , null, spriteBatch,1, 4);
+		CharacterAnimationHandler dragonAnimation 	     = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
+		CharacterAnimationHandler ghostAnimation 	     = new CharacterAnimationHandler(ghostIdleTexture, ghostIdleTexture , null, spriteBatch,1, 4);
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, ghostAnimation);
@@ -93,10 +83,11 @@ public class SagaOfTheVilleinsGame extends Game {
 
         // Uncomment this to when testing the main menu
         setScreen(new MainMenuScreen(this));
+//        setScreen(new HelpScreen(this));
 
         // Uncomment/Comment this when testing the game or other screens,
         // so you don't have to click through the menu every time
-        // setScreen(new GameLoop(this, getCurrentMap(), gameStage));
+//         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
     @Override

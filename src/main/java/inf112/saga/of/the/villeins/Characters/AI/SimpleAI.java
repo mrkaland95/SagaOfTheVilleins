@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Game.GameLoop;
+import inf112.saga.of.the.villeins.Game.GameScreen;
 import inf112.saga.of.the.villeins.MovementUtils.AStarPathfinder;
 import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
@@ -34,8 +34,8 @@ public class SimpleAI implements IBaseAI {
             return true;
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
-            for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameLoop.infoMap)) {
-                if(GameLoop.infoMap.tileIsMovable(tilePosition)){
+            for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameScreen.infoMap)) {
+                if(GameScreen.infoMap.tileIsMovable(tilePosition)){
                     tempTiles.add(tilePosition);
                 }
             }
@@ -50,7 +50,7 @@ public class SimpleAI implements IBaseAI {
             }
 
             // Finner "pathen" til den nærmeste gyldige "tilen, som er innenfor angrepsrekkevidde til målet.
-            List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameLoop.infoMap);
+            List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameScreen.infoMap);
             currentCharacter.setPathToMove(pathToAttack);
 
             return false;

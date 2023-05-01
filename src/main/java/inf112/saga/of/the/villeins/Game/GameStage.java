@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Factories.CharacterFactory;
+import inf112.saga.of.the.villeins.Factories.ICharacterFactory;
 import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 public class GameStage {
     private int stage;
-    private CharacterFactory factory;
+    private ICharacterFactory factory;
     private int enemyCount;
     private ICharacter player;
 
-    public GameStage(int stage, CharacterFactory factory, ICharacter player){
+    public GameStage(int stage, ICharacterFactory factory, ICharacter player){
         this.stage = stage;
         this.factory = factory;
         this.player = player;
@@ -28,8 +28,17 @@ public class GameStage {
         player.setTilePosition(new TilePosition(1, 1));
         generatedCharacters.add(player);
         for (int i = 0; i < enemyCount; i++){
-            ICharacter tempEnemy = factory.getSlimeCharacter(spawns.get(i));
-            generatedCharacters.add(tempEnemy);
+//            ICharacter tempEnemy = factory.getSlimeCharacter(spawns.get(i));
+//            generatedCharacters.add(tempEnemy);
+            // TODO: 30.04.2023 Legg til funskjonalitet for å velge ut fiende typer tilfeldig
+            ICharacter enemy;
+            if (i % 2 != 0) {
+                enemy = factory.getSlimeCharacter(spawns.get(i));
+            } else {
+                enemy = factory.getGhostCharacter(spawns.get(i));
+            }
+            generatedCharacters.add(enemy);
+
         }
         return generatedCharacters;
     }
@@ -63,7 +72,7 @@ public class GameStage {
         for (int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 TilePosition possibleSpawn = new TilePosition(i, j);
-                if(GameLoop.infoMap.tileIsMovable(possibleSpawn)){
+                if(GameScreen.infoMap.tileIsMovable(possibleSpawn)){
                     spawns.add(possibleSpawn);
                 }
             }

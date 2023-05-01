@@ -22,9 +22,8 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 ### Kjente feil
 
 * For øyeblikket må du sørge for at "assets" mappen ligger i samme rotmappe som den kompilerte pakken for at programmet skal kunne kjøres
-* Får opp pipeline failed. Mistenker at spillet ikke kompileres med Linux pga case-sensitivitet.
 * På OS X følger ikke spriten med om en endrer størrelsen på vinduet. Feilen løses foreløpig ved å kommentere ut setWindowMode.
-* Healthbaren er ikke statisk ved bevegelse av spillfigur
+
 
 
 ### Credits for "assetene" som er brukt

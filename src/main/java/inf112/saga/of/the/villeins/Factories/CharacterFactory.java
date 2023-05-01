@@ -22,18 +22,27 @@ public class CharacterFactory implements ICharacterFactory {
         this.ghostHandler   = ghostHandler;
     }
 
+    @Override
     public ICharacter getWarriorCharacter(TilePosition spawnPosition) {
         return new Player(spawnPosition, this.warriorHandler, 50, 5, 5, 1);
     }
+    @Override
     public ICharacter getSlimeCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1);
     }
 
+    @Override
     public ICharacter getGhostCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.ghostHandler, 25, 5, 5, 1);
     }
 
+    @Override
     public ICharacter getDragonCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1);
+    }
+
+    @Override
+    public ICharacter getRandomCharacter(TilePosition spawnPosition) {
+        return null;
     }
 }
