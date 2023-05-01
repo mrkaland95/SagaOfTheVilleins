@@ -22,26 +22,29 @@ public class GameController {
     private IPlayable playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
-    private InactivePlayerProcessor inActiveProcessor;
-    private ActivePlayerProcessor activeProcessor;
+    private InactivePlayerProcessor computerActiveProcessor;
+    private ActivePlayerProcessor playerActiveProcessor;
     public BaseInputProcessor currentProcessor;
-    private InputMultiplexer inputMultiplexer;
 
+	private InputMultiplexer playerInputMultiplexer;
+	private InputMultiplexer computerInputMultiplexer;
+    private Stage uiStage;
 
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, IPlayable playerChar, Stage stage) {        this.characterList = initialCharacterList;
+    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera gameCamera, IPlayable playerChar, Stage stage) {
+        this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
         this.playerCharacter = playerChar;
         this.currentCharacter = null;
-        this.activeProcessor = new ActivePlayerProcessor(camera);
-        this.inActiveProcessor = new InactivePlayerProcessor(camera);
+        this.playerActiveProcessor = new ActivePlayerProcessor(gameCamera);
+        this.computerActiveProcessor = new InactivePlayerProcessor(gameCamera);
+        this.playerInputMultiplexer = new InputMultiplexer();
+        this.computerInputMultiplexer = new InputMultiplexer();
+        this.uiStage = stage;
 
-        initializeGame(stage);
+        initializeGame();
     }
 
-    private int playerCount(){
-        return this.characterList.size();
-    }
 
     /*
      * This method should be added to render function in Game.java to keep updating the controller with correct values.
@@ -77,31 +80,20 @@ public class GameController {
         }
     }
 
-    public IPlayable getPlayerCharacter() {
-        return this.playerCharacter;
-    }
 
-    private void turn(ICharacter currentChar){
-        this.currentCharacter = currentChar;
-
-        if(currentChar instanceof IPlayable){
-            currentProcessor = activeProcessor;
-            Gdx.input.setInputProcessor(currentProcessor);
-        }
-        else{
-            this.currentCharacter.setTargetCharacter(playerCharacter);
-            currentProcessor = inActiveProcessor;
-            Gdx.input.setInputProcessor(currentProcessor);
-            currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
+    public void endTurnFromUI() {
+        if (currentCharacter.getCharacterState() == CharacterState.IDLE) {
+            nextTurn(characterList);
         }
     }
+
 
     /*
      * Sets the turn to the next charcter in turnList
      * Should also change which processor in use based on if its a playerturn or AI-turn
      * Maybe also use turnConter if needed
      */
-    public void nextTurn(List<ICharacter> currentCharList) {
+    private void nextTurn(List<ICharacter> currentCharList) {
         ICharacter currentTurnChar = turnList.poll();
         if (currentCharList.contains(currentTurnChar)) {
             turn(currentTurnChar);
@@ -110,36 +102,10 @@ public class GameController {
         } else {
             nextTurn(currentCharList);
         }
-
-        inputMultiplexer.getProcessors().removeValue(currentProcessor, true);
-        inputMultiplexer.addProcessor(currentProcessor);
     }
-
-
-    /*
-    *   This method initializes everything needed for the game.
-    *   Add new processors to this method as they are created.
-    */
-    private void initializeGame(Stage stage) {
-        gameState = GameState.PLAYING;
-        initializeProcessors(stage);
-        turnList.addAll(characterList);
-        nextTurn(characterList);
+    public IPlayable getPlayerCharacter() {
+        return this.playerCharacter;
     }
-
-    private void initializeProcessors(Stage stage) {
-        this.currentProcessor = activeProcessor;
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(activeProcessor);
-        Gdx.input.setInputProcessor(inputMultiplexer);
-    }
-
-
-    private boolean isAlive(ICharacter character){
-        return character != null;
-    }
-
     public GameState getGameState(){
         return gameState;
     }
@@ -151,4 +117,54 @@ public class GameController {
     public ICharacter getCurrentCharacter() {
         return currentCharacter;
     }
+
+    private void turn(ICharacter currentChar){
+        this.currentCharacter = currentChar;
+
+        if(currentChar instanceof IPlayable){
+            currentProcessor = playerActiveProcessor;
+            Gdx.input.setInputProcessor(this.playerInputMultiplexer);
+        }
+        else{
+            this.currentCharacter.setTargetCharacter(playerCharacter);
+            currentProcessor = computerActiveProcessor;
+            Gdx.input.setInputProcessor(this.computerInputMultiplexer);
+            currentCharacter.setEndPosition(playerCharacter.getCurrentPosition());
+        }
+    }
+
+
+    /**
+     * Initialiser spillet, inputhandlere og initierer "turn" listen for å håndtere hvilken karakter som er aktiv.
+    */
+    private void initializeGame() {
+        gameState = GameState.PLAYING;
+        this.playerInputMultiplexer.addProcessor(uiStage);
+        this.playerInputMultiplexer.addProcessor(playerActiveProcessor);
+
+        this.computerInputMultiplexer.addProcessor(uiStage);
+        this.computerInputMultiplexer.addProcessor(computerActiveProcessor);
+
+        this.currentProcessor = playerActiveProcessor;
+        Gdx.input.setInputProcessor(playerInputMultiplexer);
+
+        turnList.addAll(characterList);
+        nextTurn(characterList);
+    }
+
+    private int playerCount(){
+        return this.characterList.size();
+    }
+
+    private boolean isAlive(ICharacter character){
+        return character != null;
+    }
+
+
+    public enum ActionToPerform {
+        ATTACK,
+        MOVE,
+        EXAMINE
+    }
+
 }

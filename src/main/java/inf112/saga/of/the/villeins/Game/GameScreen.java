@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
 	BitmapFont bitmapFont;
 	private final TiledMap map;
 	private final HexagonalTiledMapRenderer mapRenderer;
-	private final OrthographicCamera camera;
+	private final OrthographicCamera gameCamera;
 	private final OrthographicCamera uiCamera;
 	private final GameController gameController;
 	private final GameUI gameUI;
@@ -36,8 +36,6 @@ public class GameScreen implements Screen {
 	public static TileInfoMap infoMap;
 	private LootCollection inventory;
 	private final Stage uiStage;
-	private InputMultiplexer playerInputMultiplexer;
-	private InputMultiplexer computerInputMultiplexer;
 
 	public GameScreen(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
@@ -51,19 +49,18 @@ public class GameScreen implements Screen {
 		infoMap = new TileInfoMap(height, width);
 		infoMap.addIllegalTiles(map);
 
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		uiStage = new Stage(new ScreenViewport(uiCamera));
 
-		camera.setToOrtho(false);
+		gameCamera.setToOrtho(false);
 
 
 		spriteBatch   = game.spriteBatch;
 		shapeRenderer = game.shapeRenderer;
 		bitmapFont    = game.bitmapFont;
 
-		gameUI = new GameUI(game, uiStage);
 
 
 		characterList.addAll(gameStage.generateCharacters());
@@ -72,13 +69,15 @@ public class GameScreen implements Screen {
 		System.out.println(player.getMaxHealth());
 		System.out.println(player.getStrength());
 
-		gameController = new GameController(characterList, camera, player, uiStage);
+		gameController = new GameController(characterList, gameCamera, player, uiStage);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
+
+		gameUI = new GameUI(game, uiStage, gameController);
 
 		// Inits camera and sets its starting position and zoom.
 //		camera.lookAt(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
-		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
-		camera.zoom = 1.5f;
+		gameCamera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
+		gameCamera.zoom = 1.5f;
 	}
 
 
@@ -97,13 +96,13 @@ public class GameScreen implements Screen {
 			this.game.nextStage();
 		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
-		camera.update();
+		gameCamera.update();
 		uiCamera.update();
 
-		spriteBatch.setProjectionMatrix(camera.combined);
-		shapeRenderer.setProjectionMatrix(camera.combined);
+		spriteBatch.setProjectionMatrix(gameCamera.combined);
+		shapeRenderer.setProjectionMatrix(gameCamera.combined);
 
-		mapRenderer.setView(camera);
+		mapRenderer.setView(gameCamera);
 		mapRenderer.render();
 		
 		// Denne burde antageligvis flyttes inn til GameController klassen når en karakter dør
@@ -123,10 +122,9 @@ public class GameScreen implements Screen {
 		
 		for (ICharacter character : characterList) {
 			character.update();
-			gameUI.drawHealthbar(character);
 		}
 
-		gameUI.drawUI(deltaTime, gameController.getPlayerCharacter());
+		gameUI.drawUI(deltaTime, gameController.getPlayerCharacter(), characterList);
 
 		infoMap.reset(characterList);
 		infoMap.addIllegalTiles(map);
@@ -147,9 +145,9 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height){
 
-		camera.viewportWidth = width;
-		camera.viewportHeight = height;
-		camera.update();
+		gameCamera.viewportWidth = width;
+		gameCamera.viewportHeight = height;
+		gameCamera.update();
 //    	uiCamera.setToOrtho(false, width, height);
        	uiStage.getViewport().update(width, height, true);
 	}
@@ -168,13 +166,4 @@ public class GameScreen implements Screen {
 	public void hide() {
 
 	}
-
-	private void setInputProcessor(ICharacter character) {
-		// Hvis karakteren er styrt av et menneske.
-		if (character instanceof IPlayable) {
-
-		}
-	}
-
-
 }

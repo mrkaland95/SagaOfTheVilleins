@@ -61,4 +61,11 @@ public class Player extends BaseCharacter implements IPlayable {
         throw new UnsupportedOperationException("Unimplemented method 'getTargetCharacter'");
     }
 
+    /**
+     * Brukt for debugging.
+     */
+    @Override
+    public String toString() {
+        return "Player - " + this.hashCode();
+    }
 }

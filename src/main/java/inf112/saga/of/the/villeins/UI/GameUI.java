@@ -13,7 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
+import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Game.SagaOfTheVilleinsGame;
+
+import java.util.List;
 
 
 public class GameUI {
@@ -23,38 +26,86 @@ public class GameUI {
     private final SpriteBatch spriteBatch;
     private final Stage stage;
     private final Skin skin;
-    private final Table contextMenu;
-    private Label actionPointLabel;
-    private Button endTurnButton;
+//    private final Table contextMenu;
     private TextureAtlas atlas;
+    private Button endTurnButton;
+    private Label actionPointLabel;
+    private Label activeCharacterLabel;
     private Table actionPointTable;
     private Table scoreTable;
     private Label scoreLabel;
+    private GameController gameController;
+    private ContextMenu contextMenu;
 
 
 
-    public GameUI(SagaOfTheVilleinsGame game, Stage uiStage) {
+    public GameUI(SagaOfTheVilleinsGame game, Stage uiStage, GameController controller) {
         this.renderer = game.shapeRenderer;
         this.font = game.bitmapFont;
         this.spriteBatch = game.spriteBatch;
         this.stage = uiStage;
         this.layout = new GlyphLayout();
         this.skin = game.getDefaultSkin();
-        this.contextMenu = new Table(skin);
+        this.gameController = controller;
+        this.contextMenu = new ContextMenu(this.skin);
+
+
+
+
 
         // Initierer knappene for scoren, "end turn" knappen og gjenværende action points.
         this.initAPAndEndTurnButton();
         this.initScore();
     }
 
-    public void drawUI(float deltaTime, IPlayable playerCharacter) {
-        this.updateAPAndEndTurnButton(playerCharacter);
+    /** Tegner alle elementene som tilhører UI'en.
+     * @param deltaTime
+     * @param playerCharacter
+     * @param characterList
+     */
+    public void drawUI(float deltaTime, IPlayable playerCharacter, List<ICharacter> characterList) {
+
+
+//        gameController.getCurrentCharacter();
+        this.updateAPAndEndTurnButton(gameController.getCurrentCharacter());
         this.updateScore(playerCharacter);
+
+        for (ICharacter character : characterList) {
+            drawHealthbar(character);
+        }
 
         this.stage.act(deltaTime);
         this.stage.draw();
     }
 
+    private void initContextMenu() {
+        this.contextMenu.setVisible(false);
+        this.stage.addActor(contextMenu);
+
+        contextMenu.getAttackButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Your attack logic here
+                contextMenu.setVisible(false);
+            }
+        });
+
+        contextMenu.getMoveButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Your move logic here
+                contextMenu.setVisible(false);
+            }
+        });
+
+        contextMenu.getExamineButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Your examine logic here
+                contextMenu.setVisible(false);
+            }
+        });
+    }
 
 
     private void initAPAndEndTurnButton() {
@@ -63,7 +114,7 @@ public class GameUI {
         endTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                tempEndturn();
+                gameController.endTurnFromUI();
             }
         });
 
@@ -80,16 +131,20 @@ public class GameUI {
      * Må det defineres i samme metode.
      */
     private void updateAPAndEndTurnButton(ICharacter character) {
-        String actionPointText = "Action Points: " + character.getCurrentActionPoints();
+        String actionPointText = "Action Points remaining: " + character.getCurrentActionPoints();
+        String currentCharacter = "Current Character: " + character;
         actionPointLabel.setText(actionPointText);
+        activeCharacterLabel.setText(currentCharacter);
     }
 
     private void initScore() {
         this.scoreLabel = new Label("", skin);
+        this.activeCharacterLabel = new Label("", skin);
         this.scoreTable = new Table(skin);
         this.scoreTable.setFillParent(true);
         this.scoreTable.top();
         scoreTable.add(scoreLabel).row();
+        scoreTable.add(activeCharacterLabel);
         stage.addActor(scoreTable);
     }
 
@@ -136,12 +191,5 @@ public class GameUI {
                 (barWidth - 2 * paddingX) / currentHealthPercentage,
                 barHeight - 2 * paddingY);
         renderer.end();
-    }
-
-
-
-
-    private void tempEndturn() {
-        System.out.println("End Turn was clicked");
     }
 }
