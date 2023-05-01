@@ -4,9 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
@@ -23,10 +25,10 @@ public class GameController {
     private InactivePlayerProcessor inActiveProcessor;
     private ActivePlayerProcessor activeProcessor;
     public BaseInputProcessor currentProcessor;
+    private InputMultiplexer inputMultiplexer;
 
 
-    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, IPlayable playerChar){
-        this.characterList = initialCharacterList;
+    public GameController(List<ICharacter> initialCharacterList, OrthographicCamera camera, IPlayable playerChar, Stage stage) {        this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
         this.currentProcessor = null;
         this.playerCharacter = playerChar;
@@ -34,30 +36,29 @@ public class GameController {
         this.activeProcessor = new ActivePlayerProcessor(camera);
         this.inActiveProcessor = new InactivePlayerProcessor(camera);
 
-        initializeGame(camera);
+        initializeGame(stage);
     }
 
     private int playerCount(){
         return this.characterList.size();
     }
 
+    /*
+     * This method should be added to render function in Game.java to keep updating the controller with correct values.
+     * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
+     */
     public void update(List<ICharacter> currentCharList){
-        /*
-         * This method should be added to render function in Game.java to keep updating the controller with correct values.
-         * Could be used to handle "Action Points" or similar, to handle when to end someones turn.
-         * 
-         */
-
         characterList = currentCharList;
-        boolean getPlayerSuccessful = isAlive(playerCharacter);
-        if(playerCount() == 1 && getPlayerSuccessful){
+        boolean playerIsAlive = isAlive(playerCharacter);
+        if(playerCount() == 1 && playerIsAlive) {
             gameState = GameState.MAP_WON;
         }
-        else if(!getPlayerSuccessful){
+        else if(!playerIsAlive){
             gameState = GameState.GAME_OVER;
         }
 
         if(currentCharacter instanceof IPlayable) {
+            // Spilleren sin input blir utført her.
             Vector2 movePosition = currentProcessor.getRightClickCoordinates();
             Vector2 attackPosition = currentProcessor.getLeftClickCoordinates();
             if (attackPosition != null) {
@@ -95,46 +96,59 @@ public class GameController {
         }
     }
 
-    public void nextTurn(List<ICharacter> currentCharList){
-        /*
-         * Sets the turn to the next charcter in turnList
-         * Should also change which processor in use based on if its a playerturn or AI-turn
-         * Maybe also use turnConter if needed
-         */
-
+    /*
+     * Sets the turn to the next charcter in turnList
+     * Should also change which processor in use based on if its a playerturn or AI-turn
+     * Maybe also use turnConter if needed
+     */
+    public void nextTurn(List<ICharacter> currentCharList) {
         ICharacter currentTurnChar = turnList.poll();
-        if(currentCharList.contains(currentTurnChar)){
+        if (currentCharList.contains(currentTurnChar)) {
             turn(currentTurnChar);
             currentTurnChar.resetActionPoints();
             turnList.add(currentTurnChar);
-        }
-        else{
+        } else {
             nextTurn(currentCharList);
-        }     
+        }
+
+        inputMultiplexer.getProcessors().removeValue(currentProcessor, true);
+        inputMultiplexer.addProcessor(currentProcessor);
     }
 
-        /*
-        *   This method initializes everything needed for the game.
-        *   Add new processors to this method as they are created.
-        */
-    private void initializeGame(OrthographicCamera camera){
+
+    /*
+    *   This method initializes everything needed for the game.
+    *   Add new processors to this method as they are created.
+    */
+    private void initializeGame(Stage stage) {
         gameState = GameState.PLAYING;
-        initializeProcessors(camera);
+        initializeProcessors(stage);
         turnList.addAll(characterList);
         nextTurn(characterList);
     }
 
-    private void initializeProcessors(OrthographicCamera camera){
+    private void initializeProcessors(Stage stage) {
         this.currentProcessor = activeProcessor;
-        Gdx.input.setInputProcessor(activeProcessor);
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(activeProcessor);
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
+
     private boolean isAlive(ICharacter character){
-       if(character == null)  return false;
-       else return true;
+        return character != null;
     }
 
     public GameState getGameState(){
         return gameState;
     }
-}   
+
+    public BaseInputProcessor getCurrentProcessor() {
+        return currentProcessor;
+    }
+
+    public ICharacter getCurrentCharacter() {
+        return currentCharacter;
+    }
+}

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
@@ -18,7 +20,7 @@ import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLoop implements Screen {
+public class GameScreen implements Screen {
 	SagaOfTheVilleinsGame game;
 	SpriteBatch spriteBatch;
 	ShapeRenderer shapeRenderer;
@@ -33,27 +35,35 @@ public class GameLoop implements Screen {
 	public static final List<ICharacter> characterList = new ArrayList<>();
 	public static TileInfoMap infoMap;
 	private LootCollection inventory;
+	private final Stage uiStage;
+	private InputMultiplexer playerInputMultiplexer;
+	private InputMultiplexer computerInputMultiplexer;
 
-	public GameLoop(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
+	public GameScreen(SagaOfTheVilleinsGame game, TiledMap map, GameStage stage) {
 		this.map = map;
 		this.game = game;
 		this.gameStage = stage;
+
 		// Hent dimensjonen på kartet og sett det inn i mappet som holder gyldige tiles.
 		int width = map.getProperties().get("width", Integer.class);
 		int height = map.getProperties().get("height", Integer.class);
+
 		infoMap = new TileInfoMap(height, width);
 		infoMap.addIllegalTiles(map);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+		uiStage = new Stage(new ScreenViewport(uiCamera));
+
 		camera.setToOrtho(false);
-		uiCamera.setToOrtho(false);
+
 
 		spriteBatch   = game.spriteBatch;
 		shapeRenderer = game.shapeRenderer;
 		bitmapFont    = game.bitmapFont;
 
-		gameUI = new GameUI(shapeRenderer, bitmapFont, spriteBatch, uiCamera);
+		gameUI = new GameUI(game, uiStage);
 
 
 		characterList.addAll(gameStage.generateCharacters());
@@ -62,14 +72,13 @@ public class GameLoop implements Screen {
 		System.out.println(player.getMaxHealth());
 		System.out.println(player.getStrength());
 
-		gameController = new GameController(characterList, camera, player);
+		gameController = new GameController(characterList, camera, player, uiStage);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
 		// Inits camera and sets its starting position and zoom.
 //		camera.lookAt(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		camera.zoom = 1.5f;
-
 	}
 
 
@@ -117,9 +126,7 @@ public class GameLoop implements Screen {
 			gameUI.drawHealthbar(character);
 		}
 
-		gameUI.drawScore(gameController.getPlayerCharacter());
-		gameUI.drawActionPoints(gameController.getPlayerCharacter());
-		gameUI.drawUI(deltaTime);
+		gameUI.drawUI(deltaTime, gameController.getPlayerCharacter());
 
 		infoMap.reset(characterList);
 		infoMap.addIllegalTiles(map);
@@ -142,10 +149,9 @@ public class GameLoop implements Screen {
 
 		camera.viewportWidth = width;
 		camera.viewportHeight = height;
-//		camera.setToOrtho(false);
 		camera.update();
-//    	camera.setToOrtho(false, width, height);
-    	uiCamera.setToOrtho(false, width, height);
+//    	uiCamera.setToOrtho(false, width, height);
+       	uiStage.getViewport().update(width, height, true);
 	}
 
 	@Override
@@ -162,4 +168,13 @@ public class GameLoop implements Screen {
 	public void hide() {
 
 	}
+
+	private void setInputProcessor(ICharacter character) {
+		// Hvis karakteren er styrt av et menneske.
+		if (character instanceof IPlayable) {
+
+		}
+	}
+
+
 }

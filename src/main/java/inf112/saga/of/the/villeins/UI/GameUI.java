@@ -1,8 +1,5 @@
 package inf112.saga.of.the.villeins.UI;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,49 +9,93 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
+import inf112.saga.of.the.villeins.Game.SagaOfTheVilleinsGame;
 
 
 public class GameUI {
-
     private final ShapeRenderer renderer;
     private final BitmapFont font;
     private final GlyphLayout layout;
     private final SpriteBatch spriteBatch;
-    private final OrthographicCamera uiCamera;
     private final Stage stage;
     private final Skin skin;
     private final Table contextMenu;
-    private Label actionPointsLabel;
+    private Label actionPointLabel;
     private Button endTurnButton;
     private TextureAtlas atlas;
+    private Table actionPointTable;
+    private Table scoreTable;
+    private Label scoreLabel;
 
 
 
-
-
-    public GameUI(ShapeRenderer renderer, BitmapFont bitmapFont, SpriteBatch spriteBatch, OrthographicCamera uiCamera) {
-        this.renderer = renderer;
-        this.font = bitmapFont;
-        this.spriteBatch = spriteBatch;
-        this.uiCamera = uiCamera;
-        this.stage = new Stage(new ScreenViewport(uiCamera));
+    public GameUI(SagaOfTheVilleinsGame game, Stage uiStage) {
+        this.renderer = game.shapeRenderer;
+        this.font = game.bitmapFont;
+        this.spriteBatch = game.spriteBatch;
+        this.stage = uiStage;
         this.layout = new GlyphLayout();
-        this.skin = new Skin();
+        this.skin = game.getDefaultSkin();
         this.contextMenu = new Table(skin);
 
-        this.endTurnButton = new EndTurnButton(Color.RED, this.renderer);
+        // Initierer knappene for scoren, "end turn" knappen og gjenværende action points.
+        this.initAPAndEndTurnButton();
+        this.initScore();
+    }
 
-        // Set the size and position of the button (adjust as needed)
-        this.endTurnButton.setSize(100, 100);
-        this.endTurnButton.setPosition(100, 100);
+    public void drawUI(float deltaTime, IPlayable playerCharacter) {
+        this.updateAPAndEndTurnButton(playerCharacter);
+        this.updateScore(playerCharacter);
 
-        // Add the button to the stage
-        this.stage.addActor(endTurnButton);
+        this.stage.act(deltaTime);
+        this.stage.draw();
+    }
+
+
+
+    private void initAPAndEndTurnButton() {
+        actionPointLabel = new Label("", skin);
+        endTurnButton = new TextButton("End Turn", skin, "small");
+        endTurnButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                tempEndturn();
+            }
+        });
+
+        actionPointTable = new Table(skin);
+        actionPointTable.setFillParent(true);
+        actionPointTable.bottom().right();
+        actionPointTable.pad(10);
+        actionPointTable.add(actionPointLabel).row();
+        actionPointTable.add(endTurnButton).width(150).height(50).pad(5);
+        stage.addActor(actionPointTable);
+    }
+        /**
+     * Vanligvis ville jeg ha splittet disse opp i to metoder, men fordi jeg vil ha knappen og informasjonen i en tabell
+     * Må det defineres i samme metode.
+     */
+    private void updateAPAndEndTurnButton(ICharacter character) {
+        String actionPointText = "Action Points: " + character.getCurrentActionPoints();
+        actionPointLabel.setText(actionPointText);
+    }
+
+    private void initScore() {
+        this.scoreLabel = new Label("", skin);
+        this.scoreTable = new Table(skin);
+        this.scoreTable.setFillParent(true);
+        this.scoreTable.top();
+        scoreTable.add(scoreLabel).row();
+        stage.addActor(scoreTable);
+    }
+
+    private void updateScore(IPlayable player) {
+        String scoreText = "Score: " + player.getScore();
+        scoreLabel.setText(scoreText);
     }
 
 
@@ -64,7 +105,7 @@ public class GameUI {
      * @param character Karakteren som "healthbaren" skal tegnes over.
      */
     public void drawHealthbar(ICharacter character) {
-
+        // TODO: 01.05.2023 flytt kallet på denne inn til "update" metoden
         float barWidth = 100f;
         float barHeight = 10f;
 
@@ -97,83 +138,10 @@ public class GameUI {
         renderer.end();
     }
 
-    /** Tegner "Skoren" til nåværende spiller på toppen av skjermen.
-     *
-     * @param player
-     */
-    public void drawScore(IPlayable player) {
-        String scoreText = "Score: " + player.getScore();
-//        font.getData().setScale(1);
 
-        // Denne brukes for å finne bredden på teksten slik at den blir sentrert skikkelig, uansett hvordan vinduet
-        // får endret dimensjoner.
-        layout.setText(font, scoreText);
 
-        // Regner ut posisjon på teksten.
-        float textX = (Gdx.graphics.getWidth() - layout.width) / 2;
-        float textY = Gdx.graphics.getHeight() - layout.height - 10;
 
-        // Tegner "Scoren"
-        spriteBatch.setProjectionMatrix(uiCamera.combined);
-        spriteBatch.begin();
-        font.draw(spriteBatch, scoreText, textX, textY);
-        spriteBatch.end();
+    private void tempEndturn() {
+        System.out.println("End Turn was clicked");
     }
-
-    public void drawActionPoints(ICharacter character) {
-        // Create a custom large font
-        BitmapFont font = new BitmapFont();
-        font.getData().setScale(2);
-
-        String actionPointText = "Action Points: " + character.getCurrentActionPoints();
-        layout.setText(font, actionPointText);
-
-//        Label.LabelStyle labelStyle = new Label.LabelStyle();
-//        labelStyle.font = largeFont;
-//        labelStyle.fontColor = Color.WHITE;
-
-
-//        float yPadding = 10f;
-        float yPadding = Gdx.graphics.getHeight() / 20f;
-
-        float xPadding = Gdx.graphics.getWidth() / 30f;
-
-        float textX = (Gdx.graphics.getWidth() - layout.width) - xPadding;
-        float textY = layout.height + yPadding;
-
-        spriteBatch.setProjectionMatrix(uiCamera.combined);
-        spriteBatch.begin();
-        font.draw(spriteBatch, actionPointText, textX, textY);
-        spriteBatch.end();
-    }
-
-    private void drawText(String text, float xPos, float yPos) {}
-
-
-
-    public void drawUI(float deltaTime) {
-
-        // Set the size and position of the button (adjust as needed)
-        this.endTurnButton.setSize(100, 100);
-        this.endTurnButton.setPosition(100, 100);
-
-        // Add the button to the stage
-        this.stage.addActor(endTurnButton);
-
-
-
-
-
-        this.stage.act(deltaTime);
-        this.stage.draw();
-    }
-
-    public void drawCenteredText(String text, float xPos, float yPos) {
-        layout.setText(font, text);
-        float textX = layout.width / 2f;
-        float textY = layout.height / 2f;
-
-    }
-
-
 }
