@@ -32,9 +32,13 @@ public class Player extends BaseCharacter implements IPlayable {
     @Override
     void calculatePathToMove() {
         if (this.getEndPosition() == null) return;
+        if (getCurrentActionPoints() == 0) return;
         TilePosition currentTile = TilePosition.findHexTile(this.getCurrentPosition());
         TilePosition finalTile = TilePosition.findHexTile(this.getEndPosition());
         this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameScreen.infoMap);
+        while(this.pathToMove.size() > getCurrentActionPoints()+1){
+            this.pathToMove.remove(pathToMove.size()-1);
+        }
         this.tileMovement.setPath(pathToMove);
         this.setEndPosition(null);
     }

@@ -62,19 +62,12 @@ public class TileInfoMap {
         for (int i = 0; i < mapRows; i++) {
             for (int j = 0; j < mapCols; j++) {
                 Boolean isNotWalkable = (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class));
-                if (isNotWalkable == null) continue;
+                if (isNotWalkable == null) {
+                    map.put(new TilePosition(i, j), true);
+                }
                 else if (isNotWalkable) {
                     map.put(new TilePosition(i, j), false);
                 }
-
-
-//                if (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class) == false) {
-//                    map.put(new TilePosition(i, j), false);
-//                }
-////                System.out.println(tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable"));
-//                if(tiledLayer.getCell(i, j).getTile().getId() == walkableTileId){
-//                    map.put(new TilePosition(i, j), false);
-//               }
             }
         }
     }

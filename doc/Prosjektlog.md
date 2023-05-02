@@ -325,3 +325,32 @@ Gruppetime på Vilvite:
 * Jobbet med inventory/loot
 * Jobbet med UI
 * Fikset problemer med turnsystem
+
+Tirsdag 02/05-23
+14:15-16:00
+Malene, Markus og Steffen
+
+Arbeidsøkt på realfagsbygget
+- Ferdigstille animasjoner og legge de til
+- Samle all dokumentasjon i oblig 4
+- Avtale hvilke dager som fungerer for presentasjon for alle
+- Skrive om de manuelle testene til riktig format
+- Fikset en bug for hvis player ikke fant en gyldig path
+- Lagde midscreen til å visualisere resultatet av runde
+- 
+
+Agenda videre:
+- Skrive tekst tilhørende klassediagram
+- Lage klassediagram når ting ikke leger endrer seg
+- Skrive javadocs
+- Oppdatere tester
+
+Torsdag 04/05-23
+Kl. 08:15-12:00
+Oppmøte
+
+Siste gruppetime + litt til
+
+
+
+
