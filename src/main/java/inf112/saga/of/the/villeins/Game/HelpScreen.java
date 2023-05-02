@@ -27,7 +27,6 @@ public class HelpScreen implements Screen {
     public HelpScreen(SagaOfTheVilleinsGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
-//        this.background = game.getMenuBackground();
         this.background = game.getHelpPageBackground();
         this.font = new BitmapFont();
         this.layout = new GlyphLayout();
