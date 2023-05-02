@@ -66,15 +66,6 @@ public class TileInfoMap {
                 else if (isNotWalkable) {
                     map.put(new TilePosition(i, j), false);
                 }
-
-
-//                if (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class) == false) {
-//                    map.put(new TilePosition(i, j), false);
-//                }
-////                System.out.println(tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable"));
-//                if(tiledLayer.getCell(i, j).getTile().getId() == walkableTileId){
-//                    map.put(new TilePosition(i, j), false);
-//               }
             }
         }
     }
