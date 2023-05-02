@@ -47,7 +47,7 @@ public class AStarPathfinder {
                 }
             }
         }
-        return null;
+        return new ArrayList<>();
     }
     
     private static ArrayList<TilePosition> getPath(Node node) {
