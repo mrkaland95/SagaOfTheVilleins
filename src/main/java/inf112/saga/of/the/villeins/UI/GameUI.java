@@ -1,25 +1,29 @@
 package inf112.saga.of.the.villeins.UI;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.PlayerAction;
 import inf112.saga.of.the.villeins.Game.SagaOfTheVilleinsGame;
 import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 import java.util.List;
 
 
+/**
+ * Klasse ansvarlig for å holde på det av kode relatert til UI'en som spilleren må interagere med.
+ */
 public class GameUI {
     private final ShapeRenderer renderer;
     private final Stage stage;
@@ -32,32 +36,57 @@ public class GameUI {
     private Label scoreLabel;
     private GameController gameController;
     private ContextMenu contextMenu;
-    private Vector2 clickedWorldCoordinate;
-    private boolean leftMouseClicked;
     private Stage gameCameraStage;
     private BaseInputProcessor playerActiveProcessor;
-
+    private Vector2 clickedWorldCoordinate;
+    private boolean leftMouseClicked;
+    private Table playerStatsTable;
 
 
     public GameUI(SagaOfTheVilleinsGame game,
-                                       Stage uiStage,
-                                       Stage gameCameraStage,
-                                       GameController controller,
-                                       BaseInputProcessor playerActiveProcessor) {
+                   Stage uiStage,
+                   Stage gameCameraStage,
+                   GameController controller,
+                   BaseInputProcessor playerActiveProcessor) {
+
         this.playerActiveProcessor = playerActiveProcessor;
         this.renderer = game.shapeRenderer;
         this.stage = uiStage;
         this.gameCameraStage = gameCameraStage;
         this.skin = game.getDefaultSkin();
         this.gameController = controller;
-        this.contextMenu = new ContextMenu(this.skin);
+        this.contextMenu = new ContextMenu(this.skin, this);
         this.leftMouseClicked = false;
 
         // Initierer knappene for scoren, "end turn" knappen og gjenværende action points.
         this.initAPAndEndTurnButton();
         this.initScore();
         this.initContextMenu();
+        this.initStatsTable();
+
+        // TODO: 03.05.2023 Få opp tekst som sier at man ikke har flere "action points" igjen når spilleren er tom.
     }
+
+
+    public void showMessage(String message, float duration) {
+        Label messageLabel = new Label(message, skin);
+        messageLabel.setColor(Color.RED);
+
+        Table messageTable = new Table(skin);
+        messageTable.setFillParent(true);
+        messageTable.center();
+        messageTable.add(messageLabel);
+        stage.addActor(messageTable);
+
+        // Sletter meldingen på skjermen etter den angitte tiden.
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                messageTable.remove();
+            }
+        }, duration);
+    }
+
 
     /** Tegner alle elementene som tilhører UI'en. Healthbar, score, endturn knapp og gjenværende AP.
      * @param deltaTime
@@ -68,75 +97,127 @@ public class GameUI {
         this.updateAPAndEndTurnButton(gameController.getCurrentCharacter());
         this.updateScore(playerCharacter);
 
-		leftMouseClicked = gameController.getCurrentProcessor().isLeftMouseClicked();
-		clickedWorldCoordinate = playerActiveProcessor.getRightClickCoordinates();
+		this.leftMouseClicked = gameController.getCurrentProcessor().isLeftMouseClicked();
+		this.clickedWorldCoordinate = playerActiveProcessor.getRightClickCoordinates();
 
         for (ICharacter character : characterList) {
             this.drawHealthbar(character);
         }
 
         this.updateContextMenu();
-        this.hideContextMenu();
+        this.hideContextMenuIfLeftClicked();
         this.stage.act(deltaTime);
         this.stage.draw();
-    }
-
-    public void updateTileInfo(String info) {
-        contextMenu.setTileInfo(info);
+        this.gameCameraStage.act(deltaTime);
+        this.gameCameraStage.draw();
     }
 
     private void updateContextMenu() {
         if (this.clickedWorldCoordinate == null) return;
-
-        Vector3 projectedCoordinate = this.gameCameraStage.getCamera().project(new Vector3(clickedWorldCoordinate.x, clickedWorldCoordinate.y, 0));
+        // TODO Fjern disse før endelig innlevering
+//        Vector3 projectedCoordinate = this.gameCameraStage.getCamera().project(new Vector3(clickedWorldCoordinate.x, clickedWorldCoordinate.y, 0));
+//        contextMenu.setPosition(projectedCoordinate.x, projectedCoordinate.y);
 
         contextMenu.setVisible(true);
-        contextMenu.setPosition(projectedCoordinate.x, projectedCoordinate.y);
+        contextMenu.setPosition(clickedWorldCoordinate.x, clickedWorldCoordinate.y);
 
-        String tileInfo = "" + TilePosition.findHexTile(clickedWorldCoordinate);
+        TilePosition tile = TilePosition.findHexTile(clickedWorldCoordinate);
+        String tileInfo = String.format("Clicked Tile: (%sx, %sy)", tile.x(), tile.y());
         contextMenu.setTileInfo(tileInfo);
+
+        ICharacter character = TilePosition.getCharacterOnCoordinate(clickedWorldCoordinate);
+        contextMenu.updateCharacterStats(character);
+
         gameController.setPositionToPerformAction(clickedWorldCoordinate);
         clickedWorldCoordinate = null;
     }
 
+    /** Oppdaterer antall action points som vises utifra den aktive karakteren.
+     * @param character
+     */
+    private void updateAPAndEndTurnButton(ICharacter character) {
+        String actionPointText = "Action Points remaining: " + character.getCurrentActionPoints();
+        String currentCharacter = "Current Character: " + character;
+        this.actionPointLabel.setText(actionPointText);
+        this.activeCharacterLabel.setText(currentCharacter);
+    }
+
+    /** Oppdaterer scoren til spilleren.
+     * @param player
+     */
+    private void updateScore(IPlayable player) {
+        String scoreText = "Score: " + player.getScore();
+        this.scoreLabel.setText(scoreText);
+    }
+
+
+    /**
+     * Initierer stats menyen.
+     */
+    private void initStatsTable() {
+        IPlayable player = this.gameController.getPlayerCharacter();
+
+        playerStatsTable = new Table(skin);
+        playerStatsTable.left();
+        playerStatsTable.pad(10);
+        playerStatsTable.setFillParent(true);
+
+        playerStatsTable.add(new Label("Player Stats", skin)).colspan(2);
+        playerStatsTable.row();
+
+        // Add player stats here
+        playerStatsTable.add(new Label("Max Health: ", skin));
+        playerStatsTable.add(new Label(String.valueOf(player.getMaxHealth()), skin));
+        playerStatsTable.row();
+
+        playerStatsTable.add(new Label("Strength: ", skin));
+        playerStatsTable.add(new Label(String.valueOf(player.getStrength()), skin));
+        playerStatsTable.row();
+
+        playerStatsTable.add(new Label("Defense: ", skin));
+        playerStatsTable.add(new Label(String.valueOf(player.getDefense()), skin));
+        playerStatsTable.row();
+
+        stage.addActor(playerStatsTable);
+    }
+
     private void initContextMenu() {
+        // Definerer knappene og hendelsene som skal skje.
         contextMenu.getAttackButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Angreps input her.
-                gameController.setPlayerAction(PlayerAction.ATTACK);
-                contextMenu.setVisible(false);
+                if (!gameController.getCurrentCharacter().equals(gameController.getPlayerCharacter())) {
+                    return;
+                }
+
+                if (gameController.getCurrentCharacter().getCurrentActionPoints() == 0) {
+                    showMessage("You do not have enough action points to attack.\n" +
+                                        "Press End Turn when ready", 2);
+                } else {
+                    gameController.setPlayerAction(PlayerAction.ATTACK);
+                    contextMenu.setVisible(false);
+                }
+
             }
         });
 
         contextMenu.getMoveButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // Bevegelses logikk her.
-                gameController.setPlayerAction(PlayerAction.MOVE);
-                contextMenu.setVisible(false);
+                if (gameController.getCurrentCharacter().getCurrentActionPoints() == 0) {
+                    showMessage("You do not have enough action points to move. \n" +
+                                        "Press End Turn when ready", 2);
+                } else {
+                    gameController.setPlayerAction(PlayerAction.MOVE);
+                    contextMenu.setVisible(false);
+                }
             }
         });
 
-        contextMenu.getExamineButton().addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // "Examine" logikk her.
-                gameController.setPlayerAction(PlayerAction.EXAMINE);
-                contextMenu.setVisible(false);
-            }
-        });
         this.contextMenu.setVisible(false);
-        this.stage.addActor(contextMenu);
+        this.gameCameraStage.addActor(contextMenu);
     }
-
-    private void hideContextMenu() {
-        if (this.leftMouseClicked) {
-            this.contextMenu.setVisible(false);
-            this.leftMouseClicked = false;
-        }
-    }
-
 
     /**
      * Lager en knapp der spilleren kan gå videre til neste tur. Lager også en stripe med tekst som viser hvor mange
@@ -160,17 +241,6 @@ public class GameUI {
         actionPointTable.add(endTurnButton).width(150).height(50).pad(5);
         stage.addActor(actionPointTable);
     }
-        /**
-     * Vanligvis ville jeg ha splittet disse opp i to metoder, men fordi jeg vil ha knappen og informasjonen i en tabell
-     * Må det defineres i samme metode.
-     */
-    private void updateAPAndEndTurnButton(ICharacter character) {
-        String actionPointText = "Action Points remaining: " + character.getCurrentActionPoints();
-        String currentCharacter = "Current Character: " + character;
-        this.actionPointLabel.setText(actionPointText);
-        this.activeCharacterLabel.setText(currentCharacter);
-    }
-
     private void initScore() {
         this.scoreLabel = new Label("", skin);
         this.activeCharacterLabel = new Label("", skin);
@@ -182,19 +252,12 @@ public class GameUI {
         this.stage.addActor(scoreTable);
     }
 
-    private void updateScore(IPlayable player) {
-        String scoreText = "Score: " + player.getScore();
-        this.scoreLabel.setText(scoreText);
-    }
-
-
     /**
      * Tegner en healthbar over hodet til en karakter.
      * Endrer seg dynamisk hver "frame" og flytter seg sammen med karakteren.
      * @param character Karakteren som "healthbaren" skal tegnes over.
      */
-    public void drawHealthbar(ICharacter character) {
-        // TODO: 01.05.2023 flytt kallet på denne inn til "update" metoden
+    private void drawHealthbar(ICharacter character) {
         float barWidth = 100f;
         float barHeight = 10f;
 
@@ -224,11 +287,13 @@ public class GameUI {
         renderer.end();
     }
 
-    public void setClickedWorldCoordinate(Vector2 clickedWorldCoordinate) {
-        this.clickedWorldCoordinate = clickedWorldCoordinate;
+    /**
+     * Hjelpe funksjon som gjemmer "action" menyen hvis venstre knappen har blitt trykt.
+     */
+    private void hideContextMenuIfLeftClicked() {
+        if (this.leftMouseClicked) {
+            this.contextMenu.setVisible(false);
+            this.leftMouseClicked = false;
+        }
     }
-    public void setLeftMouseClicked(boolean leftMouseClicked) {
-        this.leftMouseClicked = leftMouseClicked;
-    }
-
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Factories.ICharacterFactory;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 public class GameStage {
     private int stage;

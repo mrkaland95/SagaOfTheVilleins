@@ -18,8 +18,6 @@ public class MainMenuScreen implements Screen {
     private SagaOfTheVilleinsGame game;
     private Stage stage;
     private Texture menuBackground;
-    private BitmapFont font;
-    private GlyphLayout layout;
     private Skin mySkin;
     private Table menuTable;
 
@@ -27,8 +25,7 @@ public class MainMenuScreen implements Screen {
         this.game = game;
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
         this.menuBackground = this.game.getMenuBackground();
-        this.font = new BitmapFont();
-        this.layout = new GlyphLayout();
+
         this.mySkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
         this.menuTable = new Table(mySkin);
         Gdx.input.setInputProcessor(stage);

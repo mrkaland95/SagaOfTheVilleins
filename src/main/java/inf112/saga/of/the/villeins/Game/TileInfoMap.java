@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 /**
  * Class intended for storing information about tiles, whether they are movable etc. This makes it simpler to access
@@ -63,7 +63,7 @@ public class TileInfoMap {
             for (int j = 0; j < mapCols; j++) {
                 Boolean isNotWalkable = (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class));
                 if (isNotWalkable == null) {
-                    map.put(new TilePosition(i, j), true);
+                    continue;
                 }
                 else if (isNotWalkable) {
                     map.put(new TilePosition(i, j), false);

@@ -1,7 +1,10 @@
-package inf112.saga.of.the.villeins.MovementUtils;
+package inf112.saga.of.the.villeins.Utils;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.Game.GameScreen;
+
+import java.util.List;
 
 public record TilePosition(int x, int y) {
 
@@ -98,10 +101,21 @@ public record TilePosition(int x, int y) {
         TilePosition.hexagonDimension = hexagonDimension;
     }
 
-    public static ICharacter getCharacterOnTile() {
+    /** Prøver å finne en karakter på et gitt koordinat,
+     * @param coordinate En vector2 posisjon.
+     * @return et ICharacter objekt, hvis den finnes på tilen som tilhører koordinatet.
+     */
+    public static ICharacter getCharacterOnCoordinate(Vector2 coordinate) {
+        List<ICharacter> characterList = GameScreen.characterList;
+        TilePosition clickedTile = TilePosition.findHexTile(coordinate);
+        for (ICharacter character : characterList) {
+            TilePosition characterTile = TilePosition.findHexTile(character.getCurrentPosition());
+            if (clickedTile.equals(characterTile)) {
+                return character;
+            }
+        }
         return null;
     }
-
 }
 
 

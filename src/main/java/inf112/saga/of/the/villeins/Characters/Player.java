@@ -3,8 +3,8 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameScreen;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
-import inf112.saga.of.the.villeins.MovementUtils.AStarPathfinder;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.AStarPathfinder;
 
 public class Player extends BaseCharacter implements IPlayable {
     private int score;
@@ -36,8 +36,8 @@ public class Player extends BaseCharacter implements IPlayable {
         TilePosition currentTile = TilePosition.findHexTile(this.getCurrentPosition());
         TilePosition finalTile = TilePosition.findHexTile(this.getEndPosition());
         this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameScreen.infoMap);
-        while(this.pathToMove.size() > getCurrentActionPoints()+1){
-            this.pathToMove.remove(pathToMove.size()-1);
+        while(this.pathToMove.size() > getCurrentActionPoints() + 1){
+            this.pathToMove.remove(pathToMove.size() - 1);
         }
         this.tileMovement.setPath(pathToMove);
         this.setEndPosition(null);

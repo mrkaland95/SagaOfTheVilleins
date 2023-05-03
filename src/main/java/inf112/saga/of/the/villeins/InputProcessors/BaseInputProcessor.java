@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 abstract public class BaseInputProcessor implements InputProcessor {
     private OrthographicCamera camera;
 	private final float minimumZoomLevel = 0.5f;
+	private final float maxZoomLevel = 50f;
 	private final float zoomAmount = 0.10f;
 	private final Vector3 current = new Vector3();
 	private final Vector3 last = new Vector3(-1, -1, -1);
@@ -28,7 +29,6 @@ abstract public class BaseInputProcessor implements InputProcessor {
 		this.endTurn = false;
 		this.rightClickCoordinates = null;
 		this.leftMouseClicked = false;
-//		this.leftClickCoordinates = null;
 	}
 
 
@@ -94,21 +94,22 @@ abstract public class BaseInputProcessor implements InputProcessor {
 			Vector3 cameraCoordinates = new Vector3(screenX, screenY, 0);
 			this.camera.unproject(cameraCoordinates);
 			this.rightClickCoordinates = new Vector2(cameraCoordinates.x, cameraCoordinates.y);
+			return true;
 		}
 
 		return false;
 	}
-
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (button == Input.Buttons.MIDDLE) {
+			// Lagrer posisjonen hvis midtre museknapp ble trykket.
 			// Stores the position if the middle mouse button was clicked.
 			last.set(-1, -1, -1);
+			return true;
 		}
 		return false;
 	}
-
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		if (Gdx.input.isButtonPressed(Input.Buttons.MIDDLE)) {
@@ -118,8 +119,9 @@ abstract public class BaseInputProcessor implements InputProcessor {
 				delta.sub(current);
 				camera.position.add(delta.x, delta.y, 0);
 			}
+			last.set(screenX, screenY, 0);
+			return true;
 		}
-		last.set(screenX, screenY, 0);
 		return false;
 	}
 

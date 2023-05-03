@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterDirection;
 import inf112.saga.of.the.villeins.Characters.ITurnBasedMovable;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class TileMovement {
 
         // Hvis det ikke fins noen vei å gå, returner ut av metoden tidlig. Hvis dette er tilfelle,
         // Sett karakterens tilstand til "Idle"
-        // If there is no path, then return early. In that case, if the character's state is set to moving, set it to idle.
         if (pathToMove == null || pathIndex >= pathToMove.size()) {
             if (character.getCharacterState() == CharacterState.MOVING) {
                 character.setCharacterState(CharacterState.IDLE);
@@ -41,9 +39,10 @@ public class TileMovement {
             character.setCharacterState(CharacterState.MOVING);
         }
 
+
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
         Vector2 nextTileCoordinate = TilePosition.findVectorCoordinate(nextTilePosition);
-        Vector2 newPosition = VectorMovementUtils.calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
+        Vector2 newPosition = calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());
 
         // Setter retningen som animasjonen skal peke mot.
         if (newPosition.x > character.getCurrentPosition().x) {
@@ -64,5 +63,35 @@ public class TileMovement {
             }
             pathIndex++;
         }
+    }
+
+
+    /**
+     * Regner ut
+     * @param currentPosition
+     * @param destination
+     * @param deltaTime
+     * @param moveSpeed
+     * @return
+     */
+    public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
+        if (destination == null) return currentPosition;
+
+        float positionMarginOfError = 5.0f;
+
+        if ((Math.abs(currentPosition.x - destination.x) > positionMarginOfError) ||
+            (Math.abs(currentPosition.y - destination.y) > positionMarginOfError)) {
+            float pathX = destination.x - currentPosition.x;
+            float pathY = destination.y - currentPosition.y;
+            float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
+            float directiontoMoveX = pathX / distanceToMove;
+            float directiontoMoveY = pathY / distanceToMove;
+
+            currentPosition.x += directiontoMoveX * deltaTime * moveSpeed;
+            currentPosition.y += directiontoMoveY * deltaTime * moveSpeed;
+        } else {
+            currentPosition = destination;
+        }
+        return currentPosition;
     }
 }

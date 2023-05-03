@@ -1,5 +1,4 @@
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
-import inf112.saga.of.the.villeins.Utils.AttackUtils;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

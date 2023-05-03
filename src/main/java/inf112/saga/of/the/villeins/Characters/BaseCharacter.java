@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameScreen;
 import inf112.saga.of.the.villeins.Game.Main;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
 import inf112.saga.of.the.villeins.Utils.TileMovement;
 
@@ -153,7 +153,7 @@ public abstract class BaseCharacter implements ICharacter {
         character.setHealth(newHealth);
     }
     public Boolean attack(Vector2 CoordinateToAttack) {
-        return this.attackUtils.attackCharacter(GameScreen.characterList, CoordinateToAttack);
+        return this.attackUtils.attackCharacter(CoordinateToAttack);
     }
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;

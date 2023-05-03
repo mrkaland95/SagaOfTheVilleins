@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 import org.junit.jupiter.api.*;
 import com.badlogic.gdx.math.Vector2;
 

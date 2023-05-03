@@ -10,7 +10,7 @@ package inf112.saga.of.the.villeins.Utils;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Game.GameScreen;
 
 import java.util.List;
 
@@ -23,25 +23,25 @@ public class AttackUtils {
         this.attackRange = attackRange;
     }
 
-    public boolean attackCharacter(List<ICharacter> characterList, Vector2 clickPosition) {
+    public boolean attackCharacter(Vector2 clickPosition) {
 
-        ICharacter opponent = getCharacterToAttack(characterList, clickPosition);
-
+        ICharacter opponent = TilePosition.getCharacterOnCoordinate(clickPosition);
+        
         if (opponent == null) return false; // Må ha en karakter å angripe
         if (this.character.equals(opponent)) return false; // En karakter kan ikke angripe seg selv
         if (!(this.character.getCharacterState() == CharacterState.IDLE)) return false; // Kan kun angripe hvis karakteren er idle.
         if (!characterInRange(this.character, opponent, this.attackRange)) return false; // If the current character is not in range, don't attack.
         if (this.character.getCurrentActionPoints() == 0) return false;
+
         // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
         int damage = this.character.getStrength() / 2;
-//        int damage = this.character.getStrength() / 2;
 
-
-        System.out.println("Dealing damage: " + damage);
+//        System.out.println("Dealing damage: " + damage);
         character.applyDamage(damage, opponent);
         character.setCurrentActionPoints(0);
-        int opponentHealth = opponent.getCurrentHealth();
-        System.out.println("Opponent's current health is: " + opponentHealth);
+
+//        int opponentHealth = opponent.getCurrentHealth();
+//        System.out.println("Opponent's current health is: " + opponentHealth);
         return true;
     }
 
@@ -58,7 +58,6 @@ public class AttackUtils {
 
 
     /** Sjekker om en karakter er innenfor angrepsrekkevidde.
-     *
      * @param character
      * @param character2
      * @return
@@ -67,5 +66,9 @@ public class AttackUtils {
         TilePosition character1TilePosition = TilePosition.findHexTile(character.getCurrentPosition());
         TilePosition character2TilePosition = TilePosition.findHexTile(character2.getCurrentPosition());
         return attackRange >= TilePosition.hexDistance(character1TilePosition, character2TilePosition);
+    }
+
+    public static int calculateDamage(ICharacter character1, ICharacter character2) {
+        return 0;
     }
 }

@@ -1,8 +1,9 @@
-package inf112.saga.of.the.villeins.MovementUtils;
+package inf112.saga.of.the.villeins.Utils;
 
 import java.util.*;
 
 import inf112.saga.of.the.villeins.Game.TileInfoMap;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 public class AStarPathfinder {
 
@@ -125,8 +126,7 @@ public class AStarPathfinder {
 
         @Override
         public boolean equals(Object obj) {
-            if (obj instanceof Node) {
-                Node other = (Node) obj;
+            if (obj instanceof Node other) {
                 return position.equals(other.position);
             }
             return false;

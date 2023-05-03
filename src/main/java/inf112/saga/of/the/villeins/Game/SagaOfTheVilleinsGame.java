@@ -1,13 +1,11 @@
 package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
@@ -17,7 +15,7 @@ import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
 import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import inf112.saga.of.the.villeins.Game.LootSystem.UpgradePlayer;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,14 +49,12 @@ public class SagaOfTheVilleinsGame extends Game {
         assetManager.load();
         assetManager.manager.finishLoading();
 
-//        maps.add(new TmxMapLoader().load(GameAssetManager.testMapPath));
         maps.add(assetManager.manager.get(GameAssetManager.testMapPath));
 
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         bitmapFont = new BitmapFont();
 
-//        defaultSkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
         Texture warriorIdleTexture    = assetManager.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
 		Texture slimeIdleTexture      = assetManager.manager.get(GameAssetManager.idleSlimePath, Texture.class);
@@ -77,18 +73,22 @@ public class SagaOfTheVilleinsGame extends Game {
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, ghostAnimation);
-        
+
+        // Lager spiller objektet og setter tilstanden til spillet.
         player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
 		gameStage = new GameStage(stageIndex, charFactory, player);
 
-        // Uncomment this to when testing the main menu
-//        setScreen(new MainMenuScreen(this));
-//        setScreen(new HelpScreen(this));
-//        setScreen(new MidScreen(this, null, null));
 
-        // Uncomment/Comment this when testing the game or other screens,
-        // so you don't have to click through the menu every time
-         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
+        // TODO: 03.05.2023 slett dette før endelig innlevering, og bruk "setScreen(new MainMenuScreen(this));"
+        // Sett denne til den verdien som du skal teste.
+        int screenToTest = 0;
+
+        switch (screenToTest) {
+            case 0 -> setScreen(new MainMenuScreen(this));
+            case 1 -> setScreen(new GameScreen(this, getCurrentMap(), gameStage));
+            case 2 -> setScreen(new HelpScreen(this));
+            case 3 -> setScreen(new MidScreen(this, null, null));
+        }
     }
 
     @Override
@@ -98,6 +98,9 @@ public class SagaOfTheVilleinsGame extends Game {
         shapeRenderer.dispose();
         bitmapFont.dispose();
         assetManager.dispose();
+        menuBackground.dispose();
+        menuBackground2.dispose();
+        defaultSkin.dispose();
     }
 
     public TiledMap getCurrentMap() {
@@ -126,6 +129,11 @@ public class SagaOfTheVilleinsGame extends Game {
         updatedPlayer = upgradeApplier.UpgradeStats(updatedPlayer, inventory);
         this.player = updatedPlayer;
     }
+
+    public ICharacter getPlayer() {
+        return player;
+    }
+
     public Skin getDefaultSkin() {
         return defaultSkin;
     }

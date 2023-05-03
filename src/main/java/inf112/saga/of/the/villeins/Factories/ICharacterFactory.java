@@ -1,7 +1,7 @@
 package inf112.saga.of.the.villeins.Factories;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 public interface ICharacterFactory {
     ICharacter getWarriorCharacter(TilePosition spawnPosition);

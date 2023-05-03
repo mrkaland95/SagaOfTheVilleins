@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.AI.IBaseAI;
 import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
-import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 
 public class BaseMonster extends BaseCharacter implements ICharacter {

@@ -23,18 +23,20 @@ public class GameController {
     private GameState gameState;
     private InactivePlayerProcessor computerActiveProcessor;
     private ActivePlayerProcessor playerActiveProcessor;
-    public BaseInputProcessor currentProcessor;
+    private BaseInputProcessor currentProcessor;
 	private InputMultiplexer playerInputMultiplexer;
 	private InputMultiplexer computerInputMultiplexer;
     private Stage uiStage;
+    private Stage gameCameraStage;
     private PlayerAction playerAction;
     private Vector2 positionToPerformAction;
 
     public GameController(List<ICharacter> initialCharacterList,
                           IPlayable playerChar,
-                          Stage stage,
                           ActivePlayerProcessor activePlayerProcessor,
-                          InactivePlayerProcessor inactivePlayerProcessor
+                          InactivePlayerProcessor inactivePlayerProcessor,
+                          Stage uiStage,
+                          Stage gameCameraStage
         ) {
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
@@ -45,7 +47,8 @@ public class GameController {
         this.computerActiveProcessor = inactivePlayerProcessor;
         this.playerInputMultiplexer = new InputMultiplexer();
         this.computerInputMultiplexer = new InputMultiplexer();
-        this.uiStage = stage;
+        this.uiStage = uiStage;
+        this.gameCameraStage = gameCameraStage;
         this.playerAction = PlayerAction.IDLE;
         initializeGame();
     }
@@ -59,7 +62,7 @@ public class GameController {
 
         characterList = currentCharList;
         boolean playerIsAlive = isAlive(playerCharacter);
-        if(playerCount() == 1 && playerIsAlive) {
+        if(getPlayerCount() == 1 && playerIsAlive) {
             gameState = GameState.MAP_WON;
         }
         else if(!playerIsAlive){
@@ -144,14 +147,18 @@ public class GameController {
 
     /**
      * Initialiser spillet, inputhandlere og initierer "turn" listen for å håndtere hvilken karakter som er aktiv.
+     * Definerer også hvilket "kamera" og stage som tar i mot input først.
     */
     private void initializeGame() {
         gameState = GameState.PLAYING;
-        this.playerInputMultiplexer.addProcessor(uiStage);
+        this.playerInputMultiplexer.addProcessor(gameCameraStage);
         this.playerInputMultiplexer.addProcessor(playerActiveProcessor);
+        this.playerInputMultiplexer.addProcessor(uiStage);
 
-        this.computerInputMultiplexer.addProcessor(uiStage);
+
+        this.playerInputMultiplexer.addProcessor(gameCameraStage);
         this.computerInputMultiplexer.addProcessor(computerActiveProcessor);
+        this.computerInputMultiplexer.addProcessor(uiStage);
 
         this.currentProcessor = playerActiveProcessor;
         Gdx.input.setInputProcessor(playerInputMultiplexer);
@@ -160,7 +167,7 @@ public class GameController {
         nextTurn(characterList);
     }
 
-    private int playerCount(){
+    private int getPlayerCount() {
         return this.characterList.size();
     }
 
@@ -172,7 +179,9 @@ public class GameController {
         this.playerAction = playerAction;
     }
     public void setPositionToPerformAction(Vector2 coordinate) {
-        this.positionToPerformAction = coordinate;
+        if (playerCharacter.getCharacterState() == CharacterState.IDLE) {
+            this.positionToPerformAction = coordinate;
+        }
     }
     public BaseInputProcessor getCurrentProcessor() {
         return currentProcessor;

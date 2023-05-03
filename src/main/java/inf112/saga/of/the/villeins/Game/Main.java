@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 public class Main {
 
 	// Temp variable that specifies at what speed characters should move at.
-	public final static float globalDefaultMoveSpeed = 100.0f;
+	public final static float globalDefaultMoveSpeed = 1000.0f;
 
 	public static void main(String[] args) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
