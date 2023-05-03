@@ -99,9 +99,8 @@ public class GameScreen implements Screen {
 		if(gameController.getGameState() == GameState.GAME_OVER){
 			this.game.resetGame();
 		}
-		if(gameController.getGameState() == GameState.MAP_WON){
-			this.game.updatePlayer((IPlayable) characterList.get(0), inventory);
-			this.game.nextStage();
+		if(gameController.getGameState() == GameState.MAP_WON) {
+			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory));
 		}
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 

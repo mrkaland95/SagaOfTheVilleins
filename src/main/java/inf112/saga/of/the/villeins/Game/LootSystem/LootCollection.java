@@ -9,7 +9,7 @@ public class LootCollection {
     private List<Upgrades> collectedUpgrades;
 
 
-    public LootCollection(){
+    public LootCollection() {
         collectedUpgrades = new ArrayList<>();
     }
 

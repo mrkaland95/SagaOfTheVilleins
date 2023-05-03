@@ -84,11 +84,11 @@ public class SagaOfTheVilleinsGame extends Game {
         // Uncomment this to when testing the main menu
 //        setScreen(new MainMenuScreen(this));
 //        setScreen(new HelpScreen(this));
-        setScreen(new MidScreen(this));
+//        setScreen(new MidScreen(this, null, null));
 
         // Uncomment/Comment this when testing the game or other screens,
         // so you don't have to click through the menu every time
-//         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
+         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
     @Override
