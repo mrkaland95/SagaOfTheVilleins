@@ -20,7 +20,7 @@ import inf112.saga.of.the.villeins.MovementUtils.TilePosition;
 import java.util.List;
 
 
-public class GameUI implements GameUIUpdateListener {
+public class GameUI {
     private final ShapeRenderer renderer;
     private final Stage stage;
     private final Skin skin;

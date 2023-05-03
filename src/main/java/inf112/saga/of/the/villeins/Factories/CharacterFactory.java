@@ -24,7 +24,7 @@ public class CharacterFactory implements ICharacterFactory {
 
     @Override
     public ICharacter getWarriorCharacter(TilePosition spawnPosition) {
-        return new Player(spawnPosition, this.warriorHandler, 50, 5, 5, 1);
+        return new Player(spawnPosition, this.warriorHandler, 50, 200, 5, 1);
     }
     @Override
     public ICharacter getSlimeCharacter(TilePosition spawnPosition) {
