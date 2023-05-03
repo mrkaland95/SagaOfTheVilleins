@@ -9,17 +9,17 @@ import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 public class BaseMonster extends BaseCharacter implements ICharacter {
     private IBaseAI ai;
-    private String monsterName;
+    private final String monsterType;
     public BaseMonster(TilePosition startingTile,
                        CharacterAnimationHandler animationController,
                        int maxHealth,
                        int strength,
                        int defense,
                        int attackRange,
-                       String monsterName) {
+                       String monsterType) {
         super(startingTile, animationController, maxHealth, strength, defense, attackRange);
         this.ai = new SimpleAI(null, this);
-        this.monsterName = monsterName;
+        this.monsterType = monsterType;
     }
 
 
@@ -45,6 +45,9 @@ public class BaseMonster extends BaseCharacter implements ICharacter {
         this.setEndPosition(null);
     }
 
+    public String getMonsterType() {
+        return monsterType;
+    }
 
     @Override
     public void setTargetCharacter(ICharacter target){
@@ -58,7 +61,7 @@ public class BaseMonster extends BaseCharacter implements ICharacter {
 
     @Override
     public String toString() {
-        return monsterName + " - " + this.hashCode();
+        return monsterType + " - " + this.hashCode();
     }
 
 }

@@ -13,12 +13,12 @@ public class GameAssetManager {
     public static final String idleSlimePath = "./assets/Sprites/Slime/Slime_Idle.png";
     public static final String dragonAttackPath = "./assets/Sprites/Dragon/dragon_attack.png";
     public static final String ghostIdlePath = "./assets/Sprites/Ghost/ghost_idle.png";
-    public static final String menuBackgroundPath = "./assets/MenuAssets/MenuBackground.png";
-    public static final String menuBackgroundPath2 = "./assets/MenuAssets/MenuBackground2.png";
+    public static final String menuBackgroundPath = "./assets/Menu/MenuBackground.png";
+    public static final String menuBackgroundPath2 = "./assets/Menu/MenuBackground2.png";
     public static final String uiSkin = "./assets/Skins/glassy/skin/glassy-ui.json";
 //    public static final String uiSkin = "./assets/Skins/sgx/skin/sgx-ui.json";
 
-    public static final String testMapPath = "./assets/Maps/TiledRougelikeMapUpdated.tmx";
+    public static final String testMapPath = "./assets/Maps/SagaOfTheVilleins_Map1.tmx";
 
     public void load() {
         manager.setLoader(TiledMap.class, new TmxMapLoader(manager.getFileHandleResolver()));

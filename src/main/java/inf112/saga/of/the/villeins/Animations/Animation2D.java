@@ -1,6 +1,7 @@
 package inf112.saga.of.the.villeins.Animations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animation2D {
@@ -19,12 +20,10 @@ public class Animation2D {
         this.animation = loadAnimation(spriteSheet, playbackMultiplier);
         }
 
-    public Animation2D(Texture spriteSheet, int frameRows, int frameColumns, float playbackMultiplier) {
-        this.FRAME_ROWS = frameRows;
-        this.FRAME_COLUMNS = frameColumns;
+    public Animation2D(Texture spriteSheet, int frames, float playbackMultiplier) {
+        this.FRAME_COLUMNS = frames;
         this.animation = loadAnimation(spriteSheet, playbackMultiplier);
     }
-
 
 
     private Animation<TextureRegion> loadAnimation(Texture spriteSheet, float playbackMultiplier) {
@@ -52,9 +51,9 @@ public class Animation2D {
         return new Animation<>(animationPlaybackSpeed, animationFrames);
     }
 
-    public TextureRegion getImageToRender(float deltaTime, boolean looping) {
+    public Sprite getImageToRender(float deltaTime, boolean looping) {
         animationStateTime += deltaTime;
-        return animation.getKeyFrame(animationStateTime, looping);
+        return new Sprite(animation.getKeyFrame(animationStateTime, looping));
     }
 }
 

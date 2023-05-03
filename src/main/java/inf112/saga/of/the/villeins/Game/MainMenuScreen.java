@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * Definerer hovedmenyen. Setter opp bakgrunn, og knapper for å starte spillet eller gå inn i hjelpe menyen.
+ */
 public class MainMenuScreen implements Screen {
     private SagaOfTheVilleinsGame game;
     private Stage stage;

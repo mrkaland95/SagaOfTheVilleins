@@ -17,6 +17,7 @@ import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.GameState;
 import inf112.saga.of.the.villeins.InputProcessors.ActivePlayerProcessor;
 import inf112.saga.of.the.villeins.InputProcessors.InactivePlayerProcessor;
+import inf112.saga.of.the.villeins.UI.AbstractGameUI;
 import inf112.saga.of.the.villeins.UI.GameUI;
 import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 
@@ -33,7 +34,7 @@ public class GameScreen implements Screen {
 	private final OrthographicCamera gameCamera;
 	private final OrthographicCamera uiCamera;
 	private final GameController gameController;
-	private final GameUI gameUI;
+	private final AbstractGameUI gameUI;
 	private final GameStage gameStage;
 	public static List<ICharacter> characterList = new ArrayList<>();
 	public static TileInfoMap infoMap;
@@ -69,6 +70,7 @@ public class GameScreen implements Screen {
 		shapeRenderer = game.shapeRenderer;
 		bitmapFont    = game.bitmapFont;
 
+		// Genererer karakterer.
 		characterList = new ArrayList<>();
 		characterList.addAll(gameStage.generateCharacters());
 
@@ -83,7 +85,6 @@ public class GameScreen implements Screen {
 		gameCamera.translate(player.getCurrentPosition().x, player.getCurrentPosition().y, 0f);
 		gameCamera.zoom = 1.5f;
 	}
-
 
 
 	/**
@@ -123,7 +124,7 @@ public class GameScreen implements Screen {
 			character.update();
 		}
 
-		gameUI.updateUI(deltaTime, gameController.getPlayerCharacter(), characterList);
+		gameUI.drawUI(deltaTime, gameController.getPlayerCharacter(), characterList);
 		gameController.update(characterList);
 
 		playerActiveProcessor.resetInput();
@@ -155,7 +156,6 @@ public class GameScreen implements Screen {
 		gameCamera.viewportWidth = width;
 		gameCamera.viewportHeight = height;
 		gameCamera.update();
-//    	uiCamera.setToOrtho(false, width, height);
        	gameCameraStage.getViewport().update(width, height, true);
        	uiCameraStage.getViewport().update(width, height, true);
 	}

@@ -8,8 +8,12 @@ import java.util.List;
 
 public record TilePosition(int x, int y) {
 
-    static double hexagonDimension = 200;
+    static double hexagonDimension = 200d;
 
+    /** Finner en korresponderende Tile utifra ett gitt verdens koordinat.
+     * @param worldCoordinate
+     * @return
+     */
     public static TilePosition findHexTile(Vector2 worldCoordinate) {
         // Adaptert herfra: https://gamedevelopment.tutsplus.com/tutorials/creating-hexagonal-minesweeper--cms-28655
         double hexTileX = Math.floor(worldCoordinate.x / hexagonDimension);
@@ -46,7 +50,7 @@ public record TilePosition(int x, int y) {
     }
 
     /**
-     * Regner ut Vector2 posisjonen til midten av en gitt Tile
+     * Regner ut koordinatet til midten av en gitt Tile.
      *
      * @param tilePosition En Tile posisjon.
      * @return Midten av den gitte "Tilen"
@@ -97,6 +101,9 @@ public record TilePosition(int x, int y) {
         return Math.max(max1, Math.abs(dx+dy));
     }
 
+    /** Setter dimensjonen på seksantene på kartet, slik at utregninger blir gjort riktig.
+     * @param hexagonDimension
+     */
     public static void setHexagonDimension(double hexagonDimension) {
         TilePosition.hexagonDimension = hexagonDimension;
     }
@@ -106,6 +113,7 @@ public record TilePosition(int x, int y) {
      * @return et ICharacter objekt, hvis den finnes på tilen som tilhører koordinatet.
      */
     public static ICharacter getCharacterOnCoordinate(Vector2 coordinate) {
+        if (coordinate == null) return null;
         List<ICharacter> characterList = GameScreen.characterList;
         TilePosition clickedTile = TilePosition.findHexTile(coordinate);
         for (ICharacter character : characterList) {

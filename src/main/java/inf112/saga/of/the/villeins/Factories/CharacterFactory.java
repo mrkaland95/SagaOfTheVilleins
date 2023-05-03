@@ -6,7 +6,9 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 
-public class CharacterFactory implements ICharacterFactory {
+import java.util.Random;
+
+public class CharacterFactory implements AbstractFactory {
     CharacterAnimationHandler warriorHandler;
     CharacterAnimationHandler slimeHandler;
     CharacterAnimationHandler dragonHandler;
@@ -23,26 +25,40 @@ public class CharacterFactory implements ICharacterFactory {
     }
 
     @Override
-    public ICharacter getWarriorCharacter(TilePosition spawnPosition) {
+    public ICharacter getPlayerCharacter(TilePosition spawnPosition) {
         return new Player(spawnPosition, this.warriorHandler, 50, 200, 5, 1);
     }
+
     @Override
-    public ICharacter getSlimeCharacter(TilePosition spawnPosition) {
+    public ICharacter getEnemyCharacter(TilePosition spawnPosition) {
+        ICharacter character;
+        Random random = new Random();
+        int number = random.nextInt(100);
+
+        if (number < 50) {
+            character = getGhostCharacter(spawnPosition);
+        } else {
+            character = getSlimeCharacter(spawnPosition);
+        }
+
+        return character;
+    }
+
+    @Override
+    public ICharacter getBossCharacter(TilePosition spawnPosition) {
+        return getDragonCharacter(spawnPosition);
+    }
+
+    private ICharacter getSlimeCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1, "Slime");
     }
 
-    @Override
-    public ICharacter getGhostCharacter(TilePosition spawnPosition) {
+    private ICharacter getGhostCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.ghostHandler, 25, 5, 5, 1, "Ghost");
     }
 
-    @Override
-    public ICharacter getDragonCharacter(TilePosition spawnPosition) {
+    private ICharacter getDragonCharacter(TilePosition spawnPosition) {
         return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1, "Dragon");
     }
 
-    @Override
-    public ICharacter getRandomCharacter(TilePosition spawnPosition) {
-        return null;
-    }
 }

@@ -3,21 +3,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- FIXME - set group id -->
 	<groupId>no.uib.ii.inf112.sagaofthevilleins</groupId>
-	<!-- FIXME - set artifact name -->
 	<artifactId>SagaOfTheVilleins</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<!-- FIXME - set app name -->
 	<name>Saga Of The Villeins</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+	<url>https://git.app.uib.no/SagaOfTheVilleins/sagaofthevilleins</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
 		<libgdx.version>1.11.0</libgdx.version>
 		<junit.jupiter.version>5.9.2</junit.jupiter.version>
 		<slf4j.version>2.0.6</slf4j.version>
-		<!-- FIXME - set to app's main class' -->
 		<main.class>inf112.saga.of.the.villeins.Game.Main</main.class>
 		<jvm.extra.args></jvm.extra.args>
 	</properties>

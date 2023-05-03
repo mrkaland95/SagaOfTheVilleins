@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
+import inf112.saga.of.the.villeins.Characters.CharacterDirection;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Factories.CharacterFactory;
@@ -66,16 +67,20 @@ public class SagaOfTheVilleinsGame extends Game {
         this.menuBackground = assetManager.manager.get(GameAssetManager.menuBackgroundPath, Texture.class);
         this.menuBackground2 = assetManager.manager.get(GameAssetManager.menuBackgroundPath2, Texture.class);
 
-		CharacterAnimationHandler slimeAnimation =         new CharacterAnimationHandler(slimeIdleTexture, slimeIdleTexture, null, spriteBatch,1, 4);
-		CharacterAnimationHandler playerWarriorAnimation = new CharacterAnimationHandler(warriorIdleTexture, warriorWalkingTexture , null, spriteBatch,1, 2);
-		CharacterAnimationHandler dragonAnimation 	     = new CharacterAnimationHandler(dragonAttackTexture, dragonAttackTexture , null, spriteBatch,1, 4);
-		CharacterAnimationHandler ghostAnimation 	     = new CharacterAnimationHandler(ghostIdleTexture, ghostIdleTexture , null, spriteBatch,1, 4);
+		CharacterAnimationHandler slimeAnimation =
+                new CharacterAnimationHandler(spriteBatch, slimeIdleTexture, 4, slimeIdleTexture, 4, null,1, CharacterDirection.LEFT);
+		CharacterAnimationHandler playerWarriorAnimation =
+                new CharacterAnimationHandler(spriteBatch, warriorIdleTexture, 2, warriorWalkingTexture,11,  null, null, CharacterDirection.LEFT);
+		CharacterAnimationHandler dragonAnimation =
+                new CharacterAnimationHandler(spriteBatch, dragonAttackTexture, 4,  dragonAttackTexture,4,  null, null, CharacterDirection.LEFT);
+		CharacterAnimationHandler ghostAnimation =
+                new CharacterAnimationHandler(spriteBatch, ghostIdleTexture, 4, ghostIdleTexture, 4, null,1, CharacterDirection.LEFT);
 
 		// characterFactory burde endres basert på current stage
 		charFactory = new CharacterFactory(playerWarriorAnimation, slimeAnimation, dragonAnimation, ghostAnimation);
 
         // Lager spiller objektet og setter tilstanden til spillet.
-        player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
+        player = charFactory.getPlayerCharacter(new TilePosition(1, 1));
 		gameStage = new GameStage(stageIndex, charFactory, player);
 
 
@@ -119,7 +124,7 @@ public class SagaOfTheVilleinsGame extends Game {
 
     public void resetGame(){
         stageIndex = 1;
-        player = charFactory.getWarriorCharacter(new TilePosition(1, 1));
+        player = charFactory.getPlayerCharacter(new TilePosition(1, 1));
         gameStage = new GameStage(stageIndex, charFactory, player);
         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }

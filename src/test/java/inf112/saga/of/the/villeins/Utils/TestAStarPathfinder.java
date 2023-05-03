@@ -1,3 +1,4 @@
+package inf112.saga.of.the.villeins.Utils;
 
 import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import org.junit.jupiter.api.*;
@@ -24,7 +25,6 @@ public class TestAStarPathfinder {
         assertFalse(path.isEmpty()); // sjekker at det finnes elementer i listen
         assertEquals(start, path.get(0)); // sjekker at det første elementet i listen svarer til start
         assertEquals(end, path.get(path.size() - 1)); // sjekker at det siste elementet i listen svarer til end
-      
     }
 }
 

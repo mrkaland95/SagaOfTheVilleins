@@ -1,3 +1,12 @@
+package inf112.saga.of.the.villeins.Characters;
+
+import com.badlogic.gdx.math.Vector2;
+import inf112.saga.of.the.villeins.Utils.TilePosition;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 //import static org.junit.jupiter.api.Assertions.*;
 //
 //import java.util.ArrayList;
@@ -13,27 +22,29 @@
 //import inf112.saga.of.the.villeins.Utils.AttackUtils;
 //
 //
-public class TestForPlayer {}
-//    @Test
-//    public void testGetPosition(){
-//        Vector2 startingPosition = new Vector2(0f, 0f);
-//        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
-//        Vector2 expectedPosition = new Vector2(0,0);
-//        Vector2 result = testPlayer123.getCurrentPosition();
-//        assertEquals(expectedPosition, result);
-//    }
-//    @Test
-//    public void testSetPosition(){
-//        Vector2 startingPosition = new Vector2(0f, 0f);
-//        Player testPlayer123 = new Player(startingPosition, null, 40, 2, 5, 1);
-//        float expectedPositionX = 10f;
-//        float expectedPositionY = 10f;
-//        Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
-//        testPlayer123.setCurrentPosition(expectedResult);
-//        Vector2 result = testPlayer123.getCurrentPosition();
-//        assertEquals(expectedResult, result);
-//    }
-//
+public class TestForPlayer {
+    @BeforeEach
+    public void setup() {
+    }
+
+    @Test
+    public void testGetPosition() {
+        Player testPlayer123 = new Player(new TilePosition(0, 0), null, 40, 2, 5, 1);
+        Vector2 expectedPosition = new Vector2(100, 100);
+        Vector2 result = testPlayer123.getCurrentPosition();
+        assertEquals(expectedPosition, result);
+    }
+
+    @Test
+    public void testSetPosition() {
+        Player testPlayer123 = new Player(new TilePosition(0, 0), null, 40, 2, 5, 1);
+        float expectedPositionX = 10f;
+        float expectedPositionY = 10f;
+        Vector2 expectedResult = new Vector2(expectedPositionX, expectedPositionY);
+        testPlayer123.setCurrentPosition(expectedResult);
+        Vector2 result = testPlayer123.getCurrentPosition();
+        assertEquals(expectedResult, result);
+    }
 //    // @Test // går utenfor mapet...
 //    // public void testMoveOutsideMap(){
 //    //     Vector2 startingPosition = new Vector2(0f, 0f);
@@ -224,5 +235,4 @@ public class TestForPlayer {}
 //        player.setPathToMove(expectedList);
 //        assertEquals(expectedList, player.getPathToMove());
 //    }
-//}
-//
+}

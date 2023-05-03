@@ -61,7 +61,6 @@ public class AStarPathfinder {
     }
 
     public static ArrayList<TilePosition> getNeighbors(TilePosition position, TileInfoMap TileInfoMap) {
-
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();
         int x = position.x();

@@ -19,9 +19,6 @@ public class ContextMenu extends Table {
     private Label characterStrength;
     private Label characterDefense;
 
-
-
-
     public ContextMenu(Skin skin, GameUI gameUI) {
         super(skin);
 

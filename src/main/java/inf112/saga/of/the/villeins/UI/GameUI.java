@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Klasse ansvarlig for å holde på det av kode relatert til UI'en som spilleren må interagere med.
  */
-public class GameUI {
+public class GameUI implements AbstractGameUI {
     private final ShapeRenderer renderer;
     private final Stage stage;
     private final Skin skin;
@@ -63,14 +63,12 @@ public class GameUI {
         this.initScore();
         this.initContextMenu();
         this.initStatsTable();
-
-        // TODO: 03.05.2023 Få opp tekst som sier at man ikke har flere "action points" igjen når spilleren er tom.
     }
 
 
     public void showMessage(String message, float duration) {
         Label messageLabel = new Label(message, skin);
-        messageLabel.setColor(Color.RED);
+        messageLabel.setColor(Color.FIREBRICK);
 
         Table messageTable = new Table(skin);
         messageTable.setFillParent(true);
@@ -93,7 +91,8 @@ public class GameUI {
      * @param playerCharacter
      * @param characterList
      */
-    public void updateUI(float deltaTime, IPlayable playerCharacter, List<ICharacter> characterList) {
+    @Override
+    public void drawUI(float deltaTime, IPlayable playerCharacter, List<ICharacter> characterList) {
         this.updateAPAndEndTurnButton(gameController.getCurrentCharacter());
         this.updateScore(playerCharacter);
 

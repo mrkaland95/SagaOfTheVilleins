@@ -14,12 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
+/**
+ * Dette er en "screen" som definerer hjelpe siden. Inneholder tekst og en knapp for å returnere til spillet.
+ */
 public class HelpScreen implements Screen {
     private SagaOfTheVilleinsGame game;
     private Stage stage;
     private Texture background;
-    private BitmapFont font;
-    private GlyphLayout layout;
     private Table buttonTable;
     private Table textTable;
 
@@ -28,8 +29,6 @@ public class HelpScreen implements Screen {
         this.game = game;
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
         this.background = game.getHelpPageBackground();
-        this.font = new BitmapFont();
-        this.layout = new GlyphLayout();
         Skin skin = game.getDefaultSkin();
         this.buttonTable = new Table(skin);
         Table helpTextTable = new Table(skin);
@@ -38,14 +37,14 @@ public class HelpScreen implements Screen {
         background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        String helpString1 = """
+        String text = """
                 * To move the camera, you can hold the middle mouse button and drag the camera around.
                 * To move the character, you can left click on valid tiles. You can not move your character to water tiles or already occupied tiles.
                 * To attack another character, you can right click. But do be aware you need to be within range attack, by default this is 1 tile for the player\s
                 """;
 
 
-        Label helpTextLabel = new Label(helpString1, skin);
+        Label helpTextLabel = new Label(text, skin);
 
         float textWidth = Gdx.graphics.getWidth() * 0.8f;
         helpTextLabel.setColor(Color.FIREBRICK);

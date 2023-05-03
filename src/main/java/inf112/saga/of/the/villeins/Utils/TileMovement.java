@@ -23,6 +23,9 @@ public class TileMovement {
         this.pathIndex = 0;
     }
 
+    /** Beveger en karakter langs tiles til sin destinasjon.
+     * @param deltaTime
+     */
     public void move(float deltaTime) {
 
         // Hvis det ikke fins noen vei å gå, returner ut av metoden tidlig. Hvis dette er tilfelle,
@@ -67,12 +70,9 @@ public class TileMovement {
 
 
     /**
-     * Regner ut
-     * @param currentPosition
-     * @param destination
-     * @param deltaTime
-     * @param moveSpeed
-     * @return
+     * Regner ut hvor langt en karakter har beveget seg utifra start posisjon, destinasjon,
+     * fart og hvor lang tid har gått fra forrige tick
+     * @return Nytt koordinat.
      */
     public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
         if (destination == null) return currentPosition;
