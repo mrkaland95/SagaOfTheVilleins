@@ -32,10 +32,17 @@ public class GameStage {
 
         player.setTilePosition(new TilePosition(1, 1));
         generatedCharacters.add(player);
-        for (int i = 0; i < enemyCount; i++){
-            ICharacter enemy = factory.getEnemyCharacter(spawns.get(i));
+        if(stage != 4){
+            for (int i = 0; i < enemyCount; i++){
+                ICharacter enemy = factory.getEnemyCharacter(spawns.get(i));
+                generatedCharacters.add(enemy);
+            }
+        }
+        else {
+            ICharacter enemy = factory.getBossCharacter(new TilePosition(12, 12));
             generatedCharacters.add(enemy);
         }
+        
         return generatedCharacters;
     }
 
@@ -49,14 +56,17 @@ public class GameStage {
         if(this.stage == 1){
             return ThreadLocalRandom.current().nextInt(2, 3);
         }
-        if(this.stage == 2){
+        else if(this.stage == 2){
             return ThreadLocalRandom.current().nextInt(3, 5);
         }
-        if(this.stage == 3){  
+        else if(this.stage == 3){  
             return ThreadLocalRandom.current().nextInt(5, 6);
         }
-        else {
+        else if(this.stage == 4){
             return 1;
+        }
+        else {
+            return ThreadLocalRandom.current().nextInt(stage+1, stage + 4);
         }
     }
 

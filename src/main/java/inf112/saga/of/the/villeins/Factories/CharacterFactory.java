@@ -58,7 +58,7 @@ public class CharacterFactory implements AbstractFactory {
     }
 
     private ICharacter getDragonCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.dragonHandler, 25, 5, 4, 1, "Dragon");
+        return new BaseMonster(spawnPosition, this.dragonHandler,  200, 10, 4, 1, "Dragon");
     }
 
 }
