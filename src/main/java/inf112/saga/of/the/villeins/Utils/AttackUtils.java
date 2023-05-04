@@ -41,12 +41,9 @@ public class AttackUtils {
         // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
         int damage = this.character.getStrength() / 2;
 
-//        System.out.println("Dealing damage: " + damage);
         character.applyDamage(damage, opponent);
         character.setCurrentActionPoints(0);
 
-//        int opponentHealth = opponent.getCurrentHealth();
-//        System.out.println("Opponent's current health is: " + opponentHealth);
         return true;
     }
 
