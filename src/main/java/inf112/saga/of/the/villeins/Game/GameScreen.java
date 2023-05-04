@@ -119,7 +119,6 @@ public class GameScreen implements Screen {
 		}
 		characterList.removeAll(removeList);
 
-
 		for (ICharacter character : characterList) {
 			character.update();
 		}

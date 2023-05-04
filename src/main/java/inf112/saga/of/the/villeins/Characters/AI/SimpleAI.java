@@ -25,6 +25,9 @@ public class SimpleAI implements IBaseAI {
         this.currentCharacter = currentCharacter;
     }
 
+    /**
+     * @return
+     */
     public boolean AIPerformAction() {
         // Karakteren ikke har noen action points igjen eller ikke har et mål? Gå videre.
         if(currentCharacter.getCurrentActionPoints() == 0 || targetCharacter == null){
