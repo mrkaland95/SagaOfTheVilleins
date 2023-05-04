@@ -42,10 +42,18 @@ public class SagaOfTheVilleinsGame extends Game {
     private Texture menuBackground2;
     private Texture menuBackground;
     private Skin defaultSkin;
-
+    
+    /**
+     * Lager og holder på alle verdiene og klassene i til spillet. Bytter også mellom screens. 
+     * 
+     * @param stageIndex holder på "nivået" til spillet i form av vanskelighetsgrad
+     * @param player holder på spilleren som skal bli tatt vare på om om/når den går videre til neste "nivå".
+     * @param gameStage bruker characterFactoryen til å generere fiendene basert på "stageIndex"
+     * @param charFactory er klassen som brukes til å generere de forskjellige karakterene i spillet
+     * 
+     */
     @Override
     public void create() {
-        // Last inn alle ressursene(bilder, sprites, kart osv).
         assetManager = new GameAssetManager();
         assetManager.load();
         assetManager.manager.finishLoading();
@@ -115,12 +123,28 @@ public class SagaOfTheVilleinsGame extends Game {
     public GameStage getCurrentStage(){
         return gameStage;
     }
+    
+    /**
+    * Brukes til å resette spillet når spilleren vinner/taper.
+    * 
+    * @param stageIndex holder på "nivået" til spillet i form av vanskelighetsgrad
+    * @param gameStage bruker characterFactoryen til å generere fiendene basert på "stageIndex"
+    *
+    */
 
     public void nextStage(){
         stageIndex += 1;
         gameStage = new GameStage(stageIndex, charFactory, player);
         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
+
+    /**
+    * Brukes til å resette spillet når spilleren vinner/taper.
+    * 
+    * @param stageIndex holder på "nivået" til spillet i form av vanskelighetsgrad
+    * @param gameStage bruker characterFactoryen til å generere fiendene basert på "stageIndex"
+    *
+    */
 
     public void resetGame(){
         stageIndex = 1;
@@ -129,6 +153,12 @@ public class SagaOfTheVilleinsGame extends Game {
         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
+    /**
+     * Oppdaterer playeren med samlede oppgraderinger
+     * 
+     * @param updatedPlayer legger til oppgraderingene
+     * @param inventory en simpel klasse som inneholder en liste av "upgrades" objekter
+     */
     public void updatePlayer(IPlayable updatedPlayer, LootCollection inventory) {
         upgradeApplier = new UpgradePlayer();
         updatedPlayer = upgradeApplier.UpgradeStats(updatedPlayer, inventory);

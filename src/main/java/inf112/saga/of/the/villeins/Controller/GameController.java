@@ -104,10 +104,8 @@ public class GameController {
     }
 
 
-    /*
-     * Sets the turn to the next charcter in turnList
-     * Should also change which processor in use based on if its a playerturn or AI-turn
-     * Maybe also use turnConter if needed
+    /**
+     * Setter turen til neste karakteren i turnlist og remover døde karakterer fra turnlist
      */
     private void nextTurn(List<ICharacter> currentCharList) {
         ICharacter currentTurnChar = turnList.poll();
@@ -130,6 +128,11 @@ public class GameController {
         return currentCharacter;
     }
 
+    /**
+     * Forander inputprocessoren som brukes basert på om currentChar er en spiller eller ikke
+     * 
+     * @param currentChar
+     */
     private void turn(ICharacter currentChar){
         this.currentCharacter = currentChar;
 
@@ -171,18 +174,35 @@ public class GameController {
         return this.characterList.size();
     }
 
+    /**
+     * Sjekker om @charcter lever
+     * 
+     * @param character
+     * @return true om lever, false om død
+     */ 
     private boolean isAlive(ICharacter character){
-        return character != null;
+        return character.getCurrentHealth() > 0;
     }
 
+    /**
+     * Setter tilstanden til spilleren 
+     * 
+     * @param playerAction en enum av forskjellige tilstander spilleren kan befinne seg i
+     */
     public void setPlayerAction(PlayerAction playerAction) {
         this.playerAction = playerAction;
     }
+    /**
+     * Brukes til å finne posisjonen hvor contextMenyen skal åpnes.
+     * 
+     * @param coordinate koordinatene hvor den skal åpnes
+     */
     public void setPositionToPerformAction(Vector2 coordinate) {
         if (playerCharacter.getCharacterState() == CharacterState.IDLE) {
             this.positionToPerformAction = coordinate;
         }
     }
+
     public BaseInputProcessor getCurrentProcessor() {
         return currentProcessor;
     }
