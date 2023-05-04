@@ -24,6 +24,8 @@ import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.system.linux.Sockaddr;
+
 public class GameScreen implements Screen {
 	SagaOfTheVilleinsGame game;
 	SpriteBatch spriteBatch;
@@ -88,8 +90,8 @@ public class GameScreen implements Screen {
 
 
 	/**
-	 * This is the render/game loop of the game.
-	 * Essentially all the objects or methods that need to be updated every frame should go in here.
+	 *	Dette er metoden som kjøres hele tiden, og alle metoder som trenges å oppdateres stadig
+	 * 
 	 */
 	@Override
 	public void render (float deltaTime) {
@@ -107,9 +109,7 @@ public class GameScreen implements Screen {
 		// Tegn kartet.
 		mapRenderer.setView(gameCamera);
 		mapRenderer.render();
-
-
-		//characterList.removeIf(character -> character.getCurrentHealth() == 0);
+		
 		List<ICharacter> removeList = new ArrayList<>();
 		for (ICharacter iCharacter : characterList) {
 			if(iCharacter.getCurrentHealth() == 0){
@@ -130,11 +130,12 @@ public class GameScreen implements Screen {
 		playerActiveProcessor.resetInput();
 
 		if(gameController.getGameState() == GameState.GAME_OVER){
-			this.game.resetGame();
+			game.resetGame();
 		}
 		if(gameController.getGameState() == GameState.MAP_WON) {
 			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory));
 		}
+
 	}
 	
 	@Override
