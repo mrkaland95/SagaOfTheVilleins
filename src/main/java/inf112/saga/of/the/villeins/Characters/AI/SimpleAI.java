@@ -34,6 +34,8 @@ public class SimpleAI implements IBaseAI {
             return true;
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
+            // Finner tilesene å gå til, 
+            //TODO: utvide til naboene til naboene osv. basert på attackRange 
             for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameScreen.infoMap)) {
                 if(GameScreen.infoMap.tileIsMovable(tilePosition)){
                     tempTiles.add(tilePosition);
