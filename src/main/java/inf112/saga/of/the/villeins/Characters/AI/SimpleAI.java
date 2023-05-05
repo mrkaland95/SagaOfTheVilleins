@@ -46,17 +46,21 @@ public class SimpleAI implements IBaseAI {
             }
 
             // Finner den tilen som er nærmest karakteren, og går der.
-            TilePosition smallestHeuristic = tempTiles.get(0);   
-            for (TilePosition tilePosition : tempTiles) {
-                if (AStarPathfinder.heuristic(tilePosition, currentCharacter.getTilePosition()) < 
+            if(tempTiles.size() > 0){
+                TilePosition smallestHeuristic = tempTiles.get(0);
+                for (TilePosition tilePosition : tempTiles) {
+                    if (AStarPathfinder.heuristic(tilePosition, currentCharacter.getTilePosition()) <
                     AStarPathfinder.heuristic(smallestHeuristic, currentCharacter.getTilePosition())) {
                         smallestHeuristic = tilePosition;
-                }
+                    }
             }
-
             // Finner "pathen" til den nærmeste gyldige "tilen, som er innenfor angrepsrekkevidde til målet.
             List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, infoMap);
             currentCharacter.setPathToMove(pathToAttack);
+
+            }
+
+
             return false;
         }
     }

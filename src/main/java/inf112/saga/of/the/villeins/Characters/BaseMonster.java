@@ -45,6 +45,9 @@ public class BaseMonster extends BaseCharacter {
             this.pathToMove.remove(pathToMove.size() - 1);
         }
         this.tileMovement.setPath(this.pathToMove);
+        if(this.pathToMove.size() == 0){
+            this.setCurrentActionPoints(0);
+        }
         this.setEndPosition(null);
     }
 

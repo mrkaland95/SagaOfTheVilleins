@@ -341,16 +341,36 @@ Arbeidsøkt på realfagsbygget
 
 Agenda videre:
 - Skrive tekst tilhørende klassediagram
-- Lage klassediagram når ting ikke leger endrer seg
+- Lage klassediagram når ting ikke lenger endrer seg
 - Skrive javadocs
 - Oppdatere tester
+- Implimentere lyd
 
 Torsdag 04/05-23
-Kl. 08:15-12:00
-Oppmøte
+Kl. 08:15-11:00
+Leon, Markus, Malene og Steffen
 
 Siste gruppetime + litt til
+- Testet kompilering på mac
+- Lagde klassediagram
+- Skrev tekst tilhørende klassediagram
+- Fikset med bug ved død av karakter
+- Skrev tester for oppdaterte funksjoner
+- Skrevet på javadocs
 
+Fredag 05/05-23
+kl. 10:30-13:00
+Leon, Markus, Malene og Steffen
+
+Siste arbeidsøkt på realfagsbygget
+- Oppdatert README filen
+- Skrev tekst tilhørende klassediagram
+- Blitt enige om innhold på presentasjon og laget den
+- Fjernet imports som ikke blir brukt, ryddet litt opp
+- Skrevet tester for å øve coverage 
+- Endret utseende på knapper
+- Implimentert lyd 
+- Oppdatert linenser
 
 
 
