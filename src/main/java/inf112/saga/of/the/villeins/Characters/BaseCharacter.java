@@ -2,6 +2,9 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
+import inf112.saga.of.the.villeins.Game.GameScreen;
+import inf112.saga.of.the.villeins.Game.Main;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import inf112.saga.of.the.villeins.Utils.Settings;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;
@@ -54,11 +57,10 @@ public abstract class BaseCharacter implements ICharacter {
         this.maxActionPoints = tempActionPoints;
     }
 
-
     /**
      * Regner ut "tile" veien som en karakter skal gå.
      */
-    abstract void calculatePathToMove();
+    abstract void calculatePathToMove(TileInfoMap infoMap);
 
 
     public float getMoveSpeed() {
@@ -188,4 +190,5 @@ public abstract class BaseCharacter implements ICharacter {
     public void setCharacterDirection(CharacterDirection characterDirection) {
         this.characterDirection = characterDirection;
     }
+
 }

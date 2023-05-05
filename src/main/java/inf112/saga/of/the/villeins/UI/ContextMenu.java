@@ -18,7 +18,7 @@ public class ContextMenu extends Table {
     private Label characterStrength;
     private Label characterDefense;
 
-    public ContextMenu(Skin skin, GameUI gameUI) {
+    public ContextMenu(Skin skin) {
         super(skin);
 
         attackButton = new TextButton("Attack", skin, "default");

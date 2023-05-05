@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import inf112.saga.of.the.villeins.Characters.CharacterDirection;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.Characters.Player;
+import inf112.saga.of.the.villeins.Controller.PlayerAction;
 
 /**
  * Klasse som er ansvarling for å holde på alle animasjonene til en type karakter,
@@ -52,7 +54,7 @@ public class CharacterAnimationHandler {
         activeAnimation = switch(character.getCharacterState()) {
             case IDLE   -> idleAnimation;
             case MOVING -> walkAnimation;
-            case ATTACK -> idleAnimation; // TODO endre denne til "attack" når attack animasjon er laget.
+            case ATTACK -> idleAnimation; // Fikk ikke laget nok attack animasjoner, men funskjonaliteten er det for det.
             case DYING  -> idleAnimation;
         };
 
