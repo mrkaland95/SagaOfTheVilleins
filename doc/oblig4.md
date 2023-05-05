@@ -68,7 +68,7 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
     Som nevnt ovenfor har kommunikasjonen fungert bra, både direkte og digitalt. Opphavet til at kommunikasjonen har fungert bra er en egen kanal på discord som har blitt anvendt hyppig hvor alle har svart etter behov, samt det at vi har satt av god tid til å møtes og jobbe sammen hver uke. 
 
 * Retrospektiv av prosjektet i sin helhet 
-    Som en oppsummering har prosjektet absolutt vært vellykket og prosjektstrukturen har fungert godt. Dette gjelder også kommunikasjonen, hyppigheten og fordelingen av arbeid og tid. Fra start av satt vi av relativt mange timer i uken til å møtes og jobbe. Dette er nok i stor grad grunnen til at vi har hatt lite behov for "sprinter", men god flyt. Avgjørelser har blitt tatt i felleskap, og det har vært enighet rundt det aller meste. De ulike rollene har bidratt til få misfortåelser og tydelig skille rundt arbeidsoppgaver. 
+    Som en oppsummering har prosjektet absolutt vært vellykket og prosjektstrukturen har fungert godt. Dette gjelder også kommunikasjonen, hyppigheten og fordelingen av arbeid og tid. Fra start av satt vi av relativt mange timer i uken til å møtes og jobbe. Dette er nok i stor grad grunnen til at vi har hatt lite behov for "sprinter", men god flyt. Avgjørelser har blitt tatt i felleskap, og det har vært enighet rundt det aller meste. De ulike rollene har bidratt til få misfortåelser og tydelig skille rundt arbeidsoppgaver.
 
     Organisering av møter/arbeidsøkter
 
@@ -131,7 +131,6 @@ Spill som illustrer konseptet: roguelike, civilization 5 og 6 og xcom.
 
 Spesifikasjon
 * Det overordnede målet for applikasjonen er å bekjempe en rekke fiender for å bli "fri".
-
 
 Krav til MVP
 * Vise et tile-basert spillbrett
@@ -232,6 +231,8 @@ PRODUKT OG KODE
 
 * Klassediagram
     Finnes i egen fil; "Klassediagram_final.pdf"
+
+    Ved å se på tidligere klassediagram, kan vi uten tvil se at det har vært stor bedring i strukturen. Blant annet den abstrakte klassen BaseCharacter har bidratt til akkurat dette. Vi har forsøkt å ha fokus på high cohetion og loose coupling og følge de resterende SOLID prinsippene. Vi har også vært flittig med å bruke interfaces, for å sørge for at koden er konsistent og følger DRY prinsippet. Vi har også forsøkt å sørge for lite hardkoding og få private metoder, slik at de kan testes. Navngivningen av klassene er satt med en hensikt å gi intuitiv forståelse av hva klassene innebærer, samt hvordan de henger sammen. Koden i sin helthet er laget slik at det skal være enkelt å bygge på. 
 
 PROSJEKTLOG FRA MØTER OG ARBEIDSØKTER
 
@@ -579,7 +580,7 @@ Agenda videre:
 - Implimentere lyd
 
 Torsdag 04/05-23
-Kl. 08:15-10:00
+Kl. 08:15-11:00
 Leon, Markus, Malene og Steffen
 
 Siste gruppetime + litt til
@@ -591,13 +592,18 @@ Siste gruppetime + litt til
 - Skrevet på javadocs
 
 Fredag 05/05-23
-kl. 08:15-12:00
-Medlemmer
+kl. 10:30-13:00
+Leon, Markus, Malene og Steffen
 
-Siste arbeidsøkt (agenda)
+Siste arbeidsøkt på realfagsbygget
+- Oppdatert README filen
 - Skrev tekst tilhørende klassediagram
-- Oppdatert README fil
-
+- Blitt enige om innhold på presentasjon og laget den
+- Fjernet imports som ikke blir brukt, ryddet litt opp
+- Skrevet tester for å øve coverage 
+- Endret utseende på knapper
+- Implimentert lyd 
+- Oppdatert linenser
 
 
 
