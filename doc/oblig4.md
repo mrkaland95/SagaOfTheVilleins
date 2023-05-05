@@ -23,7 +23,7 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
 * Liste over hva de ulike rollene innebærer
 
     * Prosjektleder 
-        - Opprette prosjektodokumenter som fremdriftsplan, timelister, referat osv.
+        - Opprette prosjektdokumenter som fremdriftsplan, timelister, referat osv.
         - Føre prosjektlog
         - Følge opp timelister
         - Skrive prosessdokumentasjon i henhold til innleveringer
@@ -48,8 +48,10 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
         - Få grafikk til å samhandle
         - Lage algoritmer
 
+RETROSPEKTIV
+
 * Synes teamet at valgene vi har tatt er gode?
-    I sin helhet er vi fornøyde med valgene som er tatt. Med dette sagt, så er det alltids ting vi ville gjort anderledes om vi skulle gjort det om igjen. Eksempelvis har vi utover prosjektet både sett og fått tilbakemelding på at vi har valgt et noe mer komplisert spill enn de andre, og kan derav også muligens ansees som mer enn nødvendig. Ved doppstart hadde vi mange ønsker og ideer om ting vi ønsket å utføre, som vi i senere tid så at det ikke ble tid og anledning til å gjennomføre. Dette er en erfaring vi alle har kjent på også i andre prosjekter, men har konkludert med at vi mener det kun antyder engasjement og optimisme, som vi ikke anser som negativt. 
+    I sin helhet er vi fornøyde med valgene som er tatt. Med dette sagt, så er det alltids ting vi ville gjort anderledes om vi skulle gjort det om igjen. Eksempelvis har vi utover prosjektet både sett og fått tilbakemelding på at vi har valgt et noe mer komplisert spill enn de andre, og kan derav også muligens ansees som mer enn nødvendig. Ved oppstart hadde vi mange ønsker og ideer om ting vi ønsket å utføre, som vi i senere tid så at det ikke ble tid og anledning til å gjennomføre. Dette er en erfaring vi alle har kjent på også i andre prosjekter, men har konkludert med at vi mener det kun antyder engasjement og optimisme, som vi ikke anser som negativt. Ift. commits skulle vi til en annen gang ha squashet dem og brukt ett gjennomgående språk for å oppnå ryddigere struktur. Vi kunne også vært enda flinkere på å skille tydelig hvem som jobber i hvilken fil til enhver tid for å minske merge-conflicts. 
 
     Mer kodespesifikt er det i hovedsak én ting vi skulle ønske vi hadde gjort anderledes fra start, nemlig laget abstrakte klasser for karakterene. Dette var noe vi ikke hadde kjennskap til fra start, så var derfor ikke et alternativ. I etterkant ser vi at det hadde spart oss for mye tid og copy-paste, samt sørget for bedre kodestil. 
 
@@ -67,8 +69,7 @@ Steffen – techlead (git ansvarlig, integreringsavsnarlig)
 * Hvordan har kommuniksasjon fungert?
     Som nevnt ovenfor har kommunikasjonen fungert bra, både direkte og digitalt. Opphavet til at kommunikasjonen har fungert bra er en egen kanal på discord som har blitt anvendt hyppig hvor alle har svart etter behov, samt det at vi har satt av god tid til å møtes og jobbe sammen hver uke. 
 
-* Retrospektiv av prosjektet i sin helhet 
-    Som en oppsummering har prosjektet absolutt vært vellykket og prosjektstrukturen har fungert godt. Dette gjelder også kommunikasjonen, hyppigheten og fordelingen av arbeid og tid. Fra start av satt vi av relativt mange timer i uken til å møtes og jobbe. Dette er nok i stor grad grunnen til at vi har hatt lite behov for "sprinter", men god flyt. Avgjørelser har blitt tatt i felleskap, og det har vært enighet rundt det aller meste. De ulike rollene har bidratt til få misfortåelser og tydelig skille rundt arbeidsoppgaver.
+Som en oppsummering har prosjektet absolutt vært vellykket og prosjektstrukturen har fungert godt. Dette gjelder også kommunikasjonen, hyppigheten og fordelingen av arbeid og tid. Fra start av satt vi av relativt mange timer i uken til å møtes og jobbe. Dette er nok i stor grad grunnen til at vi har hatt lite behov for "sprinter", men god flyt. Avgjørelser har blitt tatt i felleskap, og det har vært enighet rundt det aller meste. De ulike rollene har bidratt til få misfortåelser og tydelig skille rundt arbeidsoppgaver.
 
     Organisering av møter/arbeidsøkter
 
@@ -123,9 +124,8 @@ Beskrivelse av hva som inngår i spillet
 	* Plattform bestående av hexagon tiles som spillfiguren kan stå og bevege seg på   
 * Turn-based interaksjon med fiende  
 * Spilleren kan øke i «skill» ved å bekjempe fiender av stadig vanskeligere grad  
-* Spilleren kan plukke med seg gjenstander  
 * Spilleren følger et map som består av strategiske valg i form av spill med fiende, og impassable terreng 
-* Målet med spillet er å bekjempe alle de ulike fiendene, plukke med seg gjenstander, forflytte seg til enden på   in-between-games-map og bedre skill/karma.  
+* Målet med spillet er å bekjempe alle de ulike fiendene 
 
 Spill som illustrer konseptet: roguelike, civilization 5 og 6 og xcom.
 
@@ -141,7 +141,7 @@ Krav til MVP
 * Karakterene skal kunne interagere og påføre skade som fører til død
 * Visuell fremvisning av antall liv per spillfigur
 * Visuell fremvisning av info på hver tile
-* Bekjempelse av fiende fører til økt ferdighet
+* Bekjempelse av fiende fører til økt ferdighet (power-ups)
 * Lydeffekter ved interaksjon mellom spillfigur og fiende
 * Spillbrettet inneholder en barriere hvor spilleren ikke kan befinne seg
 * Spillet skal inneholde en forside hvor en kan navigere seg videre til spillet
@@ -200,7 +200,15 @@ Manuelle tester
 * Hvilke krav vi har prioritert og hva vi har gjort siden sist:
     - Abstrakte klasser
     - Implimentere lyd og inventory
-    - Design av meny/forside og knapper osv  
+    - Design av meny/forside og knapper osv
+    - Ryddet i struktur og ubrukt kode
+    - Ferdigstilt sprites
+    - Justert hastigheter og parametrene knyttet til angrep
+    - Oppdatert lisenser
+    - Oppdatert tester
+    - Kommentert kode
+    - Skrevet om manuelle tester og lagt til flere akseptansekriterier iht. brukerhistoriene
+    - Ferdigstilt UI og AI
 
 Features:
 * En spillfigur med animasjon som kan beveges vertikalt, horisontalt og diagonalt. 
@@ -592,7 +600,7 @@ Siste gruppetime + litt til
 - Skrevet på javadocs
 
 Fredag 05/05-23
-kl. 10:30-13:00
+kl. 10:30-14:00
 Leon, Markus, Malene og Steffen
 
 Siste arbeidsøkt på realfagsbygget
@@ -600,10 +608,8 @@ Siste arbeidsøkt på realfagsbygget
 - Skrev tekst tilhørende klassediagram
 - Blitt enige om innhold på presentasjon og laget den
 - Fjernet imports som ikke blir brukt, ryddet litt opp
-- Skrevet tester for å øve coverage 
+- Skrevet tester for å øke coverage 
 - Endret utseende på knapper
 - Implimentert lyd 
 - Oppdatert linenser
-
-
-
+- Skrevet ny tekst for hjelpeside
