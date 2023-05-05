@@ -1,5 +1,5 @@
 License for our original work:
-
+All code, sorites and tiles © 2023 Team saga of the velleins. see License under.
 
 
 
