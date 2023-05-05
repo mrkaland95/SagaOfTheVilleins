@@ -14,13 +14,14 @@ import inf112.saga.of.the.villeins.Controller.PlayerAction;
  * tegne animasjon som peker i riktig retning osv.
  */
 public class CharacterAnimationHandler {
-    private final CharacterDirection animationStartingDirection;
-    private Animation2D idleAnimation;
-    private Animation2D walkAnimation;
-    private Animation2D attackAnimation;
-    private Animation2D activeAnimation;
-    private final SpriteBatch spriteBatch;
-    private final float playbackSpeedMultiplier = 1f;
+    // Disse er package-private for å testes.
+    CharacterDirection animationStartingDirection;
+    Animation2D idleAnimation;
+    Animation2D walkAnimation;
+    Animation2D attackAnimation;
+    Animation2D activeAnimation;
+    final SpriteBatch spriteBatch;
+    final float playbackSpeedMultiplier = 1f;
 
 
     public CharacterAnimationHandler(

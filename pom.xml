@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>no.uib.ii.inf112.sagaofthevilleins</groupId>
 	<artifactId>SagaOfTheVilleins</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>Saga Of The Villeins</name>
 	<url>https://git.app.uib.no/SagaOfTheVilleins/sagaofthevilleins</url>
@@ -92,6 +92,35 @@
 <!--        <version>$1.11.0</version>-->
 <!--        <scope>test</scope>-->
 <!--    	</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-backend-headless -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-backend-headless</artifactId>
+			<version>1.11.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>2.17.0</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- Add the Mockito dependency -->
 		<dependency>
