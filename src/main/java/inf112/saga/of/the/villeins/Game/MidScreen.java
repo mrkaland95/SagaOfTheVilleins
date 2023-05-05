@@ -34,13 +34,15 @@ public class MidScreen implements Screen {
     private int postUpdateDefense;
     private int postUpdateHealth;
     private int postUpdateStrength;
+    private TileInfoMap infoMap;
 
 
-    public MidScreen(SagaOfTheVilleinsGame game, List<ICharacter> characterList, LootCollection inventory) {
+    public MidScreen(SagaOfTheVilleinsGame game, List<ICharacter> characterList, LootCollection inventory, TileInfoMap infoMap) {
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
         this.startGameTable = new Table(game.getDefaultSkin());
         this.skin = game.getDefaultSkin();
         this.game = game;
+        this.infoMap = infoMap;
         this.inventory = inventory;
         this.characterList = characterList;
         this.playerPreUpgrade = (IPlayable) this.characterList.get(0);
@@ -67,7 +69,7 @@ public class MidScreen implements Screen {
      * 
      */
     private void startNextStage() {
-        this.game.nextStage();
+        this.game.nextStage(this.infoMap);
     }
 
     private void initStartNextGameButton() {

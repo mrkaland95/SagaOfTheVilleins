@@ -52,11 +52,7 @@ public class GameScreen implements Screen {
 		this.gameStage = stage;
 
 		// Hent dimensjonen på kartet og sett det inn i mappet som holder gyldige tiles.
-		int width = map.getProperties().get("width", Integer.class);
-		int height = map.getProperties().get("height", Integer.class);
-
-		infoMap = new TileInfoMap(height, width);
-		infoMap.setIllegalTiles(map);
+		infoMap = game.getInfoMap();
 
 		gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		uiCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -128,10 +124,10 @@ public class GameScreen implements Screen {
 		playerActiveProcessor.resetInput();
 
 		if(gameController.getGameState() == GameState.GAME_OVER){
-			game.resetGame();
+			game.resetGame(infoMap);
 		}
 		if(gameController.getGameState() == GameState.MAP_WON) {
-			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory));
+			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory, infoMap));
 		}
 
 	}
