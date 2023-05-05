@@ -12,6 +12,8 @@ import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Game.GameScreen;
 
+import java.util.List;
+
 
 public class AttackUtils {
     private final int attackRange;
@@ -56,14 +58,4 @@ public class AttackUtils {
         return attackRange >= TilePosition.hexDistance(character1TilePosition, character2TilePosition);
     }
 
-    /**
-     * Blir ikke brukt akkurat nå
-     * 
-     * @param character1
-     * @param character2
-     * @return 
-     */
-    public static int calculateDamage(ICharacter character1, ICharacter character2) {
-        return 0;
-    }
 }

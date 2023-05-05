@@ -126,6 +126,7 @@ public class GameScreen implements Screen {
 
 		if(gameController.getGameState() == GameState.GAME_OVER){
 			game.resetGame(infoMap);
+			game.setScreen(new MainMenuScreen(game));
 		}
 		if(gameController.getGameState() == GameState.MAP_WON) {
 			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory, infoMap));
