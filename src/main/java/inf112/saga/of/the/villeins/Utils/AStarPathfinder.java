@@ -60,6 +60,13 @@ public class AStarPathfinder {
         return path;
     }
 
+    /**
+     * Henter naboene til en tile, må litt spesielt siden det er hexgrid istedet for vanlig grid
+     * 
+     * @param position tilen vi vil finne naboene til
+     * @param TileInfoMap TileInforMapen som holder alle lovlige tiles
+     * @return listen av tilesene som er naboer.
+     */
     public static ArrayList<TilePosition> getNeighbors(TilePosition position, TileInfoMap TileInfoMap) {
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();

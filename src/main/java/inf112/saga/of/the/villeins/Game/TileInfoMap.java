@@ -30,19 +30,42 @@ public class TileInfoMap {
             }
         }
     }
+    /**
+     * sjekker om en tile er lov å gå på
+     * 
+     * @param tile tilen som sjekkes
+     * @return true om det er lov, false om det ikke er lov
+     */
     public Boolean tileIsMovable(TilePosition tile){
         return map.get(tile);
     }
-
+    /**
+     * Setter en spesifikk tile til å være lovlig eller ikke
+     * 
+     * @param tile tilen som endres
+     * @param moveable boolean som er true hvis lovlig, false hvis ikke
+     */
     public void setMoveable(TilePosition tile, Boolean moveable) {
         map.put(tile, moveable);
     }
 
+    /**
+     * Oppdaterer kartet når noen beveger seg
+     * 
+     * @param start tilen den begynner på
+     * @param end tilen den lander på
+     */
     public void onMove(TilePosition start, TilePosition end){
         map.put(start, true);
         map.put(end, false);
     }
 
+    /**
+     * Resetter tilesene i kartet basert på om det er en karakter der eller ikke
+     * Setter false hvis det er en karakter der, true hvis ikke
+     * 
+     * @param characterList listen av alle karakterene
+     */
     public void reset(List<ICharacter> characterList) {
         for (int i = 0; i < mapRows; i++) {
             for (int j = 0; j < mapCols; j++) {
@@ -57,6 +80,12 @@ public class TileInfoMap {
         }
     }
 
+    /**
+     * Finner alle ulovlige tilesene i kartet og setter de til det basert på dataen som tiledMap
+     * inneholder
+     * 
+     * @param tileMap kartet laget i Tiled, der tilesene inneholder en property om det er lovlig å gå på den eller ikke.
+     */
     public void setIllegalTiles(TiledMap tileMap){
         TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
         for (int i = 0; i < mapRows; i++) {

@@ -33,11 +33,35 @@ public interface IMovable2D {
      * @return
      */
     CharacterState getCharacterState();
+
+    /** Setter tilstanden(IDLE,  til en karakter
+     * @param characterState
+     */
     void setCharacterState(CharacterState characterState);
+
+    /** Henter retningen som en karakter skal peke mot.
+     * @return
+     */
     CharacterDirection getCharacterDirection();
+
+    /** Setter retningen som en karakter skal peke mot.
+     * @param characterDirection
+     */
     void setCharacterDirection(CharacterDirection characterDirection);
+
+    /** Henter bevegelses hastigheten til en karakter.
+     * @return
+     */
     float getMoveSpeed();
+
+    /** Setter bevegelsesnhastigenheten til en karakter.
+     * @param moveSpeed
+     */
     void setMoveSpeed(float moveSpeed);
+
+    /** Setter stien av tiles som en karakter skal følge til destinasjonen sin.
+     * @param pathToMove
+     */
     void setPathToMove(List<TilePosition> pathToMove);
 
 }

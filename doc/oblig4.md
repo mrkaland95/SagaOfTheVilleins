@@ -231,7 +231,7 @@ PRODUKT OG KODE
     * Laget abstrakt klasse for spillfigurene
 
 * Klassediagram
-    Finnes i egen fil; "EndeligKlassediagram.pdf"
+    Finnes i egen fil; "Klassediagram_final.pdf"
 
 PROSJEKTLOG FRA MØTER OG ARBEIDSØKTER
 
@@ -573,16 +573,31 @@ Arbeidsøkt på realfagsbygget
 
 Agenda videre:
 - Skrive tekst tilhørende klassediagram
-- Lage klassediagram når ting ikke leger endrer seg
+- Lage klassediagram når ting ikke lenger endrer seg
 - Skrive javadocs
 - Oppdatere tester
+- Implimentere lyd
 
 Torsdag 04/05-23
-Kl. 08:15-12:00
-Oppmøte
+Kl. 08:15-10:00
+Leon, Markus, Malene og Steffen
 
 Siste gruppetime + litt til
-- 
+- Testet kompilering på mac
+- Lagde klassediagram
+- Skrev tekst tilhørende klassediagram
+- Fikset med bug ved død av karakter
+- Skrev tester for oppdaterte funksjoner
+- Skrevet på javadocs
+
+Fredag 05/05-23
+kl. 08:15-12:00
+Medlemmer
+
+Siste arbeidsøkt (agenda)
+- Skrev tekst tilhørende klassediagram
+- Oppdatert README fil
+
 
 
 

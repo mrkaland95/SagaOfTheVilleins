@@ -62,6 +62,10 @@ public class MidScreen implements Screen {
         initPlayerStatTables();
     }
 
+    /**
+     * Kjører nextStage()-metoden i sagaOfTheVilleinsGame
+     * 
+     */
     private void startNextStage() {
         this.game.nextStage();
     }

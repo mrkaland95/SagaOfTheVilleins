@@ -30,9 +30,49 @@ abstract public class BaseInputProcessor implements InputProcessor {
 		this.leftMouseClicked = false;
 	}
 
-
+	/**
+	 * Gir mulighet for å bevege kameraet, zoome, eller ende turen med tastaturet
+	 * 
+	 */
 	@Override
-	public boolean keyDown(int keycode) {
+	public boolean keyDown(int button) {
+		float cameraTranslationAmount = 10f;
+		if(button == Input.Keys.W){
+			camera.translate(0, cameraTranslationAmount, 0);
+			return true;
+		}
+		else if(button == Input.Keys.S){
+			camera.translate(0, -cameraTranslationAmount,0);
+			return true;
+		}
+		else if(button == Input.Keys.A){
+			camera.translate(-cameraTranslationAmount, 0 ,0);
+			return true;
+		}
+		else if(button == Input.Keys.D){
+			camera.translate(cameraTranslationAmount, 0 ,0);
+			return true;
+		}
+		else if(button == Input.Keys.Z) {
+			if(camera.zoom + zoomAmount >= maxZoomLevel) {
+				camera.zoom = maxZoomLevel;
+			} else {
+				camera.zoom += zoomAmount;
+			}
+			return true;
+		}
+		else if(button == Input.Keys.X) {
+			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
+				camera.zoom = minimumZoomLevel;
+			} else {
+				camera.zoom -= zoomAmount;
+			}
+			return true;
+		}
+		else if(button == Input.Keys.N) {
+			this.endTurn = true;
+			return true;
+		}
 		return false;
 	}
 
@@ -43,49 +83,16 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		float cameraTranslationAmount = 10f;
-		if(character == 'w'){
-			camera.translate(0, cameraTranslationAmount, 0);
-			return true;
-		}
-		if(character == 's'){
-			camera.translate(0, -cameraTranslationAmount,0);
-			return true;
-		}
-		if(character == 'a'){
-			camera.translate(-cameraTranslationAmount, 0 ,0);
-			return true;
-		}
-		if(character == 'd'){
-			camera.translate(cameraTranslationAmount, 0 ,0);
-			return true;
-		}
-		if(character == 'z') {
-			if(camera.zoom + zoomAmount >= maxZoomLevel) {
-				camera.zoom = maxZoomLevel;
-			} else {
-				camera.zoom += zoomAmount;
-			}
-			return true;
-		}
-		if(character == 'x') {
-			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
-				camera.zoom = minimumZoomLevel;
-			} else {
-				camera.zoom -= zoomAmount;
-			}
-			return true;
-		}
-		if(character == 'n') {
-			this.endTurn = true;
-			return true;
-		}
-
 		return false;
 	}
 
+	/**
+	 * Behandler mus-input
+	 * 
+	 */
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		
 		if (button == Input.Buttons.LEFT) {
 			this.leftMouseClicked = true;
 		}
@@ -108,6 +115,11 @@ abstract public class BaseInputProcessor implements InputProcessor {
 		}
 		return false;
 	}
+
+	/**
+	 * Brukes til å flytte kamera med musen
+	 * 
+	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		// Oppdaterer kameraets posisjon med samme mengde som musen blir dratt.
@@ -128,7 +140,10 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	public boolean mouseMoved(int screenX, int screenY) {
 		return false;
 	}
-
+	/**
+	 * Brukes for å zoome med mus
+	 * 
+	 */
 	@Override
 	public boolean scrolled(float amountX, float amountY) {
 		float zoomMultiplier = 0.20f;
@@ -142,7 +157,7 @@ abstract public class BaseInputProcessor implements InputProcessor {
 		}
 		return true;
 	}
-
+	
 	public Vector2 getRightClickCoordinates() {
 		return rightClickCoordinates;
 	}
@@ -155,6 +170,10 @@ abstract public class BaseInputProcessor implements InputProcessor {
 		return this.endTurn;
 	}
 
+	/**
+	 * Brukes for å resette alle variabler når det ikke er spilleren sin tur lenger.
+	 * 
+	 */
 	public void resetInput() {
 		this.endTurn = false;
 		this.rightClickCoordinates = null;

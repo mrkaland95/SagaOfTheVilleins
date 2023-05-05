@@ -22,7 +22,12 @@ public class AttackUtils {
         this.character = character;
         this.attackRange = attackRange;
     }
-
+    /**
+     * Angriper en karakter på en posisjon.
+     * 
+     * @param clickPosition posisjonen til karakteren som skal angripes
+     * @return true hvis angrepet gikk gjennom, false hvis det ikke gikk gjennom
+     */
     public boolean attackCharacter(Vector2 clickPosition) {
 
         ICharacter opponent = TilePosition.getCharacterOnCoordinate(clickPosition);
@@ -36,26 +41,11 @@ public class AttackUtils {
         // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
         int damage = this.character.getStrength() / 2;
 
-//        System.out.println("Dealing damage: " + damage);
         character.applyDamage(damage, opponent);
         character.setCurrentActionPoints(0);
 
-//        int opponentHealth = opponent.getCurrentHealth();
-//        System.out.println("Opponent's current health is: " + opponentHealth);
         return true;
     }
-
-    private ICharacter getCharacterToAttack(List<ICharacter> characterList, Vector2 clickPosition) {
-        TilePosition clickedTile = TilePosition.findHexTile(clickPosition);
-        for (ICharacter character : characterList) {
-            TilePosition characterTile = TilePosition.findHexTile(character.getCurrentPosition());
-            if (clickedTile.equals(characterTile)) {
-                return character;
-            }
-        }
-        return null;
-    }
-
 
     /** Sjekker om en karakter er innenfor angrepsrekkevidde.
      * @param character
@@ -68,6 +58,15 @@ public class AttackUtils {
         return attackRange >= TilePosition.hexDistance(character1TilePosition, character2TilePosition);
     }
 
+    /**
+     * Blir ikke brukt akkurat nå
+     * 
+     * TODO: slett hvis det ikke implemeterer det
+     * 
+     * @param character1
+     * @param character2
+     * @return 
+     */
     public static int calculateDamage(ICharacter character1, ICharacter character2) {
         return 0;
     }

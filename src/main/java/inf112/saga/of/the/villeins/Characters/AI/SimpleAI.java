@@ -25,6 +25,9 @@ public class SimpleAI implements IBaseAI {
         this.currentCharacter = currentCharacter;
     }
 
+    /**
+     * @return
+     */
     public boolean AIPerformAction() {
         // Karakteren ikke har noen action points igjen eller ikke har et mål? Gå videre.
         if(currentCharacter.getCurrentActionPoints() == 0 || targetCharacter == null){
@@ -34,6 +37,8 @@ public class SimpleAI implements IBaseAI {
             return true;
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
+            // Finner tilesene å gå til, 
+            //TODO: utvide til naboene til naboene osv. basert på attackRange 
             for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameScreen.infoMap)) {
                 if(GameScreen.infoMap.tileIsMovable(tilePosition)){
                     tempTiles.add(tilePosition);
