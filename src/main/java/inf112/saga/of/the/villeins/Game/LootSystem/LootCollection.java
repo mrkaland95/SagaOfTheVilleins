@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
-
 public class LootCollection {
     private List<Upgrades> collectedUpgrades;
 
@@ -25,5 +23,9 @@ public class LootCollection {
 
     public List<Upgrades> getUpgrades(){
         return this.collectedUpgrades;
-    }    
+    }
+    
+    public void addUpgrade(Upgrades upgrade){
+        this.collectedUpgrades.add(upgrade);
+    }
 }   
