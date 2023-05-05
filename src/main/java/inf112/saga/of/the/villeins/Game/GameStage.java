@@ -2,6 +2,7 @@ package inf112.saga.of.the.villeins.Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
@@ -55,20 +56,21 @@ public class GameStage {
      * @return returnerer en int av hvor mange fiender som skal spawnes
      */
     private int generateEnemyCount(){
+        Random r = new Random();
         if(this.stage == 1){
-            return ThreadLocalRandom.current().nextInt(2, 3);
+            return r.nextInt((3 - 2) + 1) + 2;
         }
         else if(this.stage == 2){
-            return ThreadLocalRandom.current().nextInt(3, 5);
+            return r.nextInt((5 - 3) + 1) + 3;
         }
         else if(this.stage == 3){  
-            return ThreadLocalRandom.current().nextInt(5, 6);
+            return r.nextInt((6 - 5) + 1) + 5;
         }
         else if(this.stage == 4){
             return 1;
         }
         else {
-            return ThreadLocalRandom.current().nextInt(stage+1, stage + 4);
+            return r.nextInt((stage+4 - stage+1) + 1) + stage+1;
         }
     }
 
