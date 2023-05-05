@@ -51,7 +51,7 @@ public class HelpScreen implements Screen {
         helpTextTable.add(helpTextLabel).width(textWidth).center().row();
         helpTextTable.setFillParent(true);
 
-        Button mainMenuButton = new TextButton("Return to main menu", skin, "small");
+        Button mainMenuButton = new TextButton("Return to main menu", skin, "default");
         mainMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

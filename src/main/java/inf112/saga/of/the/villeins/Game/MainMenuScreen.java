@@ -27,13 +27,13 @@ public class MainMenuScreen implements Screen {
         this.stage = new Stage(new ScreenViewport(), game.spriteBatch);
         this.menuBackground = this.game.getMenuBackground();
 
-        this.mySkin = new Skin(Gdx.files.internal("./assets/Skins/glassy/skin/glassy-ui.json"));
+        this.mySkin = game.getDefaultSkin();
         this.menuTable = new Table(mySkin);
         Gdx.input.setInputProcessor(stage);
         this.menuBackground.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        Button startGameButton = new TextButton("Start Game", mySkin, "small");
+        Button startGameButton = new TextButton("Start Game", mySkin, "default");
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -42,7 +42,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        Button helpScreenButton = new TextButton("Help Page", mySkin, "small");
+        Button helpScreenButton = new TextButton("Help Page", mySkin, "default");
 
         helpScreenButton.addListener(new ClickListener() {
             @Override

@@ -4,16 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.badlogic.gdx.math.Vector2;
-import inf112.saga.of.the.villeins.Characters.BaseMonster;
-import inf112.saga.of.the.villeins.Characters.CharacterState;
-import inf112.saga.of.the.villeins.Characters.Player;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
-import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import java.util.List;
-import java.util.ArrayList;
+
+
 
 public class TestForBasemonster {
 
@@ -31,7 +26,6 @@ public class TestForBasemonster {
    @Test
    public void testSetCurrentPosition(){
        TilePosition startingPosition = new TilePosition(0,0);
-       CharacterAnimationHandler animationController = null;
        BaseMonster testMonster = new BaseMonster(startingPosition, null, 40, 2, 5, 1, "");
        float expectedPositionX = 300f;
        float expectedPositionY = 100f;

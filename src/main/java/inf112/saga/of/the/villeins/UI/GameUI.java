@@ -223,7 +223,7 @@ public class GameUI implements AbstractGameUI {
      */
     private void initAPAndEndTurnButton() {
         actionPointLabel = new Label("", skin);
-        endTurnButton = new TextButton("End Turn", skin, "small");
+        endTurnButton = new TextButton("End Turn", skin, "default");
         endTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

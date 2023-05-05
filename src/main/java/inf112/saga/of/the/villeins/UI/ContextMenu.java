@@ -21,8 +21,8 @@ public class ContextMenu extends Table {
     public ContextMenu(Skin skin, GameUI gameUI) {
         super(skin);
 
-        attackButton = new TextButton("Attack", skin, "small");
-        moveButton = new TextButton("Move", skin, "small");
+        attackButton = new TextButton("Attack", skin, "default");
+        moveButton = new TextButton("Move", skin, "default");
         tileInfoLabel = new Label("", skin);
 
         createButtonPanel();
