@@ -1,5 +1,6 @@
 package inf112.saga.of.the.villeins.Utils;
 
+import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,11 +12,11 @@ import inf112.saga.of.the.villeins.Utils.AStarPathfinder;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 public class TestAStarPathfinder {
-    
+
     @Test
     public void testFindPath() {
 
-        TileInfoMap tileInfoMap = new TileInfoMap(5,5);
+        TileInfoMap tileInfoMap = new TileInfoMap(5, 5);
 
         TilePosition start = new TilePosition(0, 0);
         TilePosition end = new TilePosition(4, 4);
@@ -27,4 +28,3 @@ public class TestAStarPathfinder {
         assertEquals(end, path.get(path.size() - 1)); // sjekker at det siste elementet i listen svarer til end
     }
 }
-

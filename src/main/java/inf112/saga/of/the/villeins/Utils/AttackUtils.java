@@ -59,8 +59,6 @@ public class AttackUtils {
     /**
      * Blir ikke brukt akkurat nå
      * 
-     * TODO: slett hvis det ikke implemeterer det
-     * 
      * @param character1
      * @param character2
      * @return 

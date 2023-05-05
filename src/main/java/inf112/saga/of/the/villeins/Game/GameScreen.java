@@ -92,9 +92,6 @@ public class GameScreen implements Screen {
 	public void render (float deltaTime) {
 		ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
 
-		infoMap.reset(characterList);
-		infoMap.setIllegalTiles(map);
-
 		gameCamera.update();
 		uiCamera.update();
 
@@ -130,6 +127,8 @@ public class GameScreen implements Screen {
 			game.setScreen(new MidScreen(game, GameScreen.characterList, inventory, infoMap));
 		}
 
+		infoMap.reset(characterList);
+		infoMap.setIllegalTiles(map);
 	}
 	
 	@Override

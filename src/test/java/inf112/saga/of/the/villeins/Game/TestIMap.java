@@ -1,9 +1,14 @@
 package inf112.saga.of.the.villeins.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import inf112.saga.of.the.villeins.AssetManager.GameAssetManager;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TestIMap {
 
@@ -34,5 +39,18 @@ public class TestIMap {
 //        assertEquals(true, map.isOccupied(end));
 //
 //    }
-    
+    @Test
+    public void setIllegalTiles() {
+        GameAssetManager gameAssetManager = new GameAssetManager();
+        gameAssetManager.manager.finishLoading();
+        TiledMap map = gameAssetManager.manager.get(GameAssetManager.testMapPath, TiledMap.class);
+        System.out.println(map);
+        TileInfoMap infoMap = new TileInfoMap(20, 20);
+        infoMap.setIllegalTiles(map);
+        TilePosition tile1 = new TilePosition(3,0);
+        boolean result = infoMap.tileIsMovable(tile1);
+        assertFalse(result);
+    }
+
 }
+

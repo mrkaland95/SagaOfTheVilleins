@@ -72,7 +72,6 @@ public class AStarPathfinder {
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();
         int x = position.x();
         int y = position.y();
-        System.out.println(infomap);
 
         // implementation of getNeighbors method depends on your specific grid structure
         // for a hexagonal grid, this could involve checking the six neighboring tiles

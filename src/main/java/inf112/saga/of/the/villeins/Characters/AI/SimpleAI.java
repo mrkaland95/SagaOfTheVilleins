@@ -57,7 +57,6 @@ public class SimpleAI implements IBaseAI {
             // Finner "pathen" til den nærmeste gyldige "tilen, som er innenfor angrepsrekkevidde til målet.
             List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, infoMap);
             currentCharacter.setPathToMove(pathToAttack);
-            System.out.println("Attempting to find path to attack");
             return false;
         }
     }
