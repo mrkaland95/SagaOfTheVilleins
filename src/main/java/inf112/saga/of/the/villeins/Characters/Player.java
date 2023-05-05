@@ -56,13 +56,13 @@ public class Player extends BaseCharacter implements IPlayable {
 
     @Override
     public void setTargetCharacter(ICharacter target) {
-        // TODO Auto-generated method stub
+        // this method is not used for player
         throw new UnsupportedOperationException("Unimplemented method 'setTargetCharacter'");
     }
 
     @Override
     public ICharacter getTargetCharacter() {
-        // TODO Auto-generated method stub
+        // this method is not used for player
         throw new UnsupportedOperationException("Unimplemented method 'getTargetCharacter'");
     }
 

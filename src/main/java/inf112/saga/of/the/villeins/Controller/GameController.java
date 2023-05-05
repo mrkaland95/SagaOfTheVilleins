@@ -78,6 +78,7 @@ public class GameController {
 
                 } else if (playerAction == PlayerAction.ATTACK) {
                     currentCharacter.attack(positionToPerformAction);
+                    
                     positionToPerformAction = null;
                     playerAction = PlayerAction.IDLE;
                 }

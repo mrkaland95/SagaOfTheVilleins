@@ -52,7 +52,7 @@ public class CharacterAnimationHandler {
         activeAnimation = switch(character.getCharacterState()) {
             case IDLE   -> idleAnimation;
             case MOVING -> walkAnimation;
-            case ATTACK -> idleAnimation; // TODO endre denne til "attack" når attack animasjon er laget.
+            case ATTACK -> attackAnimation; // TODO endre denne til "attack" når attack animasjon er laget.
             case DYING  -> idleAnimation;
         };
 

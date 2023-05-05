@@ -23,6 +23,8 @@ import inf112.saga.of.the.villeins.Utils.TilePosition;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.w3c.dom.Text;
+
 
 
 /*
@@ -71,6 +73,7 @@ public class SagaOfTheVilleinsGame extends Game {
 
         Texture warriorIdleTexture    = assetManager.manager.get(GameAssetManager.idleWarriorPath, Texture.class);
 		Texture warriorWalkingTexture = assetManager.manager.get(GameAssetManager.walkingWarriorPath, Texture.class);
+        Texture warriorAttackTexture = assetManager.manager.get(GameAssetManager.attackingWarrior, Texture.class);
 		Texture slimeIdleTexture      = assetManager.manager.get(GameAssetManager.idleSlimePath, Texture.class);
 		Texture dragonAttackTexture   = assetManager.manager.get(GameAssetManager.dragonAttackPath, Texture.class);
 		Texture ghostIdleTexture      = assetManager.manager.get(GameAssetManager.ghostIdlePath, Texture.class);
@@ -83,7 +86,7 @@ public class SagaOfTheVilleinsGame extends Game {
 		CharacterAnimationHandler slimeAnimation =
                 new CharacterAnimationHandler(spriteBatch, slimeIdleTexture, 4, slimeIdleTexture, 4, null,1, CharacterDirection.RIGHT);
 		CharacterAnimationHandler playerWarriorAnimation =
-                new CharacterAnimationHandler(spriteBatch, warriorIdleTexture, 2, warriorWalkingTexture,11,  null, null, CharacterDirection.LEFT);
+                new CharacterAnimationHandler(spriteBatch, warriorIdleTexture, 2, warriorWalkingTexture,11, warriorAttackTexture, 5, CharacterDirection.LEFT);
 		CharacterAnimationHandler dragonAnimation =
                 new CharacterAnimationHandler(spriteBatch, dragonAttackTexture, 4,  dragonAttackTexture,4,  null, null, CharacterDirection.LEFT);
 		CharacterAnimationHandler ghostAnimation =

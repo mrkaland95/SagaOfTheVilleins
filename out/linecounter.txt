@@ -1,0 +1,224 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2023-05-05 12:48:09
+count workspace : c:\Users\LeonH\Documents\INF112\project\sagaofthevilleins
+total files : 195
+total code lines : 4789
+total comment lines : 822
+total blank lines : 1054
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .md|           1098|              8|            361|     23|
+   |           .xml|            208|             45|              0|    4.3|
+   |           .tsx|             48|              0|              0|    1.0|
+   |               |             95|              9|             19|    2.0|
+   |           .tmx|             36|              0|              0|   0.75|
+   |        .piskel|             16|              0|              0|   0.33|
+   | .tiled-project|             10|              0|              1|   0.21|
+   | .tiled-session|             53|              0|              2|    1.1|
+   |           .yml|             71|             28|             11|    1.5|
+   |          .json|            160|              0|              0|    3.3|
+   |           .fnt|             18|              0|              0|   0.38|
+   |         .atlas|            242|              0|              1|    5.1|
+   |          .java|           2734|            732|            659|     57|
+   -------------------------------------------------------------------------
+.gitignore, code is 95, comment is 9, blank is 18.
+.gitlab-ci.yml, code is 71, comment is 28, blank is 11.
+assets\Maps\bridge1.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\bridge2.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenpath1 (1).tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenpath1.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenpath2.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenpath3.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenpath4.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greensplitPath1.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\greenTile.tsx, code is 4, comment is 0, blank is 0.
+assets\Maps\ProjectFiles\TiledMap.tiled-project, code is 10, comment is 0, blank is 1.
+assets\Maps\ProjectFiles\TiledMap.tiled-session, code is 53, comment is 0, blank is 2.
+assets\Maps\SagaOfTheVilleins_Map1.tmx, code is 36, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\bridge1.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\bridge2.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greenpath1.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greenpath2.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greenpath3.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greenpath4.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greensplitpath1.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\greentile.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\piskel\waterTile.piskel, code is 1, comment is 0, blank is 0.
+assets\Maps\Tiles\PNG\bridge1.png, it is a binary file.
+assets\Maps\Tiles\PNG\bridge2.png, it is a binary file.
+assets\Maps\Tiles\PNG\green Hex.png, it is a binary file.
+assets\Maps\Tiles\PNG\greenpath1.png, it is a binary file.
+assets\Maps\Tiles\PNG\greenpath2.png, it is a binary file.
+assets\Maps\Tiles\PNG\greenpath3.png, it is a binary file.
+assets\Maps\Tiles\PNG\greenpath4.png, it is a binary file.
+assets\Maps\Tiles\PNG\greensplitPath1.png, it is a binary file.
+assets\Maps\Tiles\PNG\waterTile.png, it is a binary file.
+assets\Maps\waterTile.tsx, code is 12, comment is 0, blank is 0.
+assets\Menu\MenuBackground.png, it is a binary file.
+assets\Menu\MenuBackground2.png, it is a binary file.
+assets\Skins\minecraft\skin\craftacular-ui.atlas, code is 242, comment is 0, blank is 1.
+assets\Skins\minecraft\skin\craftacular-ui.json, code is 160, comment is 0, blank is 0.
+assets\Skins\minecraft\skin\craftacular-ui.png, it is a binary file.
+assets\Skins\minecraft\skin\font-bold-export.fnt, code is 6, comment is 0, blank is 0.
+assets\Skins\minecraft\skin\font-export.fnt, code is 6, comment is 0, blank is 0.
+assets\Skins\minecraft\skin\font-title-export.fnt, code is 6, comment is 0, blank is 0.
+assets\Sounds\pop-goes-the-weasel.mp3, it is a binary file.
+assets\Sounds\sword sound.wav, it is a binary file.
+assets\Sprites\Dragon\Drage 130x114.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Dragon\DrageIDLE 130x114.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Dragon\dragon_attack.png, it is a binary file.
+assets\Sprites\Dragon\dragon_idle.png, it is a binary file.
+assets\Sprites\Ghost\ghost_attack.png, it is a binary file.
+assets\Sprites\Ghost\ghost_idle.png, it is a binary file.
+assets\Sprites\Ghost\Spøkelse.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Ghost\Spøkelse_attack_outlined.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Ghost\Spøkelse_outlined.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Ghost\Spøkelse_outlined.piskel.png, it is a binary file.
+assets\Sprites\Slime\Slime idle.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Slime\slime jump.piskel, code is 1, comment is 0, blank is 0.
+assets\Sprites\Slime\Slime_Idle.png, it is a binary file.
+assets\Sprites\Warrior\IdleWarrior.png, it is a binary file.
+assets\Sprites\Warrior\WalkingWarrior.png, it is a binary file.
+assets\Sprites\Warrior\warriorAttack.png, it is a binary file.
+doc\.gitkeep, code is 0, comment is 0, blank is 1.
+doc\A0 - medlemmenes kompetanse.md, code is 20, comment is 1, blank is 5.
+doc\Klassediagram_final.png, it is a binary file.
+doc\Klassediagram_uke_10.pdf, it is a binary file.
+doc\Klassediagram_uke_15.png, it is a binary file.
+doc\oblig1.md, code is 107, comment is 0, blank is 46.
+doc\oblig2.md, code is 104, comment is 0, blank is 37.
+doc\oblig3.md, code is 83, comment is 0, blank is 31.
+doc\oblig4.md, code is 473, comment is 1, blank is 136.
+doc\Prosjektlog.md, code is 274, comment is 1, blank is 82.
+LICENSE.md, code is 14, comment is 4, blank is 13.
+pom.xml, code is 208, comment is 45, blank is 0.
+README.md, code is 23, comment is 1, blank is 11.
+src\main\java\inf112\saga\of\the\villeins\Animations\Animation2D.java, code is 42, comment is 7, blank is 10.
+src\main\java\inf112\saga\of\the\villeins\Animations\CharacterAnimationHandler.java, code is 55, comment is 6, blank is 15.
+src\main\java\inf112\saga\of\the\villeins\AssetManager\GameAssetManager.java, code is 37, comment is 4, blank is 5.
+src\main\java\inf112\saga\of\the\villeins\AssetManager\SoundManager.java, code is 22, comment is 0, blank is 6.
+src\main\java\inf112\saga\of\the\villeins\Characters\AI\IBaseAI.java, code is 7, comment is 0, blank is 2.
+src\main\java\inf112\saga\of\the\villeins\Characters\AI\SimpleAI.java, code is 46, comment is 14, blank is 13.
+src\main\java\inf112\saga\of\the\villeins\Characters\BaseCharacter.java, code is 149, comment is 22, blank is 20.
+src\main\java\inf112\saga\of\the\villeins\Characters\BaseMonster.java, code is 55, comment is 0, blank is 12.
+src\main\java\inf112\saga\of\the\villeins\Characters\CharacterDirection.java, code is 5, comment is 0, blank is 1.
+src\main\java\inf112\saga\of\the\villeins\Characters\CharacterState.java, code is 7, comment is 0, blank is 2.
+src\main\java\inf112\saga\of\the\villeins\Characters\IAttackCapable.java, code is 10, comment is 9, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\Characters\ICharacter.java, code is 5, comment is 7, blank is 2.
+src\main\java\inf112\saga\of\the\villeins\Characters\IMovable2D.java, code is 19, comment is 33, blank is 15.
+src\main\java\inf112\saga\of\the\villeins\Characters\IPlayable.java, code is 5, comment is 9, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\Characters\IStats.java, code is 10, comment is 21, blank is 7.
+src\main\java\inf112\saga\of\the\villeins\Characters\ITurnBased.java, code is 6, comment is 11, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\Characters\ITurnBasedMovable.java, code is 2, comment is 0, blank is 1.
+src\main\java\inf112\saga\of\the\villeins\Characters\Player.java, code is 58, comment is 5, blank is 13.
+src\main\java\inf112\saga\of\the\villeins\Controller\GameController.java, code is 147, comment is 35, blank is 27.
+src\main\java\inf112\saga\of\the\villeins\Controller\GameState.java, code is 8, comment is 0, blank is 1.
+src\main\java\inf112\saga\of\the\villeins\Controller\PlayerAction.java, code is 7, comment is 0, blank is 1.
+src\main\java\inf112\saga\of\the\villeins\Factories\AbstractFactory.java, code is 8, comment is 0, blank is 2.
+src\main\java\inf112\saga\of\the\villeins\Factories\CharacterFactory.java, code is 51, comment is 0, blank is 13.
+src\main\java\inf112\saga\of\the\villeins\Game\GameScreen.java, code is 126, comment is 7, blank is 39.
+src\main\java\inf112\saga\of\the\villeins\Game\GameStage.java, code is 75, comment is 21, blank is 10.
+src\main\java\inf112\saga\of\the\villeins\Game\HelpScreen.java, code is 74, comment is 4, blank is 29.
+src\main\java\inf112\saga\of\the\villeins\Game\LootSystem\LootCollection.java, code is 19, comment is 6, blank is 6.
+src\main\java\inf112\saga\of\the\villeins\Game\LootSystem\UpgradePlayer.java, code is 22, comment is 13, blank is 5.
+src\main\java\inf112\saga\of\the\villeins\Game\LootSystem\Upgrades.java, code is 5, comment is 2, blank is 2.
+src\main\java\inf112\saga\of\the\villeins\Game\Main.java, code is 12, comment is 1, blank is 4.
+src\main\java\inf112\saga\of\the\villeins\Game\MainMenuScreen.java, code is 76, comment is 6, blank is 20.
+src\main\java\inf112\saga\of\the\villeins\Game\MidScreen.java, code is 128, comment is 7, blank is 33.
+src\main\java\inf112\saga\of\the\villeins\Game\SagaOfTheVilleinsGame.java, code is 137, comment is 37, blank is 37.
+src\main\java\inf112\saga\of\the\villeins\Game\TileInfoMap.java, code is 58, comment is 36, blank is 11.
+src\main\java\inf112\saga\of\the\villeins\InputProcessors\ActivePlayerProcessor.java, code is 7, comment is 1, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\InputProcessors\BaseInputProcessor.java, code is 143, comment is 25, blank is 18.
+src\main\java\inf112\saga\of\the\villeins\InputProcessors\InactivePlayerProcessor.java, code is 7, comment is 1, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\UI\AbstractGameUI.java, code is 7, comment is 0, blank is 3.
+src\main\java\inf112\saga\of\the\villeins\UI\ContextMenu.java, code is 84, comment is 2, blank is 26.
+src\main\java\inf112\saga\of\the\villeins\UI\GameUI.java, code is 208, comment is 41, blank is 48.
+src\main\java\inf112\saga\of\the\villeins\Utils\AStarPathfinder.java, code is 103, comment is 22, blank is 23.
+src\main\java\inf112\saga\of\the\villeins\Utils\AttackUtils.java, code is 32, comment is 30, blank is 13.
+src\main\java\inf112\saga\of\the\villeins\Utils\Settings.java, code is 4, comment is 1, blank is 1.
+src\main\java\inf112\saga\of\the\villeins\Utils\TileMovement.java, code is 63, comment is 16, blank is 18.
+src\main\java\inf112\saga\of\the\villeins\Utils\TilePosition.java, code is 86, comment is 26, blank is 17.
+src\test\java\inf112\saga\of\the\villeins\Characters\AI\TestAI.java, code is 15, comment is 0, blank is 5.
+src\test\java\inf112\saga\of\the\villeins\Characters\TestBaseCharacter.java, code is 33, comment is 0, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Characters\TestForBasemonster.java, code is 226, comment is 1, blank is 33.
+src\test\java\inf112\saga\of\the\villeins\Characters\TestForPlayer.java, code is 28, comment is 204, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Factories\TestCharacterFactory.java, code is 24, comment is 0, blank is 7.
+src\test\java\inf112\saga\of\the\villeins\Game\LootSystem\TestLootCollection.java, code is 13, comment is 0, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Game\LootSystem\TestUpgradePlayer.java, code is 22, comment is 0, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Game\TestGameStage.java, code is 33, comment is 8, blank is 11.
+src\test\java\inf112\saga\of\the\villeins\Game\TestIMap.java, code is 11, comment is 21, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Utils\TestAStarPathfinder.java, code is 23, comment is 4, blank is 7.
+src\test\java\inf112\saga\of\the\villeins\Utils\TestAttackUtils.java, code is 14, comment is 0, blank is 6.
+src\test\java\inf112\saga\of\the\villeins\Utils\TestTilePosition.java, code is 55, comment is 6, blank is 14.
+target\classes\inf112\saga\of\the\villeins\Animations\Animation2D.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Animations\CharacterAnimationHandler.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\AssetManager\GameAssetManager.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\AssetManager\SoundManager.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\AI\IBaseAI.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\AI\SimpleAI.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\BaseCharacter.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\BaseMonster.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\CharacterDirection.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\CharacterState.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\IAttackCapable.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\ICharacter.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\IMovable2D.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\IPlayable.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\IStats.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\ITurnBased.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\ITurnBasedMovable.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Characters\Player.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Controller\GameController.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Controller\GameState.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Controller\PlayerAction.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Factories\AbstractFactory.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Factories\CharacterFactory.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\GameScreen.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\GameStage.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\HelpScreen$1.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\HelpScreen.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\LootSystem\LootCollection.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\LootSystem\UpgradePlayer.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\LootSystem\Upgrades.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\Main.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\MainMenuScreen$1.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\MainMenuScreen$2.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\MainMenuScreen.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\MidScreen$1.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\MidScreen.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\SagaOfTheVilleinsGame.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Game\TileInfoMap.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\InputProcessors\ActivePlayerProcessor.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\InputProcessors\BaseInputProcessor.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\InputProcessors\InactivePlayerProcessor.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\AbstractGameUI.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\ContextMenu.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\GameUI$1.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\GameUI$2.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\GameUI$3.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\GameUI$4.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\UI\GameUI.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\AStarPathfinder$Node.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\AStarPathfinder.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\AttackUtils.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\Settings.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\TileMovement.class, it is a binary file.
+target\classes\inf112\saga\of\the\villeins\Utils\TilePosition.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Characters\AI\TestAI.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Characters\TestBaseCharacter.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Characters\TestForBasemonster.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Characters\TestForPlayer.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Factories\TestCharacterFactory.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Game\LootSystem\TestLootCollection.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Game\LootSystem\TestUpgradePlayer.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Game\TestGameStage.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Game\TestIMap.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Utils\TestAStarPathfinder.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Utils\TestAttackUtils.class, it is a binary file.
+target\test-classes\inf112\saga\of\the\villeins\Utils\TestTilePosition.class, it is a binary file.
+===============================================================================
