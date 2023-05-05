@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Align;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 
 public class ContextMenu extends Table {
-    private final GameUI gameUI;
     private TextButton attackButton;
     private TextButton moveButton;
     private Table characterStatsTable;
@@ -22,7 +21,6 @@ public class ContextMenu extends Table {
     public ContextMenu(Skin skin, GameUI gameUI) {
         super(skin);
 
-        this.gameUI = gameUI;
         attackButton = new TextButton("Attack", skin, "small");
         moveButton = new TextButton("Move", skin, "small");
         tileInfoLabel = new Label("", skin);

@@ -3,7 +3,7 @@ package inf112.saga.of.the.villeins.Utils;
 import java.util.*;
 
 import inf112.saga.of.the.villeins.Game.TileInfoMap;
-import inf112.saga.of.the.villeins.Utils.TilePosition;
+
 
 public class AStarPathfinder {
 

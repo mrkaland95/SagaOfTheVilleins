@@ -10,9 +10,7 @@ package inf112.saga.of.the.villeins.Utils;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Game.GameScreen;
 
-import java.util.List;
 
 public class AttackUtils {
     private final int attackRange;

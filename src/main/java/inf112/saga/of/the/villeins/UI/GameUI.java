@@ -1,6 +1,5 @@
 package inf112.saga.of.the.villeins.UI;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
