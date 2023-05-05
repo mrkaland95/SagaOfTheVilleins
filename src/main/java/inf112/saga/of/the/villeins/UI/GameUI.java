@@ -54,7 +54,7 @@ public class GameUI implements AbstractGameUI {
         this.gameCameraStage = gameCameraStage;
         this.skin = game.getDefaultSkin();
         this.gameController = controller;
-        this.contextMenu = new ContextMenu(this.skin, this);
+        this.contextMenu = new ContextMenu(this.skin);
         this.leftMouseClicked = false;
 
         // Initierer knappene for scoren, "end turn" knappen og gjenværende action points.
@@ -112,9 +112,6 @@ public class GameUI implements AbstractGameUI {
 
     private void updateContextMenu() {
         if (this.clickedWorldCoordinate == null) return;
-        // TODO Fjern disse før endelig innlevering
-//        Vector3 projectedCoordinate = this.gameCameraStage.getCamera().project(new Vector3(clickedWorldCoordinate.x, clickedWorldCoordinate.y, 0));
-//        contextMenu.setPosition(projectedCoordinate.x, projectedCoordinate.y);
 
         contextMenu.setVisible(true);
         contextMenu.setPosition(clickedWorldCoordinate.x, clickedWorldCoordinate.y);

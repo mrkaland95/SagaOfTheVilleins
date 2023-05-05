@@ -63,7 +63,6 @@ public class TestForBasemonster {
        float time = 0.06f;
        testMonster.setEndPosition(destination);
        testMonster.setMoveSpeed(time);
-//       assertFalse(testMonster.getCharacterState());
       assertEquals(destination, testMonster.getEndPosition());
    }
 

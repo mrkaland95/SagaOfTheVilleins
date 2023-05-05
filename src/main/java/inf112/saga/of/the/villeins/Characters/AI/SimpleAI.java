@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import inf112.saga.of.the.villeins.Characters.ICharacter;
-import inf112.saga.of.the.villeins.Game.GameScreen;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import inf112.saga.of.the.villeins.Utils.AStarPathfinder;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 
@@ -28,7 +28,7 @@ public class SimpleAI implements IBaseAI {
     /**
      * @return
      */
-    public boolean AIPerformAction() {
+    public boolean AIPerformAction(TileInfoMap infoMap) {
         // Karakteren ikke har noen action points igjen eller ikke har et mål? Gå videre.
         if(currentCharacter.getCurrentActionPoints() == 0 || targetCharacter == null){
             return false;
@@ -37,10 +37,10 @@ public class SimpleAI implements IBaseAI {
             return true;
         } else {
             List<TilePosition> tempTiles = new ArrayList<>();
-            // Finner tilesene å gå til, 
-            //TODO: utvide til naboene til naboene osv. basert på attackRange 
-            for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), GameScreen.infoMap)) {
-                if(GameScreen.infoMap.tileIsMovable(tilePosition)){
+
+
+            for (TilePosition tilePosition : AStarPathfinder.getNeighbors(targetCharacter.getTilePosition(), infoMap)) {
+                if(infoMap.tileIsMovable(tilePosition)){
                     tempTiles.add(tilePosition);
                 }
             }
@@ -55,9 +55,9 @@ public class SimpleAI implements IBaseAI {
             }
 
             // Finner "pathen" til den nærmeste gyldige "tilen, som er innenfor angrepsrekkevidde til målet.
-            List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, GameScreen.infoMap);
+            List<TilePosition> pathToAttack = AStarPathfinder.findPath(currentCharacter.getTilePosition(), smallestHeuristic, infoMap);
             currentCharacter.setPathToMove(pathToAttack);
-
+            System.out.println("Attempting to find path to attack");
             return false;
         }
     }
