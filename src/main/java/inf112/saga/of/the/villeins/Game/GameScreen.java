@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -24,7 +23,7 @@ import inf112.saga.of.the.villeins.Game.LootSystem.LootCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.system.linux.Sockaddr;
+
 
 public class GameScreen implements Screen {
 	SagaOfTheVilleinsGame game;

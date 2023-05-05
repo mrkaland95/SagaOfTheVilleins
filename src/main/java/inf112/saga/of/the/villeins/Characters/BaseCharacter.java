@@ -2,8 +2,6 @@ package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
-import inf112.saga.of.the.villeins.Game.GameScreen;
-import inf112.saga.of.the.villeins.Game.Main;
 import inf112.saga.of.the.villeins.Utils.Settings;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AttackUtils;

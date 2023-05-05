@@ -5,8 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -22,7 +20,6 @@ public class HelpScreen implements Screen {
     private Stage stage;
     private Texture background;
     private Table buttonTable;
-    private Table textTable;
 
 
     public HelpScreen(SagaOfTheVilleinsGame game) {
@@ -54,7 +51,7 @@ public class HelpScreen implements Screen {
         helpTextTable.add(helpTextLabel).width(textWidth).center().row();
         helpTextTable.setFillParent(true);
 
-        Button mainMenuButton = new TextButton("Return to main menu", skin, "small");
+        Button mainMenuButton = new TextButton("Return to main menu", skin, "default");
         mainMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

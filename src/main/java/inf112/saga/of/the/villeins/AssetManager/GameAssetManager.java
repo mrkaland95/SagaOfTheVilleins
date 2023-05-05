@@ -17,7 +17,7 @@ public class GameAssetManager {
     public static final String ghostIdlePath = "./assets/Sprites/Ghost/ghost_idle.png";
     public static final String menuBackgroundPath = "./assets/Menu/MenuBackground.png";
     public static final String menuBackgroundPath2 = "./assets/Menu/MenuBackground2.png";
-    public static final String uiSkinPath = "./assets/Skins/glassy/skin/glassy-ui.json";
+    public static final String uiSkinPath = "./assets/Skins/minecraft/skin/craftacular-ui.json";
     public static final String musicPath = "./assets/Sounds/pop-goes-the-weasel.mp3";
 //    public static final String uiSkin = "./assets/Skins/sgx/skin/sgx-ui.json";
 

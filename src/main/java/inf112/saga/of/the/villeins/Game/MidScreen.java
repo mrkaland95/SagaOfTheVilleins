@@ -73,7 +73,7 @@ public class MidScreen implements Screen {
     }
 
     private void initStartNextGameButton() {
-        Button startGameButton = new TextButton("Start next map", game.getDefaultSkin(), "small");
+        Button startGameButton = new TextButton("Start next map", game.getDefaultSkin(), "default");
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
