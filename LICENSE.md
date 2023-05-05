@@ -20,6 +20,8 @@ The following music was used for this media project:
 Music: Pop Goes the Weasel by Kevin MacLeod
 Free download: https://filmmusic.io/song/4230-pop-goes-the-weasel
 License (CC BY 4.0): https://filmmusic.io/standard-license
+soundeffect: 3 melee sounds (edited down to 1)
+License (CC0): https://opengameart.org/content/3-melee-sounds 
 
 
 
