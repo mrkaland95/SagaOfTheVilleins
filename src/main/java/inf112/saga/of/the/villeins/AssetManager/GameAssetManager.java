@@ -12,6 +12,7 @@ public class GameAssetManager {
     public final AssetManager manager = new AssetManager();
     public static final String idleWarriorPath = "./assets/Sprites/Warrior/IdleWarrior.png";
     public static final String walkingWarriorPath = "./assets/Sprites/Warrior/WalkingWarrior.png";
+    public static final String attackingWarrior = "./assets/Sprites/Warrior/warriorAttack.png";
     public static final String idleSlimePath = "./assets/Sprites/Slime/Slime_Idle.png";
     public static final String dragonAttackPath = "./assets/Sprites/Dragon/dragon_attack.png";
     public static final String ghostIdlePath = "./assets/Sprites/Ghost/ghost_idle.png";
@@ -30,6 +31,7 @@ public class GameAssetManager {
         manager.setLoader(TiledMap.class, new TmxMapLoader(manager.getFileHandleResolver()));
         manager.load(idleWarriorPath, Texture.class);
         manager.load(walkingWarriorPath, Texture.class);
+        manager.load(attackingWarrior, Texture.class);
         manager.load(idleSlimePath, Texture.class);
         manager.load(dragonAttackPath, Texture.class);
         manager.load(ghostIdlePath, Texture.class);

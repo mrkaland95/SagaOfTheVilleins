@@ -115,7 +115,7 @@ public class GameScreen implements Screen {
 		characterList.removeAll(removeList);
 
 		for (ICharacter character : characterList) {
-			character.update();
+			character.update(infoMap, deltaTime);
 		}
 
 		gameUI.drawUI(deltaTime, gameController.getPlayerCharacter(), characterList);

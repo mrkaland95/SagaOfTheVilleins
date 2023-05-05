@@ -4,12 +4,16 @@ import com.badlogic.gdx.Gdx;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Characters.AI.IBaseAI;
 import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class BaseMonster extends BaseCharacter {
     private IBaseAI ai;
     private final String monsterType;
+    private final int scoreValue;
     public BaseMonster(TilePosition startingTile,
                        CharacterAnimationHandler animationController,
                        int maxHealth,
@@ -20,26 +24,25 @@ public class BaseMonster extends BaseCharacter {
         super(startingTile, animationController, maxHealth, strength, defense, attackRange);
         this.ai = new SimpleAI(null, this);
         this.monsterType = monsterType;
+        this.scoreValue = ThreadLocalRandom.current().nextInt(30, 100);
     }
 
-
     @Override
-    public void update() {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public void update(TileInfoMap infoMap, float deltaTime) {
         this.animationController.render(this, deltaTime);
-        this.ai.AIPerformAction();
-        this.calculatePathToMove();
+        this.ai.AIPerformAction(infoMap);
+        this.calculatePathToMove(infoMap);
         this.tileMovement.move(deltaTime);
     }
 
 
     @Override
-    void calculatePathToMove() {
+    void calculatePathToMove(TileInfoMap infoMap) {
         if (this.getCharacterState() == CharacterState.MOVING) return;
         if (this.getEndPosition() == null) return;
         if (getCurrentActionPoints() == 0) return;
-        while(this.pathToMove.size() > getCurrentActionPoints()+1){
-            this.pathToMove.remove(pathToMove.size()-1);
+        while(this.pathToMove.size() > getCurrentActionPoints() + 1){
+            this.pathToMove.remove(pathToMove.size() - 1);
         }
         this.tileMovement.setPath(this.pathToMove);
         if(this.pathToMove.size() == 0){

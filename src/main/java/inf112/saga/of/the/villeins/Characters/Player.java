@@ -3,6 +3,7 @@ package inf112.saga.of.the.villeins.Characters;
 import com.badlogic.gdx.Gdx;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameScreen;
+import inf112.saga.of.the.villeins.Game.TileInfoMap;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AStarPathfinder;
 
@@ -15,22 +16,18 @@ public class Player extends BaseCharacter implements IPlayable {
               int defense,
               int attackRange) {
         super(startingPosition, animationController, maxHealth, strength, defense, attackRange);
-        this.score = 1337;
+        this.score = 0;
     }
 
-
-
     @Override
-    public void update() {
-        float deltaTime = Gdx.graphics.getDeltaTime();
+    public void update(TileInfoMap infoMap, float deltaTime) {
         this.animationController.render(this, deltaTime);
-        this.calculatePathToMove();
+        this.calculatePathToMove(infoMap);
         this.tileMovement.move(deltaTime);
     }
 
-
     @Override
-    void calculatePathToMove() {
+    void calculatePathToMove(TileInfoMap infoMap) {
         if (this.getEndPosition() == null) return;
         if (getCurrentActionPoints() == 0) return;
         TilePosition currentTile = TilePosition.findHexTile(this.getCurrentPosition());
@@ -56,13 +53,13 @@ public class Player extends BaseCharacter implements IPlayable {
 
     @Override
     public void setTargetCharacter(ICharacter target) {
-        // TODO Auto-generated method stub
+        // this method is not used for player
         throw new UnsupportedOperationException("Unimplemented method 'setTargetCharacter'");
     }
 
     @Override
     public ICharacter getTargetCharacter() {
-        // TODO Auto-generated method stub
+        // this method is not used for player
         throw new UnsupportedOperationException("Unimplemented method 'getTargetCharacter'");
     }
 

@@ -1,0 +1,1346 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\LeonH\\Documents\\INF112\\project\\sagaofthevilleins",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2023-05-05 12:48:09",
+            "filesum": 195,
+            "codesum": 4789,
+            "commentsum": 822,
+            "blanksum": 1054,
+            "statistics": {
+                ".md": {
+                    "code": 1098,
+                    "comment": 8,
+                    "blank": 361
+                },
+                ".xml": {
+                    "code": 208,
+                    "comment": 45,
+                    "blank": 0
+                },
+                ".tsx": {
+                    "code": 48,
+                    "comment": 0,
+                    "blank": 0
+                },
+                "": {
+                    "code": 95,
+                    "comment": 9,
+                    "blank": 19
+                },
+                ".tmx": {
+                    "code": 36,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".piskel": {
+                    "code": 16,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".tiled-project": {
+                    "code": 10,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".tiled-session": {
+                    "code": 53,
+                    "comment": 0,
+                    "blank": 2
+                },
+                ".yml": {
+                    "code": 71,
+                    "comment": 28,
+                    "blank": 11
+                },
+                ".json": {
+                    "code": 160,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".fnt": {
+                    "code": 18,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".atlas": {
+                    "code": 242,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".java": {
+                    "code": 2734,
+                    "comment": 732,
+                    "blank": 659
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 18,
+                    "code": 95,
+                    "comment": 9,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 11,
+                    "code": 71,
+                    "comment": 28,
+                    "filename": ".gitlab-ci.yml"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\bridge1.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\bridge2.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenpath1 (1).tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenpath1.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenpath2.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenpath3.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenpath4.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greensplitPath1.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\greenTile.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\ProjectFiles\\TiledMap.tiled-project"
+                },
+                {
+                    "blank": 2,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\ProjectFiles\\TiledMap.tiled-session"
+                },
+                {
+                    "blank": 0,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\SagaOfTheVilleins_Map1.tmx"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\bridge1.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\bridge2.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greenpath1.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greenpath2.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greenpath3.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greenpath4.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greensplitpath1.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\greentile.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\Tiles\\piskel\\waterTile.piskel"
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\bridge1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\bridge2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\green Hex.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\greenpath1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\greenpath2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\greenpath3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\greenpath4.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\greensplitPath1.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Maps\\Tiles\\PNG\\waterTile.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "assets\\Maps\\waterTile.tsx"
+                },
+                {
+                    "filename": "assets\\Menu\\MenuBackground.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Menu\\MenuBackground2.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 242,
+                    "comment": 0,
+                    "filename": "assets\\Skins\\minecraft\\skin\\craftacular-ui.atlas"
+                },
+                {
+                    "blank": 0,
+                    "code": 160,
+                    "comment": 0,
+                    "filename": "assets\\Skins\\minecraft\\skin\\craftacular-ui.json"
+                },
+                {
+                    "filename": "assets\\Skins\\minecraft\\skin\\craftacular-ui.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "assets\\Skins\\minecraft\\skin\\font-bold-export.fnt"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "assets\\Skins\\minecraft\\skin\\font-export.fnt"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "assets\\Skins\\minecraft\\skin\\font-title-export.fnt"
+                },
+                {
+                    "filename": "assets\\Sounds\\pop-goes-the-weasel.mp3",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sounds\\sword sound.wav",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Dragon\\Drage 130x114.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Dragon\\DrageIDLE 130x114.piskel"
+                },
+                {
+                    "filename": "assets\\Sprites\\Dragon\\dragon_attack.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Dragon\\dragon_idle.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Ghost\\ghost_attack.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Ghost\\ghost_idle.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Ghost\\Spøkelse.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Ghost\\Spøkelse_attack_outlined.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Ghost\\Spøkelse_outlined.piskel"
+                },
+                {
+                    "filename": "assets\\Sprites\\Ghost\\Spøkelse_outlined.piskel.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Slime\\Slime idle.piskel"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "assets\\Sprites\\Slime\\slime jump.piskel"
+                },
+                {
+                    "filename": "assets\\Sprites\\Slime\\Slime_Idle.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Warrior\\IdleWarrior.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Warrior\\WalkingWarrior.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\Sprites\\Warrior\\warriorAttack.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "doc\\.gitkeep"
+                },
+                {
+                    "blank": 5,
+                    "code": 20,
+                    "comment": 1,
+                    "filename": "doc\\A0 - medlemmenes kompetanse.md"
+                },
+                {
+                    "filename": "doc\\Klassediagram_final.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "doc\\Klassediagram_uke_10.pdf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "doc\\Klassediagram_uke_15.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 46,
+                    "code": 107,
+                    "comment": 0,
+                    "filename": "doc\\oblig1.md"
+                },
+                {
+                    "blank": 37,
+                    "code": 104,
+                    "comment": 0,
+                    "filename": "doc\\oblig2.md"
+                },
+                {
+                    "blank": 31,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "doc\\oblig3.md"
+                },
+                {
+                    "blank": 136,
+                    "code": 473,
+                    "comment": 1,
+                    "filename": "doc\\oblig4.md"
+                },
+                {
+                    "blank": 82,
+                    "code": 274,
+                    "comment": 1,
+                    "filename": "doc\\Prosjektlog.md"
+                },
+                {
+                    "blank": 13,
+                    "code": 14,
+                    "comment": 4,
+                    "filename": "LICENSE.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 208,
+                    "comment": 45,
+                    "filename": "pom.xml"
+                },
+                {
+                    "blank": 11,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 10,
+                    "code": 42,
+                    "comment": 7,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Animations\\Animation2D.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 55,
+                    "comment": 6,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Animations\\CharacterAnimationHandler.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 4,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\AssetManager\\GameAssetManager.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\AssetManager\\SoundManager.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\IBaseAI.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 46,
+                    "comment": 14,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\SimpleAI.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 149,
+                    "comment": 22,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\BaseCharacter.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\BaseMonster.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\CharacterDirection.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\CharacterState.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 9,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\IAttackCapable.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 7,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\ICharacter.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 19,
+                    "comment": 33,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\IMovable2D.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 5,
+                    "comment": 9,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\IPlayable.java"
+                },
+                {
+                    "blank": 7,
+                    "code": 10,
+                    "comment": 21,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\IStats.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 6,
+                    "comment": 11,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\ITurnBased.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\ITurnBasedMovable.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 58,
+                    "comment": 5,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\Player.java"
+                },
+                {
+                    "blank": 27,
+                    "code": 147,
+                    "comment": 35,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Controller\\GameController.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Controller\\GameState.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Controller\\PlayerAction.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Factories\\AbstractFactory.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Factories\\CharacterFactory.java"
+                },
+                {
+                    "blank": 39,
+                    "code": 126,
+                    "comment": 7,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\GameScreen.java"
+                },
+                {
+                    "blank": 10,
+                    "code": 75,
+                    "comment": 21,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\GameStage.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 74,
+                    "comment": 4,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\HelpScreen.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 19,
+                    "comment": 6,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\LootCollection.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 22,
+                    "comment": 13,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\UpgradePlayer.java"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 2,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\Upgrades.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\Main.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 76,
+                    "comment": 6,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\MainMenuScreen.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 128,
+                    "comment": 7,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\MidScreen.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 137,
+                    "comment": 37,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\SagaOfTheVilleinsGame.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 58,
+                    "comment": 36,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Game\\TileInfoMap.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\ActivePlayerProcessor.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 143,
+                    "comment": 25,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\BaseInputProcessor.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\InactivePlayerProcessor.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\UI\\AbstractGameUI.java"
+                },
+                {
+                    "blank": 26,
+                    "code": 84,
+                    "comment": 2,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\UI\\ContextMenu.java"
+                },
+                {
+                    "blank": 48,
+                    "code": 208,
+                    "comment": 41,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI.java"
+                },
+                {
+                    "blank": 23,
+                    "code": 103,
+                    "comment": 22,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\AStarPathfinder.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 32,
+                    "comment": 30,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\AttackUtils.java"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 1,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\Settings.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 63,
+                    "comment": 16,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\TileMovement.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 86,
+                    "comment": 26,
+                    "filename": "src\\main\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\TilePosition.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\TestAI.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\TestBaseCharacter.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 226,
+                    "comment": 1,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\TestForBasemonster.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 204,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Characters\\TestForPlayer.java"
+                },
+                {
+                    "blank": 7,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Factories\\TestCharacterFactory.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\TestLootCollection.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\TestUpgradePlayer.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 33,
+                    "comment": 8,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Game\\TestGameStage.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 11,
+                    "comment": 21,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Game\\TestIMap.java"
+                },
+                {
+                    "blank": 7,
+                    "code": 23,
+                    "comment": 4,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\TestAStarPathfinder.java"
+                },
+                {
+                    "blank": 6,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\TestAttackUtils.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 55,
+                    "comment": 6,
+                    "filename": "src\\test\\java\\inf112\\saga\\of\\the\\villeins\\Utils\\TestTilePosition.java"
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Animations\\Animation2D.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Animations\\CharacterAnimationHandler.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\AssetManager\\GameAssetManager.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\AssetManager\\SoundManager.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\IBaseAI.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\SimpleAI.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\BaseCharacter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\BaseMonster.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\CharacterDirection.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\CharacterState.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\IAttackCapable.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\ICharacter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\IMovable2D.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\IPlayable.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\IStats.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\ITurnBased.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\ITurnBasedMovable.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Characters\\Player.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Controller\\GameController.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Controller\\GameState.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Controller\\PlayerAction.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Factories\\AbstractFactory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Factories\\CharacterFactory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\GameScreen.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\GameStage.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\HelpScreen$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\HelpScreen.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\LootCollection.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\UpgradePlayer.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\Upgrades.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\Main.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\MainMenuScreen$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\MainMenuScreen$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\MainMenuScreen.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\MidScreen$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\MidScreen.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\SagaOfTheVilleinsGame.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Game\\TileInfoMap.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\ActivePlayerProcessor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\BaseInputProcessor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\InputProcessors\\InactivePlayerProcessor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\AbstractGameUI.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\ContextMenu.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\UI\\GameUI.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\AStarPathfinder$Node.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\AStarPathfinder.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\AttackUtils.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\Settings.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\TileMovement.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\classes\\inf112\\saga\\of\\the\\villeins\\Utils\\TilePosition.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Characters\\AI\\TestAI.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Characters\\TestBaseCharacter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Characters\\TestForBasemonster.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Characters\\TestForPlayer.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Factories\\TestCharacterFactory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\TestLootCollection.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Game\\LootSystem\\TestUpgradePlayer.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Game\\TestGameStage.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Game\\TestIMap.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Utils\\TestAStarPathfinder.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Utils\\TestAttackUtils.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "target\\test-classes\\inf112\\saga\\of\\the\\villeins\\Utils\\TestTilePosition.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                }
+            ]
+        }
+    ]
+}

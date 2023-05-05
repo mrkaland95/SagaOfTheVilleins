@@ -64,15 +64,15 @@ public class AStarPathfinder {
      * Henter naboene til en tile, må litt spesielt siden det er hexgrid istedet for vanlig grid
      * 
      * @param position tilen vi vil finne naboene til
-     * @param TileInfoMap TileInforMapen som holder alle lovlige tiles
+     * @param infomap TileInforMapen som holder alle lovlige tiles
      * @return listen av tilesene som er naboer.
      */
-    public static ArrayList<TilePosition> getNeighbors(TilePosition position, TileInfoMap TileInfoMap) {
+    public static ArrayList<TilePosition> getNeighbors(TilePosition position, TileInfoMap infomap) {
         ArrayList<TilePosition> neighbors = new ArrayList<>();
         ArrayList<TilePosition> tempneighbors = new ArrayList<>();
         int x = position.x();
         int y = position.y();
-
+        System.out.println(infomap);
 
         // implementation of getNeighbors method depends on your specific grid structure
         // for a hexagonal grid, this could involve checking the six neighboring tiles
@@ -99,10 +99,10 @@ public class AStarPathfinder {
         // Checks if a Tile can be walked on.
         for (TilePosition maybeTilePosition : tempneighbors) {
 
-            if (TileInfoMap.tileIsMovable(maybeTilePosition) == null) {
+            if (infomap.tileIsMovable(maybeTilePosition) == null) {
                 continue;
             }
-            if (TileInfoMap.tileIsMovable(maybeTilePosition)) {
+            if (infomap.tileIsMovable(maybeTilePosition)) {
                 neighbors.add(maybeTilePosition);
             }
     }

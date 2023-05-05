@@ -42,7 +42,6 @@ public class TileMovement {
             character.setCharacterState(CharacterState.MOVING);
         }
 
-
         TilePosition nextTilePosition = pathToMove.get(pathIndex);
         Vector2 nextTileCoordinate = TilePosition.findVectorCoordinate(nextTilePosition);
         Vector2 newPosition = calculateNewVectorPosition(character.getCurrentPosition(), nextTileCoordinate, deltaTime, character.getMoveSpeed());

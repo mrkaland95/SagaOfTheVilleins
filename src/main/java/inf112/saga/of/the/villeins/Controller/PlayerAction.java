@@ -6,3 +6,4 @@ public enum PlayerAction {
     EXAMINE,
     IDLE
 }
+
