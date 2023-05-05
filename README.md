@@ -25,7 +25,6 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 * På OS X følger ikke spriten med om en endrer størrelsen på vinduet. Feilen løses foreløpig ved å kommentere ut setWindowMode.
 
 
-
 ### Credits for "assetene" som er brukt
 
 LibGDX

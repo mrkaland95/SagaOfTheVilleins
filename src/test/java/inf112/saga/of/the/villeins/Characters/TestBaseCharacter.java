@@ -21,4 +21,19 @@ public class TestBaseCharacter {
         Vector2 expectedPosition = new Vector2(400.0f,250.0f);
         assertEquals(expectedPosition, testMonster.getCurrentPosition());
     }
+    @Test
+    public void setMaxHealthTest(){
+        assertEquals(40, testMonster.getMaxHealth());
+        testMonster.setMaxHealth(60);
+        assertEquals(60, testMonster.getMaxHealth());
+    }
+
+    @Test
+    public void applyDamageTest(){
+        assertEquals(40, testMonster.getCurrentHealth());
+        testMonster.applyDamage(20, testMonster);
+        assertEquals(20, testMonster.getCurrentHealth());
+        testMonster.applyDamage(40, testMonster);
+        assertEquals(0, testMonster.getCurrentHealth());
+    }
 }
