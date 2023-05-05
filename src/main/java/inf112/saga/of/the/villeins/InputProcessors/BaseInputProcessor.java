@@ -36,43 +36,6 @@ abstract public class BaseInputProcessor implements InputProcessor {
 	 */
 	@Override
 	public boolean keyDown(int button) {
-		float cameraTranslationAmount = 10f;
-		if(button == Input.Keys.W){
-			camera.translate(0, cameraTranslationAmount, 0);
-			return true;
-		}
-		else if(button == Input.Keys.S){
-			camera.translate(0, -cameraTranslationAmount,0);
-			return true;
-		}
-		else if(button == Input.Keys.A){
-			camera.translate(-cameraTranslationAmount, 0 ,0);
-			return true;
-		}
-		else if(button == Input.Keys.D){
-			camera.translate(cameraTranslationAmount, 0 ,0);
-			return true;
-		}
-		else if(button == Input.Keys.Z) {
-			if(camera.zoom + zoomAmount >= maxZoomLevel) {
-				camera.zoom = maxZoomLevel;
-			} else {
-				camera.zoom += zoomAmount;
-			}
-			return true;
-		}
-		else if(button == Input.Keys.X) {
-			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
-				camera.zoom = minimumZoomLevel;
-			} else {
-				camera.zoom -= zoomAmount;
-			}
-			return true;
-		}
-		else if(button == Input.Keys.N) {
-			this.endTurn = true;
-			return true;
-		}
 		return false;
 	}
 
@@ -83,6 +46,43 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
+		float cameraTranslationAmount = 10f;
+		if(character == 'w' || character == 'W'){
+			camera.translate(0, cameraTranslationAmount, 0);
+			return true;
+		}
+		else if(character == 's' || character == 'S'){
+			camera.translate(0, -cameraTranslationAmount,0);
+			return true;
+		}
+		else if(character == 'a' || character == 'A'){
+			camera.translate(-cameraTranslationAmount, 0 ,0);
+			return true;
+		}
+		else if(character == 'd' || character == 'D'){
+			camera.translate(cameraTranslationAmount, 0 ,0);
+			return true;
+		}
+		else if(character == 'z' || character == 'Z') {
+			if(camera.zoom + zoomAmount >= maxZoomLevel) {
+				camera.zoom = maxZoomLevel;
+			} else {
+				camera.zoom += zoomAmount;
+			}
+			return true;
+		}
+		else if(character == 'x' || character =='X') {
+			if (camera.zoom - zoomAmount <= minimumZoomLevel) {
+				camera.zoom = minimumZoomLevel;
+			} else {
+				camera.zoom -= zoomAmount;
+			}
+			return true;
+		}
+		else if(character == 'n' || character == 'N') {
+			this.endTurn = true;
+			return true;
+		}
 		return false;
 	}
 

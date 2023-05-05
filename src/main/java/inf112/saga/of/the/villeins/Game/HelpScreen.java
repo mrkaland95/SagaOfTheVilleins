@@ -35,16 +35,22 @@ public class HelpScreen implements Screen {
 
 
         String text = """
-                * To move the camera, you can hold the middle mouse button and drag the camera around.
-                * To move the character, you can left click on valid tiles. You can not move your character to water tiles or already occupied tiles.
-                * To attack another character, you can right click. But do be aware you need to be within range attack, by default this is 1 tile for the player\s
+                * To move the camera, you can hold the middle mouse button and drag the camera around. You can also use W,A,S,D.
+                * You can also zoom in and out using Z and X.
+                * To make the character act, you can left click on a valid tile. This opens a menu where you can choose your actions.
+                * If you click on an empty tile you can move there, if you click on an enemy, it shows its stats and you can choose to attack if its in range.
+                * The default attack range is 1 tile.
+
+                * There is no final victory, survive as long as possible!
+                * Everytime you kill all enemies on board, you can go to next stage with more (and more dangerous) enemies!
+                * Every enemy killed gives you a stat buff, which are applied after clearing a stage.
                 """;
 
 
         Label helpTextLabel = new Label(text, skin);
 
         float textWidth = Gdx.graphics.getWidth() * 0.8f;
-        helpTextLabel.setColor(Color.FIREBRICK);
+        helpTextLabel.setColor(Color.RED);
         helpTextLabel.setWrap(true);
         helpTextLabel.setWidth(textWidth);
 
