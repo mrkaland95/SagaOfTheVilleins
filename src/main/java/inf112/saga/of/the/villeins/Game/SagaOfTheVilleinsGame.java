@@ -47,6 +47,7 @@ public class SagaOfTheVilleinsGame extends Game {
     private Skin defaultSkin;
     private Music gameMusic;
     private SoundManager soundManager;
+    private TileInfoMap infoMap;
     
     /**
      * Lager og holder på alle verdiene og klassene i til spillet. Bytter også mellom screens. 
@@ -94,7 +95,8 @@ public class SagaOfTheVilleinsGame extends Game {
 
         // Lager spiller objektet og setter tilstanden til spillet.
         player = charFactory.getPlayerCharacter(new TilePosition(1, 1));
-		gameStage = new GameStage(stageIndex, charFactory, player);
+        initializeMap();
+		gameStage = new GameStage(stageIndex, charFactory, player, infoMap);
 
         gameMusic = assetManager.manager.get(GameAssetManager.musicPath, Music.class);
         soundManager = new SoundManager(gameMusic, null);
@@ -109,7 +111,7 @@ public class SagaOfTheVilleinsGame extends Game {
             case 0 -> setScreen(new MainMenuScreen(this));
             case 1 -> setScreen(new GameScreen(this, getCurrentMap(), gameStage));
             case 2 -> setScreen(new HelpScreen(this));
-            case 3 -> setScreen(new MidScreen(this, null, null));
+            case 3 -> setScreen(new MidScreen(this, null, null, null));
         }
 
     }
@@ -127,8 +129,20 @@ public class SagaOfTheVilleinsGame extends Game {
         gameMusic.dispose();
     }
 
+    
+    public void initializeMap(){
+        TiledMap currentMap = this.maps.get(mapIndex);
+
+        int width = currentMap.getProperties().get("width", Integer.class);
+		int height = currentMap.getProperties().get("height", Integer.class);
+
+		infoMap = new TileInfoMap(height, width);
+		infoMap.setIllegalTiles(currentMap);
+    }
+
     public TiledMap getCurrentMap() {
-        return this.maps.get(mapIndex);
+        TiledMap currentMap = this.maps.get(mapIndex);
+        return currentMap;
     }
 
     public GameStage getCurrentStage(){
@@ -143,9 +157,9 @@ public class SagaOfTheVilleinsGame extends Game {
     *
     */
 
-    public void nextStage(){
+    public void nextStage(TileInfoMap infoMap){
         stageIndex += 1;
-        gameStage = new GameStage(stageIndex, charFactory, player);
+        gameStage = new GameStage(stageIndex, charFactory, player, infoMap);
         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
@@ -157,10 +171,10 @@ public class SagaOfTheVilleinsGame extends Game {
     *
     */
 
-    public void resetGame(){
+    public void resetGame(TileInfoMap infoMap){
         stageIndex = 1;
         player = charFactory.getPlayerCharacter(new TilePosition(1, 1));
-        gameStage = new GameStage(stageIndex, charFactory, player);
+        gameStage = new GameStage(stageIndex, charFactory, player, infoMap);
         setScreen(new GameScreen(this, getCurrentMap(), gameStage));
     }
 
@@ -190,5 +204,9 @@ public class SagaOfTheVilleinsGame extends Game {
 
     public Texture getHelpPageBackground() {
         return menuBackground2;
+    }
+
+    public TileInfoMap getInfoMap() {
+        return infoMap;
     }
 }

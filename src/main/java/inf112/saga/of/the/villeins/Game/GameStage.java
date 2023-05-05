@@ -13,11 +13,13 @@ public class GameStage {
     private AbstractFactory factory;
     private int enemyCount;
     private ICharacter player;
+    private TileInfoMap infoMap;
 
-    public GameStage(int stage, AbstractFactory factory, ICharacter player){
+    public GameStage(int stage, AbstractFactory factory, ICharacter player, TileInfoMap infoMap){
         this.stage = stage;
         this.factory = factory;
         this.player = player;
+        this.infoMap = infoMap;
         this.enemyCount = generateEnemyCount();
     }
 
@@ -94,7 +96,7 @@ public class GameStage {
         for (int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 TilePosition possibleSpawn = new TilePosition(i, j);
-                if(GameScreen.infoMap.tileIsMovable(possibleSpawn)){
+                if(this.infoMap.tileIsMovable(possibleSpawn)){
                     spawns.add(possibleSpawn);
                 }
             }
