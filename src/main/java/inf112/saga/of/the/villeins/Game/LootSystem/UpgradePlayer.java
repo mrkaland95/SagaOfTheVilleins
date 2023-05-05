@@ -29,7 +29,7 @@ public class UpgradePlayer {
 
         if(upgrade == Upgrades.DAMAGE_BOOST){
             int rand = ThreadLocalRandom.current().nextInt(1,3);
-            player.setStrength(player.getStrength()+(rand*2));
+            player.setStrength(player.getStrength()+(rand*3));
         }
         else if(upgrade == Upgrades.HEALTH_BOOST){
             int rand = ThreadLocalRandom.current().nextInt(1,3);

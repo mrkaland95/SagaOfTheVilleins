@@ -7,7 +7,7 @@ import inf112.saga.of.the.villeins.Characters.AI.SimpleAI;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 
 
-public class BaseMonster extends BaseCharacter implements ICharacter {
+public class BaseMonster extends BaseCharacter {
     private IBaseAI ai;
     private final String monsterType;
     public BaseMonster(TilePosition startingTile,
