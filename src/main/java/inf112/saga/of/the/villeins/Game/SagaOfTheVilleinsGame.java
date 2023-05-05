@@ -2,6 +2,7 @@ package inf112.saga.of.the.villeins.Game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,7 +47,6 @@ public class SagaOfTheVilleinsGame extends Game {
     private Texture menuBackground2;
     private Texture menuBackground;
     private Skin defaultSkin;
-    private Music gameMusic;
     private SoundManager soundManager;
     private TileInfoMap infoMap;
     
@@ -100,22 +100,12 @@ public class SagaOfTheVilleinsGame extends Game {
         initializeMap();
 		gameStage = new GameStage(stageIndex, charFactory, player, infoMap);
 
-        gameMusic = assetManager.manager.get(GameAssetManager.musicPath, Music.class);
-        soundManager = new SoundManager(gameMusic, null);
+        Music music = assetManager.manager.get(GameAssetManager.musicPath, Music.class);
+        Sound attackSound = assetManager.manager.get(GameAssetManager.swordAttackPath, Sound.class);
+        soundManager = new SoundManager(music, attackSound);
         soundManager.playGameMusic();
 
-
-        // TODO: 03.05.2023 slett dette før endelig innlevering, og bruk "setScreen(new MainMenuScreen(this));"
-        // Sett denne til den verdien som du skal teste.
-        int screenToTest = 0;
-
-        switch (screenToTest) {
-            case 0 -> setScreen(new MainMenuScreen(this));
-            case 1 -> setScreen(new GameScreen(this, getCurrentMap(), gameStage));
-            case 2 -> setScreen(new HelpScreen(this));
-            case 3 -> setScreen(new MidScreen(this, null, null, null));
-        }
-
+        setScreen(new MainMenuScreen(this));
     }
 
     @Override
@@ -128,7 +118,6 @@ public class SagaOfTheVilleinsGame extends Game {
         menuBackground.dispose();
         menuBackground2.dispose();
         defaultSkin.dispose();
-        gameMusic.dispose();
     }
 
     
@@ -210,5 +199,9 @@ public class SagaOfTheVilleinsGame extends Game {
 
     public TileInfoMap getInfoMap() {
         return infoMap;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
     }
 }

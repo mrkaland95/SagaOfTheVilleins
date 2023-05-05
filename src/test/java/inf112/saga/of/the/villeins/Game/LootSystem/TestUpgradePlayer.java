@@ -18,8 +18,6 @@ public class TestUpgradePlayer {
         loot.addUpgrade(Upgrades.DAMAGE_BOOST);
         upgrader.UpgradeStats(player, loot);
 
-        System.out.println(player.getStrength());
-        System.out.println(notUpgradedPlayer.getStrength());
         boolean isEqual = player.getStrength() != notUpgradedPlayer.getStrength();
         
         assertTrue(isEqual);

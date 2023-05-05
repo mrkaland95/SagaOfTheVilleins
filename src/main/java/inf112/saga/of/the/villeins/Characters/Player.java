@@ -1,9 +1,12 @@
 package inf112.saga.of.the.villeins.Characters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Animations.CharacterAnimationHandler;
 import inf112.saga.of.the.villeins.Game.GameScreen;
 import inf112.saga.of.the.villeins.Game.TileInfoMap;
+import inf112.saga.of.the.villeins.Utils.AttackUtils;
+import inf112.saga.of.the.villeins.Utils.TileMovement;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
 import inf112.saga.of.the.villeins.Utils.AStarPathfinder;
 
@@ -27,12 +30,24 @@ public class Player extends BaseCharacter implements IPlayable {
     }
 
     @Override
+    public Boolean attack(Vector2 coordinate) {
+        BaseMonster monster = (BaseMonster) TilePosition.getCharacterOnCoordinate(coordinate, GameScreen.characterList);
+        Boolean result = super.attack(coordinate);
+        if (result) {
+            if (monster.getCurrentHealth() == 0) {
+                this.score += monster.getScoreValue();
+            }
+        }
+        return result;
+    }
+
+    @Override
     void calculatePathToMove(TileInfoMap infoMap) {
         if (this.getEndPosition() == null) return;
         if (getCurrentActionPoints() == 0) return;
         TilePosition currentTile = TilePosition.findHexTile(this.getCurrentPosition());
         TilePosition finalTile = TilePosition.findHexTile(this.getEndPosition());
-        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, GameScreen.infoMap);
+        this.pathToMove = AStarPathfinder.findPath(currentTile, finalTile, infoMap);
 
         while(this.pathToMove.size() > getCurrentActionPoints() + 1){
             this.pathToMove.remove(pathToMove.size() - 1);

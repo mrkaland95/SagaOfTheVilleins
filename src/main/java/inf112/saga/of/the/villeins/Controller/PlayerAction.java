@@ -4,6 +4,6 @@ public enum PlayerAction {
     ATTACK,
     MOVE,
     EXAMINE,
-    IDLE
+    NONE
 }
 

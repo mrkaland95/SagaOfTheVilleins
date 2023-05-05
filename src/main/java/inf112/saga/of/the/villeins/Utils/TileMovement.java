@@ -76,21 +76,23 @@ public class TileMovement {
     public static Vector2 calculateNewVectorPosition(Vector2 currentPosition, Vector2 destination, float deltaTime, float moveSpeed) {
         if (destination == null) return currentPosition;
 
+        Vector2 newPosition = new Vector2(currentPosition);
+
         float positionMarginOfError = 5.0f;
 
-        if ((Math.abs(currentPosition.x - destination.x) > positionMarginOfError) ||
-            (Math.abs(currentPosition.y - destination.y) > positionMarginOfError)) {
-            float pathX = destination.x - currentPosition.x;
-            float pathY = destination.y - currentPosition.y;
+        if ((Math.abs(newPosition.x - destination.x) > positionMarginOfError) ||
+            (Math.abs(newPosition.y - destination.y) > positionMarginOfError)) {
+            float pathX = destination.x - newPosition.x;
+            float pathY = destination.y - newPosition.y;
             float distanceToMove = (float) Math.sqrt(pathX * pathX + pathY * pathY);
             float directiontoMoveX = pathX / distanceToMove;
             float directiontoMoveY = pathY / distanceToMove;
 
-            currentPosition.x += directiontoMoveX * deltaTime * moveSpeed;
-            currentPosition.y += directiontoMoveY * deltaTime * moveSpeed;
+            newPosition.x += directiontoMoveX * deltaTime * moveSpeed;
+            newPosition.y += directiontoMoveY * deltaTime * moveSpeed;
         } else {
-            currentPosition = destination;
+            newPosition = destination;
         }
-        return currentPosition;
+        return newPosition;
     }
 }

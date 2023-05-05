@@ -50,15 +50,15 @@ public class CharacterFactory implements AbstractFactory {
     }
 
     private ICharacter getSlimeCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.slimeHandler, 25, 5, 5, 1, "Slime");
+        return new BaseMonster(spawnPosition, this.slimeHandler, 25, 7, 4, 1, "Slime");
     }
 
     private ICharacter getGhostCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.ghostHandler, 25, 5, 5, 1, "Ghost");
+        return new BaseMonster(spawnPosition, this.ghostHandler, 30, 7, 5, 1, "Ghost");
     }
 
     private ICharacter getDragonCharacter(TilePosition spawnPosition) {
-        return new BaseMonster(spawnPosition, this.dragonHandler,  200, 10, 4, 1, "Dragon");
+        return new BaseMonster(spawnPosition, this.dragonHandler,  200, 14, 4, 1, "Dragon");
     }
 
 }

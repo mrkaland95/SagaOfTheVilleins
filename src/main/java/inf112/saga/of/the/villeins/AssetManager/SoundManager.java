@@ -14,7 +14,8 @@ public class SoundManager {
     public void playGameMusic() {
         gameMusic.setLooping(true);
         gameMusic.play();
-        gameMusic.setVolume(30f);
+        gameMusic.setVolume(1f);
+        System.out.println(gameMusic.getVolume());
     }
 
     public void stopGameMusic() {

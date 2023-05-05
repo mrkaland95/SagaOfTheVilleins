@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.renderers.HexagonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import inf112.saga.of.the.villeins.AssetManager.SoundManager;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
@@ -37,8 +38,10 @@ public class GameScreen implements Screen {
 	private final GameController gameController;
 	private final AbstractGameUI gameUI;
 	private final GameStage gameStage;
+	private final SoundManager soundManager;
+
 	public static List<ICharacter> characterList = new ArrayList<>();
-	public static TileInfoMap infoMap;
+	private TileInfoMap infoMap;
 	private LootCollection inventory;
 	private final Stage uiCameraStage;
 	private final Stage gameCameraStage;
@@ -50,6 +53,7 @@ public class GameScreen implements Screen {
 		this.map = map;
 		this.game = game;
 		this.gameStage = stage;
+		this.soundManager = game.getSoundManager();
 
 		// Hent dimensjonen på kartet og sett det inn i mappet som holder gyldige tiles.
 		infoMap = game.getInfoMap();
@@ -74,7 +78,7 @@ public class GameScreen implements Screen {
 		IPlayable player = (IPlayable) characterList.get(0);
 		inventory = new LootCollection();
 
-		gameController = new GameController(characterList, player, playerActiveProcessor, computerActiveProcessor, uiCameraStage, gameCameraStage);
+		gameController = new GameController(characterList, player, playerActiveProcessor, computerActiveProcessor, uiCameraStage, gameCameraStage, soundManager);
 		mapRenderer    = new HexagonalTiledMapRenderer(map);
 
 		gameUI = new GameUI(game, uiCameraStage, gameCameraStage, gameController, playerActiveProcessor);

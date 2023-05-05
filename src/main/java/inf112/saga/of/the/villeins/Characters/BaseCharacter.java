@@ -13,7 +13,6 @@ import inf112.saga.of.the.villeins.Utils.TileMovement;
 import java.util.List;
 
 public abstract class BaseCharacter implements ICharacter {
-    private String identifier;
     private int maxHealth;
     private int currentHealth;
     private int strength;
@@ -68,9 +67,6 @@ public abstract class BaseCharacter implements ICharacter {
     }
     public void setMoveSpeed(float moveSpeed) {
         this.moveSpeed = moveSpeed;
-    }
-    public String getIdentifier() {
-        return this.identifier;
     }
 
     /** Setter posisjonen til karakteren i verdenskoordinater.

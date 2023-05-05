@@ -57,14 +57,14 @@ class TestTileMovement {
     @Test
     void testCalculateNewVectorPosition() {
         Vector2 currentPosition = new Vector2(0, 0);
-        Vector2 destination = new Vector2(100, 100);
-        float deltaTime = 1f;
+        Vector2 destination = new Vector2(500, 500);
+        float deltaTime = 0.5f;
         float moveSpeed = 50f;
 
         Vector2 newPosition = TileMovement.calculateNewVectorPosition(currentPosition, destination, deltaTime, moveSpeed);
-        System.out.println(newPosition);
-
+        Vector2 expectedResult = new Vector2(17.67767f, 17.67767f);
         assertNotEquals(currentPosition.x, newPosition.x);
         assertNotEquals(currentPosition.y, newPosition.y);
+        assertEquals(newPosition, expectedResult);
     }
 }

@@ -87,14 +87,17 @@ public class TileInfoMap {
      * @param tileMap kartet laget i Tiled, der tilesene inneholder en property om det er lovlig å gå på den eller ikke.
      */
     public void setIllegalTiles(TiledMap tileMap){
-        TiledMapTileLayer tiledLayer = (TiledMapTileLayer)tileMap.getLayers().get(0);
+        TiledMapTileLayer tiledLayer = (TiledMapTileLayer) tileMap.getLayers().get(0);
         for (int i = 0; i < mapRows; i++) {
             for (int j = 0; j < mapCols; j++) {
-                Boolean isNotWalkable = (tiledLayer.getCell(i, j).getTile().getProperties().get("isNotWalkable", boolean.class));
-                if (isNotWalkable == null) {
+                TiledMapTileLayer.Cell cell = tiledLayer.getCell(i, j);
+                if (cell == null || cell.getTile() == null) {
                     continue;
                 }
-                else if (isNotWalkable) {
+                Boolean isNotWalkable = cell.getTile().getProperties().get("isNotWalkable", boolean.class);
+                if (isNotWalkable == null) {
+                    continue;
+                } else if (isNotWalkable) {
                     map.put(new TilePosition(i, j), false);
                 }
             }

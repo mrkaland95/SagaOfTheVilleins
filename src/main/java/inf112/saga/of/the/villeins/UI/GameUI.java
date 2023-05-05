@@ -13,6 +13,7 @@ import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
 import inf112.saga.of.the.villeins.Controller.GameController;
 import inf112.saga.of.the.villeins.Controller.PlayerAction;
+import inf112.saga.of.the.villeins.Game.GameScreen;
 import inf112.saga.of.the.villeins.Game.SagaOfTheVilleinsGame;
 import inf112.saga.of.the.villeins.InputProcessors.BaseInputProcessor;
 import inf112.saga.of.the.villeins.Utils.TilePosition;
@@ -120,7 +121,7 @@ public class GameUI implements AbstractGameUI {
         String tileInfo = String.format("Clicked Tile: (%sx, %sy)", tile.x(), tile.y());
         contextMenu.setTileInfo(tileInfo);
 
-        ICharacter character = TilePosition.getCharacterOnCoordinate(clickedWorldCoordinate);
+        ICharacter character = TilePosition.getCharacterOnCoordinate(clickedWorldCoordinate, GameScreen.characterList);
         contextMenu.updateCharacterStats(character);
 
         gameController.setPositionToPerformAction(clickedWorldCoordinate);

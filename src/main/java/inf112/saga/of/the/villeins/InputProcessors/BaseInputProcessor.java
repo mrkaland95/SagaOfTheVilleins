@@ -46,7 +46,7 @@ abstract public class BaseInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		float cameraTranslationAmount = 10f;
+		float cameraTranslationAmount = 20f;
 		if(character == 'w' || character == 'W'){
 			camera.translate(0, cameraTranslationAmount, 0);
 			return true;

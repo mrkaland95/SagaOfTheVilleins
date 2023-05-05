@@ -10,6 +10,7 @@ package inf112.saga.of.the.villeins.Utils;
 import com.badlogic.gdx.math.Vector2;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
+import inf112.saga.of.the.villeins.Game.GameScreen;
 
 
 public class AttackUtils {
@@ -28,7 +29,7 @@ public class AttackUtils {
      */
     public boolean attackCharacter(Vector2 clickPosition) {
 
-        ICharacter opponent = TilePosition.getCharacterOnCoordinate(clickPosition);
+        ICharacter opponent = TilePosition.getCharacterOnCoordinate(clickPosition, GameScreen.characterList);
         
         if (opponent == null) return false; // Må ha en karakter å angripe
         if (this.character.equals(opponent)) return false; // En karakter kan ikke angripe seg selv
@@ -36,8 +37,7 @@ public class AttackUtils {
         if (!characterInRange(this.character, opponent, this.attackRange)) return false; // If the current character is not in range, don't attack.
         if (this.character.getCurrentActionPoints() == 0) return false;
 
-        // TODO En bedre funksjon for å beregne damage burde lages, men denne får fungere mtp. testing
-        int damage = this.character.getStrength() / 2;
+        int damage = this.character.getStrength() - this.character.getDefense() / 2;
 
         character.applyDamage(damage, opponent);
         character.setCurrentActionPoints(0);

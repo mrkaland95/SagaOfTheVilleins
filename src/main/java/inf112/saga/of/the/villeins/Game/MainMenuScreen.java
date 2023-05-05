@@ -20,6 +20,10 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private Texture menuBackground;
     private Skin mySkin;
+
+
+    Button startGameButton;
+    Button helpScreenButton;
     private Table menuTable;
 
     public MainMenuScreen(SagaOfTheVilleinsGame game) {
@@ -33,7 +37,7 @@ public class MainMenuScreen implements Screen {
         this.menuBackground.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        Button startGameButton = new TextButton("Start Game", mySkin, "default");
+        startGameButton = new TextButton("Start Game", mySkin, "default");
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -42,7 +46,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        Button helpScreenButton = new TextButton("Help Page", mySkin, "default");
+        helpScreenButton = new TextButton("Help Page", mySkin, "default");
 
         helpScreenButton.addListener(new ClickListener() {
             @Override
@@ -99,4 +103,12 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
     }
+
+    public Button getStartGameButton() {
+        return startGameButton;
+    }
+    public Button getHelpScreenButton() {
+        return helpScreenButton;
+    }
+
 }

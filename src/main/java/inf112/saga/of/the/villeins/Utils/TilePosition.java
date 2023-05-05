@@ -101,7 +101,7 @@ public record TilePosition(int x, int y) {
         return Math.max(max1, Math.abs(dx+dy));
     }
 
-    /** Setter dimensjonen på seksantene på kartet, slik at utregninger blir gjort riktig.
+    /** Setter dimensjonen på sekskantene på kartet, slik at utregninger blir gjort riktig.
      * @param hexagonDimension
      */
     public static void setHexagonDimension(double hexagonDimension) {
@@ -112,9 +112,8 @@ public record TilePosition(int x, int y) {
      * @param coordinate En vector2 posisjon.
      * @return et ICharacter objekt, hvis den finnes på tilen som tilhører koordinatet.
      */
-    public static ICharacter getCharacterOnCoordinate(Vector2 coordinate) {
+    public static ICharacter getCharacterOnCoordinate(Vector2 coordinate, List<ICharacter> characterList) {
         if (coordinate == null) return null;
-        List<ICharacter> characterList = GameScreen.characterList;
         TilePosition clickedTile = TilePosition.findHexTile(coordinate);
         for (ICharacter character : characterList) {
             TilePosition characterTile = TilePosition.findHexTile(character.getCurrentPosition());

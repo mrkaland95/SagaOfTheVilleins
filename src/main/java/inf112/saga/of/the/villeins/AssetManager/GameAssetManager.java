@@ -20,8 +20,7 @@ public class GameAssetManager {
     public static final String menuBackgroundPath2 = "./assets/Menu/MenuBackground2.png";
     public static final String uiSkinPath = "./assets/Skins/minecraft/skin/craftacular-ui.json";
     public static final String musicPath = "./assets/Sounds/pop-goes-the-weasel.mp3";
-//    public static final String uiSkin = "./assets/Skins/sgx/skin/sgx-ui.json";
-
+    public static final String swordAttackPath = "./assets/Sounds/sword-sound.wav";
     public static final String testMapPath = "./assets/Maps/SagaOfTheVilleins_Map1.tmx";
 
     /**
@@ -40,6 +39,7 @@ public class GameAssetManager {
         manager.load(uiSkinPath, Skin.class);
         manager.load(testMapPath, TiledMap.class);
         manager.load(musicPath, Music.class);
+        manager.load(swordAttackPath, Sound.class);
     }
 
     public void dispose() {

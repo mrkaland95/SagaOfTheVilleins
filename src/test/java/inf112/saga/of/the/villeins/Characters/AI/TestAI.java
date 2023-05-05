@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 public class TestAI {
 
 
-
     @Test
     public void testAI() {
         TileInfoMap infoMap = new TileInfoMap(10, 10);
@@ -19,7 +18,6 @@ public class TestAI {
         SimpleAI simpleAI = new SimpleAI(testMonster2, testMonster);
         simpleAI.setTargetCharacter(testMonster2);
         boolean result = simpleAI.AIPerformAction(infoMap);
-        assertFalse(result);
+        assertFalse(result, "Should return false");
     }
-
 }

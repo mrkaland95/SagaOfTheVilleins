@@ -70,4 +70,7 @@ public class BaseMonster extends BaseCharacter {
         return monsterType + " - " + this.hashCode();
     }
 
+    public int getScoreValue() {
+        return scoreValue;
+    }
 }

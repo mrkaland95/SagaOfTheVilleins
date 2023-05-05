@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Vector2;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import inf112.saga.of.the.villeins.AssetManager.SoundManager;
 import inf112.saga.of.the.villeins.Characters.CharacterState;
 import inf112.saga.of.the.villeins.Characters.ICharacter;
 import inf112.saga.of.the.villeins.Characters.IPlayable;
@@ -21,6 +22,7 @@ public class GameController {
     private IPlayable playerCharacter;
     private ICharacter currentCharacter;
     private GameState gameState;
+    private final SoundManager soundManager;
     private InactivePlayerProcessor computerActiveProcessor;
     private ActivePlayerProcessor playerActiveProcessor;
     private BaseInputProcessor currentProcessor;
@@ -36,7 +38,8 @@ public class GameController {
                           ActivePlayerProcessor activePlayerProcessor,
                           InactivePlayerProcessor inactivePlayerProcessor,
                           Stage uiStage,
-                          Stage gameCameraStage
+                          Stage gameCameraStage,
+                          SoundManager soundManager
         ) {
         this.characterList = initialCharacterList;
         this.turnList = new LinkedList<>();
@@ -49,7 +52,8 @@ public class GameController {
         this.computerInputMultiplexer = new InputMultiplexer();
         this.uiStage = uiStage;
         this.gameCameraStage = gameCameraStage;
-        this.playerAction = PlayerAction.IDLE;
+        this.playerAction = PlayerAction.NONE;
+        this.soundManager = soundManager;
         initializeGame();
     }
 
@@ -74,13 +78,13 @@ public class GameController {
                 if (playerAction == PlayerAction.MOVE) {
                     currentCharacter.setEndPosition(positionToPerformAction);
                     positionToPerformAction = null;
-                    playerAction = PlayerAction.IDLE;
+                    playerAction = PlayerAction.NONE;
 
                 } else if (playerAction == PlayerAction.ATTACK) {
                     currentCharacter.attack(positionToPerformAction);
-                    
+                    soundManager.playAttackSound();
                     positionToPerformAction = null;
-                    playerAction = PlayerAction.IDLE;
+                    playerAction = PlayerAction.NONE;
                 }
             }
             if(this.currentProcessor.checkTurn()){
