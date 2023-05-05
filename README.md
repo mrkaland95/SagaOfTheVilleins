@@ -5,14 +5,13 @@ Medlemmer: Leon Dammann, Markus Sylta, Malene Wathne og Steffen Arnesen Kaland
 https://git.app.uib.no/SagaOfTheVilleins/sagaofthevilleins
 
 Om spillet
-En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og ferdighetene, samt bedre rustningen sin må han bekjempe en rekke fiender med økende vanskelighetsgrad.
+En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrken og ferdighetene må han bekjempe en rekke fiender med økende vanskelighetsgrad.
 
-### (Foreløpelig) Spillkontroller:
-* Flytt karakteren rundt ved å trykke med høyre museknapp
-* Man kan flytte kamera ved å trykke midt/skrolle knappen, eller ved WASD.
-* Man can zoome inn/ut ved å skrolle på musen, eller ved Z/X
-* Angripe andre karakterer med venstre museknapp
-
+### Spillkontroller:
+* Flytt karakteren rundt ved å trykke med venstre museknapp og move knapp
+* Flytt kameraet ved å trykke midt/skrolle knappen, eller ved WASD.
+* Zoom inn/ut ved å skrolle på musen, eller ved Z/X
+* Angrip andre karakterer med venstre museknapp og attack knapp
 
 ### Kjøring 
 * Kompileres med "mvn package".
@@ -20,11 +19,7 @@ En villein skal bekjempe seg fri fra å jobbe for overklassen. For å øke styrk
 * Krever Java 17 eller senere
 
 ### Kjente feil
-
 * For øyeblikket må du sørge for at "assets" mappen ligger i samme rotmappe som den kompilerte pakken for at programmet skal kunne kjøres
-* På OS X følger ikke spriten med om en endrer størrelsen på vinduet. Feilen løses foreløpig ved å kommentere ut setWindowMode.
-
-
 
 ### Credits for "assetene" som er brukt
 
